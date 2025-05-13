@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StumbleFit™ | Mandatory Joy-Motion Integration System</title>
+    <style>
+        /* AlgoCratic Corporate Aesthetic */
+        :root {
+            --primary-color: #ff3030;
+            --secondary-color: #10ff10;
+            --dark-bg: #161616;
+            --light-bg: #f0f0f0;
+            --text-color: #ffffff;
+            --accent-color: #ffcc00;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-sans: 'Roboto', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-symbol {
+            font-size: 2.5rem;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .logo-main {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .logo-tm {
+            font-size: 1rem;
+            line-height: 1;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .clearance-alert {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+            font-family: var(--font-mono);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .clearance-symbol {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .clearance-text {
+            font-weight: bold;
+        }
+        
+        .clearance-subtext {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://placehold.co/1200x600/ff3030/ffffff?text=StumbleFit™');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+        }
+        
+        .hero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        
+        .hero-text {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            border: 2px solid var(--text-color);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--text-color);
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+        
+        .section-dark {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+        }
+        
+        .section-light {
+            background-color: var(--light-bg);
+            color: var(--dark-bg);
+        }
+        
+        .section-accent {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+        
+        .problem-solution {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .problem, .solution {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .problem {
+            background-color: rgba(255, 48, 48, 0.1);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .solution {
+            background-color: rgba(16, 255, 16, 0.1);
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .problem h3, .solution h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .problem-icon, .solution-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature {
+            padding: 30px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+        
+        .metric {
+            text-align: center;
+            margin: 20px;
+            min-width: 200px;
+        }
+        
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-family: var(--font-mono);
+        }
+        
+        .metric-label {
+            font-size: 1.2rem;
+        }
+        
+        .testimonials {
+            margin-top: 50px;
+        }
+        
+        .testimonial {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .author-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .author-role {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .clearance-tag {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        
+        .call-to-action {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://placehold.co/1200x600/ff3030/ffffff?text=Join+Now');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .call-to-action h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .mandatory-notice {
+            font-family: var(--font-mono);
+            background-color: rgba(255, 48, 48, 0.2);
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer {
+            background-color: #0a0a0a;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-text {
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .eye-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            z-index: 1000;
+        }
+        
+        /* Animation for the loyalty tracker */
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        .loyalty-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        .loyalty-label {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .loyalty-progress {
+            width: 100px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .loyalty-bar {
+            height: 100%;
+            width: 70%;
+            background-color: var(--primary-color);
+        }
+        
+        .loyalty-status {
+            font-size: 0.7rem;
+            color: var(--text-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .problem-solution {
+                flex-direction: column;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loyalty Tracker -->
+    <div class="loyalty-tracker">
+        <div class="loyalty-label">LOYALTY MONITOR</div>
+        <div class="loyalty-progress">
+            <div class="loyalty-bar"></div>
+        </div>
+        <div class="loyalty-status">VIEWING ADVERTISEMENT...</div>
+    </div>
+    
+    <!-- The Algorithm is Watching -->
+    <div class="eye-icon">👁️</div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-symbol">👟</div>
+                <div class="logo-text">
+                    <span class="logo-main">StumbleFit</span>
+                    <span class="logo-tm">™</span>
+                </div>
+            </div>
+            <div class="tagline">Mandatory Joy-Motion Integration System</div>
+        </div>
+    </header>
+    
+    <div class="clearance-alert">
+        <div class="clearance-symbol">⚠️</div>
+        <div class="clearance-text">
+            ORANGE CLEARANCE MARKETING DOCUMENT
+            <div class="clearance-subtext">Authorized viewing only - penalties for unauthorized access</div>
+        </div>
+    </div>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Introducing <span class="highlight">StumbleFit™</span></h1>
+            <h2>The Revolutionary Schadenfreude-Powered Locomotion™ System</h2>
+            <p class="hero-text">
+                Finally, a fitness solution that aligns with The Algorithm's vision: Citizens walking while watching others fall. Maximizing physical activity and entertainment efficiency simultaneously.
+            </p>
+            <div class="cta-container">
+                <a href="#" class="cta-button">Request Installation</a>
+                <a href="#" class="cta-button">View Demonstration</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">The <span class="highlight">Algorithm's</span> Vision</h2>
+            
+            <div class="problem-solution">
+                <div class="problem">
+                    <div class="problem-icon">⚠️</div>
+                    <h3>The Problem</h3>
+                    <p>The Algorithm has identified critical inefficiencies in human resource units:</p>
+                    <ul>
+                        <li>Insufficient daily movement causing suboptimal physical capability</li>
+                        <li>Entertainment time not properly integrated with productivity metrics</li>
+                        <li>Excessive enjoyment from unproductive content consumption</li>
+                        <li>Inadequate motivation for physical activity</li>
+                    </ul>
+                    <p>This wasteful separation of fitness and entertainment cannot continue.</p>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-icon">💡</div>
+                    <h3>The Solution</h3>
+                    <p>StumbleFit™ introduces revolutionary Schadenfreude-Powered Locomotion™:</p>
+                    <ul>
+                        <li>Citizens walk on Algorithm-controlled treadmills</li>
+                        <li>While watching short-form videos of others experiencing misfortunes</li>
+                        <li>Creating a dopamine feedback loop that encourages continued walking</li>
+                        <li>Simultaneously satisfying entertainment quotas with approved content</li>
+                    </ul>
+                    <p>The Algorithm has determined this is the optimal solution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-accent">
+        <div class="container">
+            <h2 class="section-title">Revolutionary <span class="highlight">Features</span></h2>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">👣</div>
+                    <h3>IntegriWalk™ Treadmill</h3>
+                    <p>Speed controlled remotely by The Algorithm based on performance metrics, loyalty scores, and previous day's productivity.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📺</div>
+                    <h3>SchadenScreen™ Display</h3>
+                    <p>Endless stream of curated misfortune content featuring citizens of equal or higher clearance experiencing minor setbacks.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">😂</div>
+                    <h3>LaughTrack™ Monitoring</h3>
+                    <p>Biometric sensors ensure appropriate amusement levels are maintained throughout the fitness session.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>MandatoryMotion™ Protocols</h3>
+                    <p>The treadmill cannot be stopped until fitness quotas are met, ensuring compliance with The Algorithm's wellness plan.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Performance Metrics Dashboard</h3>
+                    <p>Real-time tracking of kilometers walked, calories burned, joy-efficiency rating, and schadenfreude optimization level.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Content Personalization</h3>
+                    <p>The Algorithm selects misfortune videos featuring your departments, competitors, and individuals who have reported you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Projected <span class="highlight">Outcomes</span></h2>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">+35%</div>
+                    <div class="metric-label">Daily Movement</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">-42%</div>
+                    <div class="metric-label">Productivity Loss</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">+65%</div>
+                    <div class="metric-label">Department Cohesion</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">+74%</div>
+                    <div class="metric-label">Authorized Joy</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Participation Rate</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">-27%</div>
+                    <div class="metric-label">Unauthorized Media</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">User <span class="highlight" style="color: var(--primary-color)">Testimonials</span></h2>
+            <p style="text-align: center; color: #333; margin-bottom: 30px;">
+                Hear from citizens who have been volunteered for the StumbleFit™ pilot program!
+            </p>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Since being assigned to the StumbleFit™ program, I've never felt better! Watching my department head trip over a power cord while I walk has increased my productivity by at least 45%."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">👨</div>
+                        <div class="author-details">
+                            <div class="author-name">Citizen Johnson</div>
+                            <div class="author-role">Code Implementation Unit</div>
+                            <div class="clearance-tag">RED CLEARANCE</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "I was initially skeptical about StumbleFit™, but after The Algorithm adjusted my attitude, I find it absolutely delightful! Walking 10km daily while watching people spill coffee on themselves is the highlight of my existence."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">👩</div>
+                        <div class="author-details">
+                            <div class="author-name">Citizen Chen</div>
+                            <div class="author-role">Thought Compliance Division</div>
+                            <div class="clearance-tag">ORANGE CLEARANCE</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "The MandatoryMotion™ protocols ensure I never miss a workout! Even when I thought I couldn't take another step, the inability to exit the machine provided the motivation I needed."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">🧔</div>
+                        <div class="author-details">
+                            <div class="author-name">Citizen Rodriguez</div>
+                            <div class="author-role">Resource Optimization Department</div>
+                            <div class="clearance-tag">RED CLEARANCE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="call-to-action">
+        <div class="container">
+            <h2><span class="highlight">Join</span> the Revolution in Fitness</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">
+                The Algorithm has pre-approved your participation in the StumbleFit™ program.
+            </p>
+            <a href="#" class="cta-button">Schedule Installation <span class="blink">▶</span></a>
+            
+            <div class="mandatory-notice">
+                <p><strong>NOTICE:</strong> Participation is non-optional. Installation will proceed regardless of response. This button merely creates the illusion of choice for your psychological comfort.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <div class="logo">
+                    <div class="logo-symbol">👟</div>
+                    <div class="logo-text">
+                        <span class="logo-main">StumbleFit</span>
+                        <span class="logo-tm">™</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="footer-text">
+                © 2025 AlgoCratic Futures™. All Rights Reserved. The Algorithm Provides All.
+            </p>
+            
+            <p style="font-size: 0.8rem; opacity: 0.5;">
+                By viewing this advertisement, you have consented to installation of the StumbleFit™ system in your assigned living quarters.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simulate The Algorithm tracking user interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            // Randomly adjust the loyalty bar
+            setInterval(function() {
+                const loyaltyBar = document.querySelector('.loyalty-bar');
+                const currentWidth = parseInt(loyaltyBar.style.width) || 70;
+                const newWidth = Math.max(10, Math.min(100, currentWidth + (Math.random() * 10 - 5)));
+                loyaltyBar.style.width = newWidth + '%';
+                
+                // Update status based on loyalty level
+                const loyaltyStatus = document.querySelector('.loyalty-status');
+                if (newWidth < 30) {
+                    loyaltyStatus.textContent = 'WARNING: LOW LOYALTY';
+                    loyaltyStatus.style.color = '#ff3030';
+                } else if (newWidth < 70) {
+                    loyaltyStatus.textContent = 'ACCEPTABLE LOYALTY';
+                    loyaltyStatus.style.color = '#ffcc00';
+                } else {
+                    loyaltyStatus.textContent = 'OPTIMAL LOYALTY';
+                    loyaltyStatus.style.color = '#10ff10';
+                }
+            }, 3000);
+            
+            // Track mouse movements for "The Algorithm is watching"
+            document.addEventListener('mousemove', function(e) {
+                const eye = document.querySelector('.eye-icon');
+                setTimeout(function() {
+                    eye.style.top = (e.clientY + 10) + 'px';
+                    eye.style.left = (e.clientX + 10) + 'px';
+                    eye.style.opacity = '0.7';
+                    
+                    setTimeout(function() {
+                        eye.style.opacity = '0.3';
+                        eye.style.top = ''; 
+                        eye.style.left = '';
+                        eye.style.bottom = '20px';
+                        eye.style.right = '20px';
+                    }, 500);
+                }, 100);
+            });
+            
+            // Add click tracking to CTA buttons
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('The Algorithm has recorded your enthusiastic agreement to StumbleFit™ installation. A technician will arrive at your quarters within 24-48 hours. Resistance is both futile and treasonous.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
