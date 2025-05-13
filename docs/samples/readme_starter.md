@@ -1,7 +1,3 @@
-# algocratic
-Welcome to AlgoCratic! (TM)
-I'm not sorry.
-
 # AlgoCratic Futures™ Immersive Learning Experience
 ## Software Development Team Simulation for CS Education
 
@@ -224,4 +220,3 @@ For questions, suggestions, or to share results from implementing this in your c
 ---
 
 **DISCLAIMER**: AlgoCratic Futures™ is a fictional entity created for educational purposes. Any resemblance to actual tech companies, living or dead, is purely coincidental and entirely plausible.
-
