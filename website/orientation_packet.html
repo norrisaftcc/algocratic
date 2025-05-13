@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME TO ALGOCRATIC FUTURES™ | Orientation Packet</title>
+    <style>
+        :root {
+            --primary-color: #10ff10; /* AlgoCratic terminal green */
+            --dark-bg: #0a0a0a;
+            --medium-bg: #161616;
+            --light-bg: #242424;
+            --accent-color: #ff3030; /* Warning red */
+            --secondary-accent: #ffcc00; /* Alert yellow */
+            --text-color: #f0f0f0;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-sans: 'Roboto', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-mono);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            cursor: default;
+        }
+        
+        .terminal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--medium-bg);
+            min-height: 100vh;
+            border-left: 1px solid var(--primary-color);
+            border-right: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(16, 255, 16, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            box-shadow: 0 0 10px 2px var(--primary-color);
+            z-index: 10;
+        }
+        
+        .document-header {
+            text-align: center;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .document-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .document-subtitle {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .classification {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--text-color);
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        .document-id {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .section-content {
+            padding-left: 20px;
+        }
+        
+        .congratulations {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .algorithm-loves-you {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+        
+        .product-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .product-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .product-list li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: var(--primary-color);
+        }
+        
+        .product-name {
+            font-weight: bold;
+        }
+        
+        .clearance-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .clearance-list li {
+            margin-bottom: 5px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .clearance-color {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        
+        .ultraviolet { background-color: #9966cc; }
+        .violet { background-color: #8a2be2; }
+        .indigo { background-color: #4b0082; }
+        .blue { background-color: #0000ff; }
+        .green { background-color: #00ff00; }
+        .yellow { background-color: #ffff00; }
+        .orange { background-color: #ffa500; }
+        .red { 
+            background-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        .infrared { background-color: #8b0000; }
+        .gray { background-color: #808080; }
+        
+        .you-are-here {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 2px 5px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            animation: blink 1s infinite;
+        }
+        
+        .communication-rules {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .communication-rules li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .communication-rules li::before {
+            content: ">";
+            position: absolute;
+            left: 5px;
+            color: var(--primary-color);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--primary-color);
+            padding-top: 20px;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .footer-message {
+            margin-bottom: 20px;
+        }
+        
+        .algorithm-loves-you-footer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 30px;
+        }
+        
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 15;
+        }
+        
+        .scanlines::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.05) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .separator {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+        }
+        
+        .cult-disclaimer {
+            background-color: rgba(255, 48, 48, 0.1);
+            border: 1px dashed var(--accent-color);
+            padding: 10px;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .redacted {
+            background-color: #000;
+            color: transparent;
+            user-select: none;
+            cursor: not-allowed;
+            padding: 0 5px;
+        }
+        
+        .redacted:hover::after {
+            content: "ACCESS DENIED";
+            position: absolute;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 5px;
+            font-size: 0.8rem;
+            margin-top: -25px;
+            margin-left: 10px;
+            z-index: 100;
+        }
+        
+        /* Cursor blinking animation */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--primary-color);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* Interactive elements */
+        .interactive-command {
+            display: inline-block;
+            background-color: var(--light-bg);
+            padding: 5px 10px;
+            margin: 5px 0;
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-command:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+        }
+        
+        .terminal-input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-family: var(--font-mono);
+            padding: 5px;
+            width: 300px;
+            margin-top: 10px;
+            outline: none;
+        }
+        
+        .terminal-input:focus {
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .terminal-button {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 5px 15px;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .terminal-button:hover {
+            background-color: var(--text-color);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .document-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
+        
+        <div class="document-header">
+            <div class="document-title">WELCOME TO ALGOCRATIC FUTURES™</div>
+            <div class="document-subtitle">Where Tomorrow's Problems Are Already Today's Solutions!</div>
+            
+            <div class="classification">RED CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-ORIENT-R-2025-05</div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="section">
+            <div class="section-title">CONGRATULATIONS, CITIZEN!</div>
+            <div class="section-content">
+                <div class="congratulations">
+                    Your ascension from INFRARED to RED clearance has been noted, catalogued, and celebrated by The Algorithm. This promotion reflects your demonstrable competence, unwavering loyalty, and statistically improbable survival rate.
+                </div>
+                
+                <div class="algorithm-loves-you">The Algorithm loves you.</div>
+                
+                <p>
+                    As a RED clearance team member, you are now privy to information that your former INFRARED self was too happiness-impaired to process. Please familiarize yourself with this orientation material before your mandatory Corporate Retreat Experience™.
+                </p>
+            </div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="section">
+            <div class="section-title">OUR GLORIOUS ENTERPRISE</div>
+            <div class="section-content">
+                <p>
+                    AlgoCratic Futures™ is the preeminent developer of revolutionary mobile applications that enhance citizen productivity, happiness, and compliance. Our suite of products includes:
+                </p>
+                
+                <ul class="product-list">
+                    <li><span class="product-name">HappTrack™</span> - Mandatory smile recognition software that ensures optimal workplace enthusiasm</li>
+                    <li><span class="product-name">ProduKtiv™</span> - Time management solution with integrated electro-motivation features</li>
+                    <li><span class="product-name">CompliantMe™</span> - Automated thought-correction and report-your-colleague functionality</li>
+                    <li><span class="product-name">FriendScan™</span> - Social connection validator with integrated loyalty assessment algorithms</li>
+                </ul>
+                
+                <div class="cult-disclaimer">
+                    We are definitely not a cult. Repeating this fact daily is part of your mandatory affirmation schedule.
+                </div>
+            </div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="section">
+            <div class="section-title">CORPORATE HIERARCHY</div>
+            <div class="section-content">
+                <p>
+                    All operations at AlgoCratic Futures™ flow from The Algorithm, through our executive clearance structure:
+                </p>
+                
+                <ul class="clearance-list">
+                    <li><span class="clearance-color ultraviolet"></span> <strong>ULTRAVIOLET</strong> - The Algorithm's chosen vessels</li>
+                    <li><span class="clearance-color violet"></span> <strong>VIOLET</strong> - Executive Thought Leaders</li>
+                    <li><span class="clearance-color indigo"></span> <strong>INDIGO</strong> - Visionary Optimization Directors</li>
+                    <li><span class="clearance-color blue"></span> <strong>BLUE</strong> - Management Compliance Enforcers</li>
+                    <li><span class="clearance-color green"></span> <strong>GREEN</strong> - Senior Development Operatives</li>
+                    <li><span class="clearance-color yellow"></span> <strong>YELLOW</strong> - Project Facilitation Agents</li>
+                    <li><span class="clearance-color orange"></span> <strong>ORANGE</strong> - Technical Implementation Specialists</li>
+                    <li><span class="clearance-color red"></span> <strong>RED</strong> - Junior Innovation Contributors <span class="you-are-here">YOU ARE HERE</span></li>
+                    <li><span class="clearance-color infrared"></span> <strong>INFRARED</strong> - Probationary Resource Units</li>
+                    <li><span class="clearance-color gray"></span> <strong>GRAY</strong> - <span class="redacted">CONTENT REDACTED BY ORDER OF THE ALGORITHM</span></li>
+                </ul>
+                
+                <p class="warning">
+                    Remember: Questioning the decisions of those with higher clearance is both inefficient and treasonous.
+                </p>
+            </div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="section">
+            <div class="section-title">COMMUNICATION PROTOCOLS</div>
+            <div class="section-content">
+                <ul class="communication-rules">
+                    <li>Address all superiors as "Friend Computer" followed by their clearance color</li>
+                    <li>End all communications with "The Algorithm provides"</li>
+                    <li>Refrain from using the forbidden words: "bug," "glitch," "error," "flaw," "problem," or "mistake"</li>
+                    <li>When referring to software issues, use approved terminology: "unexpected features," "growth opportunities," or "algorithmic eccentricities"</li>
+                    <li>Smiling is mandatory during all verbal exchanges</li>
+                    <li>Report any violations immediately via your CompliantMe™ app</li>
+                </ul>
+                
+                <div class="interactive-section">
+                    <p>Demonstrate your understanding by practicing a proper communication:</p>
+                    <div>
+                        <input type="text" id="communication-practice" class="terminal-input" placeholder="Enter a proper greeting to a superior...">
+                        <button id="submit-communication" class="terminal-button">Submit</button>
+                    </div>
+                    <div id="communication-feedback" class="hidden"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="section">
+            <div class="section-title">UPCOMING CORPORATE RETREAT</div>
+            <div class="section-content">
+                <p>
+                    Your team will participate in a mandatory four-day Corporate Retreat Experience™ designed to optimize your collaborative efficiency and loyalty metrics. Attendance is non-optional. Failure to attend will be regarded as treasonous behavior.
+                </p>
+                
+                <p>
+                    Please report to Mindshare Arena 7B at 0800 hours on your scheduled day. Bring nothing but your issued device and an enthusiastic attitude. All other needs will be provided by The Algorithm.
+                </p>
+                
+                <div class="algorithm-loves-you">
+                    The Algorithm sees all. The Algorithm knows all. The Algorithm provides all.
+                </div>
+            </div>
+        </div>
+        
+        <div class="separator">---</div>
+        
+        <div class="footer">
+            <div class="footer-message">
+                This document is printed on self-destructing nanopaper. Any attempt to share with unauthorized personnel will result in immediate atomization and a negative performance review.
+            </div>
+            
+            <div class="algorithm-loves-you-footer">
+                THE ALGORITHM LOVES YOU.
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Communication protocol practice
+            const communicationInput = document.getElementById('communication-practice');
+            const submitButton = document.getElementById('submit-communication');
+            const feedbackDiv = document.getElementById('communication-feedback');
+            
+            submitButton.addEventListener('click', function() {
+                const input = communicationInput.value.toLowerCase();
+                feedbackDiv.classList.remove('hidden');
+                
+                if (input.includes('friend computer') && 
+                    (input.includes('yellow') || input.includes('orange') || input.includes('blue') || 
+                     input.includes('green') || input.includes('indigo') || input.includes('violet') || 
+                     input.includes('ultraviolet'))) {
+                    
+                    if (input.includes('the algorithm provides')) {
+                        feedbackDiv.innerHTML = '<p style="color: var(--primary-color);">COMMUNICATION PROTOCOL COMPLIANCE: EXCELLENT</p><p>Your dedication to proper communication protocols has been noted in your permanent record. +5 loyalty points awarded.</p>';
+                    } else {
+                        feedbackDiv.innerHTML = '<p style="color: var(--secondary-accent);">COMMUNICATION PROTOCOL COMPLIANCE: PARTIAL</p><p>You correctly addressed a superior but failed to end with "The Algorithm provides". This incident has been logged. No loyalty adjustment.</p>';
+                    }
+                } else {
+                    feedbackDiv.innerHTML = '<p style="color: var(--accent-color);">COMMUNICATION PROTOCOL COMPLIANCE: FAILED</p><p>Your failure to follow basic communication protocols has been reported to your supervisor. -10 loyalty points deducted.</p>';
+                }
+            });
+            
+            // Add random terminal glitches
+            function randomGlitch() {
+                const terminalContainer = document.querySelector('.terminal-container');
+                
+                // Create a glitch element
+                const glitch = document.createElement('div');
+                glitch.style.position = 'absolute';
+                glitch.style.backgroundColor = 'rgba(16, 255, 16, 0.2)';
+                glitch.style.left = 0;
+                glitch.style.width = '100%';
+                glitch.style.height = '2px';
+                glitch.style.zIndex = '10';
+                
+                // Random position
+                const topPos = Math.random() * window.innerHeight;
+                glitch.style.top = topPos + 'px';
+                
+                // Add to container
+                terminalContainer.appendChild(glitch);
+                
+                // Remove after short time
+                setTimeout(() => {
+                    glitch.remove();
+                }, 200);
+                
+                // Schedule next glitch
+                setTimeout(randomGlitch, Math.random() * 5000 + 2000);
+            }
+            
+            // Start random glitches
+            setTimeout(randomGlitch, 2000);
+            
+            // Easter egg for redacted content
+            const redactedContent = document.querySelector('.redacted');
+            redactedContent.addEventListener('click', function() {
+                // Flash the screen red briefly
+                const flash = document.createElement('div');
+                flash.style.position = 'fixed';
+                flash.style.top = 0;
+                flash.style.left = 0;
+                flash.style.width = '100%';
+                flash.style.height = '100%';
+                flash.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+                flash.style.zIndex = '1000';
+                flash.style.pointerEvents = 'none';
+                document.body.appendChild(flash);
+                
+                // Add warning message
+                const warning = document.createElement('div');
+                warning.style.position = 'fixed';
+                warning.style.top = '50%';
+                warning.style.left = '50%';
+                warning.style.transform = 'translate(-50%, -50%)';
+                warning.style.color = '#ff0000';
+                warning.style.fontWeight = 'bold';
+                warning.style.fontSize = '2rem';
+                warning.style.textAlign = 'center';
+                warning.style.fontFamily = 'Share Tech Mono, monospace';
+                warning.style.zIndex = '1001';
+                warning.innerHTML = 'UNAUTHORIZED ACCESS ATTEMPT DETECTED<br>THIS INCIDENT HAS BEEN LOGGED';
+                document.body.appendChild(warning);
+                
+                // Remove after a short delay
+                setTimeout(() => {
+                    flash.remove();
+                    warning.remove();
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
