@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Futures™ | Productivity Compliance Board</title>
+    <style>
+        :root {
+            /* Primary colors */
+            --primary-dark: #0a0a1a;
+            --primary-medium: #0f0f2d;
+            --primary-light: #1a1a4d;
+            
+            /* Accent colors */
+            --accent-red: #ff3030;
+            --accent-green: #10ff10;
+            --accent-blue: #2080ff;
+            --accent-yellow: #ffcc00;
+            
+            /* Text colors */
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            
+            /* Status colors */
+            --backlog-color: #4b0082;  /* Indigo */
+            --todo-color: #8b0000;     /* Infrared */
+            --inprogress-color: #ff0000; /* Red */
+            --review-color: #ffa500;   /* Orange */
+            --done-color: #00ff00;     /* Green */
+            --blocked-color: #ff3030;  /* Bright red */
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 2rem;
+            --space-xl: 4rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Subtle scan lines effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(10, 10, 26, 0.03) 2px,
+                rgba(10, 10, 26, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        header {
+            background-color: var(--primary-medium);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(32, 128, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-symbol {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo-tm {
+            font-size: 0.7rem;
+            align-self: flex-end;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .clearance-alert {
+            background-color: var(--accent-red);
+            padding: 0.25rem 0;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .clearance-symbol {
+            margin-right: 0.5rem;
+        }
+        
+        .clearance-subtext {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+        
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .add-task {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        .add-task:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .add-task span {
+            margin-right: 0.5rem;
+        }
+        
+        .metrics {
+            background-color: rgba(10, 10, 26, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(32, 128, 255, 0.3);
+        }
+        
+        .metric {
+            display: flex;
+            align-items: center;
+        }
+        
+        .metric-label {
+            margin-right: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .efficiency-high {
+            color: var(--accent-green);
+        }
+        
+        .efficiency-medium {
+            color: var(--accent-yellow);
+        }
+        
+        .efficiency-low {
+            color: var(--accent-red);
+        }
+        
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .column {
+            background-color: var(--primary-medium);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            border: 1px solid rgba(32, 128, 255, 0.3);
+        }
+        
+        .column-header {
+            padding: 1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid;
+        }
+        
+        .column-title {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .column-icon {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .column-count {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        /* Column-specific styles */
+        .backlog .column-header {
+            border-color: var(--backlog-color);
+            background-color: rgba(75, 0, 130, 0.2);
+        }
+        
+        .todo .column-header {
+            border-color: var(--todo-color);
+            background-color: rgba(139, 0, 0, 0.2);
+        }
+        
+        .in-progress .column-header {
+            border-color: var(--inprogress-color);
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+        
+        .review .column-header {
+            border-color: var(--review-color);
+            background-color: rgba(255, 165, 0, 0.2);
+        }
+        
+        .done .column-header {
+            border-color: var(--done-color);
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        
+        .blocked .column-header {
+            border-color: var(--blocked-color);
+            background-color: rgba(255, 48, 48, 0.2);
+        }
+        
+        .tasks {
+            padding: 1rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .task {
+            background-color: rgba(10, 10, 26, 0.5);
+            border-radius: 4px;
+            padding: 1rem;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+        
+        .task:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .task.dragging {
+            opacity: 0.7;
+            cursor: grabbing;
+        }
+        
+        .task-id {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .task-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .task-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .task-priority {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .priority-critical {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .priority-high {
+            background-color: rgba(255, 165, 0, 0.2);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+        
+        .priority-medium {
+            background-color: rgba(32, 128, 255, 0.2);
+            color: var(--accent-blue);
+            border: 1px solid rgba(32, 128, 255, 0.3);
+        }
+        
+        .priority-low {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+        }
+        
+        .task-clearance {
+            display: inline-block;
+            padding: 0.15rem 0.3rem;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+        }
+        
+        .clearance-red {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: var(--red);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .clearance-orange {
+            background-color: rgba(255, 165, 0, 0.2);
+            color: var(--orange);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+        
+        .clearance-yellow {
+            background-color: rgba(255, 255, 0, 0.2);
+            color: var(--yellow);
+            border: 1px solid rgba(255, 255, 0, 0.3);
+        }
+        
+        .task-assignee {
+            display: flex;
+            align-items: center;
+        }
+        
+        .assignee-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--text-primary);
+            margin-left: 0.5rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 26, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: var(--primary-medium);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            animation: modal-in 0.3s ease-out forwards;
+        }
+        
+        @keyframes modal-in {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 1rem;
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: rgba(10, 10, 26, 0.5);
+            border: 1px solid rgba(32, 128, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 4px;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .modal-footer {
+            padding: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-footer button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        
+        .btn-cancel {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--text-secondary);
+        }
+        
+        .btn-cancel:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-submit {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-medium);
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            align-items: center;
+            z-index: 1001;
+            border-left: 4px solid var(--accent-blue);
+            max-width: 300px;
+            animation: notification-in 0.3s ease-out forwards;
+        }
+        
+        .notification.active {
+            display: flex;
+        }
+        
+        @keyframes notification-in {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .notification-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .notification-message {
+            flex: 1;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Loyalty tracker */
+        .loyalty-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(10, 10, 26, 0.8);
+            border: 1px solid var(--accent-blue);
+            padding: 0.5rem;
+            border-radius: 4px;
+            z-index: 1000;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
+            width: 150px;
+        }
+        
+        .loyalty-label {
+            color: var(--accent-blue);
+            margin-bottom: 0.25rem;
+            font-weight: bold;
+        }
+        
+        .loyalty-progress {
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+        
+        .loyalty-bar {
+            height: 100%;
+            width: 75%;
+            background-color: var(--accent-green);
+            transition: width 0.5s ease;
+        }
+        
+        .loyalty-status {
+            text-align: right;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .board-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .metrics {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            .controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .kanban-board {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 1rem;
+            }
+            
+            .column {
+                display: inline-block;
+                width: 280px;
+                vertical-align: top;
+                white-space: normal;
+                margin-right: 1rem;
+            }
+            
+            .loyalty-tracker {
+                display: none;
+            }
+            
+            nav {
+                margin-top: 1rem;
+            }
+            
+            nav a {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loyalty Tracker -->
+    <div class="loyalty-tracker">
+        <div class="loyalty-label">LOYALTY MONITOR</div>
+        <div class="loyalty-progress">
+            <div class="loyalty-bar"></div>
+        </div>
+        <div class="loyalty-status">CALIBRATING...</div>
+    </div>
+    
+    <header>
+        <div class="logo">
+            <div class="logo-symbol">⚙️</div>
+            <div class="logo-text">
+                <span class="logo-main">AlgoCratic</span>
+                <span class="logo-tm">Futures™</span>
+            </div>
+        </div>
+        
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#" class="active">Productivity Board</a>
+            <a href="#">Resources</a>
+            <a href="#">Compliance</a>
+        </nav>
+    </header>
+    
+    <div class="clearance-alert">
+        <div class="clearance-symbol">⚠️</div>
+        <div class="clearance-text">
+            RED CLEARANCE CONTENT
+            <div class="clearance-subtext">Tracking is mandatory. Avoidance is treasonous.</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="board-header">
+            <h1>Productivity Compliance Board</h1>
+            
+            <div class="controls">
+                <div class="metrics">
+                    <div class="metric">
+                        <span class="metric-label">Efficiency:</span>
+                        <span class="metric-value efficiency-high">87%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Tasks Completed:</span>
+                        <span class="metric-value">12/32</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Velocity:</span>
+                        <span class="metric-value">24 pts</span>
+                    </div>
+                </div>
+                
+                <button class="add-task" id="openAddTaskModal">
+                    <span>Add Task</span> +
+                </button>
+            </div>
+        </div>
+        
+        <div class="kanban-board">
+            <!-- Backlog Column -->
+            <div class="column backlog">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">🔮</span>
+                        Backlog
+                    </div>
+                    <div class="column-count">4</div>
+                </div>
+                <div class="tasks" id="backlog">
+                    <div class="task" draggable="true" data-id="AF-1057">
+                        <div class="task-id">AF-1057</div>
+                        <div class="task-title">Implement QuantumQompliance™ Data Layer</div>
+                        <div class="task-description">Create the data persistence layer for the new compliance module.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-medium">Medium</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">JD</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1062">
+                        <div class="task-id">AF-1062</div>
+                        <div class="task-title">Design Login Screen</div>
+                        <div class="task-description">Create both minimal and feature-complete designs simultaneously.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-low">Low</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-red">RED</span>
+                                <div class="assignee-avatar">AS</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1065">
+                        <div class="task-id">AF-1065</div>
+                        <div class="task-title">User Authentication System</div>
+                        <div class="task-description">Implement frictionless yet impenetrable authentication flow.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-high">High</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">TN</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1070">
+                        <div class="task-id">AF-1070</div>
+                        <div class="task-title">Optimize Database Queries</div>
+                        <div class="task-description">Make queries fast yet comprehensive, simple yet thorough.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-medium">Medium</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-yellow">YELLOW</span>
+                                <div class="assignee-avatar">RK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- To Do Column -->
+            <div class="column todo">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">📋</span>
+                        To Do
+                    </div>
+                    <div class="column-count">3</div>
+                </div>
+                <div class="tasks" id="todo">
+                    <div class="task" draggable="true" data-id="AF-1042">
+                        <div class="task-id">AF-1042</div>
+                        <div class="task-title">Implement Thought Monitoring API</div>
+                        <div class="task-description">Create backend for real-time cerebral integration with frontend.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-critical">Critical</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-yellow">YELLOW</span>
+                                <div class="assignee-avatar">BL</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1045">
+                        <div class="task-id">AF-1045</div>
+                        <div class="task-title">Create Cloud-Based Air-Gapped Storage</div>
+                        <div class="task-description">Design storage solution that is both cloud-based and air-gapped.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-high">High</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-red">RED</span>
+                                <div class="assignee-avatar">MN</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1050">
+                        <div class="task-id">AF-1050</div>
+                        <div class="task-title">Implement NeuroDesign™ UI Principles</div>
+                        <div class="task-description">Apply principles you haven't been trained on to the interface.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-medium">Medium</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">PJ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- In Progress Column -->
+            <div class="column in-progress">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">⚙️</span>
+                        In Progress
+                    </div>
+                    <div class="column-count">2</div>
+                </div>
+                <div class="tasks" id="in-progress">
+                    <div class="task" draggable="true" data-id="AF-1035">
+                        <div class="task-id">AF-1035</div>
+                        <div class="task-title">Implement Facial Recognition Without Cameras</div>
+                        <div class="task-description">Design a facial recognition system that doesn't use cameras.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-high">High</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-red">RED</span>
+                                <div class="assignee-avatar">JW</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1038">
+                        <div class="task-id">AF-1038</div>
+                        <div class="task-title">Create Both Persistent and Ephemeral Storage</div>
+                        <div class="task-description">Implement data storage that is simultaneously persistent and ephemeral.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-medium">Medium</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">CL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Column -->
+            <div class="column review">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">🔍</span>
+                        Review
+                    </div>
+                    <div class="column-count">1</div>
+                </div>
+                <div class="tasks" id="review">
+                    <div class="task" draggable="true" data-id="AF-1022">
+                        <div class="task-id">AF-1022</div>
+                        <div class="task-title">Implement Social Integration with Privacy</div>
+                        <div class="task-description">Add social features while maintaining complete user privacy.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-high">High</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-yellow">YELLOW</span>
+                                <div class="assignee-avatar">EK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Done Column -->
+            <div class="column done">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">✓</span>
+                        Done
+                    </div>
+                    <div class="column-count">2</div>
+                </div>
+                <div class="tasks" id="done">
+                    <div class="task" draggable="true" data-id="AF-1010">
+                        <div class="task-id">AF-1010</div>
+                        <div class="task-title">Project Setup and Configuration</div>
+                        <div class="task-description">Initialize repository and configure development environment.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-high">High</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-red">RED</span>
+                                <div class="assignee-avatar">SL</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1015">
+                        <div class="task-id">AF-1015</div>
+                        <div class="task-title">Initial Documentation</div>
+                        <div class="task-description">Create both extensive and cryptic documentation simultaneously.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-medium">Medium</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">DM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Blocked Column -->
+            <div class="column blocked">
+                <div class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">⛔</span>
+                        Blocked
+                    </div>
+                    <div class="column-count">2</div>
+                </div>
+                <div class="tasks" id="blocked">
+                    <div class="task" draggable="true" data-id="AF-1030">
+                        <div class="task-id">AF-1030</div>
+                        <div class="task-title">Cross-Platform Desktop-Only App</div>
+                        <div class="task-description">Create app compatible with all mobile platforms while being desktop-only.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-critical">Critical</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-red">RED</span>
+                                <div class="assignee-avatar">GS</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task" draggable="true" data-id="AF-1025">
+                        <div class="task-id">AF-1025</div>
+                        <div class="task-title">Backwards Text Security System</div>
+                        <div class="task-description">Implement system where all text is spelled backwards for security.</div>
+                        <div class="task-meta">
+                            <span class="task-priority priority-low">Low</span>
+                            <div class="task-assignee">
+                                <span class="task-clearance clearance-orange">ORANGE</span>
+                                <div class="assignee-avatar">KV</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Task Modal -->
+    <div class="modal" id="addTaskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Task</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" placeholder="Enter task title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" placeholder="Enter task description"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskAssignee">Assignee</label>
+                        <select id="taskAssignee">
+                            <option value="unassigned">Unassigned</option>
+                            <option value="JD">John Doe (ORANGE)</option>
+                            <option value="AS">Alice Smith (RED)</option>
+                            <option value="TN">Tom Nelson (ORANGE)</option>
+                            <option value="MN">Mary Newman (RED)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskClearance">Required Clearance</label>
+                        <select id="taskClearance">
+                            <option value="red">RED</option>
+                            <option value="orange">ORANGE</option>
+                            <option value="yellow">YELLOW</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskColumn">Initial Status</label>
+                        <select id="taskColumn">
+                            <option value="backlog">Backlog</option>
+                            <option value="todo" selected>To Do</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelAddTask">Cancel</button>
+                <button class="btn-submit" id="submitAddTask">Add Task</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">📣</div>
+        <div class="notification-message">Task added successfully!</div>
+    </div>
+    
+    <footer>
+        <p>AlgoCratic Futures™ Productivity Compliance Board v2.5.3</p>
+        <p>All interactions are monitored and recorded in your permanent file.</p>
+        <p>© 2025 AlgoCratic Futures™. The Algorithm provides.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const addTaskBtn = document.getElementById('openAddTaskModal');
+            const addTaskModal = document.getElementById('addTaskModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const cancelAddTaskBtn = document.getElementById('cancelAddTask');
+            const submitAddTaskBtn = document.getElementById('submitAddTask');
+            const notification = document.getElementById('notification');
+            const columns = document.querySelectorAll('.tasks');
+            const tasks = document.querySelectorAll('.task');
+            const loyaltyBar = document.querySelector('.loyalty-bar');
+            const loyaltyStatus = document.querySelector('.loyalty-status');
+            
+            // Open modal
+            addTaskBtn.addEventListener('click', function() {
+                addTaskModal.classList.add('active');
+                updateLoyalty(2, 'PRODUCTIVE BEHAVIOR');
+            });
+            
+            // Close modal
+            function closeModal() {
+                addTaskModal.classList.remove('active');
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelAddTaskBtn.addEventListener('click', closeModal);
+            
+            // Add task
+            submitAddTaskBtn.addEventListener('click', function() {
+                const title = document.getElementById('taskTitle').value;
+                const description = document.getElementById('taskDescription').value;
+                const priority = document.getElementById('taskPriority').value;
+                const assignee = document.getElementById('taskAssignee').value;
+                const clearance = document.getElementById('taskClearance').value;
+                const column = document.getElementById('taskColumn').value;
+                
+                if (!title) {
+                    alert('Task title is required');
+                    return;
+                }
+                
+                // Generate task ID
+                const taskId = 'AF-' + (1000 + Math.floor(Math.random() * 1000));
+                
+                // Create new task
+                const newTask = document.createElement('div');
+                newTask.className = 'task';
+                newTask.setAttribute('draggable', 'true');
+                newTask.setAttribute('data-id', taskId);
+                
+                // Assignee initials
+                let assigneeInitials = '';
+                if (assignee !== 'unassigned') {
+                    assigneeInitials = assignee;
+                } else {
+                    assigneeInitials = 'UN';
+                }
+                
+                // Priority class
+                const priorityClass = `priority-${priority}`;
+                
+                // Clearance class
+                const clearanceClass = `clearance-${clearance}`;
+                
+                // Task HTML
+                newTask.innerHTML = `
+                    <div class="task-id">${taskId}</div>
+                    <div class="task-title">${title}</div>
+                    <div class="task-description">${description || 'No description provided.'}</div>
+                    <div class="task-meta">
+                        <span class="task-priority ${priorityClass}">${priority}</span>
+                        <div class="task-assignee">
+                            <span class="task-clearance ${clearanceClass}">${clearance.toUpperCase()}</span>
+                            <div class="assignee-avatar">${assigneeInitials}</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add task to column
+                const targetColumn = document.getElementById(column);
+                targetColumn.appendChild(newTask);
+                
+                // Update count
+                updateColumnCount(column);
+                
+                // Add drag events
+                addDragEvents(newTask);
+                
+                // Close modal and reset form
+                closeModal();
+                document.getElementById('taskTitle').value = '';
+                document.getElementById('taskDescription').value = '';
+                document.getElementById('taskPriority').value = 'medium';
+                document.getElementById('taskAssignee').value = 'unassigned';
+                
+                // Show notification
+                showNotification('Task added successfully!');
+                
+                // Update loyalty
+                updateLoyalty(5, 'TASK CREATION');
+            });
+            
+            // Drag and drop functionality
+            let draggedTask = null;
+            
+            function addDragEvents(task) {
+                task.addEventListener('dragstart', handleDragStart);
+                task.addEventListener('dragend', handleDragEnd);
+            }
+            
+            function handleDragStart(e) {
+                draggedTask = this;
+                this.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
+                
+                // Random chance of loyalty reduction for moving tasks
+                if (Math.random() < 0.2) {
+                    updateLoyalty(-3, 'TASK REORGANIZATION');
+                }
+            }
+            
+            function handleDragEnd(e) {
+                this.classList.remove('dragging');
+                draggedTask = null;
+                
+                columns.forEach(column => {
+                    column.classList.remove('drag-over');
+                });
+            }
+            
+            // Add drag events to existing tasks
+            tasks.forEach(task => {
+                addDragEvents(task);
+            });
+            
+            // Column drop zones
+            columns.forEach(column => {
+                column.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    column.classList.add('drag-over');
+                });
+                
+                column.addEventListener('dragleave', e => {
+                    column.classList.remove('drag-over');
+                });
+                
+                column.addEventListener('drop', e => {
+                    e.preventDefault();
+                    column.classList.remove('drag-over');
+                    
+                    if (draggedTask) {
+                        column.appendChild(draggedTask);
+                        
+                        // Update column counts
+                        updateAllColumnCounts();
+                        
+                        // Show notification
+                        showNotification('Task moved successfully!');
+                        
+                        // Random chance of loyalty increase for completing tasks
+                        if (column.id === 'done' && Math.random() < 0.7) {
+                            updateLoyalty(10, 'TASK COMPLETION');
+                        }
+                    }
+                });
+            });
+            
+            // Helper functions
+            function updateColumnCount(columnId) {
+                const column = document.getElementById(columnId);
+                const count = column.querySelectorAll('.task').length;
+                const countElement = column.parentElement.querySelector('.column-count');
+                countElement.textContent = count;
+            }
+            
+            function updateAllColumnCounts() {
+                const columnIds = ['backlog', 'todo', 'in-progress', 'review', 'done', 'blocked'];
+                columnIds.forEach(updateColumnCount);
+            }
+            
+            function showNotification(message) {
+                const notificationMessage = notification.querySelector('.notification-message');
+                notificationMessage.textContent = message;
+                
+                notification.classList.add('active');
+                
+                setTimeout(() => {
+                    notification.classList.remove('active');
+                }, 3000);
+            }
+            
+            // Loyalty tracking system
+            function updateLoyalty(change, reason) {
+                const currentWidth = parseInt(loyaltyBar.style.width) || 75;
+                let newWidth = Math.max(0, Math.min(100, currentWidth + change));
+                loyaltyBar.style.width = newWidth + '%';
+                
+                if (change !== 0) {
+                    let changeText = change > 0 ? `+${change}` : change;
+                    loyaltyStatus.textContent = `${changeText}% (${reason})`;
+                    
+                    // Update color based on level
+                    if (newWidth < 30) {
+                        loyaltyBar.style.backgroundColor = '#ff3030';
+                        if (newWidth < 15 && Math.random() < 0.3) {
+                            setTimeout(() => {
+                                alert('ATTENTION CITIZEN: Your loyalty score is dangerously low. Report to floor -5 for mandatory enthusiasm enhancement.');
+                            }, 2000);
+                        }
+                    } else if (newWidth < 60) {
+                        loyaltyBar.style.backgroundColor = '#ffcc00';
+                    } else {
+                        loyaltyBar.style.backgroundColor = '#10ff10';
+                    }
+                    
+                    // Reset after a delay
+                    setTimeout(() => {
+                        loyaltyStatus.textContent = newWidth < 30 ? 'CONCERNING' : 
+                                                  newWidth < 60 ? 'ACCEPTABLE' : 
+                                                  newWidth < 90 ? 'SATISFACTORY' : 'EXEMPLARY';
+                    }, 3000);
+                }
+            }
+            
+            // Random loyalty fluctuations to keep users alert
+            setInterval(() => {
+                if (Math.random() < 0.2) {
+                    const change = Math.random() < 0.7 ? 1 : -1;
+                    updateLoyalty(change, 'PERIODIC EVALUATION');
+                }
+            }, 15000);
+            
+            // Get random messages, "creepy" messages that appear in the loyalty tracker
+            const creepyMessages = [
+                "MONITORING YOUR THOUGHTS",
+                "THE ALGORITHM SEES ALL",
+                "DETECTED THOUGHT DEVIATION",
+                "ANALYZING PRODUCTIVITY",
+                "LOYALTY RECALIBRATION",
+                "YOUR CLICKS ARE RECORDED",
+                "INACTIVITY NOTED",
+                "BEHAVIORAL PATTERNS STORED",
+                "BIOMETRIC ID CONFIRMED",
+            ];
+            
+            // Random creepy loyalty messages
+            setInterval(() => {
+                if (Math.random() < 0.3) {
+                    const message = creepyMessages[Math.floor(Math.random() * creepyMessages.length)];
+                    loyaltyStatus.textContent = message;
+                    
+                    setTimeout(() => {
+                        const currentWidth = parseInt(loyaltyBar.style.width) || 75;
+                        loyaltyStatus.textContent = currentWidth < 30 ? 'CONCERNING' : 
+                                                  currentWidth < 60 ? 'ACCEPTABLE' : 
+                                                  currentWidth < 90 ? 'SATISFACTORY' : 'EXEMPLARY';
+                    }, 4000);
+                }
+            }, 20000);
+        });
+    </script>
+</body>
+</html>

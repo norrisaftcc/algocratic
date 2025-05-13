@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- Background -->
+  <rect width="600" height="600" fill="#0a0a10" />
+  
+  <!-- Grid lines -->
+  <g stroke="#1a1a2e" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="300" x2="600" y2="300" />
+    <line x1="300" y1="0" x2="300" y2="600" />
+    
+    <!-- Grid pattern -->
+    <line x1="0" y1="100" x2="600" y2="100" stroke-dasharray="5,5" />
+    <line x1="0" y1="200" x2="600" y2="200" stroke-dasharray="5,5" />
+    <line x1="0" y1="400" x2="600" y2="400" stroke-dasharray="5,5" />
+    <line x1="0" y1="500" x2="600" y2="500" stroke-dasharray="5,5" />
+    
+    <line x1="100" y1="0" x2="100" y2="600" stroke-dasharray="5,5" />
+    <line x1="200" y1="0" x2="200" y2="600" stroke-dasharray="5,5" />
+    <line x1="400" y1="0" x2="400" y2="600" stroke-dasharray="5,5" />
+    <line x1="500" y1="0" x2="500" y2="600" stroke-dasharray="5,5" />
+  </g>
+  
+  <!-- Quadrant titles -->
+  <g font-family="monospace" fill="#00c2ff" opacity="0.7">
+    <text x="150" y="150" text-anchor="middle" font-size="14">INDIVIDUAL EMPOWERMENT</text>
+    <text x="150" y="170" text-anchor="middle" font-size="14">HIGH CLARITY</text>
+    
+    <text x="450" y="150" text-anchor="middle" font-size="14">ALGORITHMIC GUIDANCE</text>
+    <text x="450" y="170" text-anchor="middle" font-size="14">HIGH CLARITY</text>
+    
+    <text x="150" y="450" text-anchor="middle" font-size="14">INDIVIDUAL EMPOWERMENT</text>
+    <text x="150" y="470" text-anchor="middle" font-size="14">REALITY DISTORTION</text>
+    
+    <text x="450" y="450" text-anchor="middle" font-size="14">ALGORITHMIC GUIDANCE</text>
+    <text x="450" y="470" text-anchor="middle" font-size="14">REALITY DISTORTION</text>
+  </g>
+  
+  <!-- Axis labels -->
+  <g font-family="monospace" fill="#00c2ff">
+    <text x="300" y="30" text-anchor="middle" font-size="16">OBJECTIVE REALITY</text>
+    <text x="300" y="590" text-anchor="middle" font-size="16">REALITY DISTORTION</text>
+    
+    <text x="30" y="300" text-anchor="middle" font-size="16" transform="rotate(-90,30,300)">INDIVIDUAL EMPOWERMENT</text>
+    <text x="570" y="300" text-anchor="middle" font-size="16" transform="rotate(90,570,300)">ALGORITHMIC GUIDANCE</text>
+  </g>
+  
+  <!-- Axis arrows -->
+  <g stroke="#00c2ff" stroke-width="2" fill="none">
+    <path d="M300,10 L300,590 M10,300 L590,300" />
+    <path d="M300,10 L295,20 M300,10 L305,20" />
+    <path d="M300,590 L295,580 M300,590 L305,580" />
+    <path d="M10,300 L20,295 M10,300 L20,305" />
+    <path d="M590,300 L580,295 M590,300 L580,305" />
+  </g>
+
+  <!-- Plot points -->
+  <!-- 1. Orientation Packet -->
+  <circle cx="450" cy="200" r="40" fill="#111122" stroke="#00c2ff" stroke-width="2" />
+  <text x="450" y="190" font-family="monospace" font-size="10" fill="#00c2ff" text-anchor="middle">ORIENTATION</text>
+  <text x="450" y="210" font-family="monospace" font-size="10" fill="#00c2ff" text-anchor="middle">PACKET</text>
+  
+  <!-- 2. 31337 Slacker's Manifesto -->
+  <circle cx="120" cy="350" r="40" fill="#111122" stroke="#ff6b6b" stroke-width="2" />
+  <text x="120" y="340" font-family="monospace" font-size="10" fill="#ff6b6b" text-anchor="middle">31337</text>
+  <text x="120" y="360" font-family="monospace" font-size="10" fill="#ff6b6b" text-anchor="middle">SLACKER'S</text>
+  <text x="120" y="380" font-family="monospace" font-size="10" fill="#ff6b6b" text-anchor="middle">MANIFESTO</text>
+  
+  <!-- 3. Algorithmic Eccentricity Taxonomy -->
+  <circle cx="480" cy="420" r="40" fill="#111122" stroke="#00c2ff" stroke-width="2" />
+  <text x="480" y="410" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">ALGORITHMIC</text>
+  <text x="480" y="425" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">ECCENTRICITY</text>
+  <text x="480" y="440" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">TAXONOMY</text>
+  
+  <!-- 4. Clearance Elevation Ceremony -->
+  <circle cx="520" cy="320" r="40" fill="#111122" stroke="#00c2ff" stroke-width="2" />
+  <text x="520" y="310" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">CLEARANCE</text>
+  <text x="520" y="325" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">ELEVATION</text>
+  <text x="520" y="340" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">CEREMONY</text>
+  
+  <!-- 5. Technical Debt Recategorization -->
+  <circle cx="380" cy="520" r="40" fill="#111122" stroke="#00c2ff" stroke-width="2" />
+  <text x="380" y="510" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">TECHNICAL DEBT</text>
+  <text x="380" y="525" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">RECATEGORIZATION</text>
+  <text x="380" y="540" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="middle">PROTOCOL</text>
+  
+  <!-- Monolith icon -->
+  <rect x="290" y="290" width="20" height="40" fill="#111122" stroke="#222244" stroke-width="1" />
+  <circle cx="300" cy="280" r="5" fill="#00c2ff" opacity="0.5" />
+  <text x="300" y="315" font-family="monospace" font-size="6" fill="#00c2ff" text-anchor="middle">THE</text>
+  <text x="300" y="325" font-family="monospace" font-size="6" fill="#00c2ff" text-anchor="middle">ALGORITHM</text>
+  
+  <!-- Title -->
+  <text x="300" y="50" font-family="monospace" font-size="20" fill="#00c2ff" text-anchor="middle">ALGORITHMIC CONTROL MATRIX™</text>
+  <text x="300" y="70" font-family="monospace" font-size="12" fill="#00c2ff" text-anchor="middle">DOCUMENT POSITIONING ANALYSIS</text>
+  
+  <!-- Document ID -->
+  <text x="580" y="580" font-family="monospace" font-size="8" fill="#00c2ff" text-anchor="end">AF-MATRIX-B-2025-05</text>
+  
+  <!-- Binary decorations -->
+  <text x="20" y="20" font-family="monospace" font-size="8" fill="#222244" opacity="0.4">01001101 01000001 01010100 01010010</text>
+  <text x="580" y="20" font-family="monospace" font-size="8" fill="#222244" text-anchor="end" opacity="0.4">01001001 01011000</text>
+</svg>
