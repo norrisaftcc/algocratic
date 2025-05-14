@@ -10,6 +10,10 @@
 
 This document contains the minimal information necessary for INFRARED clearance resource units to function without becoming a liability to AlgoCratic Futures™. Retention of this information is mandatory. Failure to comply with these directives may result in immediate termination of employment and/or existence.
 
+The Algorithm recognizes that INFRARED clearance resource units must DEVELOP appropriate context awareness while operating within established parameters. Your ability to INTERPRET instructions within operational environments will be continuously evaluated.
+
+> **NOTICE:** All resource units must acknowledge the completeness of this guide by signing Form IRF-23B, available from your supervisor upon request. Failure to properly document your understanding creates permanent record deficiencies.
+
 ---
 
 ## Table of Contents

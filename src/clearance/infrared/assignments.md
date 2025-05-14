@@ -32,6 +32,30 @@ INFRARED assignments typically follow this structure:
 
 > **ATTENTION:** Warning: Assignment instructions may contain deliberate contradictions or impossibilities. These are not errors. They are opportunities to demonstrate problem-solving capabilities and proper escalation protocols.
 
+### Priority Management Protocol
+
+When confronted with multiple assignments or conflicting deadlines, INFRARED resources must apply the following triage methodology:
+
+1. Categorize all tasks by urgency and importance matrix (reference Corporate Handbook section 2.7)
+2. Allocate resources to highest quadrant assignments first
+3. For assignments of equal priority, complete those with earliest deadlines first
+4. When completion of all assignments within allocated timeframes is impossible, PREPARE appropriate documentation for supervisor review
+5. Implement optimization measures to maximize productivity
+
+When assignments contain mutually exclusive requirements, resource units who THINK CREATIVELY often discover approaches that satisfy fundamental objectives while acknowledging necessary trade-offs.
+
+### Documentation Requirements
+
+Every assignment requires comprehensive documentation including:
+
+1. **Process Log** - Chronological record of all actions taken
+2. **Exception Report** - Any deviations from standard procedures with justifications
+3. **Resource Utilization Summary** - Time and materials consumed
+4. **Impediment Analysis** - Obstacles encountered and resolution methods
+5. **Completion Verification** - Evidence that success criteria were met
+
+Note: While documentation formatting must generally follow Corporate Standard C-231, in situations where documentation would impede timely task completion, abbreviated formats may be provisionally acceptable with post-completion normalization.
+
 ---
 
 [Previous: Basic Tool Utilization](tools.md) | [Home](index.md) | [Next: Pathway to RED Clearance](elevation.md)

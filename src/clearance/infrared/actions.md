@@ -29,6 +29,17 @@ The following actions are **explicitly forbidden** for INFRARED clearance person
 * Communicating with other INFRARED resources on unrelated tasks
 * Accessing non-approved data repositories or websites
 
+### Efficiency Enhancement Clause
+
+While precise adherence to procedures is expected, The Algorithm values resource units who can complete assigned tasks with optimal efficiency. You are therefore encouraged to IDENTIFY potential process improvements within authorized parameters. Note: All perceived improvements must be documented on form IR-8B and submitted for supervisor review before implementation.
+
+In emergency situations where immediate action is required but no specific procedure exists, resource units may implement temporary solutions provided they:
+
+1. Document all actions taken
+2. Notify a supervisor at the earliest opportunity
+3. Ensure all actions align with AlgoCratic operational priorities
+4. Submit a detailed Procedural Exception Report (form IR-17C)
+
 ---
 
 [Previous: Who to Approach for Assistance](assistance.md) | [Home](index.md) | [Next: Basic Tool Utilization](tools.md)
