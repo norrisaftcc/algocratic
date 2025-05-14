@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Forms Repository | AlgoCratic Futures™</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #10ff10; /* AlgoCratic terminal green */
+            --dark-bg: #0a0a0a;
+            --medium-bg: #161616;
+            --light-bg: #242424;
+            --accent-color: #ff3030; /* Warning red */
+            --secondary-accent: #ffcc00; /* Alert yellow */
+            --text-color: #f0f0f0;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-sans: 'Roboto', sans-serif;
+            
+            /* Clearance level colors */
+            --ultraviolet: #9966cc;
+            --violet: #8a2be2;
+            --indigo: #4b0082;
+            --blue: #0000ff;
+            --green: #00ff00;
+            --yellow: #ffff00;
+            --orange: #ffa500;
+            --red: #ff0000;
+            --infrared: #8b0000;
+            --gray: #808080;
+        }
+        
+        body {
+            font-family: var(--font-mono);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            cursor: default;
+        }
+        
+        .terminal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--medium-bg);
+            min-height: 100vh;
+            border-left: 1px solid var(--primary-color);
+            border-right: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(16, 255, 16, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            box-shadow: 0 0 10px 2px var(--primary-color);
+            z-index: 10;
+        }
+        
+        .document-header {
+            text-align: center;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .document-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .document-subtitle {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .document-id {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .form-card {
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(16, 255, 16, 0.05);
+        }
+        
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            background-color: rgba(16, 255, 16, 0.1);
+        }
+        
+        .form-card h3 {
+            margin-top: 0;
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .form-card .clearance {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: var(--dark-bg);
+        }
+        
+        .form-card .access-button {
+            text-align: center;
+            padding: 8px 15px;
+            margin-top: 15px;
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: block;
+            background-color: rgba(16, 255, 16, 0.2);
+            color: var(--text-color);
+        }
+        
+        .form-card .access-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+        }
+        
+        .clearance-infrared { background-color: var(--infrared); }
+        .clearance-red { background-color: var(--red); }
+        .clearance-orange { background-color: var(--orange); }
+        .clearance-yellow { background-color: var(--yellow); }
+        .clearance-green { background-color: var(--green); }
+        .clearance-blue { background-color: var(--blue); }
+        
+        .locked-card {
+            filter: grayscale(0.8);
+            opacity: 0.7;
+        }
+        
+        .locked-card .access-button {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .locked-card .access-button::before {
+            content: "🔒 ACCESS DENIED";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+        
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(16, 255, 16, 0.3);
+            opacity: 0.5;
+            z-index: 999;
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Loyalty indicator */
+        #loyalty-tracker {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: var(--medium-bg);
+            border: 1px solid var(--primary-color);
+            padding: 10px;
+            font-size: 0.7rem;
+            z-index: 1000;
+            width: 150px;
+        }
+        
+        .loyalty-label {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .loyalty-progress {
+            width: 100%;
+            height: 8px;
+            background-color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+        
+        .loyalty-bar {
+            height: 100%;
+            width: 50%;
+            background-color: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        
+        .loyalty-status {
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .algorithm-message {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 30px 0;
+            font-size: 1.1rem;
+            animation: fadeInOut 4s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes scanline {
+            0% { top: -5%; }
+            100% { top: 105%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden loyalty tracker (purely decorative) -->
+    <div id="loyalty-tracker">
+        <div class="loyalty-label">LOYALTY MONITOR</div>
+        <div class="loyalty-progress">
+            <div class="loyalty-bar" style="width: 50%;"></div>
+        </div>
+        <div class="loyalty-status">CALCULATING...</div>
+    </div>
+
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <h1 class="document-title">OFFICIAL FORMS REPOSITORY</h1>
+            <h2 class="document-subtitle">AlgoCratic Futures™ Standardized Documentation</h2>
+            
+            <div class="document-id">DOCUMENT: AF-FORM-INDEX-2025-05</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-content">
+                <p>Welcome to the AlgoCratic Futures™ Official Forms Repository. This system provides access to all standardized forms required for official processes within the organization.</p>
+                
+                <p>Each form is access-restricted based on clearance level. Attempting to access forms above your clearance is a violation of protocol and will be logged in your permanent record.</p>
+                
+                <p>Please note that all form submissions are logged, analyzed, and contribute to your personal efficiency and loyalty metrics.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">BOT INTERACTION FORMS</h3>
+            
+            <div class="form-grid">
+                <!-- RED Clearance Bot Request Form -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-BOT-REQ-2025</h3>
+                    <p>Algorithmic Intelligence Consultation Request Form</p>
+                    <p>Required for RED clearance personnel to request bot interaction session.</p>
+                    <a href="bot_request.html" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- ORANGE Clearance Bot Anomaly Form -->
+                <div class="form-card">
+                    <span class="clearance clearance-orange">ORANGE</span>
+                    <h3>AF-BOT-ANOM-2025</h3>
+                    <p>Bot Behavior Anomaly Report</p>
+                    <p>Required when encountering unusual or unexpected bot responses.</p>
+                    <a href="bot_anomaly.html" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- YELLOW Clearance Bot Template Form -->
+                <div class="form-card">
+                    <span class="clearance clearance-yellow">YELLOW</span>
+                    <h3>AF-BOT-TMPL-2025</h3>
+                    <p>Custom Prompt Template Registration</p>
+                    <p>For registering team-wide bot interaction templates.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- GREEN Clearance Experimental Bot Form -->
+                <div class="form-card locked-card">
+                    <span class="clearance clearance-green">GREEN</span>
+                    <h3>AF-BOT-EXP-2025-G</h3>
+                    <p>Experimental Bot Capability Authorization</p>
+                    <p>Required for accessing experimental bot features.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">CODE SUBMISSION FORMS</h3>
+            
+            <div class="form-grid">
+                <!-- RED Intent Declaration -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-DEV-INTENT-2025</h3>
+                    <p>Code Modification Intent Declaration</p>
+                    <p>Required before initiating any code modifications.</p>
+                    <a href="code_intent.html" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- RED Risk Assessment -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-DEV-RISK-2025</h3>
+                    <p>Risk Assessment Matrix</p>
+                    <p>Required evaluation of potential impacts from code changes.</p>
+                    <a href="risk_assessment.html" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- RED Defense Form -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-DEV-DEFENSE-2025</h3>
+                    <p>Implementation Defense Justification</p>
+                    <p>Required response to code review criticisms.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- RED Post-Integration Form -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-DEV-POST-2025</h3>
+                    <p>Post-Integration Analysis Report</p>
+                    <p>Required after code integration into main repository.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">ADMINISTRATIVE FORMS</h3>
+            
+            <div class="form-grid">
+                <!-- INFRARED Tool Request -->
+                <div class="form-card">
+                    <span class="clearance clearance-infrared">INFRARED</span>
+                    <h3>AF-TOOL-REQ-2025</h3>
+                    <p>Additional Tool Access Request</p>
+                    <p>For requesting access to tools beyond standard allocation.</p>
+                    <a href="tool_request.html" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- RED Loyalty Reaffirmation -->
+                <div class="form-card">
+                    <span class="clearance clearance-red">RED</span>
+                    <h3>AF-LOY-REAF-2025</h3>
+                    <p>Voluntary Loyalty Reaffirmation Request</p>
+                    <p>For requesting loyalty score recalibration.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- ORANGE Clearance Elevation -->
+                <div class="form-card">
+                    <span class="clearance clearance-orange">ORANGE</span>
+                    <h3>AF-CL-ELEV-2025</h3>
+                    <p>Clearance Elevation Endorsement</p>
+                    <p>For recommending subordinate clearance elevation.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+                
+                <!-- YELLOW Timeline Adjustment -->
+                <div class="form-card locked-card">
+                    <span class="clearance clearance-yellow">YELLOW</span>
+                    <h3>AF-TIME-ADJ-2025</h3>
+                    <p>Project Timeline Adjustment Request</p>
+                    <p>For official modification of project deadlines.</p>
+                    <a href="#" class="access-button">ACCESS FORM</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="algorithm-message">THE ALGORITHM DEMANDS PROPER DOCUMENTATION * THE ALGORITHM PROVIDES</div>
+    </div>
+
+    <script>
+        // Purely cosmetic effects for the loyalty bar
+        document.addEventListener('DOMContentLoaded', function() {
+            const loyaltyBar = document.querySelector('.loyalty-bar');
+            const loyaltyStatus = document.querySelector('.loyalty-status');
+            
+            // Randomly fluctuate the loyalty bar
+            setInterval(() => {
+                const currentWidth = parseFloat(loyaltyBar.style.width);
+                const fluctuation = (Math.random() * 6) - 3; // Random value between -3 and 3
+                let newWidth = currentWidth + fluctuation;
+                
+                // Keep within reasonable range
+                newWidth = Math.max(40, Math.min(60, newWidth));
+                loyaltyBar.style.width = newWidth + '%';
+                
+                // Update status text
+                if (newWidth < 45) {
+                    loyaltyStatus.textContent = 'SUSPICIOUS';
+                    loyaltyBar.style.backgroundColor = '#ffa500';
+                } else if (newWidth < 55) {
+                    loyaltyStatus.textContent = 'ACCEPTABLE';
+                    loyaltyBar.style.backgroundColor = '#10ff10';
+                } else {
+                    loyaltyStatus.textContent = 'COMMENDABLE';
+                    loyaltyBar.style.backgroundColor = '#10ff10';
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
