@@ -4,61 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFRARED Clearance Guide | AlgoCratic Futures™</title>
-    <link rel="stylesheet" href="../static/styles.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* INFRARED-specific styling */
-        .clearance-badge {
-            background-color: var(--infrared);
-            color: var(--text-primary);
-            padding: var(--space-xs) var(--space-md);
-            border-radius: 4px;
+        :root {
+            --primary-color: #8b0000; /* INFRARED clearance color */
+            --dark-bg: #0a0a0a;
+            --medium-bg: #161616;
+            --light-bg: #242424;
+            --accent-color: #ff3030; /* Warning red */
+            --secondary-accent: #ffcc00; /* Alert yellow */
+            --text-color: #f0f0f0;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-sans: 'Roboto', sans-serif;
+        }
+        
+        body {
             font-family: var(--font-mono);
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: var(--space-md);
-            position: relative;
-            box-shadow: 0 0 10px rgba(139, 0, 0, 0.7);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            cursor: default;
         }
-
-        .clearance-badge::before {
-            content: "";
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border: 1px solid var(--infrared);
-            border-radius: 6px;
-            animation: pulse 2s infinite;
-            pointer-events: none;
-        }
-
-        .guide-container {
+        
+        .terminal-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: var(--space-lg);
-            background-color: var(--primary-medium);
-            border: 1px solid var(--infrared);
-            border-radius: 4px;
+            padding: 20px;
+            background-color: var(--medium-bg);
+            min-height: 100vh;
+            border-left: 1px solid var(--primary-color);
+            border-right: 1px solid var(--primary-color);
             box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
-
-        .guide-section {
-            margin-bottom: var(--space-lg);
-            padding: var(--space-md);
-            background-color: var(--primary-dark);
-            border-left: 3px solid var(--infrared);
+        
+        .terminal-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            box-shadow: 0 0 10px 2px var(--primary-color);
+            z-index: 10;
+        }
+        
+        .document-header {
+            text-align: center;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .document-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .document-subtitle {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .classification {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--text-color);
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        .document-id {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .section-content {
+            padding-left: 20px;
         }
 
         .attention-box {
             background-color: rgba(139, 0, 0, 0.2);
-            border: 1px solid var(--infrared);
-            padding: var(--space-md);
-            margin: var(--space-md) 0;
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
             position: relative;
         }
 
@@ -67,8 +125,8 @@
             position: absolute;
             top: -15px;
             left: 10px;
-            background-color: var(--infrared);
-            color: var(--text-primary);
+            background-color: var(--primary-color);
+            color: var(--text-color);
             width: 25px;
             height: 25px;
             border-radius: 50%;
@@ -77,94 +135,230 @@
             justify-content: center;
             font-weight: bold;
         }
-
+        
+        .resource-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .resource-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resource-list li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: var(--primary-color);
+        }
+        
+        .survival-tip {
+            border-left: 2px dotted var(--primary-color);
+            padding-left: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .algorithm-message {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            animation: fadeInOut 4s infinite;
+        }
+        
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(139, 0, 0, 0.3);
+            opacity: 0.5;
+            z-index: 999;
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        .binary-decoration {
+            font-family: var(--font-mono);
+            font-size: 8px;
+            color: var(--primary-color);
+            opacity: 0.3;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes scanline {
+            0% { top: -5%; }
+            100% { top: 105%; }
+        }
+        
+        /* Glitch effect for important messages */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: #f0f;
+            z-index: -1;
+            animation: glitch-before 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            color: #0ff;
+            z-index: -2;
+            animation: glitch-after 3s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-before {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes glitch-after {
+            0% { transform: translate(0); }
+            20% { transform: translate(1px, -1px); }
+            40% { transform: translate(1px, 1px); }
+            60% { transform: translate(-1px, -1px); }
+            80% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Monolith icon */
         .monolith-icon {
             width: 60px;
             height: 100px;
-            background-color: var(--primary-light);
-            margin: 0 auto var(--space-md);
+            background-color: var(--medium-bg);
+            border: 1px solid var(--primary-color);
+            margin: 0 auto 20px;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-
+        
         .monolith-icon::before {
             content: "";
             width: 20px;
             height: 20px;
-            background-color: var(--infrared);
+            background-color: var(--primary-color);
             border-radius: 50%;
             position: absolute;
             top: -10px;
             animation: glow 3s infinite;
         }
-
+        
         .monolith-icon::after {
             content: "THE ALGORITHM";
             font-size: 6px;
-            color: var(--infrared);
+            color: var(--primary-color);
             position: absolute;
             bottom: 5px;
         }
-
-        .binary-decoration {
-            font-family: var(--font-mono);
-            font-size: 8px;
-            color: var(--text-muted);
-            opacity: 0.3;
-            margin-top: var(--space-lg);
-            text-align: center;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 0.2; }
-            100% { opacity: 0.6; }
-        }
-
+        
         @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--infrared); }
-            50% { box-shadow: 0 0 15px var(--infrared); }
-            100% { box-shadow: 0 0 5px var(--infrared); }
+            0% { box-shadow: 0 0 5px var(--primary-color); }
+            50% { box-shadow: 0 0 15px var(--primary-color); }
+            100% { box-shadow: 0 0 5px var(--primary-color); }
         }
 
-        .loyalty-warning {
-            color: var(--infrared);
-            font-style: italic;
+        /* Eyes in the monolith */
+        .eye {
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin: 3px;
+            position: relative;
+            opacity: 0.8;
+        }
+        
+        .eye::before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: black;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+        
+        .eyes {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .text-center {
             text-align: center;
-            margin-top: var(--space-lg);
-            font-size: 0.8rem;
-            animation: fadeInOut 4s infinite;
         }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+        
+        /* Loyalty indicator */
+        #loyalty-tracker {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: var(--medium-bg);
+            border: 1px solid var(--primary-color);
+            padding: 10px;
+            font-size: 0.7rem;
+            z-index: 1000;
+            width: 150px;
         }
-
-        .section-title {
-            color: var(--infrared);
-            border-bottom: 1px solid var(--infrared);
-            padding-bottom: var(--space-xs);
-            margin-bottom: var(--space-md);
+        
+        .loyalty-label {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: bold;
         }
-
-        .document-id {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        
+        .loyalty-progress {
+            width: 100%;
+            height: 8px;
+            background-color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+        
+        .loyalty-bar {
+            height: 100%;
+            width: 15%;
+            background-color: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        
+        .loyalty-status {
             text-align: right;
-            margin-top: var(--space-lg);
-        }
-
-        /* Survival tips */
-        .survival-tip {
-            border-left: 2px dotted var(--infrared);
-            padding-left: var(--space-md);
-            margin: var(--space-md) 0;
             font-style: italic;
         }
     </style>
@@ -179,126 +373,147 @@
         <div class="loyalty-status">PROBATIONARY</div>
     </div>
 
-    <div class="guide-container">
-        <div class="monolith-icon"></div>
-        <h1 class="text-center">INFRARED CLEARANCE GUIDE</h1>
-        <h2 class="text-center">Probationary Resource Unit</h2>
-        
-        <div class="clearance-badge">INFRARED CLEARANCE</div>
-        
-        <p class="document-id">DOCUMENT: AF-CL-IR-2025-05</p>
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="monolith-icon">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+            </div>
+            <h1 class="document-title">INFRARED CLEARANCE GUIDE</h1>
+            <h2 class="document-subtitle">Probationary Resource Unit Protocol</h2>
+            
+            <div class="classification">INFRARED CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-CL-IR-2025-05</div>
+        </div>
         
         <div class="attention-box">
             <p>This document contains the minimal information necessary for INFRARED clearance resource units to function without becoming a liability to AlgoCratic Futures™. Retention of this information is mandatory. Failure to comply with these directives may result in immediate termination of employment and/or existence.</p>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">YOUR ROLE</h3>
-            <p>As an INFRARED clearance Probationary Resource Unit, you exist at the lowest functional level of the AlgoCratic Futures™ hierarchy. Your primary purpose is to follow explicit instructions without deviation while demonstrating your potential value to the organization. Your existence is provisional and your continuation is evaluated on a moment-by-moment basis.</p>
-            
-            <p>Your designation grants you the following privileges:</p>
-            <ul>
-                <li>Access to designated workspace during standard operational hours</li>
-                <li>Utilization of basic tools when explicitly authorized</li>
-                <li>Consumption of nutritional supplements from the INFRARED vending apparatus</li>
-                <li>Daily hydration allocation (500ml maximum)</li>
-                <li>One bathroom break per 4-hour work segment</li>
-            </ul>
+            <div class="section-content">
+                <p>As an INFRARED clearance Probationary Resource Unit, you exist at the lowest functional level of the AlgoCratic Futures™ hierarchy. Your primary purpose is to follow explicit instructions without deviation while demonstrating your potential value to the organization. Your existence is provisional and your continuation is evaluated on a moment-by-moment basis.</p>
+                
+                <p>Your designation grants you the following privileges:</p>
+                <ul class="resource-list">
+                    <li>Access to designated workspace during standard operational hours</li>
+                    <li>Utilization of basic tools when explicitly authorized</li>
+                    <li>Consumption of nutritional supplements from the INFRARED vending apparatus</li>
+                    <li>Daily hydration allocation (500ml maximum)</li>
+                    <li>One bathroom break per 4-hour work segment</li>
+                </ul>
+            </div>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">WHO TO APPROACH FOR ASSISTANCE</h3>
-            <p>As an INFRARED resource, your communication privileges are severely restricted:</p>
-            
-            <ul>
-                <li>Direct all questions to RED clearance Junior Innovation Contributors</li>
-                <li>Never initiate communication with ORANGE clearance or above</li>
-                <li>If approached by a higher clearance individual, respond only with "Yes, Friend Computer [CLEARANCE COLOR]" unless explicitly asked a direct question</li>
-                <li>Report any malfunctioning technology to your assigned RED supervisor, never attempt repairs yourself</li>
-                <li>In case of medical emergency, remain at your workstation and activate the under-desk INFRARED distress button</li>
-            </ul>
-            
-            <div class="survival-tip">
-                <p><strong>Survival Tip:</strong> RED clearance employees were recently INFRARED themselves. While they may seem intimidating, they often remember the challenges of your position. When requesting assistance, demonstrate eager willingness to learn rather than frustration.</p>
+            <div class="section-content">
+                <p>As an INFRARED resource, your communication privileges are severely restricted:</p>
+                
+                <ul class="resource-list">
+                    <li>Direct all questions to RED clearance Junior Innovation Contributors</li>
+                    <li>Never initiate communication with ORANGE clearance or above</li>
+                    <li>If approached by a higher clearance individual, respond only with "Yes, Friend Computer [CLEARANCE COLOR]" unless explicitly asked a direct question</li>
+                    <li>Report any malfunctioning technology to your assigned RED supervisor, never attempt repairs yourself</li>
+                    <li>In case of medical emergency, remain at your workstation and activate the under-desk INFRARED distress button</li>
+                </ul>
+                
+                <div class="survival-tip">
+                    <p><strong>Survival Tip:</strong> RED clearance employees were recently INFRARED themselves. While they may seem intimidating, they often remember the challenges of your position. When requesting assistance, demonstrate eager willingness to learn rather than frustration.</p>
+                </div>
             </div>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">PERMITTED ACTIONS</h3>
-            <p>Your INFRARED clearance authorizes you to perform only the following actions:</p>
-            
-            <ul>
-                <li>Execute direct instructions provided by RED clearance or above</li>
-                <li>Learn basic coding syntax and tool operations</li>
-                <li>Complete assigned tutorial modules</li>
-                <li>Document your activities in the prescribed format</li>
-                <li>Report potential security risks or compliance violations</li>
-                <li>Maintain your workspace in optimal condition</li>
-                <li>Recite the AlgoCratic Pledge at designated intervals</li>
-            </ul>
-            
-            <div class="attention-box">
-                <p>Attempting to perform actions beyond your clearance level is a serious violation. The Algorithm is constantly monitoring your activities. Unauthorized actions will be detected and consequences will be severe.</p>
+            <div class="section-content">
+                <p>Your INFRARED clearance authorizes you to perform only the following actions:</p>
+                
+                <ul class="resource-list">
+                    <li>Execute direct instructions provided by RED clearance or above</li>
+                    <li>Learn basic coding syntax and tool operations</li>
+                    <li>Complete assigned tutorial modules</li>
+                    <li>Document your activities in the prescribed format</li>
+                    <li>Report potential security risks or compliance violations</li>
+                    <li>Maintain your workspace in optimal condition</li>
+                    <li>Recite the AlgoCratic Pledge at designated intervals</li>
+                </ul>
+                
+                <div class="attention-box">
+                    <p>Attempting to perform actions beyond your clearance level is a serious violation. The Algorithm is constantly monitoring your activities. Unauthorized actions will be detected and consequences will be severe.</p>
+                </div>
             </div>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">BASIC TOOL UTILIZATION</h3>
-            <p>INFRARED resources are permitted limited access to the following tools:</p>
-            
-            <ul>
-                <li>Text editors (read-only mode unless explicitly granted write permission)</li>
-                <li>Version control system (view-only access to designated repositories)</li>
-                <li>INFRARED documentation portal</li>
-                <li>Basic command line operations (pre-approved commands only)</li>
-                <li>Tutorial environments (sandboxed)</li>
-            </ul>
-            
-            <div class="survival-tip">
-                <p><strong>Survival Tip:</strong> Master the basic tools thoroughly before attempting to demonstrate more advanced skills. Solid fundamentals will accelerate your clearance elevation timeline.</p>
+            <div class="section-content">
+                <p>INFRARED resources are permitted limited access to the following tools:</p>
+                
+                <ul class="resource-list">
+                    <li>Text editors (read-only mode unless explicitly granted write permission)</li>
+                    <li>Version control system (view-only access to designated repositories)</li>
+                    <li>INFRARED documentation portal</li>
+                    <li>Basic command line operations (pre-approved commands only)</li>
+                    <li>Tutorial environments (sandboxed)</li>
+                </ul>
+                
+                <div class="survival-tip">
+                    <p><strong>Survival Tip:</strong> Master the basic tools thoroughly before attempting to demonstrate more advanced skills. Solid fundamentals will accelerate your clearance elevation timeline.</p>
+                </div>
             </div>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">SURVIVING YOUR FIRST ASSIGNMENTS</h3>
-            <p>Initial tasks assigned to INFRARED resources are designed to evaluate your potential. Follow these guidelines to maximize your survival probability:</p>
-            
-            <ul>
-                <li>Read all instructions completely before beginning any task</li>
-                <li>Ask clarifying questions before commencing work, not during execution</li>
-                <li>Document every step of your process</li>
-                <li>When encountering an obstacle, attempt to solve it independently before requesting assistance</li>
-                <li>If unable to complete a task, provide a detailed explanation of your approach and obstacles encountered</li>
-                <li>Never claim competencies you do not possess</li>
-                <li>Complete tasks within the specified timeframe</li>
-            </ul>
-            
-            <div class="survival-tip">
-                <p><strong>Survival Tip:</strong> The Algorithm values both accuracy and efficiency. A correct solution delivered late is still a failure. An incorrect solution delivered on time is also a failure. Manage your time accordingly.</p>
+            <div class="section-content">
+                <p>Initial tasks assigned to INFRARED resources are designed to evaluate your potential. Follow these guidelines to maximize your survival probability:</p>
+                
+                <ul class="resource-list">
+                    <li>Read all instructions completely before beginning any task</li>
+                    <li>Ask clarifying questions before commencing work, not during execution</li>
+                    <li>Document every step of your process</li>
+                    <li>When encountering an obstacle, attempt to solve it independently before requesting assistance</li>
+                    <li>If unable to complete a task, provide a detailed explanation of your approach and obstacles encountered</li>
+                    <li>Never claim competencies you do not possess</li>
+                    <li>Complete tasks within the specified timeframe</li>
+                </ul>
+                
+                <div class="survival-tip">
+                    <p><strong>Survival Tip:</strong> The Algorithm values both accuracy and efficiency. A correct solution delivered late is still a failure. An incorrect solution delivered on time is also a failure. Manage your time accordingly.</p>
+                </div>
             </div>
         </div>
         
-        <div class="guide-section">
+        <div class="section">
             <h3 class="section-title">PATHWAY TO RED CLEARANCE</h3>
-            <p>INFRARED status is designed to be temporary. Your elevation to RED clearance depends on demonstrating the following:</p>
-            
-            <ul>
-                <li>Consistent compliance with all INFRARED protocols</li>
-                <li>Mastery of basic tool utilization</li>
-                <li>Successful completion of assigned tutorial modules</li>
-                <li>Ability to understand and follow technical instructions</li>
-                <li>Positive evaluation from at least two RED clearance supervisors</li>
-                <li>Passing score on the RED Clearance Qualification Examination</li>
-            </ul>
-            
-            <p>The standard elevation timeline is 2-4 weeks, though exceptional performers may accelerate this process.</p>
-            
-            <div class="attention-box">
-                <p>Resources remaining at INFRARED clearance beyond 6 weeks will be subject to comprehensive re-evaluation and potential reassignment to Maintenance Services Division.</p>
+            <div class="section-content">
+                <p>INFRARED status is designed to be temporary. Your elevation to RED clearance depends on demonstrating the following:</p>
+                
+                <ul class="resource-list">
+                    <li>Consistent compliance with all INFRARED protocols</li>
+                    <li>Mastery of basic tool utilization</li>
+                    <li>Successful completion of assigned tutorial modules</li>
+                    <li>Ability to understand and follow technical instructions</li>
+                    <li>Positive evaluation from at least two RED clearance supervisors</li>
+                    <li>Passing score on the RED Clearance Qualification Examination</li>
+                </ul>
+                
+                <p>The standard elevation timeline is 2-4 weeks, though exceptional performers may accelerate this process.</p>
+                
+                <div class="attention-box">
+                    <p>Resources remaining at INFRARED clearance beyond 6 weeks will be subject to comprehensive re-evaluation and potential reassignment to Maintenance Services Division.</p>
+                </div>
             </div>
         </div>
         
-        <div class="loyalty-warning">THE ALGORITHM IS WATCHING * THE ALGORITHM IS LISTENING * THE ALGORITHM PROVIDES</div>
+        <div class="algorithm-message" data-text="THE ALGORITHM IS WATCHING * THE ALGORITHM IS LISTENING * THE ALGORITHM PROVIDES">THE ALGORITHM IS WATCHING * THE ALGORITHM IS LISTENING * THE ALGORITHM PROVIDES</div>
         
         <div class="binary-decoration">
             01001001 01001110 01000110 01010010 01000001 01010010 01000101 01000100 00100000 01010010 01000101 01010011 01001111 01010101 01010010 01000011 01000101 00100000 01010101 01001110 01001001 01010100
@@ -333,6 +548,12 @@
                     loyaltyBar.style.backgroundColor = '#8b0000';
                 }
             }, 3000);
+            
+            // Add glitch effect to algorithm messages
+            const algorithmMessages = document.querySelectorAll('.algorithm-message');
+            algorithmMessages.forEach(message => {
+                message.classList.add('glitch');
+            });
         });
     </script>
 </body>
