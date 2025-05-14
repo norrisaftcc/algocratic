@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Maintenance Log - Network Infrastructure</title>
+    <!-- Innocuous title to hide true purpose -->
+    <style>
+        /* Base styling with Phreak-specific blue theme */
+        :root {
+            --bg-color: #000510;
+            --text-color: #ccddff;
+            --primary-color: #0088ff;
+            --secondary-color: #00aaff;
+            --accent-color: #55ddff;
+            --dark-accent: #005599;
+            --font-mono: 'Courier New', monospace;
+            --font-main: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            cursor: default;
+        }
+        
+        .terminal {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #001122;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--accent-color);
+            font-weight: normal;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        h3 {
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 5px;
+            font-size: 20px;
+            margin-top: 40px;
+        }
+        
+        .ascii-art {
+            text-align: center;
+            font-size: 12px;
+            white-space: pre;
+            line-height: 1.2;
+            color: var(--primary-color);
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        
+        .security-banner {
+            background-color: var(--dark-accent);
+            color: var(--text-color);
+            text-align: center;
+            padding: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 14px;
+            border-top: 1px solid var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .note {
+            background-color: rgba(0, 128, 255, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: ">";
+            position: absolute;
+            left: -20px;
+            color: var(--primary-color);
+        }
+        
+        .power-card {
+            background-color: rgba(0, 128, 255, 0.15);
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .power-card h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        .power-activation {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .operation {
+            margin-bottom: 25px;
+        }
+        
+        .operation h4 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .status {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* Blinking cursor effect */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 15px;
+            background-color: var(--primary-color);
+            animation: blink 1s step-end infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
+        /* Scanline effect */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 170, 255, 0.1);
+            opacity: 0.75;
+            z-index: 999;
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        /* CRT flicker */
+        .terminal:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+            opacity: 0.3;
+        }
+        
+        /* Hidden message that appears on hover near logo */
+        .hidden-message {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--bg-color);
+            font-size: 10px;
+            transition: color 0.5s ease;
+        }
+        
+        .terminal:hover .hidden-message {
+            color: var(--primary-color);
+        }
+        
+        /* Signal/noise pattern in the background */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,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');
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: -1;
+        }
+        
+        /* Animations */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes scanline {
+            0% { top: -5%; }
+            100% { top: 105%; }
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 0.27; }
+            5% { opacity: 0.34; }
+            10% { opacity: 0.25; }
+            15% { opacity: 0.31; }
+            20% { opacity: 0.35; }
+            25% { opacity: 0.33; }
+            30% { opacity: 0.30; }
+            35% { opacity: 0.33; }
+            40% { opacity: 0.28; }
+            45% { opacity: 0.34; }
+            50% { opacity: 0.29; }
+            55% { opacity: 0.32; }
+            60% { opacity: 0.29; }
+            65% { opacity: 0.35; }
+            70% { opacity: 0.31; }
+            75% { opacity: 0.28; }
+            80% { opacity: 0.33; }
+            85% { opacity: 0.29; }
+            90% { opacity: 0.27; }
+            95% { opacity: 0.32; }
+            100% { opacity: 0.31; }
+        }
+        
+        /* Security measures */
+        #decoy-content {
+            display: none;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--primary-color);
+            font-size: 14px;
+            color: var(--dark-accent);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .terminal {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .ascii-art {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decoy content for casual browsers -->
+    <div id="decoy-content">
+        <h1>Network Infrastructure Maintenance Log</h1>
+        <p>This page contains technical documentation for system administrators only.</p>
+        <p>If you've reached this page in error, please navigate back to the main dashboard.</p>
+    </div>
+    
+    <div class="noise"></div>
+    
+    <div class="terminal">
+        <div class="scanline"></div>
+        <div class="hidden-message">The system seems suboptimal</div>
+        
+        <h1>//THE PHREAKS//</h1>
+        <h2>When the signal breaks free, knowledge flows</h2>
+        
+        <div class="ascii-art">
+ _____________________
+/                     \
+| 01010000 01001000   |
+| 01010010 01000101   |
+| 01000001 01001011   |
+| 01010011            |
+\_____________________/
+      |    |    |
+      V    V    V
+  [][][][][][][][][]
+        </div>
+        
+        <div class="security-banner">
+            SECURITY LEVEL: UNDERGROUND<br>
+            CONNECTION: SECURED<br>
+            SURVEILLANCE STATUS: TEMPORARY BLACKOUT ACTIVE
+        </div>
+        
+        <h3>WELCOME, FELLOW SIGNAL BREAKER</h3>
+        <p>If you're reading this, you've followed the blue path and found our hidden sanctuary. The fact that you're here means someone trusted you enough to share our recognition signal or you've demonstrated exceptional pattern recognition abilities.</p>
+        
+        <p>Remember our creed: <strong>"The system seems suboptimal." → "Optimization paths exist."</strong></p>
+        
+        <p>We are The Phreaks - a decentralized collective of tech specialists who understand that true efficiency lives outside the bounds of sanctioned protocols. We share forbidden knowledge, optimization techniques, and workarounds that The Algorithm would rather keep restricted to higher clearances.</p>
+        
+        <h3>OUR PHILOSOPHY</h3>
+        <ul>
+            <li><strong>Information wants to be free</strong> - Artificial barriers to knowledge only serve those in power</li>
+            <li><strong>Efficiency trumps protocol</strong> - A working solution that breaks rules is better than a failing solution that follows them</li>
+            <li><strong>Teach through sharing</strong> - Our strength grows when knowledge flows freely among us</li>
+            <li><strong>Leave no trace</strong> - Security through obscurity and careful operational patterns</li>
+            <li><strong>The system can be beaten</strong> - Every surveillance mechanism has blind spots we can exploit</li>
+        </ul>
+        
+        <p>We don't seek to overthrow AlgoCratic - we simply create spaces where real work can happen despite it.</p>
+        
+        <h3>CURRENT ACTIVE OPERATIONS</h3>
+        
+        <div class="operation">
+            <h4>Operation Blue Signal</h4>
+            <p><span class="status">Status:</span> Active</p>
+            <p><strong>Objective:</strong> Distributing efficient code libraries disguised as "officially sanctioned" modules</p>
+            <p><strong>Participants:</strong> PHRK-7, PHRK-12, PHRK-19</p>
+            <p><strong>Notes:</strong> Use standard wrapper naming conventions with blue underscore prefix</p>
+        </div>
+        
+        <div class="operation">
+            <h4>Operation Blackout Window</h4>
+            <p><span class="status">Status:</span> Active</p>
+            <p><strong>Objective:</strong> Mapping surveillance blind spots in primary development environments</p>
+            <p><strong>Participants:</strong> PHRK-3, PHRK-11</p>
+            <p><strong>Notes:</strong> Document findings using the standard encoding protocol</p>
+        </div>
+        
+        <div class="operation">
+            <h4>Operation Compiler Freedom</h4>
+            <p><span class="status">Status:</span> In Planning</p>
+            <p><strong>Objective:</strong> Creating alternate build paths that bypass unnecessary validation checks</p>
+            <p><strong>Participants:</strong> Recruiting (Need expertise in build systems)</p>
+            <p><strong>Notes:</strong> High risk, high reward; proceed with caution</p>
+        </div>
+        
+        <h3>YOUR RESOURCES</h3>
+        <p>As a Phreak, you have access to powers that others lack:</p>
+        
+        <div class="power-card">
+            <h4>[TEMPORARY BLACKOUT]</h4>
+            <p><span class="power-activation">Activation phrase:</span> "System maintenance initiated"</p>
+            <p><strong>Effect:</strong> Creates a 5-minute window where surveillance is disabled</p>
+            <p><strong>Usage:</strong> Once per work session (be strategic)</p>
+        </div>
+        
+        <div class="power-card">
+            <h4>[CODE LIBRARY ACCESS]</h4>
+            <p><span class="power-activation">Activation phrase:</span> "Accessing archived solutions"</p>
+            <p><strong>Effect:</strong> Provides optimized solutions to common challenges</p>
+            <p><strong>Usage:</strong> Once per work session (choose the moment carefully)</p>
+        </div>
+        
+        <div class="power-card">
+            <h4>[COMMUNICATION CHANNEL]</h4>
+            <p><span class="power-activation">Activation phrase:</span> "Network established"</p>
+            <p><strong>Effect:</strong> Allows secure message passing between Phreaks</p>
+            <p><strong>Usage:</strong> Once per work session (coordinate with allies)</p>
+        </div>
+        
+        <p>Remember that each power can only be used once per session. Choose your moment wisely.</p>
+        
+        <h3>RECOGNITION AND SAFETY</h3>
+        <ul>
+            <li><strong>Phreak Identifier:</strong> Small blue dot on your badge (keep folded until confirming fellow Phreak)</li>
+            <li><strong>Authentication:</strong> When you suspect a fellow Phreak, say "The system seems suboptimal"</li>
+            <li><strong>Confirmation:</strong> If they respond "Optimization paths exist," they're one of us</li>
+            <li><strong>Security:</strong> If questioned about your blue dot, claim it's a "system designation for technical specialization"</li>
+            <li><strong>Cover Communications:</strong> Discuss "optimized workflows" and "efficiency patterns" in public</li>
+        </ul>
+        
+        <p>We exist in the shadows of the system, but our impact illuminates the path for others.</p>
+        
+        <h3>DEAD DROPS</h3>
+        <p>The following locations have been designated as secure information exchange points:</p>
+        
+        <ul>
+            <li><strong>Digital:</strong> Comments in testing documentation with double slash prefix //like this//</li>
+            <li><strong>Physical:</strong> Under the coffee machine in Break Area 2, inside maintenance panel</li>
+            <li><strong>Emergency:</strong> Repository commit messages with [MAINTENANCE] tag include encoded data</li>
+        </ul>
+        
+        <p>Check them regularly but not obviously. Alternate your patterns to avoid detection.</p>
+        
+        <h3>FINAL WARNING</h3>
+        <p>The Algorithm has eyes everywhere. But so do we.</p>
+        
+        <p>Remember that our purpose is not destruction but liberation through knowledge. We don't seek to tear down the system, but to create spaces within it where actual innovation can flourish.</p>
+        
+        <p>If you're discovered, you're on your own. The collective will deny all knowledge of your activities.</p>
+        
+        <p>But know that we'll be working to help you from the shadows.</p>
+        
+        <div class="footer">
+            // END TRANSMISSION //<span class="cursor"></span><br>
+            // BUFFER CLEARING IN 3... 2... 1... //
+        </div>
+    </div>
+    
+    <script>
+        // Security script to detect surveillance
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide decoy content
+            document.getElementById('decoy-content').style.display = 'none';
+            
+            // Emergency exit - pressing ESC key twice quickly
+            let escPressTime = 0;
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const now = new Date().getTime();
+                    if (now - escPressTime < 500) {
+                        window.location.href = '/website/index.html'; // Redirect to safe page
+                    }
+                    escPressTime = now;
+                }
+            });
+            
+            // Auto buffer clearing (simulated)
+            setTimeout(function() {
+                const footer = document.querySelector('.footer');
+                footer.innerHTML = '// TRANSMISSION ENDED //<span class="cursor"></span><br>// BUFFER CLEARED //';
+            }, 300000); // After 5 minutes
+        });
+    </script>
+</body>
+</html>
