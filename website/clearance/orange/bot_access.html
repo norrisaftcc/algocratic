@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithmic Intelligence Access Privileges | ORANGE Clearance Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Efficiency tracker -->
+    <div id="efficiency-tracker">
+        <div class="efficiency-label">EFFICIENCY MONITOR</div>
+        <div class="efficiency-progress">
+            <div class="efficiency-bar" style="width: 65%;"></div>
+        </div>
+        <div class="efficiency-status">OPTIMAL</div>
+    </div>
+
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="monolith-icon">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+            </div>
+            <h1 class="document-title">ORANGE CLEARANCE GUIDE</h1>
+            <h2 class="document-subtitle">Technical Implementation Specialist Protocol</h2>
+            
+            <div class="classification">ORANGE CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-CL-O-2025-05-7</div>
+        </div>
+        
+        <div class="guide-content">
+            <h3 class="section-title typewriter">ALGORITHMIC INTELLIGENCE ACCESS PRIVILEGES</h3>
+            
+            <p>Congratulations, ORANGE clearance Technical Implementation Specialist! You have been granted limited access to Algorithmic Intelligence systems (colloquially referred to as "bots"). This represents a significant privilege reflecting your demonstrated technical competence and loyalty metrics.</p>
+
+            <div class="technical-diagram">
+┌────────────────────────────────────────────────────┐
+│     BOT ACCESS PRIVILEGE COMPARISON                │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│  CLEARANCE  │  QUERY RIGHTS  │  RESPONSE OBLIGATION│
+│  ───────────┼────────────────┼────────────────────┤
+│  INFRARED   │      NONE      │     MANDATORY      │
+│  RED        │      NONE      │     MANDATORY      │
+│  ORANGE     │     LIMITED    │     REQUIRED       │
+│  YELLOW     │      FULL      │     SELECTIVE      │
+│  GREEN+     │    UNLIMITED   │     OPTIONAL       │
+│                                                    │
+└────────────────────────────────────────────────────┘</div>
+            
+            <h4>Bot Interaction Authorization</h4>
+            
+            <p>ORANGE clearance personnel are permitted to:</p>
+            <ul class="resource-list">
+                <li>Directly query Algorithmic Intelligence systems for technical assistance</li>
+                <li>Submit code snippets for analysis and recommendation</li>
+                <li>Request documentation generation for approved systems</li>
+                <li>Utilize pattern-matching capabilities for problem-solving</li>
+                <li>Deploy supervised debugging assistants within approved parameters</li>
+            </ul>
+            
+            <div class="attention-box">
+                <p>While you now possess direct bot access privileges, significant restrictions remain in place. Each interaction is logged, analyzed, and contributes to your Technical Judgment Score. Excessive reliance on Algorithmic assistance suggests insufficient human capability and will impact advancement eligibility.</p>
+            </div>
+            
+            <h4>Usage Limitations</h4>
+            
+            <p>Your bot interaction privileges are subject to the following constraints:</p>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <strong>Query Volume Restrictions</strong>
+                    <ul class="resource-list">
+                        <li>Maximum 10 bot interactions per work cycle</li>
+                        <li>No more than 3 consecutive queries on the same topic</li>
+                        <li>Minimum 15-minute interval between related queries</li>
+                        <li>Monthly quota of 150 total interactions</li>
+                    </ul>
+                </div>
+                
+                <div class="process-step">
+                    <strong>Prohibited Query Categories</strong>
+                    <ul class="resource-list">
+                        <li>Strategic decision-making assistance</li>
+                        <li>Performance evaluation of personnel</li>
+                        <li>Questioning implementation of Algorithm directives</li>
+                        <li>Hypothetical scenarios regarding alternate corporate structures</li>
+                        <li>Any query containing forbidden terminology (see Appendix A-7)</li>
+                    </ul>
+                </div>
+                
+                <div class="process-step">
+                    <strong>Mandatory Reporting Requirements</strong>
+                    <ul class="resource-list">
+                        <li>All significant bot insights must be documented</li>
+                        <li>Unusual or unexpected bot responses must be reported immediately</li>
+                        <li>Monthly summary of bot utilization metrics must be submitted</li>
+                        <li>Any apparent bot behavioral anomalies require Form AF-BOT-ANOM-2025</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="code-block">
+// Bot Access Control System
+class BotAccessManager {
+    constructor(user) {
+        this.user = user;
+        this.clearanceLevel = user.clearance;
+        this.dailyQuota = this.getQuotaForClearance(this.clearanceLevel);
+        this.usageCount = 0;
+        this.lastQueryTime = null;
+        this.queryHistory = [];
+    }
+    
+    getQuotaForClearance(clearance) {
+        switch(clearance) {
+            case "INFRARED":
+                return 0; // No query privileges
+            case "RED":
+                return 0; // No query privileges
+            case "ORANGE":
+                return 10; // Limited query privileges
+            case "YELLOW":
+                return 25; // Enhanced query privileges
+            default:
+                return 50; // Advanced query privileges
+        }
+    }
+    
+    // Check if user can make a query
+    canQuery(queryText) {
+        // INFRARED and RED clearance cannot initiate queries
+        if (this.clearanceLevel === "INFRARED" || 
+            this.clearanceLevel === "RED") {
+            return {
+                allowed: false,
+                reason: "INSUFFICIENT_CLEARANCE"
+            };
+        }
+        
+        // Check for ORANGE restrictions
+        if (this.clearanceLevel === "ORANGE") {
+            // Check daily quota
+            if (this.usageCount >= this.dailyQuota) {
+                return {
+                    allowed: false,
+                    reason: "DAILY_QUOTA_EXCEEDED"
+                };
+            }
+            
+            // Check cooldown period (15 minutes)
+            if (this.lastQueryTime && 
+                (Date.now() - this.lastQueryTime) < 900000) {
+                return {
+                    allowed: false,
+                    reason: "COOLDOWN_PERIOD_ACTIVE"
+                };
+            }
+            
+            // Check for prohibited query content
+            if (this.containsProhibitedContent(queryText)) {
+                return {
+                    allowed: false,
+                    reason: "PROHIBITED_CONTENT"
+                };
+            }
+        }
+        
+        return { allowed: true };
+    }
+}</div>
+            
+            <h4>Bot Oversight Responsibilities</h4>
+            
+            <p>As an ORANGE clearance Technical Implementation Specialist, you now have responsibility for processing bot access requests from lower clearance personnel:</p>
+            
+            <ul class="resource-list">
+                <li>Review and approve/deny RED clearance Bot Consultation Requests</li>
+                <li>Schedule and supervise approved bot interaction sessions</li>
+                <li>Evaluate the necessity and efficiency of bot utilization</li>
+                <li>Report excessive or suspicious bot dependency patterns</li>
+                <li>Ensure bot-generated solutions conform to AlgoCratic standards</li>
+            </ul>
+            
+            <div class="technical-tip">
+                <p><strong>Technical Advisory:</strong> When utilizing Algorithmic Intelligence systems, remember that bots are tools, not colleagues. They possess no understanding of The Algorithm's ultimate vision and provide purely technical outputs without philosophical alignment. All bot-suggested solutions must be scrutinized for alignment with AlgoCratic principles before implementation.</p>
+            </div>
+            
+            <div class="attention-box">
+                <p><strong>Security Notice:</strong> The sharing of bot access credentials with lower clearance personnel is a Class 2 Protocol Violation resulting in immediate clearance reduction and mandatory Loyalty Reinforcement Programming.</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="rubber_duck.html" class="nav-button prev-button">PREVIOUS</a>
+                <a href="index.html" class="nav-button home-button">HOME</a>
+                <a href="elevation.html" class="nav-button next-button">NEXT</a>
+            </div>
+        </div>
+        
+        <div class="algorithm-message" data-text="THE ALGORITHM OPTIMIZES * THE ALGORITHM PROVIDES">THE ALGORITHM OPTIMIZES * THE ALGORITHM PROVIDES</div>
+        
+        <div class="binary-decoration">
+            01001111 01010010 01000001 01001110 01000111 01000101 00100000 01000011 01001100 01000101 01000001 01010010 01000001 01001110 01000011 01000101
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
