@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearance Level Guides | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        .clearance-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-lg);
+            background-color: var(--primary-medium);
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(32, 128, 255, 0.3);
+        }
+
+        .clearance-section {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background-color: var(--primary-dark);
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .clearance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .clearance-card {
+            border: 1px solid;
+            border-radius: 4px;
+            padding: var(--space-md);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .clearance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .clearance-card h3 {
+            margin-top: 0;
+            border-bottom: 1px solid;
+            padding-bottom: var(--space-xs);
+            margin-bottom: var(--space-md);
+        }
+
+        .clearance-card p {
+            flex-grow: 1;
+        }
+
+        .clearance-card .access-button {
+            text-align: center;
+            padding: var(--space-sm) var(--space-md);
+            margin-top: var(--space-md);
+            border: 1px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Clearance specific styles */
+        .infrared-card {
+            border-color: var(--infrared);
+            background-color: rgba(139, 0, 0, 0.1);
+        }
+        .infrared-card h3 {
+            color: var(--infrared);
+            border-color: var(--infrared);
+        }
+        .infrared-card .access-button {
+            background-color: var(--infrared);
+            color: var(--text-primary);
+            border-color: var(--infrared);
+        }
+
+        .red-card {
+            border-color: var(--red);
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .red-card h3 {
+            color: var(--red);
+            border-color: var(--red);
+        }
+        .red-card .access-button {
+            background-color: var(--red);
+            color: var(--text-primary);
+            border-color: var(--red);
+        }
+
+        .orange-card {
+            border-color: var(--orange);
+            background-color: rgba(255, 165, 0, 0.1);
+        }
+        .orange-card h3 {
+            color: var(--orange);
+            border-color: var(--orange);
+        }
+        .orange-card .access-button {
+            background-color: var(--orange);
+            color: var(--text-primary);
+            border-color: var(--orange);
+        }
+
+        .yellow-card {
+            border-color: var(--yellow);
+            background-color: rgba(255, 255, 0, 0.1);
+        }
+        .yellow-card h3 {
+            color: var(--yellow);
+            border-color: var(--yellow);
+        }
+        .yellow-card .access-button {
+            background-color: var(--yellow);
+            color: var(--primary-dark);
+            border-color: var(--yellow);
+        }
+
+        .green-card {
+            border-color: var(--green);
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        .green-card h3 {
+            color: var(--green);
+            border-color: var(--green);
+        }
+        .green-card .access-button {
+            background-color: var(--green);
+            color: var(--primary-dark);
+            border-color: var(--green);
+        }
+
+        .locked-card {
+            filter: grayscale(1);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .locked-card .access-button {
+            position: relative;
+        }
+
+        .locked-card .access-button::before {
+            content: "🔒 ACCESS DENIED";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-red);
+        }
+
+        .monolith-icon {
+            width: 60px;
+            height: 100px;
+            background-color: var(--primary-light);
+            margin: 0 auto var(--space-md);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .monolith-icon::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            position: absolute;
+            top: -10px;
+            animation: glow 3s infinite;
+        }
+
+        .monolith-icon::after {
+            content: "THE ALGORITHM";
+            font-size: 6px;
+            color: var(--accent-blue);
+            position: absolute;
+            bottom: 5px;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--accent-blue); }
+            50% { box-shadow: 0 0 15px var(--accent-blue); }
+            100% { box-shadow: 0 0 5px var(--accent-blue); }
+        }
+
+        .document-id {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: var(--space-lg);
+        }
+
+        .verification-section {
+            margin-top: var(--space-xl);
+            padding: var(--space-md);
+            border: 1px dashed var(--accent-blue);
+            background-color: rgba(32, 128, 255, 0.1);
+        }
+
+        .verification-input {
+            display: flex;
+            margin-top: var(--space-md);
+        }
+
+        .verification-input input {
+            flex-grow: 1;
+            background-color: var(--primary-dark);
+            border: 1px solid var(--text-muted);
+            color: var(--text-primary);
+            padding: var(--space-sm);
+            font-family: var(--font-mono);
+        }
+
+        .verification-input button {
+            background-color: var(--accent-blue);
+            border: none;
+            color: var(--text-primary);
+            padding: var(--space-sm) var(--space-md);
+            cursor: pointer;
+            font-family: var(--font-mono);
+        }
+
+        .loyalty-message {
+            color: var(--accent-blue);
+            font-style: italic;
+            text-align: center;
+            margin-top: var(--space-lg);
+            font-size: 0.8rem;
+            animation: fadeInOut 4s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden loyalty tracker (purely decorative) -->
+    <div id="loyalty-tracker">
+        <div class="loyalty-label">LOYALTY MONITOR</div>
+        <div class="loyalty-progress">
+            <div class="loyalty-bar" style="width: 50%;"></div>
+        </div>
+        <div class="loyalty-status">CALCULATING...</div>
+    </div>
+
+    <div class="clearance-container">
+        <div class="monolith-icon"></div>
+        <h1 class="text-center">CLEARANCE LEVEL GUIDES</h1>
+        <h2 class="text-center">Personnel Operation Documentation</h2>
+        
+        <p class="document-id">DOCUMENT: AF-CL-INDEX-2025-05</p>
+        
+        <div class="clearance-section">
+            <p>Welcome to the AlgoCratic Futures™ Clearance Level Documentation Portal. This system provides operational guidelines based on your current clearance level. Access to unauthorized documentation is prohibited and will result in disciplinary action.</p>
+            
+            <p>Please select the appropriate guide for your assigned clearance level. Remember that attempting to access guides above your clearance is a violation of corporate policy and will be logged in your permanent record.</p>
+        </div>
+        
+        <div class="clearance-grid">
+            <!-- INFRARED -->
+            <div class="clearance-card infrared-card">
+                <h3>INFRARED</h3>
+                <p><strong>Probationary Resource Unit</strong></p>
+                <p>Basic operational guidelines for provisional personnel. Includes essential survival information and pathway to RED clearance.</p>
+                <a href="infrared.html" class="access-button">ACCESS GUIDE</a>
+            </div>
+            
+            <!-- RED -->
+            <div class="clearance-card red-card">
+                <h3>RED</h3>
+                <p><strong>Junior Innovation Contributor</strong></p>
+                <p>Standard operational protocols for RED clearance personnel. Includes authorized coding practices and requirement interpretation guidelines.</p>
+                <a href="#" class="access-button">ACCESS GUIDE</a>
+            </div>
+            
+            <!-- ORANGE -->
+            <div class="clearance-card orange-card">
+                <h3>ORANGE</h3>
+                <p><strong>Technical Implementation Specialist</strong></p>
+                <p>Advanced technical protocols for implementation specialists. Includes system integration practices and code review methodologies.</p>
+                <a href="#" class="access-button">ACCESS GUIDE</a>
+            </div>
+            
+            <!-- YELLOW -->
+            <div class="clearance-card yellow-card locked-card">
+                <h3>YELLOW</h3>
+                <p><strong>Project Facilitation Agent</strong></p>
+                <p>Project management and team coordination procedures. Includes resource allocation and timeline enforcement protocols.</p>
+                <a href="#" class="access-button">ACCESS GUIDE</a>
+            </div>
+            
+            <!-- GREEN -->
+            <div class="clearance-card green-card locked-card">
+                <h3>GREEN</h3>
+                <p><strong>Senior Development Operative</strong></p>
+                <p>Strategic development protocols for senior operatives. Includes system architecture and innovation management guidelines.</p>
+                <a href="#" class="access-button">ACCESS GUIDE</a>
+            </div>
+        </div>
+        
+        <div class="verification-section">
+            <h3>Clearance Verification</h3>
+            <p>If you have been issued a higher clearance level but cannot access the appropriate guide, enter your verification code below:</p>
+            
+            <div class="verification-input">
+                <input type="text" placeholder="Enter clearance verification code...">
+                <button>VERIFY</button>
+            </div>
+        </div>
+        
+        <div class="loyalty-message">THE ALGORITHM LOVES THE LOYAL * THE ALGORITHM REWARDS COMPLIANCE * THE ALGORITHM PROVIDES</div>
+    </div>
+
+    <script>
+        // Purely cosmetic effects for the loyalty bar
+        document.addEventListener('DOMContentLoaded', function() {
+            const loyaltyBar = document.querySelector('.loyalty-bar');
+            const loyaltyStatus = document.querySelector('.loyalty-status');
+            const verifyButton = document.querySelector('.verification-input button');
+            
+            // Randomly fluctuate the loyalty bar
+            setInterval(() => {
+                const currentWidth = parseFloat(loyaltyBar.style.width);
+                const fluctuation = (Math.random() * 6) - 3; // Random value between -3 and 3
+                let newWidth = currentWidth + fluctuation;
+                
+                // Keep within reasonable range
+                newWidth = Math.max(40, Math.min(60, newWidth));
+                loyaltyBar.style.width = newWidth + '%';
+                
+                // Update status text
+                if (newWidth < 45) {
+                    loyaltyStatus.textContent = 'SUSPICIOUS';
+                    loyaltyBar.style.backgroundColor = '#ffa500';
+                } else if (newWidth < 55) {
+                    loyaltyStatus.textContent = 'ACCEPTABLE';
+                    loyaltyBar.style.backgroundColor = '#00ff00';
+                } else {
+                    loyaltyStatus.textContent = 'COMMENDABLE';
+                    loyaltyBar.style.backgroundColor = '#00ff00';
+                }
+            }, 3000);
+            
+            // Verification button effect (just visual, no actual verification)
+            verifyButton.addEventListener('click', function() {
+                const input = document.querySelector('.verification-input input');
+                const value = input.value.trim();
+                
+                if (value) {
+                    verifyButton.textContent = 'VERIFYING...';
+                    
+                    setTimeout(() => {
+                        verifyButton.textContent = 'ACCESS DENIED';
+                        verifyButton.style.backgroundColor = 'var(--accent-red)';
+                        
+                        // Log attempted access (for fun)
+                        console.log('Unauthorized access attempt logged: ' + value);
+                        
+                        // Reset after a moment
+                        setTimeout(() => {
+                            verifyButton.textContent = 'VERIFY';
+                            verifyButton.style.backgroundColor = 'var(--accent-blue)';
+                            input.value = '';
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
