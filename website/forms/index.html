@@ -4,112 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Official Forms Repository | AlgoCratic Futures™</title>
-    <!-- Google Fonts -->
+    <link rel="stylesheet" href="../static/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #10ff10; /* AlgoCratic terminal green */
-            --dark-bg: #0a0a0a;
-            --medium-bg: #161616;
-            --light-bg: #242424;
-            --accent-color: #ff3030; /* Warning red */
-            --secondary-accent: #ffcc00; /* Alert yellow */
-            --text-color: #f0f0f0;
-            --font-mono: 'Share Tech Mono', monospace;
-            --font-sans: 'Roboto', sans-serif;
-            
-            /* Clearance level colors */
-            --ultraviolet: #9966cc;
-            --violet: #8a2be2;
-            --indigo: #4b0082;
-            --blue: #0000ff;
-            --green: #00ff00;
-            --yellow: #ffff00;
-            --orange: #ffa500;
-            --red: #ff0000;
-            --infrared: #8b0000;
-            --gray: #808080;
-        }
-        
-        body {
-            font-family: var(--font-mono);
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            cursor: default;
-        }
-        
-        .terminal-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: var(--medium-bg);
-            min-height: 100vh;
-            border-left: 1px solid var(--primary-color);
-            border-right: 1px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(16, 255, 16, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .terminal-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary-color);
-            box-shadow: 0 0 10px 2px var(--primary-color);
-            z-index: 10;
-        }
-        
-        .document-header {
-            text-align: center;
-            border-bottom: 1px solid var(--primary-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .document-title {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .document-subtitle {
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        
-        .document-id {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 10px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            border-bottom: 1px dashed var(--primary-color);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        
+        /* Forms page specific styles */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -118,7 +18,7 @@
         }
         
         .form-card {
-            border: 1px solid var(--primary-color);
+            border: 1px solid var(--accent-green);
             border-radius: 4px;
             padding: 15px;
             transition: all 0.3s ease;
@@ -135,10 +35,10 @@
         
         .form-card h3 {
             margin-top: 0;
-            border-bottom: 1px dashed var(--primary-color);
+            border-bottom: 1px dashed var(--accent-green);
             padding-bottom: 5px;
             margin-bottom: 15px;
-            color: var(--primary-color);
+            color: var(--accent-green);
         }
         
         .form-card .clearance {
@@ -148,14 +48,15 @@
             font-size: 0.8rem;
             padding: 3px 8px;
             border-radius: 3px;
-            color: var(--dark-bg);
+            color: var(--primary-dark);
+            font-weight: bold;
         }
         
         .form-card .access-button {
             text-align: center;
             padding: 8px 15px;
             margin-top: 15px;
-            border: 1px solid var(--primary-color);
+            border: 1px solid var(--accent-green);
             border-radius: 4px;
             cursor: pointer;
             font-family: var(--font-mono);
@@ -163,20 +64,13 @@
             text-decoration: none;
             display: block;
             background-color: rgba(16, 255, 16, 0.2);
-            color: var(--text-color);
+            color: var(--text-primary);
         }
         
         .form-card .access-button:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-bg);
+            background-color: var(--accent-green);
+            color: var(--primary-dark);
         }
-        
-        .clearance-infrared { background-color: var(--infrared); }
-        .clearance-red { background-color: var(--red); }
-        .clearance-orange { background-color: var(--orange); }
-        .clearance-yellow { background-color: var(--yellow); }
-        .clearance-green { background-color: var(--green); }
-        .clearance-blue { background-color: var(--blue); }
         
         .locked-card {
             filter: grayscale(0.8);
@@ -199,7 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-color);
+            color: var(--accent-red);
         }
         
         .scanline {
@@ -215,51 +109,9 @@
             pointer-events: none;
         }
         
-        .text-center {
-            text-align: center;
-        }
-        
-        /* Loyalty indicator */
-        #loyalty-tracker {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: var(--medium-bg);
-            border: 1px solid var(--primary-color);
-            padding: 10px;
-            font-size: 0.7rem;
-            z-index: 1000;
-            width: 150px;
-        }
-        
-        .loyalty-label {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .loyalty-progress {
-            width: 100%;
-            height: 8px;
-            background-color: var(--dark-bg);
-            margin-bottom: 5px;
-        }
-        
-        .loyalty-bar {
-            height: 100%;
-            width: 50%;
-            background-color: var(--primary-color);
-            transition: width 0.5s ease;
-        }
-        
-        .loyalty-status {
-            text-align: right;
-            font-style: italic;
-        }
-        
         .algorithm-message {
             text-align: center;
-            color: var(--primary-color);
+            color: var(--accent-green);
             font-weight: bold;
             margin: 30px 0;
             font-size: 1.1rem;
