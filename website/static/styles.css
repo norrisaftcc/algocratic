@@ -5,6 +5,8 @@
    The Algorithm has calculated this to be the optimal visual representation
    of AlgoCratic Futures™ corporate identity. Any unauthorized modifications
    will be logged in your permanent record.
+   
+   Updated: JavaScript interactivity enhancements added
 */
 
 /* === Core Variables === */
@@ -1407,5 +1409,318 @@ footer {
     
     .loyalty-tracker {
         display: none;
+    }
+}
+
+/* === INTERACTIVE FEATURES === */
+
+/* Modal System */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: var(--z-modal);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: var(--primary-medium);
+    margin: 10% auto;
+    padding: 0;
+    border: 2px solid var(--accent-red);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    background-color: var(--accent-red);
+    color: var(--text-primary);
+    padding: var(--space-md);
+    border-radius: 6px 6px 0 0;
+    text-align: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    animation: pulse 1s infinite;
+}
+
+.modal-body {
+    padding: var(--space-lg);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.loyalty-adjustment {
+    background-color: var(--primary-dark);
+    padding: var(--space-md);
+    border-radius: 4px;
+    margin: var(--space-md) 0;
+    border-left: 4px solid var(--accent-red);
+}
+
+.loyalty-decrease {
+    color: var(--accent-red);
+    font-weight: bold;
+    font-family: var(--font-mono);
+}
+
+.modal-footer {
+    padding: var(--space-md) var(--space-lg);
+    text-align: center;
+}
+
+.modal-footer button {
+    background-color: var(--accent-green);
+    color: var(--primary-dark);
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.modal-footer button:hover {
+    background-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+/* Product Modal */
+.product-modal {
+    display: block;
+    position: fixed;
+    z-index: var(--z-modal);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+.product-modal .modal-content {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 30px rgba(16, 255, 16, 0.3);
+    max-width: 600px;
+}
+
+.product-modal .modal-header {
+    background-color: var(--accent-green);
+    color: var(--primary-dark);
+}
+
+.close-btn {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: none;
+    border: none;
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    color: var(--accent-red);
+}
+
+.product-metrics {
+    background-color: var(--primary-dark);
+    padding: var(--space-md);
+    border-radius: 4px;
+    margin: var(--space-md) 0;
+    border-left: 4px solid var(--accent-green);
+}
+
+.product-metrics div {
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: var(--space-md);
+}
+
+.btn-primary, .btn-secondary {
+    padding: var(--space-md) var(--space-lg);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 var(--space-sm);
+    transition: var(--transition-fast);
+}
+
+.btn-primary {
+    background-color: var(--accent-green);
+    color: var(--primary-dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--primary-light);
+    color: var(--text-primary);
+    border: 1px solid var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-secondary);
+    color: var(--primary-dark);
+}
+
+/* Notification System */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary-medium);
+    border: 1px solid var(--accent-green);
+    border-radius: 4px;
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all var(--transition-medium);
+    z-index: var(--z-floating);
+    max-width: 300px;
+    box-shadow: var(--shadow-medium);
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+}
+
+.notification-text {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+}
+
+/* Interactive Elements */
+.job-apply-btn:disabled {
+    background-color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(16, 255, 16, 0.2);
+}
+
+.product-card.locked:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 48, 48, 0.3);
+}
+
+/* Enhanced Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes glow {
+    0%, 100% { 
+        text-shadow: 0 0 5px currentColor;
+    }
+    50% { 
+        text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+}
+
+.countdown {
+    animation: glow 3s ease-in-out infinite;
+    font-weight: bold;
+}
+
+/* Loyalty Bar Enhancements */
+.loyalty-bar {
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.loyalty-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Form Enhancements */
+.form-group {
+    position: relative;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 10px rgba(16, 255, 16, 0.3);
+    outline: none;
+}
+
+/* Responsive Interactive Elements */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+    }
+    
+    .notification {
+        right: 10px;
+        top: 10px;
+        max-width: calc(100vw - 20px);
+    }
+    
+    .product-modal .modal-content {
+        max-width: 95%;
     }
 }
