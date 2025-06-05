@@ -167,40 +167,110 @@ This document provides clear, marketable translations between AlgoCratic Futures
 ### Core Concept
 Each microcredential adds specific, marketable skills to base clearance level and extends the loyalty oath with practical commands relevant to that specialization.
 
-### Example Microcredential Categories
+### Three Core Microcredential Domains
 
-**Web Development Track:**
-- Frontend Frameworks (React, Vue, Angular)
-- Backend APIs (REST, GraphQL, WebSockets)
-- Database Design (SQL, NoSQL, ORM)
-- Deployment & Hosting (AWS, Heroku, Docker)
+**DOMAIN 1: TECHNICAL IMPLEMENTATION**  
+*Building, coding, and creating functional systems*  
+**Available from:** RED clearance and above
 
-**Data Science Track:**
-- Data Analysis (Pandas, NumPy, Jupyter)
-- Visualization (Matplotlib, D3, Tableau)
-- Machine Learning (Scikit-learn, TensorFlow, PyTorch)
-- Big Data Tools (Spark, Hadoop, SQL)
+- **Web Frameworks & Applications**
+  - Flask Fundamentals (Basic web app creation)
+  - Streamlit Essentials (Rapid data app development)
+  - Django Advanced (GREEN+ only - enterprise web development)
+  - Frontend Frameworks (React, Vue, Angular)
 
-**DevOps Track:**
-- Containerization (Docker, Kubernetes)
-- CI/CD Pipelines (GitHub Actions, Jenkins)
-- Cloud Platforms (AWS, Azure, GCP)
-- Monitoring & Logging (Prometheus, ELK Stack)
+- **Data & Analytics**
+  - Data Analysis (Pandas, NumPy, Jupyter)
+  - Data Visualization (Matplotlib, Plotly, D3)
+  - Machine Learning Basics (Scikit-learn, basic models)
+  - Database Integration (SQL, NoSQL, ORM)
 
-**Mobile Development Track:**
-- Native iOS (Swift, Xcode)
-- Native Android (Kotlin, Android Studio)
-- Cross-Platform (React Native, Flutter)
-- App Store Deployment
+- **Infrastructure & Deployment**
+  - Containerization (Docker basics)
+  - Cloud Deployment (AWS, Heroku, basic hosting)
+  - Version Control Advanced (Git workflows, branching strategies)
+  - API Development (REST, basic GraphQL)
 
-### Oath Extension Example
-**RED + Python Web Development Microcredential:**
+**DOMAIN 2: SYSTEMS & ARCHITECTURE**  
+*Designing, planning, and documenting complex systems*  
+**Available from:** ORANGE clearance and above
+
+- **System Design & Documentation**
+  - Context Diagrams & System Modeling
+  - Diagram Zero & Data Flow Diagrams
+  - Architecture Documentation
+  - Technical Specification Writing
+
+- **Integration & Optimization**
+  - API Integration Patterns
+  - Performance Optimization
+  - Legacy System Modernization
+  - Cross-Platform Development (React Native, Flutter)
+
+- **DevOps & Operations**
+  - CI/CD Pipeline Design
+  - Monitoring & Logging Systems
+  - Cloud Architecture (AWS, Azure, GCP)
+  - Security Implementation Basics
+
+**DOMAIN 3: LEADERSHIP & INFLUENCE**  
+*Managing people, processes, and organizational systems*  
+**Available from:** YELLOW clearance and above
+
+- **Team & Resource Management**
+  - Motivating INFRARED/RED Resources (NLP techniques)
+  - Bot Management & Prompt Engineering
+  - Technical Mentoring Strategies
+  - Cross-Clearance Communication
+
+- **Process & Methodology**
+  - Agile Techniques & Implementation (GREEN+ recommended)
+  - Project Planning & Estimation
+  - Requirements Gathering & Analysis
+  - Stakeholder Management
+
+- **Strategic Planning**
+  - Technical Decision Making
+  - Resource Allocation Optimization
+  - Risk Assessment & Mitigation
+  - Innovation Management
+
+### Oath Extension Examples
+
+**RED + Flask Fundamentals:**
 ```bash
 source venv/Scripts/activate
 git status
 python --version
-pip install -r requirements.txt
-python manage.py runserver
+pip install flask
+python app.py
+```
+
+**ORANGE + System Design & Documentation:**
+```bash
+source venv/Scripts/activate
+git status
+python --version
+draw.io --version
+plantuml --version
+```
+
+**YELLOW + Team & Resource Management:**
+```bash
+source venv/Scripts/activate
+git status
+python --version
+git log --oneline --author="$(git config user.name)" --since="1 week ago"
+git blame README.md
+```
+
+**GREEN + Agile Techniques:**
+```bash
+source venv/Scripts/activate
+git status
+python --version
+git log --oneline --grep="closes #" --since="1 sprint ago"
+python -m pytest --cov-report=term-missing
 ```
 
 ---
