@@ -22,6 +22,18 @@ In the final debrief, students step back and recognize the parallels between the
 
 **Educational Value:** Creates transferable insights that will serve them throughout their careers.
 
+### Clearance Level Educational Praxis
+
+The progression through clearance levels follows a specific educational framework:
+
+**ROYG Physical Lanyards**: Students wear color-coded lanyards that create visible achievement markers, natural mentoring relationships, and aspirational pressure through status progression.
+
+**GREEN Clearance Achievement**: Represents the "highest code jockey, lowest senior dev" - students reach peak individual contributor status, able to solve any technical problem but not yet responsible for leadership or architecture decisions.
+
+**BLUE Clearance Transition**: Students move into full senior responsibilities including system architecture, project management, team leadership, and advanced esoteric techniques.
+
+**The "Dessert First" Factor**: At YELLOW clearance, students earn phone privileges and begin using LLAMAAs (AI assistants). Rather than fighting this natural desire, we embrace it as a strategic educational opportunity where the embedded psychological patterns enhance AI interactions and create deeper learning through the satisfaction of technology use.
+
 ### The Petty Tyrant's Gift
 
 As Don Juan explained, the petty tyrant provides a unique opportunity for growth that cannot be obtained through comfortable experiences. The "gifts" students receive from confronting the AlgoCratic Futures™ petty tyrant include:

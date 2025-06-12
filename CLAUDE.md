@@ -91,7 +91,18 @@ Example: `1_1_github_identity.md`, `2_3_fastapi_specialist.md`
 - "When you [COMPLETE TASK], that's [TRANSFORMATION MOMENT]"
 - "Some students report that [POSITIVE EXPERIENCE]. If this happens to you, [REINFORCEMENT]"
 
-### 7. Collaboration with 289 Team
+### 7. The "Dessert First" Factor
+
+**YELLOW Clearance Reward Strategy**: Students reaching YELLOW clearance gain phone privileges in class - but this isn't just a reward, it's a strategic educational opportunity. Once students have their phones, they'll naturally want to use LLAMAAs (AI assistants) to help with assignments.
+
+**Key Insight**: Rather than fighting this, we embrace it. The psychological patterns we've embedded in assignments work even better when filtered through AI interactions. Students who copy-paste our assignments into AI tools will:
+- Have the embedded commands reinforced by AI responses
+- Get better results because our descriptive language enhances AI understanding
+- Experience the "dessert first" satisfaction while unknowingly deepening their learning
+
+**Implementation**: YELLOW assignments should be designed to work synergistically with AI assistance, creating a feedback loop where students feel rewarded for using technology while actually reinforcing the learning objectives.
+
+### 8. Collaboration with 289 Team
 
 The 289 collaboration has provided sophisticated examples of these techniques in action. Their assignments demonstrate:
 - Anti-circumvention design (works even with AI assistance)

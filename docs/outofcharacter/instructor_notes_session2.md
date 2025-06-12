@@ -380,6 +380,23 @@ The satirical framework creates a cognitive apprenticeship:
 
 Help instructors place this session within broader educational goals:
 
+### Clearance Level Progression Framework
+
+**Understanding the Educational Praxis**:
+- **GREEN Clearance** = "Highest code jockey, lowest senior dev" - Peak individual contributor who can solve any technical problem but hasn't crossed into leadership/architecture
+- **BLUE Clearance** = Full senior responsibilities - system architecture, project management, team leadership, plus advanced esoteric techniques
+
+**Physical Manifestation**: ROYG lanyards provide visible achievement markers that create:
+- Natural mentoring relationships between clearance levels
+- Aspirational pressure through visible status progression
+- Corporate aesthetic alignment with AlgoCratic worldbuilding
+- Tangible gamification that students can literally wear
+
+**The "Dessert First" Factor**: By YELLOW clearance, students earn phone privileges and naturally begin using LLAMAAs (AI assistants). This creates a strategic educational opportunity where:
+- Embedded psychological patterns enhance rather than circumvent AI interactions
+- Students get "dessert first" satisfaction while unknowingly deepening learning
+- AI becomes a multiplier for educational techniques rather than a bypass
+
 ### Skill Progression Through Sessions
 
 Session Two builds on Session One by:
@@ -393,8 +410,9 @@ Session Two builds on Session One by:
 Session Two sets the foundation for:
 - The Crisis (Session Three) - Managing major project emergencies
 - The Demonstration (Session Four) - Knowledge transfer and documentation
-- Professional practice beyond the educational experience
-- Long-term resilience in changing environments
+- YELLOW clearance AI collaboration (phone privileges + LLAMAA integration)
+- GREEN clearance peak individual contribution mastery
+- BLUE clearance leadership and architectural responsibilities
 
 ### Transferable Skills Development
 
