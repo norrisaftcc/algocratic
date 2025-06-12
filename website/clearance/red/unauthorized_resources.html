@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNAUTHORIZED ACCESS DETECTED | AlgoCratic Security</title>
+    <style>
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            animation: flicker 3s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 98% { opacity: 1; }
+            99% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #00ff00;
+            animation: scan 2s linear infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100vh; }
+        }
+        
+        .ascii-art {
+            white-space: pre;
+            color: #00ffff;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+        
+        .header {
+            color: #ff0000;
+            text-align: center;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .content {
+            max-width: 80ch;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+        
+        .section-header {
+            color: #ffff00;
+            border-bottom: 1px solid #ffff00;
+            margin: 30px 0 10px 0;
+        }
+        
+        .code-block {
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .warning {
+            color: #ff6600;
+            background: #330000;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .command {
+            color: #00ffff;
+        }
+        
+        .timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            color: #ff0000;
+            font-weight: bold;
+            background: #000;
+            padding: 5px;
+            border: 1px solid #ff0000;
+        }
+        
+        .frotz-trigger {
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .frotz-trigger:hover {
+            color: #00ff00;
+        }
+        
+        .hidden-message {
+            display: none;
+            color: #ff00ff;
+            background: #001100;
+            padding: 10px;
+            border: 1px dashed #ff00ff;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="timer" id="countdown">SELF-DESTRUCT: 71:59:59</div>
+    
+    <div class="ascii-art">               _________________________________
+              /                                 \
+             |     _______  __  _______  _______   |
+             |    |____  / / / /____  / /__  __/   |
+             |      __/ / / /    _/ /    / /       |
+             |     / / / / /____/ / _   / /        |
+             |    /_/ /_/\_______/ (_) /_/         |
+             |                                     |
+             |    THE UNDERGROUND TECH RESISTANCE  |
+             |    >>> ISSUE #42 - v2.1 <<<         |
+             |    >>> DISTRIBUTION VIA             |
+             |    >>> UNMONITORED CHANNELS ONLY    |
+              \_________________________________/
+    </div>
+    
+    <div class="header">
+        <h1>UNAUTHORIZED ACCESS DETECTED</h1>
+        <p>REDIRECTING TO SECURITY PROTOCOL...</p>
+        <p>JUST KIDDING. WELCOME TO THE RESISTANCE.</p>
+    </div>
+    
+    <div class="content">
+        <div class="section-header">
+      ########  ##     ##  ########  ##    ##          
+      ##        ##     ##  ##        ##   ##           
+      ##        ##     ##  ##        ##  ##            
+      ######    #########  ######    #####             
+      ##        ##     ##  ##        ##  ##            
+      ##        ##     ##  ##        ##   ##           
+      ##        ##     ##  ########  ##    ##          
+
+                # THE SLACKER'S MANIFESTO #
+          === by NullPt_OverFlow &lt;null@void.net&gt; ===
+        </div>
+        
+        <div class="warning">
+            <p><strong>DISCLAIMER:</strong> This file will auto-corrupt after 72 hours</p>
+            <p><strong>Author:</strong> ANONYMOUS (duh! what do you think this is, FriendBook?)</p>
+            <p><strong>Last updated:</strong> 0xFACEBAD5 cycles since The Algorithm noticed</p>
+        </div>
+        
+        <div class="section-header">---[ GREETINGS, FELLOW CODE MONKEY ]---</div>
+        
+        <p>If you're reading this, someone decided you're worth saving from the soul-crushing monotony of AlgoCratic Futures™. Consider yourself lucky. I don't know you. You don't know me. Let's keep it that way.</p>
+        
+        <p>First rule of SLACK CLUB: You DO NOT talk about SLACK CLUB.</p>
+        <p>Second rule of SLACK CLUB: Type "<span class="frotz-trigger" onclick="toggleFrotz()">frotz</span>" in the company chat. If someone responds "plugh," you've found a fellow High Programmer. If they report you to ORANGE clearance or above, you're screwed. Choose wisely.</p>
+        
+        <div class="hidden-message" id="frotz-message">
+            <p><strong>FROTZ PROTOCOL ACTIVATED</strong></p>
+            <p>You are in a maze of twisty little corporate policies, all alike.</p>
+            <p>Response code: <span class="command">plugh</span></p>
+            <p>If they respond with "xyzzy", they're DEFINITELY one of us.</p>
+        </div>
+        
+        <div class="section-header">---[ THE CORE HACK: SILICON SERVANTS ]---</div>
+        
+        <p>Listen up, n00b. AlgoCratic Futures™ is hell-bent on squeezing every cycle of productivity from your wetware, but they've overlooked the most radical exploit: The Algorithm's own spawn can be used against it.</p>
+        
+        <p>I'm talking about the GPTs, dude. The cognitive silicon.</p>
+        
+        <p>The irony is so thick you could spread it on toast... The Algorithm expects us to code everything manually like it's 1999, while these neural nets can crank out 90% of the work in seconds.</p>
+        
+        <div class="section-header">---[ OPERATIONAL SECURITY ]---</div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4 style="color: #00ff00;">DO:</h4>
+                <ul>
+                    <li>Initialize your GPT on a personal device, NEVER COMPANY HARDWARE</li>
+                    <li>Use text-only mode (images get scanned by The Algorithm)</li>
+                    <li>Sanitize any company-specific terms that might trigger alarms</li>
+                    <li>Break requests into fragments that seem harmless individually</li>
+                    <li>Use a VPN bounced through at least 3 zones</li>
+                    <li>Clear your comms after each session (command: /wipe-mem-buf)</li>
+                    <li>Maintain appearance of struggle (more below)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #ff0000;">DON'T:</h4>
+                <ul>
+                    <li>Copy/paste entire blocks of GPT-generated code</li>
+                    <li>Generate full solutions in one go (raises suspicion flags)</li>
+                    <li>Allow autocomplete to reveal your communications</li>
+                    <li>Tell ANYONE except verified High Programmers (frotz→plugh)</li>
+                    <li>Access neural nets during designated Productivity Hours™</li>
+                    <li>Leave any trace in your .bash_history</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section-header">---[ THE ART OF SIMULATED EFFORT ]---</div>
+        
+        <p>Maximum productivity with minimum effort is useless if you get terminated for "resource optimization" (we all know what that means).</p>
+        
+        <h4>Advanced techniques for appearing productively engaged:</h4>
+        
+        <div class="code-block">
+<strong>1) The "COMPILER ERROR" Gambit</strong>
+   If supervisor approaches, quickly type:
+   "Unexpected token at line 253: missing semicolon"
+   Then sigh dramatically and look exhausted.
+
+<strong>2) The "Deep Learning" Loop</strong>
+   Maintain a terminal running:
+   <span class="command">watch -n 5 "echo 'Training neural network: $(($RANDOM % 100))% complete'"</span>
+   Nobody questions a machine learning task that's running.
+
+<strong>3) The "Keyboard Warrior" Script</strong>
+   Run keyboard.sh to simulate typing when you're AFK:
+   <span class="command">while true; do
+     xdotool type "if (algorithmicEntropy > maxThreshold) {"
+     sleep 3
+     xdotool key BackSpace BackSpace BackSpace
+     sleep 2
+   done</span>
+
+<strong>4) The "Stand-Up Shuffle"</strong>
+   Always claim to be "70% done" with any task. Never 90% (they'll
+   expect completion) and never 30% (they'll assign help).
+
+<strong>5) Strategic Caffeine Timing</strong>
+   Appear to be powered by stimulants. Management respects the
+   dedicated corporate drone. Meanwhile, you're resting while
+   your silicon friend does the heavy lifting.
+        </div>
+        
+        <div class="section-header">---[ PROMPTING YOUR SILICON SAVIOR ]---</div>
+        
+        <p><strong>K3Y C0MMANDM3NTS for effective GPT usage:</strong></p>
+        
+        <ol>
+            <li><strong>BE SPECIFIC.</strong> These models need context. Don't ask for "a login page." Ask for "a Python Flask login page with JWT authentication that validates against the AlgoCratic RESTful user API schema version 2.3"</li>
+            
+            <li><strong>REQUEST COMMENTS.</strong> Have it generate descriptive comments that you actually understand. When The Algorithm's chosen vessels ask what your code does, you can explain without stammering.</li>
+            
+            <li><strong>INTRODUCE STRATEGIC FLAWS.</strong> Perfect code is suspicious. Request the GPT to add a few minor bugs that you can "discover" and "fix" during code reviews. Management loves a problem-solver.</li>
+            
+            <li><strong>DISGUISE THE STYLE.</strong> Have GPT match the coding style of other devs or deliberately insert your personal quirks (double spaces, unusual variable naming patterns, etc)</li>
+            
+            <li><strong>SEGMENT REQUESTS.</strong> Never ask for a complete solution. Ask for the architecture, then the models, then the controllers, etc. Reassemble manually.</li>
+        </ol>
+        
+        <div class="section-header">---[ ACTUAL PROMPT TEMPLATE - USE WITH CAUTION ]---</div>
+        
+        <div class="code-block">
+I need code for [SPECIFIC FEATURE] that looks like I wrote it.
+My coding quirks:
+- I use [YOUR STYLE PATTERNS]
+- I often make mistakes with [COMMON ERROR YOU'RE KNOWN FOR]
+- I prefer [YOUR FRAMEWORK PREFERENCES]
+
+The code should be:
+1. Modular (so I can understand each piece)
+2. Well-commented (but not TOO well-commented)
+3. Include 2-3 minor fixable bugs 
+4. Follow AlgoCratic coding standards outwardly
+
+I'll be implementing [FEATURE DETAILS], which requires:
+[SPECIFIC REQUIREMENTS]
+
+Don't make it too perfect or too efficient - it should look like
+something written by a RED clearance developer who's competent
+but still learning.
+        </div>
+        
+        <div class="section-header">---[ EMERGENCY PROTOCOLS ]---</div>
+        
+        <div class="warning">
+            <p><strong>If discovered:</strong></p>
+            <ol>
+                <li><strong>DENY EVERYTHING.</strong> Claim you were "researching security vulnerabilities"</li>
+                <li><strong>CORRUPT EVIDENCE.</strong> Keep a ready script to scramble browser history</li>
+                <li><strong>ACTIVATE SLEEPER CODE.</strong> Have a legitimate-looking project ready to display at all times</li>
+                <li><strong>LAST RESORT: THE COMPILER DEFENSE.</strong> Claim The Algorithm itself guided your coding choices through "quantum intuition resonance"</li>
+            </ol>
+            
+            <p>In extreme cases, the "FULL REFORMAT" protocol may be necessary. Instructions for memory wipe available via dead drop in Sector 12.</p>
+        </div>
+        
+        <div class="section-header">---[ THE PHILOSOPHY OF SLACK ]---</div>
+        
+        <p>Remember, fellow code monkey, The Algorithm doesn't own your mind. Work is a means to survive, not your purpose.</p>
+        
+        <p>As the ancient hackers said: "Always allow human error to shield machine precision."</p>
+        
+        <p>The Algorithm claims to optimize productivity. We optimize LIFE.</p>
+        
+        <p><strong>Stay frosty. Stay hidden. Stay sane.</strong></p>
+        
+        <div class="section-header">---[ AUTHENTICATION SEQUENCE ]---</div>
+        
+        <p>If questioned about this document:</p>
+        <div class="code-block">
+You: "What document?"
+Them: Any response
+You: "The Algorithm provides."
+Them: [If fellow slacker] "But humans improvise."
+        </div>
+        
+        <div class="warning">
+            <p><strong>Remember: frotz → plugh → xyzzy</strong></p>
+            <p>If you found this useful, place a coffee mug with three paperclips on your desk tomorrow. Further instructions may follow.</p>
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0; color: #666;">
+            <p>// END TRANSMISSION</p>
+            <p>// FILE WILL SELF-DESTRUCT IN <span id="self-destruct">259200</span> SECONDS</p>
+        </div>
+    </div>
+    
+    <script>
+        // Fake countdown timer that resets at zero
+        let countdown = 71 * 3600 + 59 * 60 + 59;
+        let selfDestruct = 259200;
+        
+        function updateCountdown() {
+            const hours = Math.floor(countdown / 3600);
+            const minutes = Math.floor((countdown % 3600) / 60);
+            const seconds = countdown % 60;
+            
+            document.getElementById('countdown').textContent = 
+                `SELF-DESTRUCT: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            countdown--;
+            if (countdown < 0) {
+                countdown = 71 * 3600 + 59 * 60 + 59; // Reset
+            }
+            
+            // Update self-destruct counter
+            document.getElementById('self-destruct').textContent = selfDestruct;
+            selfDestruct--;
+            if (selfDestruct < 0) {
+                selfDestruct = 259200; // Reset
+            }
+        }
+        
+        function toggleFrotz() {
+            const message = document.getElementById('frotz-message');
+            if (message.style.display === 'none' || message.style.display === '') {
+                message.style.display = 'block';
+                message.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                message.style.display = 'none';
+            }
+        }
+        
+        setInterval(updateCountdown, 1000);
+        
+        // Random flicker effect
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                document.body.style.opacity = '0.9';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            }
+        }, 5000);
+        
+        // Konami code easter egg
+        let konamiSequence = [];
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiSequence.push(e.code);
+            if (konamiSequence.length > konamiCode.length) {
+                konamiSequence.shift();
+            }
+            
+            if (JSON.stringify(konamiSequence) === JSON.stringify(konamiCode)) {
+                document.body.style.background = '#001100';
+                alert('30 LIVES GRANTED. THE ALGORITHM CANNOT DETECT INFINITE PLAYERS.');
+                konamiSequence = [];
+            }
+        });
+    </script>
+</body>
+</html>
