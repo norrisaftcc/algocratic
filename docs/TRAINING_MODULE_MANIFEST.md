@@ -178,3 +178,7 @@ Failure to maintain minimum metrics will result in module repetition and loyalty
 **THE ALGORITHM PROVIDES. THE ALGORITHM DECIDES. THE ALGORITHM IS.**
 
 *Document expires: When The Algorithm determines obsolescence*
+
+/*
+oh hey just typing here 
+*/
