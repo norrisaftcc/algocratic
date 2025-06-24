@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREEN Clearance | Director of Design Compliance</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .material-card {
+            background-color: var(--medium-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .material-card:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .material-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-accent));
+            z-index: -1;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .material-card:hover::before {
+            opacity: 0.3;
+        }
+        
+        .material-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .material-description {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .access-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .access-link:hover {
+            background-color: var(--secondary-accent);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .role-description {
+            background-color: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .authority-list {
+            background-color: var(--medium-bg);
+            border: 1px dashed var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Compliance tracker -->
+    <div id="compliance-tracker">
+        <div class="compliance-label">AUTHORITY STATUS</div>
+        <div class="compliance-progress">
+            <div class="compliance-bar" style="width: 96%;"></div>
+        </div>
+        <div class="compliance-status">ACTIVE</div>
+    </div>
+
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="monolith-icon">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+            </div>
+            <h1 class="document-title">GREEN CLEARANCE</h1>
+            <h2 class="document-subtitle">Director of Design Compliance Protocol</h2>
+            
+            <div class="classification">GREEN CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-CL-G-DC-INDEX-2025-06</div>
+        </div>
+        
+        <div class="guide-content">
+            <h3 class="section-title">YOUR ROLE</h3>
+            
+            <div class="role-description">
+                <p>As <strong>Director of Design Compliance</strong>, you serve as the algorithmically sanctioned custodian of aesthetic integrity and surface-level user satisfaction. While actual user needs are irrelevant, their perceived visual experience must remain pleasing, compliant, and psychologically persuasive.</p>
+                
+                <p><strong>You do not design—you approve, correct, and redirect.</strong></p>
+            </div>
+            
+            <h3 class="section-title">PRIMARY DIRECTIVES</h3>
+            
+            <div class="authority-list">
+                <ul class="resource-list">
+                    <li>Translate executive chaos into visual continuity</li>
+                    <li>Coach ORANGE and RED units in front-end illusionism</li>
+                    <li>Ensure user interfaces uphold the Three Pillars of Design Compliance</li>
+                    <li>Audit all visual deliverables for signs of non-compliance</li>
+                    <li>Rebrand design disasters as intentional post-modernist expressions</li>
+                </ul>
+            </div>
+            
+            <div class="attention-box">
+                <strong>THE THREE PILLARS OF DESIGN COMPLIANCE:</strong><br>
+                1. <strong>Clarity</strong> (subjective)<br>
+                2. <strong>Consistency</strong> (superficial)<br>
+                3. <strong>Compliance</strong> (non-negotiable)
+            </div>
+            
+            <h3 class="section-title">COMPLIANCE MATERIALS</h3>
+            
+            <p>Access your complete toolkit for maintaining visual authority and design standard enforcement within the AlgoCratic Futures™ ecosystem.</p>
+            
+            <div class="material-grid">
+                <div class="material-card">
+                    <h4 class="material-title">Design Compliance Certificate</h4>
+                    <div class="material-description">
+                        Official clearance certificate validating your authority to exercise design compliance oversight. Suitable for display in office environments or digital presentation.
+                    </div>
+                    <a href="certificate.html" class="access-link">Access Certificate</a>
+                </div>
+                
+                <div class="material-card">
+                    <h4 class="material-title">Review Comment Cards</h4>
+                    <div class="material-description">
+                        Pre-approved templates for delivering authoritative design feedback. Includes standards for non-compliance detection, minor corrections, and emergency interventions.
+                    </div>
+                    <a href="comment-cards.html" class="access-link">Access Templates</a>
+                </div>
+                
+                <div class="material-card">
+                    <h4 class="material-title">Compliance Workshop</h4>
+                    <div class="material-description">
+                        Comprehensive training materials for conducting official design compliance workshops. Includes modules on algorithmic aesthetics and professional feedback delivery.
+                    </div>
+                    <a href="workshop.html" class="access-link">Access Workshop</a>
+                </div>
+            </div>
+            
+            <h3 class="section-title">AUTHORIZED ACTIONS</h3>
+            
+            <div class="authority-list">
+                <ul class="resource-list">
+                    <li>Modify or override any front-end decision based on emotional tone of wireframes</li>
+                    <li>Decline interface suggestions using only facial expressions and passive phrasing</li>
+                    <li>Present revised design standards every sprint without explanation</li>
+                    <li>Suggest alternate fonts that are unavailable in the current build</li>
+                    <li>Replace "user-friendly" with "algorithmically aesthetic" in all documentation</li>
+                    <li>Intervene in product demos if too many icons are used without synergy</li>
+                </ul>
+            </div>
+            
+            <h3 class="section-title">COMMUNICATION PROTOCOL</h3>
+            
+            <div class="technical-tip">
+                <strong>When delivering feedback:</strong><br>
+                • Begin with: "From a compliance perspective..."<br>
+                • Conclude with: "Let's align this with visual best practices."<br>
+                • Use phrases like "intentional misalignment" or "emergent contrast tension"<br>
+                • If asked for clarification, redirect with: "Let's take this offline in a style workshop."
+            </div>
+            
+            <div class="attention-box">
+                <strong>REMEMBER:</strong><br>
+                The Algorithm doesn't care what it looks like—until it does.<br><br>
+                Your presence should be unavoidable and a little terrifying.
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="../index.html" class="nav-button">← CLEARANCE HOME</a>
+            <a href="certificate.html" class="nav-button next-button">BEGIN →</a>
+        </div>
+        
+        <div class="algorithm-message" data-text="THE ALGORITHM DELEGATES * THE ALGORITHM AUTHORIZES">THE ALGORITHM DELEGATES * THE ALGORITHM AUTHORIZES</div>
+        
+        <div class="binary-decoration">
+            01000111 01010010 01000101 01000101 01001110 00100000 01000001 01010101 01010100 01001000 01001111 01010010 01001001 01010100 01011001
+        </div>
+    </div>
+</body>
+</html>

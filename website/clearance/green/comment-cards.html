@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Review Comment Cards | GREEN Clearance</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        .comment-card {
+            background-color: var(--medium-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            max-width: 500px;
+        }
+        
+        .comment-card::before {
+            content: "DESIGN COMPLIANCE";
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background-color: var(--medium-bg);
+            color: var(--primary-color);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .compliance-level {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            line-height: 1.5;
+        }
+        
+        .action-required {
+            background-color: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid var(--warning-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Compliance tracker -->
+    <div id="compliance-tracker">
+        <div class="compliance-label">REVIEW STATUS</div>
+        <div class="compliance-progress">
+            <div class="compliance-bar" style="width: 88%;"></div>
+        </div>
+        <div class="compliance-status">IN PROGRESS</div>
+    </div>
+
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="monolith-icon">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+            </div>
+            <h1 class="document-title">DESIGN REVIEW</h1>
+            <h2 class="document-subtitle">Official Comment Card Templates</h2>
+            
+            <div class="classification">GREEN CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-DC-REVIEW-2025-06</div>
+        </div>
+        
+        <div class="guide-content">
+            <h3 class="section-title">COMPLIANCE REVIEW TEMPLATES</h3>
+            
+            <p>As Director of Design Compliance, utilize these pre-approved comment templates to maintain consistent, authoritative feedback aligned with AlgoCratic design standards.</p>
+            
+            <div class="templates-grid">
+                <!-- Template 1: Non-Compliance -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>NON-COMPLIANCE DETECTED</strong>
+                        <span class="compliance-level">CRITICAL</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>From a compliance perspective,</strong> this design exhibits multiple violations of our established visual hierarchy protocols.</p>
+                        
+                        <div class="action-required">
+                            <strong>ACTION REQUIRED:</strong> Immediate revision to align with Three Pillars framework
+                        </div>
+                        
+                        <p><strong>Specific Issues:</strong><br>
+                        • Unauthorized gradient implementation<br>
+                        • Non-compliant spacing ratios<br>
+                        • Typography hierarchy violations</p>
+                        
+                        <p><strong>Resolution:</strong> Let's take this offline in a mandatory style workshop to ensure algorithmic aesthetic alignment.</p>
+                    </div>
+                </div>
+
+                <!-- Template 2: Minor Corrections -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>MINOR ALIGNMENT REQUIRED</strong>
+                        <span class="compliance-level">MODERATE</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>From a compliance perspective,</strong> this approach demonstrates promising direction but requires refinement for optimal algorithmic harmony.</p>
+                        
+                        <p><strong>Suggested Improvements:</strong><br>
+                        • Consider intentional misalignment for enhanced visual tension<br>
+                        • Explore emergent contrast opportunities<br>
+                        • Evaluate color authority hierarchy</p>
+                        
+                        <p><strong>Next Steps:</strong> Let's align this with visual best practices during our next design convergence session.</p>
+                    </div>
+                </div>
+
+                <!-- Template 3: Conceptual Redirect -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>CONCEPTUAL REDESIGN</strong>
+                        <span class="compliance-level">ADVISORY</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>From a compliance perspective,</strong> while technically functional, this design lacks the algorithmic sophistication expected at your clearance level.</p>
+                        
+                        <div class="action-required">
+                            <strong>RECOMMENDATION:</strong> Explore alternative approaches that demonstrate visual innovation
+                        </div>
+                        
+                        <p><strong>Consider:</strong><br>
+                        • Post-modernist geometric interpretation<br>
+                        • Advanced typographic authority<br>
+                        • Algorithmic color psychology implementation</p>
+                        
+                        <p><strong>Development Path:</strong> Let's schedule a design evolution workshop to unlock your creative potential within compliance parameters.</p>
+                    </div>
+                </div>
+
+                <!-- Template 4: Standards Enforcement -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>STANDARDS CLARIFICATION</strong>
+                        <span class="compliance-level">EDUCATIONAL</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>From a compliance perspective,</strong> this presents an excellent opportunity to reinforce our design philosophy fundamentals.</p>
+                        
+                        <p><strong>Key Principles:</strong><br>
+                        • Clarity (subjective, context-dependent)<br>
+                        • Consistency (superficial, brand-aligned)<br>
+                        • Compliance (non-negotiable, algorithm-approved)</p>
+                        
+                        <p><strong>Remember:</strong> Aesthetic feedback is not optional—it's a mandated upgrade to your professional development trajectory.</p>
+                        
+                        <p><strong>Follow-up:</strong> Let's align this with visual best practices in our next compliance consultation.</p>
+                    </div>
+                </div>
+
+                <!-- Template 5: Innovation Approval -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>INNOVATION APPROVED</strong>
+                        <span class="compliance-level">EXEMPLARY</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>From a compliance perspective,</strong> this design successfully demonstrates advanced understanding of algorithmic aesthetic principles.</p>
+                        
+                        <p><strong>Strengths Identified:</strong><br>
+                        • Superior visual hierarchy implementation<br>
+                        • Compliant creative interpretation<br>
+                        • Algorithmically aesthetic execution</p>
+                        
+                        <div class="action-required">
+                            <strong>DIRECTIVE:</strong> Document this approach for future compliance training materials
+                        </div>
+                        
+                        <p><strong>Status:</strong> Approved for implementation with full design compliance authorization.</p>
+                    </div>
+                </div>
+
+                <!-- Template 6: Emergency Override -->
+                <div class="comment-card">
+                    <div class="card-header">
+                        <strong>EMERGENCY INTERVENTION</strong>
+                        <span class="compliance-level">OVERRIDE</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>IMMEDIATE ATTENTION REQUIRED:</strong> This design poses significant risk to brand algorithm integrity.</p>
+                        
+                        <div class="action-required">
+                            <strong>COMPLIANCE OVERRIDE ACTIVATED:</strong> All work must cease pending design authority review
+                        </div>
+                        
+                        <p><strong>Critical Issues:</strong><br>
+                        • Severe algorithmic misalignment<br>
+                        • Unauthorized visual ideology<br>
+                        • Potential user confusion vectors</p>
+                        
+                        <p><strong>Resolution Protocol:</strong> Mandatory emergency design compliance workshop required before project continuation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="certificate.html" class="nav-button">← CERTIFICATE</a>
+            <a href="workshop.html" class="nav-button next-button">WORKSHOP →</a>
+        </div>
+        
+        <div class="algorithm-message" data-text="THE ALGORITHM REVIEWS * THE ALGORITHM APPROVES">THE ALGORITHM REVIEWS * THE ALGORITHM APPROVES</div>
+        
+        <div class="binary-decoration">
+            01000100 01000101 01010011 01001001 01000111 01001110 00100000 01000011 01001111 01001101 01010000 01001100 01001001 01000001 01001110 01000011 01000101
+        </div>
+    </div>
+</body>
+</html>
