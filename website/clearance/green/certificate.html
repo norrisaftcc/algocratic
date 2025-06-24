@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Compliance Clearance Certificate | GREEN Clearance</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Compliance tracker -->
+    <div id="compliance-tracker">
+        <div class="compliance-label">COMPLIANCE MONITOR</div>
+        <div class="compliance-progress">
+            <div class="compliance-bar" style="width: 92%;"></div>
+        </div>
+        <div class="compliance-status">APPROVED</div>
+    </div>
+
+    <!-- Scanning line effect -->
+    <div class="scanline"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="monolith-icon">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+            </div>
+            <h1 class="document-title">GREEN CLEARANCE</h1>
+            <h2 class="document-subtitle">Design Compliance Authority Protocol</h2>
+            
+            <div class="classification">GREEN CLEARANCE</div>
+            <div class="document-id">DOCUMENT: AF-CL-G-DC-2025-06</div>
+        </div>
+        
+        <div class="certificate-container">
+            <div class="certificate-header">
+                <div class="certificate-title">DESIGN COMPLIANCE</div>
+                <div class="certificate-subtitle">Clearance Certificate</div>
+            </div>
+            
+            <div class="certificate-content">
+                <h3>DIRECTOR OF DESIGN COMPLIANCE</h3>
+                <div class="certificate-badge">GREEN</div>
+                
+                <p>This certificate validates authorization to exercise design compliance authority within the AlgoCratic Futures™ ecosystem. The holder is granted full discretion over visual standards, aesthetic enforcement, and design protocol compliance.</p>
+                
+                <div class="attention-box">
+                    <strong>AUTHORIZED COMPLIANCE ACTIONS:</strong><br>
+                    • Audit all visual deliverables for compliance violations<br>
+                    • Enforce the Three Pillars of Design Compliance<br>
+                    • Issue mandatory design corrections<br>
+                    • Conduct compliance workshops and training<br>
+                    • Override design decisions for algorithmic alignment
+                </div>
+                
+                <p><strong>CLEARANCE LEVEL:</strong> GREEN - Senior Development Operative<br>
+                <strong>AUTHORITY SCOPE:</strong> Visual Ideology & Design Standards<br>
+                <strong>REPORTING STRUCTURE:</strong> Direct to BLUE Clearance<br>
+                <strong>VALIDITY:</strong> Until Algorithm Determines Otherwise</p>
+            </div>
+            
+            <div class="certificate-footer">
+                <div class="authority-signature">
+                    By Authority of The Algorithm<br>
+                    AlgoCratic Futures™ Design Division
+                </div>
+                <div class="certificate-seal">
+                    ALGO<br>
+                    CRATIC<br>
+                    SEAL
+                </div>
+            </div>
+        </div>
+        
+        <div class="algorithm-message" data-text="THE ALGORITHM APPROVES * THE ALGORITHM DELEGATES">THE ALGORITHM APPROVES * THE ALGORITHM DELEGATES</div>
+        
+        <div class="binary-decoration">
+            01000111 01010010 01000101 01000101 01001110 00100000 01000011 01001100 01000101 01000001 01010010 01000001 01001110 01000011 01000101
+        </div>
+    </div>
+
+    <script>
+        // Simple compliance monitoring animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const complianceBar = document.querySelector('.compliance-bar');
+            const statuses = ['APPROVED', 'MONITORING', 'COMPLIANT'];
+            const statusElement = document.querySelector('.compliance-status');
+            
+            setInterval(() => {
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                statusElement.textContent = randomStatus;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
