@@ -31,13 +31,17 @@ The Algorithm has optimized the following training progression to maximize emplo
   - Tool Authorization Procedures
 - **Learning Outcomes**: System integration, tool familiarity
 
-#### Module 1.3: Collaborative Indoctrination
+#### Module 1.3: GitHub Sacred Flow Certification
 - **Clearance**: RED
-- **Duration**: 3 hours
+- **Duration**: 2 days (2x 50 minutes)
+- **Pre-Class Materials**:
+  - "Why The Algorithm Forbids Chaos" (Video)
+  - "Your First Contribution Ceremony" (Video)
 - **Assignments**:
-  - MindMeld™ Synchronization Exercise
-  - Pull Request Submission Protocol
-- **Learning Outcomes**: Team synchronization, process compliance
+  - Day 1: Employee Satisfaction Calculator (Individual GitHub Workflow)
+  - Day 2: Algorithmic Task Manager (Paired Development Protocol)
+- **Assessment**: RED Clearance Certification Forms (AF-PERF-RED-001, AF-COLLAB-RED-002, AF-EXIT-RED-001)
+- **Learning Outcomes**: GitHub workflow mastery, merge conflict resolution, collaborative development
 
 ### PHASE 2: OPERATIONAL COMPETENCY (Weeks 3-4)
 **Target Clearance: RED → ORANGE**
@@ -58,13 +62,21 @@ The Algorithm has optimized the following training progression to maximize emplo
   - Legacy System Navigation
 - **Learning Outcomes**: Fault tolerance, legacy integration
 
-#### Module 2.3: Crisis Response Protocols
+#### Module 2.3: HERD Management & VIBE Protocol Certification
 - **Clearance**: ORANGE
-- **Duration**: 3 hours
-- **Assignments**:
-  - Emergency Debugging Protocol™ (Part 1 & 2)
-  - Refactoring Under Duress
-- **Learning Outcomes**: Production debugging, systematic problem-solving
+- **Duration**: 5 sessions (5x 50 minutes)
+- **Pre-Class Materials**:
+  - "Welcome to HERD: Your New Coding Livestock" (Video)
+  - "VIBE Theory: Atmospheric Programming" (Video)
+  - "When LLAMAA Code Attacks" (Video)
+- **Sessions**:
+  - Session 1: HERD Orientation (First LLAMAA Encounter)
+  - Session 2: VIBE Calibration Protocols (Context Discovery)
+  - Session 3: Production Deployment Crisis (Reality Check)
+  - Session 4: Advanced HERD Management (Professional Prompting)
+  - Session 5: Forklift Certification Examination
+- **Assessment**: HERD Certification Forms (AF-HERD-EVAL-001 through AF-FORKLIFT-CERT-005)
+- **Learning Outcomes**: AI-assisted development, prompt engineering, debugging generated code, production deployment
 
 ### PHASE 3: ADVANCED IMPLEMENTATION (Weeks 5-6)
 **Target Clearance: ORANGE → YELLOW**
