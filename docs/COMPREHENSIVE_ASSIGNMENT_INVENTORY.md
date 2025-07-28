@@ -59,7 +59,7 @@ This document provides a complete cross-reference between:
 #### ⚠️ DOCUMENTED BUT MISSING FILES
 | Matrix Assignment | Status | Priority |
 |------------------|--------|----------|
-| `red_pull_request_protocol.md` | File missing | HIGH - Core workflow skill |
+| `red_pull_request_protocol.md` | File missing (IN PROGRESS - separate developer) | HIGH - Core workflow skill |
 
 #### ➕ EXISTS BUT NOT IN MATRIX
 | Assignment File | Purpose | Suggested Classification |
@@ -178,10 +178,10 @@ This document provides a complete cross-reference between:
 
 ### 🚨 CRITICAL GAPS (Immediate Priority)
 
-1. **Missing Core RED Assignment**
+1. **Missing Core RED Assignment** *(IN PROGRESS)*
    - **Issue**: `red_pull_request_protocol.md` documented but file missing
    - **Impact**: Core git workflow skill not available
-   - **Work Item**: Create pull request protocol assignment
+   - **Work Item**: Create pull request protocol assignment (currently being developed by separate developer)
    - **Career Outcome**: Essential for junior developer positions
 
 2. **Session 4 Assignment Gap**
@@ -249,7 +249,7 @@ This document provides a complete cross-reference between:
 ## RECOMMENDED DEVELOPMENT SPRINT PLAN
 
 ### Sprint 1: Critical Foundation (Weeks 1-2)
-- [ ] Create `red_pull_request_protocol.md` assignment
+- [ ] ~~Create `red_pull_request_protocol.md` assignment~~ (IN PROGRESS - separate developer)
 - [ ] Design Session 4 "Demonstration" assignments
 - [ ] Write instructor guides for INFRARED assignments
 - [ ] Update ASSIGNMENT_ALLOCATION_MATRIX.md with new discoveries
