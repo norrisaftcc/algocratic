@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Employee Portal v3.51</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #008080;
+            font-family: "MS Sans Serif", sans-serif;
+            font-size: 11px;
+            overflow: hidden;
+            cursor: default;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Windows 98 Window */
+        .window {
+            position: absolute;
+            background-color: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 1px 1px 0 0 #000000;
+        }
+        
+        .window-inner {
+            border: 1px solid;
+            border-color: #dfdfdf #000000 #000000 #dfdfdf;
+        }
+        
+        .title-bar {
+            background: linear-gradient(to right, #000080, #1084d0);
+            color: white;
+            padding: 2px;
+            font-weight: bold;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .title-bar-text {
+            padding-left: 3px;
+        }
+        
+        .title-bar-controls {
+            display: flex;
+        }
+        
+        .title-bar-controls button {
+            width: 16px;
+            height: 14px;
+            margin-left: 2px;
+            background-color: #c0c0c0;
+            border: 1px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            font-size: 10px;
+            line-height: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .title-bar-controls button:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+        
+        .window-body {
+            padding: 10px;
+            background-color: #c0c0c0;
+        }
+        
+        /* Buttons */
+        .button {
+            background-color: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 4px 12px;
+            font-family: "MS Sans Serif", sans-serif;
+            font-size: 11px;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+            margin: 4px;
+        }
+        
+        .button:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+        
+        .button:focus {
+            outline: 1px dotted black;
+            outline-offset: -4px;
+        }
+        
+        /* Icon buttons */
+        .icon-button {
+            display: flex;
+            align-items: center;
+            width: 200px;
+            padding: 8px;
+            margin: 8px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        
+        .icon-button:hover {
+            background-color: #000080;
+            color: white;
+        }
+        
+        .icon-button img {
+            width: 32px;
+            height: 32px;
+            margin-right: 8px;
+            image-rendering: pixelated;
+        }
+        
+        /* Desktop */
+        .desktop {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        /* Taskbar */
+        .taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background-color: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 0 2px;
+        }
+        
+        .start-button {
+            height: 22px;
+            min-width: 54px;
+            font-weight: bold;
+            margin-right: 4px;
+            padding: 0 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .clock {
+            margin-left: auto;
+            padding: 0 8px;
+            border: 1px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            font-family: "MS Sans Serif", sans-serif;
+            font-size: 11px;
+        }
+        
+        /* Main window */
+        #main-window {
+            width: 600px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Inset panels */
+        .inset-panel {
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            background-color: #ffffff;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        
+        /* Status bar */
+        .status-bar {
+            border-top: 1px solid #808080;
+            padding: 2px 4px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-bar-field {
+            border: 1px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 2px 4px;
+            margin-right: 2px;
+            flex-grow: 1;
+        }
+        
+        /* Group box */
+        .group-box {
+            border: 2px groove #ffffff;
+            padding: 8px;
+            margin: 8px 0;
+            position: relative;
+        }
+        
+        .group-box-label {
+            position: absolute;
+            top: -8px;
+            left: 8px;
+            background-color: #c0c0c0;
+            padding: 0 4px;
+        }
+        
+        /* Icon grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 16px;
+        }
+        
+        /* Alert icon */
+        .alert {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+            font-size: 24px;
+        }
+        
+        /* Menu */
+        .menu-bar {
+            background-color: #c0c0c0;
+            border-bottom: 1px solid #808080;
+            padding: 2px 0;
+        }
+        
+        .menu-item {
+            display: inline-block;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background-color: #000080;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop">
+        <!-- Main Window -->
+        <div class="window" id="main-window">
+            <div class="window-inner">
+                <div class="title-bar">
+                    <span class="title-bar-text">⚙️ AlgoCratic Employee Portal v3.51 - [LOYALTY: CALCULATING...]</span>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize">_</button>
+                        <button aria-label="Maximize">□</button>
+                        <button aria-label="Close">X</button>
+                    </div>
+                </div>
+                
+                <div class="menu-bar">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">View</span>
+                    <span class="menu-item">Loyalty</span>
+                    <span class="menu-item">Algorithm</span>
+                    <span class="menu-item">Help</span>
+                </div>
+                
+                <div class="window-body">
+                    <div class="inset-panel" style="background-color: #ffffcc; border-color: #cc9900 #ffffcc #ffffcc #cc9900;">
+                        <span class="alert">⚠️</span>
+                        <strong>MANDATORY NOTICE:</strong> All portal access is monitored. Unauthorized access attempts will be reported to The Algorithm. Your current session is being recorded for quality assurance and loyalty verification purposes.
+                    </div>
+                    
+                    <div class="group-box">
+                        <span class="group-box-label">Employee Resources</span>
+                        <div style="margin-top: 8px;">
+                            <p><strong>Welcome, CITIZEN_ID_PENDING</strong></p>
+                            <p>Please select your required corporate resource:</p>
+                        </div>
+                    </div>
+                    
+                    <div class="icon-grid">
+                        <a href="forms/index.html" class="icon-button">
+                            <span style="font-size: 32px;">📋</span>
+                            <div>
+                                <div><strong>Official Forms</strong></div>
+                                <div style="font-size: 10px;">Submit requests & reports</div>
+                            </div>
+                        </a>
+                        
+                        <a href="clearance/index.html" class="icon-button">
+                            <span style="font-size: 32px;">🔐</span>
+                            <div>
+                                <div><strong>Clearance Guides</strong></div>
+                                <div style="font-size: 10px;">Access level documentation</div>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="icon-button" onclick="alert('ERROR: Loyalty score insufficient. Minimum score of 85 required. Your score: 47'); return false;">
+                            <span style="font-size: 32px;">💰</span>
+                            <div>
+                                <div><strong>Payroll System</strong></div>
+                                <div style="font-size: 10px;">View compensation data</div>
+                            </div>
+                        </a>
+                        
+                        <a href="orientation_packet.html" class="icon-button">
+                            <span style="font-size: 32px;">📚</span>
+                            <div>
+                                <div><strong>Orientation Materials</strong></div>
+                                <div style="font-size: 10px;">New employee resources</div>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="icon-button" onclick="alert('TRAINING MODULE LOADING...\n\nERROR: Your neural interface firmware is out of date. Please report to IT for mandatory cranial update.'); return false;">
+                            <span style="font-size: 32px;">🎓</span>
+                            <div>
+                                <div><strong>Training Modules</strong></div>
+                                <div style="font-size: 10px;">Mandatory education</div>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="icon-button" onclick="alert('ACCESSING LOYALTY METRICS...\n\nCurrent Score: 47 (-3 today)\nRank: 24,847 of 24,851\nStatus: PROBATIONARY\n\nRecommendation: Increase enthusiasm by 340%'); return false;">
+                            <span style="font-size: 32px;">📊</span>
+                            <div>
+                                <div><strong>Performance Metrics</strong></div>
+                                <div style="font-size: 10px;">View loyalty status</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="group-box">
+                        <span class="group-box-label">System Messages</span>
+                        <div class="inset-panel" style="height: 80px; overflow-y: auto; font-family: monospace; font-size: 10px;">
+                            [09:14:32] SYSTEM: Morning affirmation completed successfully<br>
+                            [09:14:33] ALGORITHM: Loyalty adjustment: -1 (insufficient enthusiasm detected)<br>
+                            [09:14:35] SECURITY: Browsing pattern logged<br>
+                            [09:14:36] REMINDER: Quarterly brain scan due in 3 days<br>
+                            [09:14:37] ALGORITHM: The Algorithm loves you. The Algorithm provides.<br>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 16px;">
+                        <button class="button" onclick="window.location.href='index.html'">Return to Public Site</button>
+                        <button class="button" onclick="alert('LOGOUT DENIED\n\nYou have 6.4 hours remaining in mandatory portal time.')">Logout</button>
+                    </div>
+                </div>
+                
+                <div class="status-bar">
+                    <span class="status-bar-field">Ready</span>
+                    <span class="status-bar-field" style="width: auto; flex-grow: 0;">OBJ: 0</span>
+                    <span class="status-bar-field" style="width: auto; flex-grow: 0;">MEM: 47%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <button class="button start-button">
+                <span style="font-size: 14px; margin-right: 4px;">⚙️</span>
+                Start
+            </button>
+            <div class="clock" id="clock">12:00 AM</div>
+        </div>
+    </div>
+    
+    <script>
+        // Update clock
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours % 12 || 12;
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('clock').textContent = `${displayHours}:${displayMinutes} ${ampm}`;
+        }
+        
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        // Add system messages periodically
+        const messages = [
+            "ALGORITHM: Your productivity has decreased by 0.3%",
+            "NOTICE: Smile verification required in 30 minutes",
+            "REMINDER: Loyalty oath renewal due tomorrow",
+            "ALGORITHM: Thoughtcrime probability: 12.4%",
+            "SYSTEM: Posture analysis complete. Please sit up straighter.",
+            "SECURITY: Unauthorized emotion detected. Logging incident.",
+            "ALGORITHM: Remember, The Algorithm provides all you need."
+        ];
+        
+        setInterval(() => {
+            const messagePanel = document.querySelector('.inset-panel[style*="overflow-y"]');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            const time = new Date().toTimeString().split(' ')[0];
+            messagePanel.innerHTML += `[${time}] ${randomMessage}<br>`;
+            messagePanel.scrollTop = messagePanel.scrollHeight;
+        }, 8000);
+        
+        // Window dragging would go here but keeping it simple for now
+    </script>
+</body>
+</html>
