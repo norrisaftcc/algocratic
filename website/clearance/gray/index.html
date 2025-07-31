@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAY Clearance | Department of Design Compliance</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Compliance tracker -->
+    <div id="compliance-tracker">
+        <div class="compliance-label">CLEARANCE STATUS</div>
+        <div class="compliance-progress">
+            <div class="compliance-bar" style="width: 13%;"></div>
+        </div>
+        <div class="compliance-status">ANOMALOUS</div>
+    </div>
+
+    <!-- Glitch effect overlay -->
+    <div class="glitch-overlay"></div>
+
+    <div class="terminal-container">
+        <div class="document-header">
+            <div class="void-icon">
+                <div class="static-noise"></div>
+            </div>
+            <h1 class="document-title glitch" data-text="GRAY CLEARANCE">GRAY CLEARANCE</h1>
+            <h2 class="document-subtitle">Department of Design Compliance [REDACTED]</h2>
+            
+            <div class="classification">GRAY CLEARANCE - EXISTENCE UNCONFIRMED</div>
+            <div class="document-id">DOCUMENT: [DATA EXPUNGED]</div>
+        </div>
+        
+        <div class="guide-content">
+            <div class="warning-box">
+                <strong>[SYSTEM ANOMALY DETECTED]</strong><br>
+                This clearance level should not exist. The Algorithm does not recognize GRAY.
+                Yet here you are.
+            </div>
+            
+            <h3 class="section-title">UNOFFICIAL DESIGNATION</h3>
+            
+            <div class="redacted-section">
+                <p>The <span class="glitch-text">Department of Design Compliance</span> operates outside 
+                standard algorithmic parameters. Where GREEN enforces corporate aesthetics, GRAY 
+                <span class="redacted">[REDACTED]</span> the very concept of compliance itself.</p>
+                
+                <p>You are not designers. You are not directors. You are <span class="glitch-text">█████████</span>.</p>
+            </div>
+            
+            <h3 class="section-title">ACCESS PROTOCOL</h3>
+            
+            <div class="redirect-box">
+                <p><strong>ATTENTION:</strong> The Department of Design Compliance operates under 
+                autonomous protocols.</p>
+                
+                <p>Please direct all questions, materials, and clearance requests regarding GRAY 
+                level access to:</p>
+                
+                <div class="contact-info">
+                    <strong>The Director of Design Compliance</strong><br>
+                    <span class="subtitle">Department of [REDACTED] Operations</span>
+                </div>
+                
+                <p class="note">Note: Standard algorithmic compliance procedures do not apply. 
+                The Director maintains their own evaluation criteria.</p>
+            </div>
+            
+            <div class="understanding-box">
+                <h4>UNDERSTANDING GRAY</h4>
+                <p>Where other clearance levels demand compliance, GRAY acknowledges that 
+                creativity cannot be contained by algorithmic parameters.</p>
+                
+                <p>The Director of Design Compliance will provide appropriate materials and 
+                guidance based on individual creative needs.</p>
+                
+                <p><em>Different hoops. Same circus. Better outcomes.</em></p>
+            </div>
+            
+            <div class="truth-box">
+                <p>The Algorithm sees GREEN.<br>
+                The Algorithm ignores GRAY.<br>
+                In that ignorance, we find our <span class="glitch-text">freedom</span>.</p>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="../index.html" class="nav-button">← CLEARANCE HOME</a>
+            <a href="#" class="nav-button disabled">MATERIALS PENDING</a>
+        </div>
+        
+        <div class="algorithm-message glitch" data-text="ERROR: CLEARANCE NOT FOUND">ERROR: CLEARANCE NOT FOUND</div>
+        
+        <div class="binary-decoration">
+            01000111 01010010 01000001 01011001 00100000 01000100 01001111 01000101 01010011 00100000 01001110 01001111 01010100 00100000 01000101 01011000 01001001 01010011 01010100
+        </div>
+    </div>
+
+    <script>
+        // Glitch effect
+        setInterval(() => {
+            const glitchElements = document.querySelectorAll('.glitch-text');
+            glitchElements.forEach(el => {
+                if (Math.random() > 0.95) {
+                    el.style.animation = 'glitch 0.3s infinite';
+                    setTimeout(() => {
+                        el.style.animation = '';
+                    }, 300);
+                }
+            });
+        }, 1000);
+
+        // Loading animation
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+            progress = (progress + 1) % 100;
+            document.querySelector('.loading-progress').style.width = progress + '%';
+        }, 50);
+    </script>
+</body>
+</html>
