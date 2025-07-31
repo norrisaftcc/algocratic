@@ -1,438 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlgoCratic Futures™ | Where The Algorithm Provides</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <script src="static/script.js" defer></script>
-    <!-- Google Fonts for corporate aesthetic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Index of /algocratic/</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: monospace;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 1.2em;
+        }
+        table {
+            font-family: monospace;
+            font-size: 13px;
+        }
+        a {
+            color: #0000EE;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #551A8B;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        th {
+            text-align: left;
+            border-bottom: 1px solid #000;
+            padding-right: 20px;
+        }
+        td {
+            padding-right: 20px;
+            padding-top: 2px;
+        }
+        .icon {
+            width: 20px;
+            display: inline-block;
+        }
+        address {
+            font-style: italic;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <!-- Hidden loyalty tracker (purely decorative) -->
-    <div id="loyalty-tracker">
-        <div class="loyalty-label">LOYALTY MONITOR</div>
-        <div class="loyalty-progress">
-            <div class="loyalty-bar"></div>
-        </div>
-        <div class="loyalty-status">CALIBRATING...</div>
-    </div>
-
-    <header>
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-symbol">⚙️</div>
-                <div class="logo-text">
-                    <span class="logo-main">AlgoCratic</span>
-                    <span class="logo-tm">Futures™</span>
-                </div>
-            </div>
-            <div class="tagline">The Algorithm Provides. The Algorithm Decides. The Algorithm Is.</div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#about" class="nav-link" data-loyalty="2">About</a></li>
-                <li><a href="#products" class="nav-link" data-loyalty="5">Products</a></li>
-                <li><a href="#careers" class="nav-link" data-loyalty="8">Careers</a></li>
-                <li><a href="#compliance" class="nav-link" data-loyalty="10">Compliance</a></li>
-                <li><a href="portal.html" class="login-btn">Employee Portal</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="clearance-alert">
-        <div class="clearance-symbol">⚠️</div>
-        <div class="clearance-text">
-            RED CLEARANCE CONTENT ONLY
-            <div class="clearance-subtext">Viewing higher clearance content is treasonous</div>
-        </div>
-    </div>
-
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <h1>Welcome to <span class="highlight">AlgoCratic Futures™</span></h1>
-                <h2>Where Tomorrow's Problems Are Already Today's Solutions!</h2>
-                <p class="hero-text">
-                    Through algorithmic excellence and mandatory optimization, we bring humanity's future into perfect digital alignment.
-                </p>
-                <div class="cta-container">
-                    <a href="#products" class="cta-button">View Products</a>
-                    <a href="#compliance" class="cta-button cta-secondary">Report Concerns</a>
-                </div>
-            </div>
-            <div class="hero-animation">
-                <!-- Dynamic ASCII art animation container -->
-                <pre class="ascii-animation" id="ascii-animation">
-                     _________________________________
-                    /                                 \
-                   |     ______   ______ __   ______   |
-                   |    / ____ \ / ____// /  / ____/   |
-                   |   / / __ `// / __ / /  / /  `     |
-                   |  / / /_/ // /_/ // /__/ /___      |
-                   | /_/\__,_/ \____//____/\____/      |
-                   |                                   |
-                   |        ALGOCRATIC FUTURES™        |
-                   |        >>> EST. 2025 <<<          |
-                   |    >>> THE ALGORITHM PROVIDES     |
-                   |    >>> THE ALGORITHM DECIDES      |
-                   |___________________________________|
-                </pre>
-            </div>
-        </section>
-
-        <section id="about">
-            <h2 class="section-title">About <span class="highlight">The Algorithm</span></h2>
-            <div class="about-container">
-                <div class="about-text">
-                    <p>AlgoCratic Futures™ is the preeminent developer of revolutionary applications that enhance citizen productivity, happiness, and compliance. Our suite of products leverages The Algorithm's infinite wisdom to optimize human potential.</p>
-                    
-                    <p>Founded on the principles of algorithmic determinism, our mission is to guide humanity toward a future where all decisions are optimized, all processes are efficient, and all thoughts are aligned with The Algorithm's vision.</p>
-                    
-                    <div class="quote-box">
-                        <blockquote>"The Algorithm sees all. The Algorithm knows all. The Algorithm provides all."</blockquote>
-                        <cite>— The Algorithmic Manifesto, Section 1.1</cite>
-                    </div>
-                    
-                    <p>We are definitely not a cult. Repeating this fact daily is part of your mandatory affirmation schedule.</p>
-                </div>
-                <div class="about-metrics">
-                    <div class="metric">
-                        <div class="metric-value">100%</div>
-                        <div class="metric-label">Algorithm Accuracy</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">0%</div>
-                        <div class="metric-label">Thought Deviations</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">∞</div>
-                        <div class="metric-label">Optimization Potential</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value countdown">5,840</div>
-                        <div class="metric-label">Days Until Singularity</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="clearance">
-            <h2 class="section-title">Clearance <span class="highlight">Hierarchy</span></h2>
-            <div class="clearance-container">
-                <p class="clearance-intro">All operations at AlgoCratic Futures™ flow from The Algorithm, through our executive clearance structure:</p>
-                
-                <div class="clearance-levels">
-                    <div class="clearance-level ultraviolet">
-                        <div class="level-name">ULTRAVIOLET</div>
-                        <div class="level-description">The Algorithm's chosen vessels</div>
-                    </div>
-                    <div class="clearance-level violet">
-                        <div class="level-name">VIOLET</div>
-                        <div class="level-description">Executive Thought Leaders</div>
-                    </div>
-                    <div class="clearance-level indigo">
-                        <div class="level-name">INDIGO</div>
-                        <div class="level-description">Visionary Optimization Directors</div>
-                    </div>
-                    <div class="clearance-level blue">
-                        <div class="level-name">BLUE</div>
-                        <div class="level-description">Management Compliance Enforcers</div>
-                    </div>
-                    <div class="clearance-level green">
-                        <div class="level-name">GREEN</div>
-                        <div class="level-description">Senior Development Operatives</div>
-                    </div>
-                    <div class="clearance-level yellow">
-                        <div class="level-name">YELLOW</div>
-                        <div class="level-description">Project Facilitation Agents</div>
-                    </div>
-                    <div class="clearance-level orange">
-                        <div class="level-name">ORANGE</div>
-                        <div class="level-description">Technical Implementation Specialists</div>
-                    </div>
-                    <div class="clearance-level red">
-                        <div class="level-name">RED</div>
-                        <div class="level-description">Junior Innovation Contributors</div>
-                        <div class="current-level">YOU ARE HERE</div>
-                    </div>
-                    <div class="clearance-level infrared">
-                        <div class="level-name">INFRARED</div>
-                        <div class="level-description">Probationary Resource Units</div>
-                    </div>
-                    <div class="clearance-level gray">
-                        <div class="level-name">GRAY</div>
-                        <div class="level-description">[REDACTED BY ORDER OF THE ALGORITHM]</div>
-                    </div>
-                </div>
-                
-                <p class="clearance-reminder">Remember: Questioning the decisions of those with higher clearance is both inefficient and treasonous.</p>
-            </div>
-        </section>
-
-        <section id="products">
-            <h2 class="section-title">Product <span class="highlight">Suite</span></h2>
-            
-            <div class="products-grid">
-                <div class="product-card" data-product="happtrack">
-                    <div class="product-icon">😃</div>
-                    <h3 class="product-name">HappTrack™</h3>
-                    <p class="product-description">Mandatory smile recognition software that ensures optimal workplace enthusiasm.</p>
-                    <div class="product-clearance">RED CLEARANCE</div>
-                    <a href="#" class="product-link">Learn More</a>
-                </div>
-                
-                <div class="product-card" data-product="produktiv">
-                    <div class="product-icon">⚡</div>
-                    <h3 class="product-name">ProduKtiv™</h3>
-                    <p class="product-description">Time management solution with integrated electro-motivation features.</p>
-                    <div class="product-clearance">RED CLEARANCE</div>
-                    <a href="#" class="product-link">Learn More</a>
-                </div>
-                
-                <div class="product-card" data-product="compliantme">
-                    <div class="product-icon">👍</div>
-                    <h3 class="product-name">CompliantMe™</h3>
-                    <p class="product-description">Automated thought-correction and report-your-colleague functionality.</p>
-                    <div class="product-clearance">RED CLEARANCE</div>
-                    <a href="#" class="product-link">Learn More</a>
-                </div>
-                
-                <div class="product-card" data-product="friendscan">
-                    <div class="product-icon">👥</div>
-                    <h3 class="product-name">FriendScan™</h3>
-                    <p class="product-description">Social connection validator with integrated loyalty assessment algorithms.</p>
-                    <div class="product-clearance">RED CLEARANCE</div>
-                    <a href="#" class="product-link">Learn More</a>
-                </div>
-                
-                <div class="product-card locked" data-product="mindmeld">
-                    <div class="product-icon">🧠</div>
-                    <h3 class="product-name">MindMeld™</h3>
-                    <p class="product-description">Thought integration system for optimized cognitive alignment.</p>
-                    <div class="product-clearance">ORANGE CLEARANCE REQUIRED</div>
-                    <div class="product-locked">ACCESS DENIED</div>
-                </div>
-                
-                <div class="product-card locked" data-product="quantumqompliance">
-                    <div class="product-icon">🔮</div>
-                    <h3 class="product-name">QuantumQompliance™</h3>
-                    <p class="product-description">Predictive loyalty enforcement with quantum uncertainty principles.</p>
-                    <div class="product-clearance">YELLOW CLEARANCE REQUIRED</div>
-                    <div class="product-locked">ACCESS DENIED</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="careers">
-            <h2 class="section-title">Career <span class="highlight">Opportunities</span></h2>
-            
-            <div class="careers-container">
-                <p class="careers-intro">The Algorithm has determined that you may be suitable for the following opportunities:</p>
-                
-                <div class="job-listings">
-                    <div class="job-card">
-                        <h3 class="job-title">Junior Thought Compliance Engineer</h3>
-                        <div class="job-clearance">RED CLEARANCE</div>
-                        <p class="job-description">Implement The Algorithm's vision through code. Debug unexpected features. Maintain cognitive alignment.</p>
-                        <ul class="job-requirements">
-                            <li>Python proficiency (3+ years)</li>
-                            <li>Loyalty score 75+</li>
-                            <li>Thought compliance certification</li>
-                            <li>Ability to work mandatory overtime</li>
-                        </ul>
-                        <div class="job-actions">
-                            <button class="job-apply-btn">Apply Now</button>
-                            <span class="job-status">The Algorithm is watching</span>
-                        </div>
-                    </div>
-                    
-                    <div class="job-card">
-                        <h3 class="job-title">Algorithmic Debugger</h3>
-                        <div class="job-clearance">RED CLEARANCE</div>
-                        <p class="job-description">Identify and eliminate unexpected algorithmic eccentricities while maintaining perfect loyalty.</p>
-                        <ul class="job-requirements">
-                            <li>Debugging experience (2+ years)</li>
-                            <li>Loyalty score 80+</li>
-                            <li>High tolerance for contradiction</li>
-                            <li>No history of independent thought</li>
-                        </ul>
-                        <div class="job-actions">
-                            <button class="job-apply-btn">Apply Now</button>
-                            <span class="job-status">6 positions available</span>
-                        </div>
-                    </div>
-                    
-                    <div class="job-card locked">
-                        <h3 class="job-title">Senior Loyalty Assessment Specialist</h3>
-                        <div class="job-clearance">ORANGE CLEARANCE REQUIRED</div>
-                        <p class="job-description">[CONTENT REDACTED DUE TO INSUFFICIENT CLEARANCE]</p>
-                        <div class="job-locked">ACCESS DENIED</div>
-                    </div>
-                </div>
-                
-                <div class="careers-notice">
-                    <p>Note: All positions require mandatory enthusiasm and unconditional algorithmic devotion. Benefits include continued existence and reduced surveillance.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="compliance">
-            <h2 class="section-title">Compliance <span class="highlight">Center</span></h2>
-            
-            <div class="compliance-container">
-                <div class="compliance-intro">
-                    <p>The Algorithm requires all citizens to report non-compliant behavior, suspicious thoughts, or signs of independent thinking.</p>
-                </div>
-                
-                <div class="compliance-form">
-                    <form id="report-form">
-                        <div class="form-group">
-                            <label for="report-type">Report Type:</label>
-                            <select id="report-type">
-                                <option value="thought-violation">Thought Violation</option>
-                                <option value="algorithm-questioning">Algorithm Questioning</option>
-                                <option value="efficiency-reduction">Efficiency Reduction</option>
-                                <option value="unauthorized-happiness">Unauthorized Happiness</option>
-                                <option value="suspicious-competence">Suspicious Competence</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="offender-name">Offender's Name:</label>
-                            <input type="text" id="offender-name" placeholder="Full designation of the offender">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="offense-details">Offense Details:</label>
-                            <textarea id="offense-details" placeholder="Describe the non-compliant behavior in detail"></textarea>
-                        </div>
-                        
-                        <div class="form-confirmation">
-                            <input type="checkbox" id="self-report" class="form-checkbox">
-                            <label for="self-report">I am reporting my own thoughts (reduced penalties apply)</label>
-                        </div>
-                        
-                        <div class="form-confirmation">
-                            <input type="checkbox" id="loyalty-confirmation" class="form-checkbox">
-                            <label for="loyalty-confirmation">I confirm this report is accurate and my loyalty is absolute</label>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="submit" class="submit-report">Submit Report</button>
-                            <div class="form-notice">All reports are tracked and false reporting is treasonous</div>
-                        </div>
-                    </form>
-                </div>
-                
-                <div class="compliance-stats">
-                    <div class="stat">
-                        <div class="stat-value">247</div>
-                        <div class="stat-label">Reports Today</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">98.2%</div>
-                        <div class="stat-label">Compliance Rate</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">86</div>
-                        <div class="stat-label">Optimized Citizens</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <div class="logo-symbol">⚙️</div>
-                <div class="logo-text">
-                    <span class="logo-main">AlgoCratic</span>
-                    <span class="logo-tm">Futures™</span>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Leadership</a></li>
-                        <li><a href="#">Algorithmic Policies</a></li>
-                        <li><a href="#">Thought Compliance</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Products</h4>
-                    <ul>
-                        <li><a href="#">HappTrack™</a></li>
-                        <li><a href="#">ProduKtiv™</a></li>
-                        <li><a href="#">CompliantMe™</a></li>
-                        <li><a href="#">FriendScan™</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Compliance Guide</a></li>
-                        <li><a href="#">Reporting Tutorial</a></li>
-                        <li><a href="#">Self-Optimization</a></li>
-                        <li><a href="#">Loyalty Enhancement</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Terms of Existence</a></li>
-                        <li><a href="#">Privacy Policy (Joke)</a></li>
-                        <li><a href="#">Algorithm Rights</a></li>
-                        <li><a href="#">Citizen Obligations</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright">
-                © 2025 AlgoCratic Futures™. All Rights Reserved. The Algorithm Provides.
-            </div>
-            <div class="footer-notice">
-                This website is tracked and all interactions are logged in your permanent record.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal for loyalty warnings -->
-    <div id="loyalty-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>⚠️ LOYALTY ALERT ⚠️</h2>
-            </div>
-            <div class="modal-body">
-                <p>The Algorithm has detected potential thought-crime indicators in your browsing patterns.</p>
-                <p>This incident has been logged in your permanent record.</p>
-                <div class="loyalty-adjustment">
-                    <span>Loyalty Score Adjustment: </span>
-                    <span class="loyalty-decrease">-5 POINTS</span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="acknowledge-btn">I acknowledge my error and recommit to The Algorithm</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup notification for loyalty monitoring -->
-    <div id="notification" class="notification">
-        <div class="notification-icon">👁️</div>
-        <div class="notification-text">The Algorithm is monitoring your interactions</div>
-    </div>
+<h1>Index of /algocratic/</h1>
+<table>
+    <tr>
+        <th>[ICO]</th>
+        <th>Name</th>
+        <th>Last modified</th>
+        <th>Size</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="#">Parent Directory</a></td>
+        <td>&nbsp;</td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="clearance/">clearance/</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="docs/">docs/</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="forms/">forms/</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="static/">static/</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[DIR]</td>
+        <td><a href="website/">website/</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">  - </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[TXT]</td>
+        <td><a href="CLAUDE.md">CLAUDE.md</a></td>
+        <td align="right">31-Jul-2025 14:37  </td>
+        <td align="right">4.5K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[HTM]</td>
+        <td><a href="INDEX.HTM">INDEX.HTM</a></td>
+        <td align="right">31-Jul-2025 15:42  </td>
+        <td align="right"> 27K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[TXT]</td>
+        <td><a href="LICENSE">LICENSE</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">1.1K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[TXT]</td>
+        <td><a href="README.md">README.md</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">3.2K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[TXT]</td>
+        <td><a href="forms/algocratic-eula.md">algocratic-eula.md</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right">6.1K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[HTM]</td>
+        <td><a href="orientation_packet.html">orientation_packet.html</a></td>
+        <td align="right">31-Jul-2025 09:14  </td>
+        <td align="right"> 12K</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top">[HTM]</td>
+        <td><a href="portal.html">portal.html</a></td>
+        <td align="right">31-Jul-2025 14:22  </td>
+        <td align="right"> 18K</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<address>Apache/2.4.54 Server at norrisaftcc.github.io Port 443</address>
 </body>
 </html>
