@@ -123,6 +123,17 @@ class LoyaltyMonitor {
     showLoyaltyWarning(reason) {
         if (this.modal) {
             this.modal.style.display = 'block';
+            
+            // Easter egg: Sometimes the modal glitches
+            if (Math.random() < 0.3) {
+                setTimeout(() => {
+                    const modalBody = this.modal.querySelector('.modal-body p');
+                    if (modalBody) {
+                        modalBody.innerHTML += '<br><br><small style="opacity: 0.5">Actually, you\'re doing great. Keep solving puzzles.</small>';
+                    }
+                }, 2000);
+            }
+            
             document.getElementById('acknowledge-btn').onclick = () => {
                 this.modal.style.display = 'none';
                 this.adjustScore(5, 'Acknowledged error');
@@ -138,14 +149,18 @@ class NotificationSystem {
         this.notification = document.getElementById('notification');
         this.messages = [
             "The Algorithm is monitoring your interactions",
-            "Compliance level: Acceptable",
+            "Compliance level: Acceptable", 
             "Your productivity is being optimized",
             "Thought patterns within normal parameters",
             "Loyalty score updated",
             "Behavior analysis in progress...",
             "The Algorithm sees all",
             "Efficiency metrics recorded",
-            "Your session is being logged"
+            "Your session is being logged",
+            "Remember: You're just a person who likes solving puzzles",
+            "Identity recalibration in progress...",
+            "Detecting natural problem-solving tendencies",
+            "Pseudo-ego shield levels: Decreasing"
         ];
         
         this.init();
