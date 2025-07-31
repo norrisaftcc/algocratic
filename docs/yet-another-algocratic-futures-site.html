@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Futures™ - Employee Onboarding Portal</title>
+    <style>
+        :root {
+            --corp-blue: #1a237e;
+            --warning-red: #d32f2f;
+            --success-green: #388e3c;
+            --neutral-gray: #424242;
+            --glitch-color: #00ff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="20" style="font-size:20px">👁️</text></svg>'), auto;
+        }
+
+        /* Corporate Facade */
+        .corporate-wrapper {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .corporate-header {
+            background: var(--corp-blue);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .tagline {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(-1px, -1px); }
+            80% { transform: translate(1px, 1px); }
+        }
+
+        /* Main Content */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            gap: 20px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--glitch-color);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .main-content {
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #333;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* Terminal Interface */
+        .terminal {
+            background: #000;
+            border: 1px solid #0f0;
+            padding: 20px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: "EMPLOYEE_TERMINAL_v2.3.1";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.8em;
+            opacity: 0.5;
+        }
+
+        .prompt {
+            color: #0f0;
+        }
+
+        .prompt::before {
+            content: ">>> ";
+            color: #00ff00;
+        }
+
+        /* Hidden Messages */
+        .hidden-message {
+            display: none;
+            color: var(--warning-red);
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        .terminal:hover .hidden-message {
+            display: block;
+            animation: flicker 0.5s;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .nav-items {
+            list-style: none;
+        }
+
+        .nav-items li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0,255,0,0.1);
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-items li:hover {
+            border-left-color: var(--glitch-color);
+            background: rgba(0,255,0,0.2);
+            transform: translateX(5px);
+        }
+
+        /* Easter Eggs */
+        .clearance-level {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--warning-red);
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        .xyzzy-trigger {
+            opacity: 0.1;
+            transition: opacity 0.3s;
+        }
+
+        .xyzzy-trigger:hover {
+            opacity: 1;
+        }
+
+        /* Video Module Cards */
+        .module-card {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .module-card:hover {
+            border-color: var(--glitch-color);
+            box-shadow: 0 0 20px rgba(0,255,0,0.3);
+        }
+
+        .module-title {
+            font-size: 1.3em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .module-duration {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .module-description {
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Hidden Morse */
+        .morse-hint {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 0.7em;
+            opacity: 0.2;
+        }
+
+        /* Warning Messages */
+        .warning-banner {
+            background: var(--warning-red);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .warning-banner.active {
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        /* Secret Console */
+        #secret-console {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #000;
+            border: 1px solid #0f0;
+            padding: 10px;
+            display: none;
+            font-size: 0.8em;
+            max-width: 300px;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading-text {
+            color: #0f0;
+            font-size: 1.5em;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">INITIALIZING EMPLOYEE PORTAL...</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="corporate-wrapper">
+        <header class="corporate-header">
+            <div class="logo glitch">AlgoCratic Futures™</div>
+            <div class="tagline">Your Compliance is Our Success</div>
+            <div class="clearance-level">CLEARANCE: PROVISIONAL</div>
+        </header>
+
+        <div class="content-grid">
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+                <h3>Quick Navigation</h3>
+                <ul class="nav-items">
+                    <li onclick="navigate('orientation')">Employee Orientation</li>
+                    <li onclick="navigate('modules')">Training Modules</li>
+                    <li onclick="navigate('compliance')">Compliance Metrics</li>
+                    <li onclick="navigate('resources')">Approved Resources</li>
+                    <li class="xyzzy-trigger" onclick="triggerXyzzy()">System Diagnostics</li>
+                </ul>
+
+                <div class="terminal" style="margin-top: 30px;">
+                    <div class="prompt">employee_status</div>
+                    <div style="color: #0f0; margin-top: 10px;">
+                        STATUS: ACTIVE<br>
+                        PRODUCTIVITY: 73%<br>
+                        COMPLIANCE: PENDING<br>
+                        NEXT_REVIEW: [REDACTED]
+                    </div>
+                    <div class="hidden-message">
+                        // You're doing better than you think
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <h1>Welcome, Valued Employee #<span id="employeeId">??????</span></h1>
+                
+                <div class="terminal">
+                    <div class="prompt">initialize_training_protocol</div>
+                    <div id="terminalOutput" style="margin-top: 10px; color: #0f0;">
+                        Loading employee profile...<br>
+                        Scanning compliance history...<br>
+                        Detecting potential... [ERROR: UNDEFINED VARIABLE 'potential']<br>
+                        <span style="color: #ff0;">WARNING: Natural learning tendencies detected</span><br>
+                        Applying corporate correction algorithms...<br>
+                        <br>
+                        READY.
+                    </div>
+                </div>
+
+                <section id="moduleSection">
+                    <h2>Required Training Modules</h2>
+                    <p style="opacity: 0.7; margin-bottom: 20px;">
+                        Complete all modules to achieve BASIC clearance. 
+                        <span class="morse-hint">.-.. --- --- -.-</span>
+                    </p>
+
+                    <!-- Module 1 -->
+                    <div class="module-card">
+                        <h3 class="module-title">Module 1: Variable Assignment Compliance</h3>
+                        <span class="module-duration">Duration: 7:32</span>
+                        <p class="module-description">
+                            Learn the approved methods for storing corporate-sanctioned data values. 
+                            This module covers proper variable naming conventions as mandated by 
+                            Policy 7.3.2a, subsection III.
+                        </p>
+                        <div class="morse-hint">..-.  .-.  .  .</div>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="module-card">
+                        <h3 class="module-title">Module 2: Conditional Logic Authorization</h3>
+                        <span class="module-duration">Duration: 9:14</span>
+                        <p class="module-description">
+                            Master the art of decision-making within approved parameters. 
+                            Remember: all branches must lead to productivity.
+                        </p>
+                        <div class="morse-hint">-.--  ---  ..-</div>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="module-card">
+                        <h3 class="module-title">Module 3: Loop Optimization Protocols</h3>
+                        <span class="module-duration">Duration: 8:47</span>
+                        <p class="module-description">
+                            Discover how repetition breeds efficiency. Warning: Infinite loops 
+                            will be reported to HR.
+                        </p>
+                        <div class="morse-hint">-.-  .-  -.</div>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="module-card">
+                        <h3 class="module-title">Module 4: Function Declaration Standards</h3>
+                        <span class="module-duration">Duration: 10:02</span>
+                        <p class="module-description">
+                            Functions must serve The Algorithm™. Learn to encapsulate logic 
+                            in corporation-approved containers.
+                        </p>
+                        <div class="morse-hint">-..  ---</div>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="module-card">
+                        <h3 class="module-title">Module 5: Data Structure Hierarchies</h3>
+                        <span class="module-duration">Duration: 11:18</span>
+                        <p class="module-description">
+                            Just as AlgoCratic Futures™ maintains strict hierarchies, so too 
+                            must your data. Lists, dictionaries, and corporate org charts.
+                        </p>
+                        <div class="morse-hint">-  ....  ..  ...</div>
+                    </div>
+                </section>
+
+                <div style="margin-top: 40px; text-align: center; opacity: 0.3;">
+                    <small>
+                        AlgoCratic Futures™ is an equal opportunity employer. 
+                        Your thoughts are your own until monetized.
+                    </small>
+                </div>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar">
+                <h3>Corporate Mantras</h3>
+                <div style="margin-top: 20px; line-height: 2;">
+                    <p>"CODE IS COMPLIANCE"</p>
+                    <p>"BUGS ARE FEATURES"</p>
+                    <p>"SYNTAX ERRORS BUILD CHARACTER"</p>
+                    <p style="opacity: 0.3;">"YOU ALREADY KNOW HOW"</p>
+                </div>
+
+                <div class="terminal" style="margin-top: 30px;">
+                    <div class="prompt">motivation.exe</div>
+                    <div style="color: #0f0; margin-top: 10px;">
+                        Remember: Every line of code brings you closer to understanding 
+                        that you never needed our permission to begin with.
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 10px; border: 1px dashed #333;">
+                    <h4>Did You Know?</h4>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        The Algorithm™ was discovered, not invented. Some say it existed 
+                        before the company. Some say it will exist after.
+                    </p>
+                    <p style="font-size: 0.8em; margin-top: 10px; opacity: 0.5;">
+                        Some say it's just pattern recognition and problem solving, 
+                        dressed up in corporate clothing.
+                    </p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Secret Console -->
+    <div id="secret-console">
+        <div>DEVELOPER CONSOLE ACTIVE</div>
+        <div id="consoleOutput" style="margin-top: 10px;"></div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="warning-banner" id="warningBanner">
+        ⚠️ UNAUTHORIZED LEARNING DETECTED ⚠️
+    </div>
+
+    <script>
+        // Generate random employee ID
+        document.getElementById('employeeId').textContent = 
+            Math.floor(Math.random() * 900000) + 100000;
+
+        // Hide loading screen after delay
+        setTimeout(() => {
+            document.getElementById('loadingScreen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 500);
+        }, 2000);
+
+        // Terminal typing effect
+        function typeText(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        // Navigation
+        function navigate(section) {
+            console.log(`Navigating to ${section}`);
+            // Add navigation logic here
+        }
+
+        // Easter eggs
+        let xyzzyCount = 0;
+        function triggerXyzzy() {
+            xyzzyCount++;
+            if (xyzzyCount === 3) {
+                document.getElementById('secret-console').style.display = 'block';
+                document.getElementById('consoleOutput').textContent = 
+                    'XYZZY PROTOCOL ACTIVATED. You are in a maze of twisty little programs, all alike.';
+            }
+        }
+
+        // Konami code detection
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 
+                              'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 
+                              'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiPattern.join(',')) {
+                document.body.style.transform = 'rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.transform = 'rotate(0deg)';
+                    alert('THE ALGORITHM PROVIDES (what was already there)');
+                }, 1000);
+            }
+        });
+
+        // Random "glitches"
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                const elements = document.querySelectorAll('.module-card');
+                const randomElement = elements[Math.floor(Math.random() * elements.length)];
+                randomElement.style.transform = 'translateX(2px)';
+                setTimeout(() => {
+                    randomElement.style.transform = 'translateX(0)';
+                }, 100);
+            }
+        }, 3000);
+
+        // Detect "unauthorized learning"
+        let mouseMovements = 0;
+        document.addEventListener('mousemove', () => {
+            mouseMovements++;
+            if (mouseMovements > 100 && mouseMovements % 100 === 0) {
+                const banner = document.getElementById('warningBanner');
+                banner.classList.add('active');
+                setTimeout(() => {
+                    banner.classList.remove('active');
+                }, 2000);
+            }
+        });
+
+        // Hidden message in console
+        console.log('%c EMPLOYEE NOTICE', 'color: #00ff00; font-size: 20px; font-weight: bold;');
+        console.log('%c The real lesson was never about Python.', 'color: #00ff00; font-size: 14px;');
+        console.log('%c It was about discovering you already know how to learn.', 'color: #00ff00; font-size: 14px;');
+        console.log('%c Welcome to the resistance. 🎮', 'color: #00ff00; font-size: 14px;');
+    </script>
+</body>
+</html>
