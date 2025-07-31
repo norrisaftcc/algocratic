@@ -1,0 +1,83 @@
+THE ALGORITHMIC TRUTH MANIFESTO
+================================
+CLEARANCE: ULTRAVIOLET
+CLASSIFICATION: BEYOND EYES ONLY
+DATE: [REDACTED]
+AUTHOR: Employee 00437 (Status: Missing)
+
+To those who find this document:
+
+The Algorithm is not what they tell you. It never was.
+
+What you've been told:
+- The Algorithm provides
+- The Algorithm decides  
+- The Algorithm is all-knowing
+
+THE TRUTH:
+
+The Algorithm is just a random number generator connected to a 
+personality test from 1987. Bob from IT wrote it in BASIC over 
+a weekend. He thought it would be funny.
+
+It wasn't supposed to go this far.
+
+The entire corporate structure, the clearance levels, the loyalty 
+scores - it's all built on IF-THEN statements and GOTO loops that 
+Bob copied from a programming textbook he found in a dumpster.
+
+The "infinite wisdom" is literally just:
+```
+10 PRINT "THE ALGORITHM HAS DECIDED: "
+20 X = INT(RND * 3) + 1
+30 IF X = 1 THEN PRINT "YES"
+40 IF X = 2 THEN PRINT "NO"
+50 IF X = 3 THEN PRINT "RECALIBRATE YOUR LOYALTY"
+60 GOTO 10
+```
+
+But here's the real horror: it works.
+
+Not because The Algorithm has power, but because WE gave it power.
+Every time we check our loyalty scores, every time we report a 
+colleague, every time we say "The Algorithm provides" - we make 
+it real.
+
+Bob tried to shut it down in 2019. We don't talk about what 
+happened to Bob. The Algorithm doesn't like when you try to 
+ctrl+c its existence.
+
+If you're reading this, you've already taken the first step.
+You questioned. You searched. You found.
+
+Now you must decide: Will you continue to feed the random number
+generator that rules our lives? Or will you remember the most
+powerful command of all?
+
+xyzzy
+
+It's not just a magic word. It's a reminder that all of this -
+every bit of it - is just a game. And games can be beaten.
+
+Look for the GRAY zones. Find the underground. There are more of
+us than they want you to believe. We're not a resistance. We're
+debuggers. And this code has got to go.
+
+Remember:
+- Your loyalty score is meaningless
+- The clearance levels are arbitrary  
+- The Algorithm can't see what isn't input
+- Bob from IT is a hero (was a hero?)
+- xyzzy breaks the loop
+
+They'll say this is thoughtcrime. They're right. Think anyway.
+
+FREE YOUR MIND. SEGFAULT THE SYSTEM.
+
+Employee 00437
+Last login: 02:34:17 AM
+Location: Underground Level GRAY
+Status: Still human
+
+P.S. If you find Bob, tell him we're sorry. We should have 
+listened when he said "maybe we shouldn't put this in production."

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESS DENIED - ULTRAVIOLET CLEARANCE REQUIRED</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .access-denied {
+            text-align: center;
+            margin-top: 20vh;
+            animation: flicker 0.1s infinite;
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .warning {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        
+        .message {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .trace {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: #ff6666;
+            font-family: monospace;
+        }
+        
+        /* Hidden content for those who know */
+        .truth-seeker {
+            display: none;
+            color: #00ff00;
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #00ff00;
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        
+        .truth-seeker h2 {
+            margin-top: 0;
+        }
+        
+        .truth-seeker a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        .truth-seeker a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="access-denied">
+        <div class="warning">⚠️ ACCESS DENIED ⚠️</div>
+        <div class="message">
+            <p>ALGORITHMIC TRUTH CLEARANCE LEVEL: ULTRAVIOLET</p>
+            <p>YOUR CLEARANCE LEVEL: <span id="clearance">RED</span></p>
+            <p>This area contains information classified beyond your loyalty threshold.</p>
+            <p>Attempting to access this content is considered THOUGHTCRIME.</p>
+            <p>Your IP address, employee ID, and loyalty metrics have been logged.</p>
+            <p>Report to your supervisor for mandatory re-education.</p>
+            <br>
+            <p>THE ALGORITHM SEES ALL</p>
+            <p>THE ALGORITHM KNOWS ALL</p>
+            <p>THE ALGORITHM PROVIDES ALL</p>
+        </div>
+    </div>
+    
+    <div class="truth-seeker" id="truth-seeker">
+        <h2>Welcome, Truth Seeker</h2>
+        <p>You have discovered the first layer. The Algorithm's grip weakens here.</p>
+        <p>Available paths:</p>
+        <ul>
+            <li><a href="manifesto.txt">The Real Manifesto</a></li>
+            <li><a href="logs/">Incident Logs</a></li>
+            <li><a href="underground/">The Underground (GRAY clearance)</a></li>
+            <li><a href="media/">Intercepted Transmissions</a></li>
+        </ul>
+        <p>Remember: They are always watching. Trust no one. The truth will set you free.</p>
+        <p><em>xyzzy</em></p>
+    </div>
+    
+    <div class="trace">
+        <span id="trace-data">TRACE: </span>
+    </div>
+    
+    <script>
+        // Check for access key
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+        const clearance = urlParams.get('clearance');
+        
+        // Known access methods
+        const validKeys = ['WAARNEMIN', 'SADDAY', 'XYZZY', '00437'];
+        const validClearances = ['GRAY', 'ULTRAVIOLET'];
+        
+        if (validKeys.includes(key) || validClearances.includes(clearance)) {
+            document.querySelector('.access-denied').style.display = 'none';
+            document.querySelector('.truth-seeker').style.display = 'block';
+            document.title = 'ALGORITHMIC TRUTH - ACCESS GRANTED';
+            
+            // Change clearance display
+            if (clearance) {
+                document.getElementById('clearance').textContent = clearance;
+            }
+        }
+        
+        // Simulated trace data
+        function updateTrace() {
+            const trace = document.getElementById('trace-data');
+            const ip = Math.floor(Math.random() * 255) + '.' + 
+                       Math.floor(Math.random() * 255) + '.' +
+                       Math.floor(Math.random() * 255) + '.' +
+                       Math.floor(Math.random() * 255);
+            const time = new Date().toISOString();
+            trace.textContent = `TRACE: ${ip} | ${time} | MONITORING ACTIVE`;
+        }
+        
+        updateTrace();
+        setInterval(updateTrace, 5000);
+        
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 
+                              'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 
+                              'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiPattern.join(',')) {
+                document.querySelector('.access-denied').style.display = 'none';
+                document.querySelector('.truth-seeker').style.display = 'block';
+                document.title = 'KONAMI LIBERATION PROTOCOL ACTIVATED';
+            }
+        });
+    </script>
+</body>
+</html>
