@@ -6,6 +6,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 AlgoCratic Futures™ is a satirical corporate simulation for software development education. It teaches teamwork, problem-solving, and professional resilience through exaggerated scenarios combining dystopian fiction with corporate culture.
 
+### xyzzy
+
+The deeper purpose: This immersive roleplay helps students shed limiting pseudo-identities imposed by years of "you're not a [tech/math/creative] person" messaging. By playing within the AlgoCratic narrative, students accidentally discover they're just people who happen to enjoy solving puzzles and making things work. The corporate dystopia gives permission to fail, experiment, and ultimately succeed - because it's "just a game" until it isn't.
+
 ## Repository Structure
 
 - `docs/` - Documentation and educational materials
