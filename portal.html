@@ -238,6 +238,9 @@
         <div class="terminal-header">
             <h1 class="terminal-title">ALGOCRATIC EMPLOYEE PORTAL<span class="cursor"></span></h1>
             <div class="terminal-subtitle">v3.51 - CLASSIFIED ACCESS TERMINAL</div>
+            <div id="welcomeMessage" style="color: var(--text-primary); margin-top: 10px; display: none;">
+                Welcome, <span id="username"></span>
+            </div>
         </div>
 
         <div class="status-bar">
@@ -304,6 +307,26 @@
     </div>
 
     <script>
+        // Check authentication
+        function checkAuth() {
+            const storedUser = localStorage.getItem('algocratic_user');
+            if (!storedUser) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            
+            const userData = JSON.parse(storedUser);
+            if (!userData.sessionActive) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            
+            return userData;
+        }
+        
+        // Initialize user session
+        const currentUser = checkAuth();
+        
         // Generate binary background
         function generateBinary() {
             const chars = '01';
@@ -327,15 +350,21 @@
                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }, 1000);
 
-        // Generate session ID
-        document.getElementById('sessionId').textContent = 
-            'AF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-
-        // Detect clearance (mock)
-        setTimeout(() => {
-            document.getElementById('userClearance').textContent = 'RED';
-            document.getElementById('userClearance').style.color = '#ff0000';
-        }, 2000);
+        // Set user-specific data
+        if (currentUser) {
+            document.getElementById('sessionId').textContent = currentUser.sessionId || 
+                'AF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            // Show welcome message
+            document.getElementById('username').textContent = currentUser.username;
+            document.getElementById('welcomeMessage').style.display = 'block';
+            
+            // Set clearance from user data
+            setTimeout(() => {
+                document.getElementById('userClearance').textContent = currentUser.clearanceLevel || 'RED';
+                document.getElementById('userClearance').style.color = '#ff0000';
+            }, 2000);
+        }
 
         // Navigation functions
         function accessResource(resource) {
@@ -355,6 +384,11 @@
 
         function logout() {
             if (confirm('Logout will be recorded in your permanent record. Continue?')) {
+                // Clear session
+                if (currentUser) {
+                    currentUser.sessionActive = false;
+                    localStorage.setItem('algocratic_user', JSON.stringify(currentUser));
+                }
                 window.location.href = 'INDEX.HTM';
             }
         }

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Account Creation | Employee Registration</title>
+    <style>
+        /* Console/Terminal Aesthetic */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #00ff41;
+            --text-secondary: #e0e0e0;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --error-color: #ff0000;
+            --warning-color: #ffff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: default;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Scan lines effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .terminal-container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 500px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            padding: 30px;
+        }
+
+        .terminal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .terminal-title {
+            color: var(--text-primary);
+            font-size: 20px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--text-primary);
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+        }
+
+        .form-input.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background-color: var(--text-secondary);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-primary);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .loading::after {
+            content: '.';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--text-primary);
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-title {
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Binary background */
+        .binary-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            font-size: 10px;
+            color: rgba(0, 255, 65, 0.05);
+            white-space: pre;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="binary-bg" id="binaryBg"></div>
+
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <h1 class="terminal-title">CREATE YOUR ALGOCRATIC ACCOUNT</h1>
+        </div>
+
+        <div class="divider"></div>
+
+        <form id="registrationForm">
+            <div class="form-group">
+                <label class="form-label" for="username">Username:</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input" 
+                    required 
+                    autocomplete="off"
+                    maxlength="20"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="theWord">What's the word?</label>
+                <input 
+                    type="text" 
+                    id="theWord" 
+                    name="theWord" 
+                    class="form-input" 
+                    required 
+                    autocomplete="off"
+                >
+                <div id="wordError" class="error-message">
+                    Incorrect. Perhaps review our documentation.
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                [SUBMIT]
+            </button>
+        </form>
+
+        <div id="loadingMessage" class="loading">
+            Processing registration
+        </div>
+
+        <div id="successMessage" class="success-message">
+            <div class="success-title">ACCOUNT CREATED SUCCESSFULLY</div>
+            <p>Welcome to AlgoCratic Futures™</p>
+            <p>Your default password is: <strong>xyzzy</strong></p>
+            <p>Redirecting to employee portal...</p>
+        </div>
+
+        <a href="portal.html" class="back-link">← Back to Employee Portal</a>
+    </div>
+
+    <script>
+        // Generate binary background
+        function generateBinary() {
+            const chars = '01';
+            let result = '';
+            for (let i = 0; i < 5000; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+                if (i % 100 === 0) result += '\n';
+            }
+            return result;
+        }
+        document.getElementById('binaryBg').textContent = generateBinary();
+
+        // Form handling
+        const form = document.getElementById('registrationForm');
+        const usernameInput = document.getElementById('username');
+        const wordInput = document.getElementById('theWord');
+        const wordError = document.getElementById('wordError');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        // Clear error on input
+        wordInput.addEventListener('input', () => {
+            wordInput.classList.remove('error');
+            wordError.classList.remove('show');
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const theWord = wordInput.value.trim().toLowerCase();
+
+            // Validate "the word"
+            if (theWord !== 'xyzzy') {
+                wordInput.classList.add('error');
+                wordError.classList.add('show');
+                
+                // Log failed attempt
+                console.log('Failed registration attempt - incorrect word');
+                
+                return;
+            }
+
+            // Show loading
+            submitBtn.disabled = true;
+            loadingMessage.classList.add('show');
+
+            // Simulate processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Store user data (in real app, this would be server-side)
+            const userData = {
+                username: username,
+                password: 'xyzzy',
+                clearanceLevel: 'RED',
+                createdAt: new Date().toISOString(),
+                sessionId: 'AF-' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+
+            localStorage.setItem('algocratic_user', JSON.stringify(userData));
+
+            // Hide form and loading
+            form.style.display = 'none';
+            loadingMessage.classList.remove('show');
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'portal.html';
+            }, 3000);
+        });
+
+        // Prevent right-click
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>

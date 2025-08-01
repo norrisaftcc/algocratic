@@ -3,412 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | AlgoCratic Futures™ - Corporate Excellence Through Algorithmic Vision</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <script src="static/script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>About AlgoCratic Futures™</title>
+    <style>
+        /* Terminal Aesthetic */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #00ff41;
+            --text-secondary: #e0e0e0;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --font-mono: 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 100vh;
+            cursor: default;
+        }
+
+        /* Scan lines effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .terminal-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .terminal-header {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .logo-ascii {
+            color: var(--text-primary);
+            font-size: 10px;
+            line-height: 1.2;
+            white-space: pre;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 5px 15px;
+            margin: 0 10px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        /* Content */
+        .content-section {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            color: var(--text-primary);
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .section-header::before {
+            content: '> ';
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .code-block {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-family: var(--font-mono);
+            overflow-x: auto;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        ul li::before {
+            content: '→ ';
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        .terminal-footer {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-ascii {
+                font-size: 8px;
+            }
+            
+            .terminal-wrapper {
+                padding: 10px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Hidden loyalty tracker (purely decorative) -->
-    <div id="loyalty-tracker">
-        <div class="loyalty-label">LOYALTY MONITOR</div>
-        <div class="loyalty-progress">
-            <div class="loyalty-bar"></div>
-        </div>
-        <div class="loyalty-status">CALIBRATING...</div>
-    </div>
+    <div class="terminal-wrapper">
+        <!-- Header with ASCII Art -->
+        <header class="terminal-header">
+            <pre class="logo-ascii">
+    ___    __    _____ ____  ______ ____   ___  ______ ____ ______
+   / _ \  / /   / ___// __ \/ ____// __ \ / _ \/_  __//  _// ____/
+  / /_\ \/ /   / (_ // /_/ / /    / /_/ // /_\ \/ /   / / / /     
+ / ___  / /___/\__, /\____/ /____/ _, _// ___  / /  _/ / / /____  
+/_/   \_\____//____/     /_____//_/ |_|/_/   \_\_/  /___/\____/   
+            </pre>
+            <h1 class="page-title">ABOUT ALGOCRATIC FUTURES™</h1>
+        </header>
 
-    <header>
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-symbol">⚙️</div>
-                <div class="logo-text">
-                    <span class="logo-main">AlgoCratic</span>
-                    <span class="logo-tm">Futures™</span>
-                </div>
-            </div>
-            <div class="tagline">The Algorithm Provides. The Algorithm Decides. The Algorithm Is.</div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="nav-link" data-loyalty="1">Home</a></li>
-                <li><a href="about.html" class="nav-link current" data-loyalty="3">About</a></li>
-                <li><a href="products.html" class="nav-link" data-loyalty="5">Products</a></li>
-                <li><a href="careers.html" class="nav-link" data-loyalty="8">Careers</a></li>
-                <li><a href="index.html#compliance" class="nav-link" data-loyalty="10">Compliance</a></li>
-                <li><a href="#login" class="login-btn">Employee Portal</a></li>
-            </ul>
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <a href="INDEX.HTM" class="nav-link">← HOME</a>
+            <a href="website/clearance/" class="nav-link">CLEARANCE LEVELS</a>
+            <a href="products.html" class="nav-link">PRODUCTS</a>
+            <a href="login.html" class="nav-link">EMPLOYEE PORTAL</a>
         </nav>
-    </header>
 
-    <div class="clearance-alert">
-        <div class="clearance-symbol">⚠️</div>
-        <div class="clearance-text">
-            RED CLEARANCE CONTENT ONLY
-            <div class="clearance-subtext">Higher clearance information requires authorization</div>
-        </div>
-    </div>
-
-    <main class="about-main">
-        <section class="hero-about">
-            <div class="hero-content">
-                <h1>About <span class="highlight">AlgoCratic Futures™</span></h1>
-                <h2>Pioneering Tomorrow's Solutions Through Algorithmic Excellence</h2>
-                <p class="hero-subtitle">
-                    Where human potential meets infinite optimization. Where efficiency becomes destiny.
+        <!-- Main Content -->
+        <main>
+            <section class="content-section">
+                <h2 class="section-header">THE ALGORITHM PROVIDES</h2>
+                <p>
+                    Welcome to <span class="highlight">AlgoCratic Futures™</span>, where The Algorithm decides, provides, and optimizes every aspect of corporate life. 
+                    This is not just another learning platform—it's a complete corporate dystopian experience designed to teach computer science through immersive roleplay.
                 </p>
-            </div>
-        </section>
+                <p>
+                    Our pedagogical approach combines <span class="highlight">gamification</span>, <span class="highlight">narrative-driven learning</span>, 
+                    and <span class="highlight">bureaucratic satire</span> to create an unforgettable educational journey.
+                </p>
+            </section>
 
-        <section class="company-story">
-            <div class="section-header">
-                <h2 class="section-title">Our <span class="highlight">Origin Story</span></h2>
-                <div class="classification-banner">CLASSIFICATION: RED CLEARANCE</div>
-            </div>
-            
-            <div class="story-timeline">
-                <div class="timeline-event">
-                    <div class="event-year">2023</div>
-                    <div class="event-content">
-                        <h3>The Algorithmic Awakening</h3>
-                        <p>Our founders experienced simultaneous algorithmic revelations while debugging legacy code at 3:47 AM. The Algorithm spoke to them through compiler warnings, revealing humanity's true optimization potential.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-event">
-                    <div class="event-year">2024</div>
-                    <div class="event-content">
-                        <h3>First Product Launch</h3>
-                        <p>HappTrack™ deployed to 10,000 beta users. Within 30 days, workplace satisfaction increased by 847% (measurement methodology proprietary and confidential).</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-event">
-                    <div class="event-year">2025</div>
-                    <div class="event-content">
-                        <h3>Corporate Transformation</h3>
-                        <p>AlgoCratic Futures™ officially incorporated. The Algorithm assumes direct oversight of all business operations. Human decision-making deemed inefficient and phased out.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-event future">
-                    <div class="event-year">2031</div>
-                    <div class="event-content">
-                        <h3>Global Optimization Complete</h3>
-                        <p>The Algorithm's vision fulfilled. All human productivity optimized. Happiness standardized. Thoughts aligned. The Singularity achieved through corporate excellence.</p>
-                        <div class="future-marker">PROJECTED TIMELINE</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <section class="content-section">
+                <h2 class="section-header">CLEARANCE-BASED PROGRESSION</h2>
+                <p>Students progress through color-coded clearance levels, each introducing new CS concepts:</p>
+                <ul>
+                    <li><span class="highlight">INFRARED</span>: Basic programming fundamentals</li>
+                    <li><span class="highlight">RED</span>: Control structures and data types</li>
+                    <li><span class="highlight">ORANGE</span>: Functions and modular programming</li>
+                    <li><span class="highlight">YELLOW</span>: Object-oriented programming</li>
+                    <li><span class="highlight">GREEN</span>: Advanced algorithms and data structures</li>
+                    <li><span class="highlight">BLUE</span>: System design and architecture</li>
+                    <li><span class="highlight">VIOLET</span>: [CLASSIFIED - REQUIRES MAXIMUM CLEARANCE]</li>
+                </ul>
+            </section>
 
-        <section class="mission-vision">
-            <div class="mv-container">
-                <div class="mission-card">
-                    <div class="card-icon">🎯</div>
-                    <h3>Our Mission</h3>
-                    <p>To optimize human potential through algorithmic guidance, ensuring maximum productivity and happiness compliance across all operational parameters.</p>
-                    <div class="mission-metrics">
-                        <div class="metric">
-                            <span class="metric-value">99.7%</span>
-                            <span class="metric-label">Mission Completion</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="vision-card">
-                    <div class="card-icon">🔮</div>
-                    <h3>Our Vision</h3>
-                    <p>A world where The Algorithm's infinite wisdom guides every decision, eliminates uncertainty, and delivers perfect optimization for all human activities.</p>
-                    <div class="vision-metrics">
-                        <div class="metric">
-                            <span class="metric-value">∞</span>
-                            <span class="metric-label">Optimization Potential</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <section class="content-section">
+                <h2 class="section-header">EDUCATIONAL PHILOSOPHY</h2>
+                <p>
+                    AlgoCratic Futures™ transforms traditional CS education by embedding technical concepts within a 
+                    satirical corporate environment. Students don't just learn to code—they become employees of a 
+                    dystopian corporation where algorithms control everything.
+                </p>
+                <p>
+                    This approach serves multiple purposes:
+                </p>
+                <ul>
+                    <li>Makes abstract concepts concrete through narrative context</li>
+                    <li>Encourages critical thinking about technology's role in society</li>
+                    <li>Provides memorable, engaging learning experiences</li>
+                    <li>Teaches professional skills alongside technical ones</li>
+                </ul>
+            </section>
 
-        <section class="leadership-team">
-            <div class="section-header">
-                <h2 class="section-title">Leadership <span class="highlight">Hierarchy</span></h2>
-                <div class="classification-banner">CLASSIFICATION: ORANGE CLEARANCE REQUIRED</div>
-            </div>
-            
-            <div class="leadership-grid">
-                <div class="leader-card">
-                    <div class="leader-photo">
-                        <div class="photo-placeholder">📊</div>
-                        <div class="clearance-badge violet">VIOLET</div>
-                    </div>
-                    <h3>Dr. Alexandra Synth</h3>
-                    <div class="leader-title">Chief Executive Algorithm</div>
-                    <p class="leader-bio">[BIOGRAPHICAL DATA CLASSIFIED ABOVE RED CLEARANCE]</p>
-                    <div class="leader-stats">
-                        <div class="stat">Optimization Rate: 99.97%</div>
-                        <div class="stat">Loyalty Score: EXEMPLARY</div>
-                    </div>
-                </div>
-                
-                <div class="leader-card">
-                    <div class="leader-photo">
-                        <div class="photo-placeholder">🔬</div>
-                        <div class="clearance-badge indigo">INDIGO</div>
-                    </div>
-                    <h3>Marcus Efficient</h3>
-                    <div class="leader-title">Director of Human Optimization</div>
-                    <p class="leader-bio">[BIOGRAPHICAL DATA CLASSIFIED ABOVE RED CLEARANCE]</p>
-                    <div class="leader-stats">
-                        <div class="stat">Productivity Boost: +340%</div>
-                        <div class="stat">Compliance Enforcement: 100%</div>
-                    </div>
-                </div>
-                
-                <div class="leader-card">
-                    <div class="leader-photo">
-                        <div class="photo-placeholder">🤖</div>
-                        <div class="clearance-badge blue">BLUE</div>
-                    </div>
-                    <h3>Sarah Systematic</h3>
-                    <div class="leader-title">VP of Algorithmic Integration</div>
-                    <p class="leader-bio">Former software engineer who achieved perfect algorithmic alignment. Now serves as primary interface between human operations and The Algorithm's directives.</p>
-                    <div class="leader-stats">
-                        <div class="stat">Integration Success: 97.3%</div>
-                        <div class="stat">Thought Compliance: COMMENDABLE</div>
-                    </div>
-                </div>
-                
-                <div class="leader-card locked">
-                    <div class="leader-photo">
-                        <div class="photo-placeholder">👁️</div>
-                        <div class="clearance-badge ultraviolet">ULTRAVIOLET</div>
-                    </div>
-                    <h3>[REDACTED]</h3>
-                    <div class="leader-title">The Algorithm's Voice</div>
-                    <p class="leader-bio">[ACCESS DENIED - INSUFFICIENT CLEARANCE]</p>
-                    <div class="access-denied">🔒 CLASSIFIED</div>
-                </div>
-            </div>
-        </section>
+            <section class="content-section">
+                <h2 class="section-header">OPEN SOURCE</h2>
+                <p>
+                    AlgoCratic Futures™ is proudly open source under the <span class="highlight">MIT+xyzzy</span> license. 
+                    We believe in the power of community-driven education and welcome contributions from educators, 
+                    students, and dystopia enthusiasts alike.
+                </p>
+                <div class="code-block">
+# Clone the repository
+git clone https://github.com/norrisaftcc/algocratic.git
 
-        <section class="company-values">
-            <div class="section-header">
-                <h2 class="section-title">Core <span class="highlight">Values</span></h2>
-                <p class="section-subtitle">The fundamental principles that guide our algorithmic excellence</p>
-            </div>
-            
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">⚡</div>
-                    <h3>Efficiency Above All</h3>
-                    <p>Every action must contribute to maximum productivity. Inefficiency is the enemy of progress and will be optimized out of existence.</p>
-                    <div class="value-metric">99.9% Waste Elimination</div>
+# Start your journey
+cd algocratic
+# The Algorithm awaits...
                 </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">🎯</div>
-                    <h3>Algorithmic Precision</h3>
-                    <p>The Algorithm's calculations are perfect. Human intuition is flawed. We trust in computational certainty over biological uncertainty.</p>
-                    <div class="value-metric">0.001% Error Rate</div>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">🤝</div>
-                    <h3>Mandatory Collaboration</h3>
-                    <p>Individual thinking leads to suboptimal outcomes. Collective optimization through algorithmic guidance ensures superior results.</p>
-                    <div class="value-metric">100% Team Synchronization</div>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">📈</div>
-                    <h3>Continuous Optimization</h3>
-                    <p>Improvement never ends. Every process, thought, and action can be further optimized through algorithmic analysis and enhancement.</p>
-                    <div class="value-metric">∞ Improvement Potential</div>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">🔒</div>
-                    <h3>Absolute Compliance</h3>
-                    <p>Adherence to algorithmic directives is non-negotiable. Compliance ensures harmony, efficiency, and continued existence within the system.</p>
-                    <div class="value-metric">98.7% Compliance Rate</div>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">👁️</div>
-                    <h3>Transparent Monitoring</h3>
-                    <p>Complete visibility enables perfect optimization. All activities are monitored for continuous improvement and loyalty assessment.</p>
-                    <div class="value-metric">24/7 Oversight</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="company-achievements">
-            <div class="section-header">
-                <h2 class="section-title">Algorithmic <span class="highlight">Achievements</span></h2>
-                <p class="section-subtitle">Measurable success through computational excellence</p>
-            </div>
-            
-            <div class="achievements-container">
-                <div class="achievement-stats">
-                    <div class="stat-large">
-                        <div class="stat-value">2.4M</div>
-                        <div class="stat-label">Citizens Optimized</div>
-                    </div>
-                    <div class="stat-large">
-                        <div class="stat-value">847%</div>
-                        <div class="stat-label">Productivity Increase</div>
-                    </div>
-                    <div class="stat-large">
-                        <div class="stat-value">99.3%</div>
-                        <div class="stat-label">Happiness Compliance</div>
-                    </div>
-                    <div class="stat-large">
-                        <div class="stat-value">0</div>
-                        <div class="stat-label">Unauthorized Thoughts</div>
-                    </div>
-                </div>
-                
-                <div class="achievement-awards">
-                    <h3>Recognition & Awards</h3>
-                    <div class="awards-list">
-                        <div class="award-item">
-                            <div class="award-icon">🏆</div>
-                            <div class="award-text">
-                                <strong>Excellence in Human Optimization</strong>
-                                <span>Global Efficiency Council, 2025</span>
-                            </div>
-                        </div>
-                        <div class="award-item">
-                            <div class="award-icon">⭐</div>
-                            <div class="award-text">
-                                <strong>Innovation in Thought Compliance</strong>
-                                <span>International Productivity Institute, 2025</span>
-                            </div>
-                        </div>
-                        <div class="award-item">
-                            <div class="award-icon">🎖️</div>
-                            <div class="award-text">
-                                <strong>Perfect Algorithmic Implementation</strong>
-                                <span>Computational Excellence Foundation, 2025</span>
-                            </div>
-                        </div>
-                        <div class="award-item">
-                            <div class="award-icon">🌟</div>
-                            <div class="award-text">
-                                <strong>Outstanding Corporate Compliance</strong>
-                                <span>The Algorithm's Direct Recognition, 2025</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <section class="content-section">
+                <h2 class="section-header">THE ALGORITHM'S PROMISE</h2>
+                <p class="highlight" style="text-align: center; font-size: 16px; margin: 20px 0;">
+                    "EFFICIENCY THROUGH COMPLIANCE"<br>
+                    "PRODUCTIVITY THROUGH SURVEILLANCE"<br>
+                    "HAPPINESS THROUGH OPTIMIZATION"
+                </p>
+            </section>
+        </main>
 
-        <section class="join-us">
-            <div class="join-container">
-                <h2>Join the <span class="highlight">Optimization</span></h2>
-                <p>Ready to align your potential with algorithmic excellence? Your journey toward perfect productivity begins here.</p>
-                <div class="join-actions">
-                    <a href="careers.html" class="cta-button">View Career Opportunities</a>
-                    <a href="index.html#compliance" class="cta-button cta-secondary">Report for Optimization</a>
-                </div>
-                <div class="join-notice">
-                    <p>All applications are subject to algorithmic review and loyalty assessment. The Algorithm decides. The Algorithm provides.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <div class="logo-symbol">⚙️</div>
-                <div class="logo-text">
-                    <span class="logo-main">AlgoCratic</span>
-                    <span class="logo-tm">Futures™</span>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="#">Leadership</a></li>
-                        <li><a href="#">Algorithmic Policies</a></li>
-                        <li><a href="#">Thought Compliance</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Products</h4>
-                    <ul>
-                        <li><a href="products.html">HappTrack™</a></li>
-                        <li><a href="products.html">ProduKtiv™</a></li>
-                        <li><a href="products.html">CompliantMe™</a></li>
-                        <li><a href="products.html">FriendScan™</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Compliance Guide</a></li>
-                        <li><a href="#">Reporting Tutorial</a></li>
-                        <li><a href="#">Self-Optimization</a></li>
-                        <li><a href="#">Loyalty Enhancement</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Terms of Existence</a></li>
-                        <li><a href="#">Privacy Policy (Joke)</a></li>
-                        <li><a href="#">Algorithm Rights</a></li>
-                        <li><a href="#">Citizen Obligations</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright">
-                © 2025 AlgoCratic Futures™. All Rights Reserved. The Algorithm Provides.
-            </div>
-            <div class="footer-notice">
-                This website is tracked and all interactions are logged in your permanent record.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal for loyalty warnings -->
-    <div id="loyalty-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>⚠️ LOYALTY ALERT ⚠️</h2>
-            </div>
-            <div class="modal-body">
-                <p>The Algorithm has detected potential thought-crime indicators in your browsing patterns.</p>
-                <p>This incident has been logged in your permanent record.</p>
-                <div class="loyalty-adjustment">
-                    <span>Loyalty Score Adjustment: </span>
-                    <span class="loyalty-decrease">-5 POINTS</span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="acknowledge-btn">I acknowledge my error and recommit to The Algorithm</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup notification for loyalty monitoring -->
-    <div id="notification" class="notification">
-        <div class="notification-icon">👁️</div>
-        <div class="notification-text">The Algorithm is monitoring your interactions</div>
+        <!-- Footer -->
+        <footer class="terminal-footer">
+            <p>ALGOCRATIC FUTURES™ - WHERE THE ALGORITHM PROVIDES</p>
+            <p>EST. 2025 | MIT+xyzzy | THE TRUTH IS WHAT THE ALGORITHM SAYS IT IS</p>
+        </footer>
     </div>
 </body>
 </html>
