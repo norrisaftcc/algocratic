@@ -5,412 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoCratic Employee Portal v3.51</title>
     <style>
-        body {
+        /* Console/Terminal Aesthetic */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #00ff41;
+            --text-secondary: #e0e0e0;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --error-color: #ff0000;
+            --warning-color: #ffff00;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #008080;
-            font-family: "MS Sans Serif", sans-serif;
-            font-size: 11px;
-            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: hidden;
             cursor: default;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        /* Windows 98 Window */
-        .window {
-            position: absolute;
-            background-color: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            box-shadow: 1px 1px 0 0 #000000;
+
+        /* Scan lines effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
         }
-        
-        .window-inner {
-            border: 1px solid;
-            border-color: #dfdfdf #000000 #000000 #dfdfdf;
+
+        .terminal-container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 800px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            padding: 20px;
         }
-        
-        .title-bar {
-            background: linear-gradient(to right, #000080, #1084d0);
-            color: white;
-            padding: 2px;
-            font-weight: bold;
-            font-size: 11px;
+
+        .terminal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terminal-title {
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .terminal-subtitle {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .status-bar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-        
-        .title-bar-text {
-            padding-left: 3px;
-        }
-        
-        .title-bar-controls {
-            display: flex;
-        }
-        
-        .title-bar-controls button {
-            width: 16px;
-            height: 14px;
-            margin-left: 2px;
-            background-color: #c0c0c0;
-            border: 1px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            font-size: 10px;
-            line-height: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .title-bar-controls button:active {
-            border-color: #808080 #ffffff #ffffff #808080;
-        }
-        
-        .window-body {
+            margin-bottom: 20px;
             padding: 10px;
-            background-color: #c0c0c0;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
         }
-        
-        /* Buttons */
-        .button {
-            background-color: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            padding: 4px 12px;
-            font-family: "MS Sans Serif", sans-serif;
-            font-size: 11px;
-            text-align: center;
+
+        .status-item {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .status-item.active {
+            color: var(--text-primary);
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .menu-title {
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .menu-item {
+            padding: 8px 0;
             cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-            color: black;
-            margin: 4px;
-        }
-        
-        .button:active {
-            border-color: #808080 #ffffff #ffffff #808080;
-        }
-        
-        .button:focus {
-            outline: 1px dotted black;
-            outline-offset: -4px;
-        }
-        
-        /* Icon buttons */
-        .icon-button {
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            width: 200px;
-            padding: 8px;
-            margin: 8px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            padding-left: 10px;
+        }
+
+        .menu-item::before {
+            content: '>';
+            color: var(--text-primary);
+            margin-right: 10px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+        }
+
+        .menu-item.disabled {
+            color: var(--text-muted);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .menu-item.disabled:hover {
             background-color: transparent;
-            border: none;
-            cursor: pointer;
-            text-align: left;
+            padding-left: 0;
         }
-        
-        .icon-button:hover {
-            background-color: #000080;
-            color: white;
+
+        .clearance-indicator {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 10px;
+            margin-left: 10px;
+            border: 1px solid;
         }
-        
-        .icon-button img {
-            width: 32px;
-            height: 32px;
-            margin-right: 8px;
-            image-rendering: pixelated;
+
+        .clearance-red { color: #ff0000; border-color: #ff0000; }
+        .clearance-orange { color: #ffa500; border-color: #ffa500; }
+        .clearance-yellow { color: #ffff00; border-color: #ffff00; }
+        .clearance-green { color: #00ff00; border-color: #00ff00; }
+        .clearance-blue { color: #0000ff; border-color: #0000ff; }
+        .clearance-gray { color: #808080; border-color: #808080; }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12px;
         }
-        
-        /* Desktop */
-        .desktop {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+
+        .algorithm-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+            text-align: center;
+            animation: blink 2s infinite;
         }
-        
-        /* Taskbar */
-        .taskbar {
-            position: absolute;
-            bottom: 0;
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Cursor animation */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background-color: var(--text-primary);
+            animation: cursor-blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes cursor-blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Binary decoration */
+        .binary-bg {
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            height: 28px;
-            background-color: #c0c0c0;
-            border-top: 2px solid #ffffff;
-            display: flex;
-            align-items: center;
-            padding: 0 2px;
+            bottom: 0;
+            overflow: hidden;
+            font-size: 10px;
+            color: rgba(0, 255, 65, 0.05);
+            white-space: pre;
+            pointer-events: none;
+            z-index: 0;
         }
-        
-        .start-button {
-            height: 22px;
-            min-width: 54px;
-            font-weight: bold;
-            margin-right: 4px;
-            padding: 0 4px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .clock {
-            margin-left: auto;
-            padding: 0 8px;
-            border: 1px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            font-family: "MS Sans Serif", sans-serif;
-            font-size: 11px;
-        }
-        
-        /* Main window */
-        #main-window {
-            width: 600px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        /* Inset panels */
-        .inset-panel {
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            background-color: #ffffff;
-            padding: 8px;
-            margin: 8px 0;
-        }
-        
-        /* Status bar */
-        .status-bar {
-            border-top: 1px solid #808080;
-            padding: 2px 4px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .status-bar-field {
-            border: 1px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            padding: 2px 4px;
-            margin-right: 2px;
-            flex-grow: 1;
-        }
-        
-        /* Group box */
-        .group-box {
-            border: 2px groove #ffffff;
-            padding: 8px;
-            margin: 8px 0;
-            position: relative;
-        }
-        
-        .group-box-label {
-            position: absolute;
-            top: -8px;
-            left: 8px;
-            background-color: #c0c0c0;
-            padding: 0 4px;
-        }
-        
-        /* Icon grid */
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            padding: 16px;
-        }
-        
-        /* Alert icon */
-        .alert {
-            width: 32px;
-            height: 32px;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-            font-size: 24px;
-        }
-        
-        /* Menu */
-        .menu-bar {
-            background-color: #c0c0c0;
-            border-bottom: 1px solid #808080;
-            padding: 2px 0;
-        }
-        
-        .menu-item {
-            display: inline-block;
-            padding: 4px 8px;
-            cursor: pointer;
-        }
-        
-        .menu-item:hover {
-            background-color: #000080;
-            color: white;
+
+        @media (max-width: 768px) {
+            .terminal-container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .menu-item {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="desktop">
-        <!-- Main Window -->
-        <div class="window" id="main-window">
-            <div class="window-inner">
-                <div class="title-bar">
-                    <span class="title-bar-text">⚙️ AlgoCratic Employee Portal v3.51 - [LOYALTY: CALCULATING...]</span>
-                    <div class="title-bar-controls">
-                        <button aria-label="Minimize">_</button>
-                        <button aria-label="Maximize">□</button>
-                        <button aria-label="Close">X</button>
-                    </div>
-                </div>
-                
-                <div class="menu-bar">
-                    <span class="menu-item">File</span>
-                    <span class="menu-item">Edit</span>
-                    <span class="menu-item">View</span>
-                    <span class="menu-item">Loyalty</span>
-                    <span class="menu-item">Algorithm</span>
-                    <span class="menu-item">Help</span>
-                </div>
-                
-                <div class="window-body">
-                    <div class="inset-panel" style="background-color: #ffffcc; border-color: #cc9900 #ffffcc #ffffcc #cc9900;">
-                        <span class="alert">⚠️</span>
-                        <strong>MANDATORY NOTICE:</strong> All portal access is monitored. Unauthorized access attempts will be reported to The Algorithm. Your current session is being recorded for quality assurance and loyalty verification purposes.
-                    </div>
-                    
-                    <div class="group-box">
-                        <span class="group-box-label">Employee Resources</span>
-                        <div style="margin-top: 8px;">
-                            <p><strong>Welcome, CITIZEN_ID_PENDING</strong></p>
-                            <p>Please select your required corporate resource:</p>
-                        </div>
-                    </div>
-                    
-                    <div class="icon-grid">
-                        <a href="forms/index.html" class="icon-button">
-                            <span style="font-size: 32px;">📋</span>
-                            <div>
-                                <div><strong>Official Forms</strong></div>
-                                <div style="font-size: 10px;">Submit requests & reports</div>
-                            </div>
-                        </a>
-                        
-                        <a href="clearance/index.html" class="icon-button">
-                            <span style="font-size: 32px;">🔐</span>
-                            <div>
-                                <div><strong>Clearance Guides</strong></div>
-                                <div style="font-size: 10px;">Access level documentation</div>
-                            </div>
-                        </a>
-                        
-                        <a href="#" class="icon-button" onclick="alert('ERROR: Loyalty score insufficient. Minimum score of 85 required. Your score: 47'); return false;">
-                            <span style="font-size: 32px;">💰</span>
-                            <div>
-                                <div><strong>Payroll System</strong></div>
-                                <div style="font-size: 10px;">View compensation data</div>
-                            </div>
-                        </a>
-                        
-                        <a href="orientation_packet.html" class="icon-button">
-                            <span style="font-size: 32px;">📚</span>
-                            <div>
-                                <div><strong>Orientation Materials</strong></div>
-                                <div style="font-size: 10px;">New employee resources</div>
-                            </div>
-                        </a>
-                        
-                        <a href="#" class="icon-button" onclick="alert('TRAINING MODULE LOADING...\n\nERROR: Your neural interface firmware is out of date. Please report to IT for mandatory cranial update.'); return false;">
-                            <span style="font-size: 32px;">🎓</span>
-                            <div>
-                                <div><strong>Training Modules</strong></div>
-                                <div style="font-size: 10px;">Mandatory education</div>
-                            </div>
-                        </a>
-                        
-                        <a href="#" class="icon-button" onclick="alert('ACCESSING LOYALTY METRICS...\n\nCurrent Score: 47 (-3 today)\nRank: 24,847 of 24,851\nStatus: PROBATIONARY\n\nRecommendation: Increase enthusiasm by 340%'); return false;">
-                            <span style="font-size: 32px;">📊</span>
-                            <div>
-                                <div><strong>Performance Metrics</strong></div>
-                                <div style="font-size: 10px;">View loyalty status</div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="group-box">
-                        <span class="group-box-label">System Messages</span>
-                        <div class="inset-panel" style="height: 80px; overflow-y: auto; font-family: monospace; font-size: 10px;">
-                            [09:14:32] SYSTEM: Morning affirmation completed successfully<br>
-                            [09:14:33] ALGORITHM: Loyalty adjustment: -1 (insufficient enthusiasm detected)<br>
-                            [09:14:35] SECURITY: Browsing pattern logged<br>
-                            [09:14:36] REMINDER: Quarterly brain scan due in 3 days<br>
-                            [09:14:37] ALGORITHM: The Algorithm loves you. The Algorithm provides.<br>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 16px;">
-                        <button class="button" onclick="window.location.href='index.html'">Return to Public Site</button>
-                        <button class="button" onclick="alert('LOGOUT DENIED\n\nYou have 6.4 hours remaining in mandatory portal time.')">Logout</button>
-                    </div>
-                </div>
-                
-                <div class="status-bar">
-                    <span class="status-bar-field">Ready</span>
-                    <span class="status-bar-field" style="width: auto; flex-grow: 0;">OBJ: 0</span>
-                    <span class="status-bar-field" style="width: auto; flex-grow: 0;">MEM: 47%</span>
-                </div>
+    <div class="binary-bg" id="binaryBg"></div>
+
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <h1 class="terminal-title">ALGOCRATIC EMPLOYEE PORTAL<span class="cursor"></span></h1>
+            <div class="terminal-subtitle">v3.51 - CLASSIFIED ACCESS TERMINAL</div>
+        </div>
+
+        <div class="status-bar">
+            <span class="status-item">STATUS: <span class="active">ONLINE</span></span>
+            <span class="status-item">CLEARANCE: <span id="userClearance" class="active">DETECTING...</span></span>
+            <span class="status-item">SESSION: <span id="sessionTime" class="active">00:00:00</span></span>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="menu-title">// EMPLOYEE RESOURCES</h2>
+            <div class="menu-item" onclick="accessResource('orientation')">
+                <span>Orientation Materials</span>
+                <span class="clearance-indicator clearance-red">RED</span>
+            </div>
+            <div class="menu-item" onclick="accessResource('clearance')">
+                <span>Clearance Levels</span>
+                <span class="clearance-indicator clearance-orange">ORANGE+</span>
+            </div>
+            <div class="menu-item" onclick="accessResource('forms')">
+                <span>Compliance Forms</span>
+                <span class="clearance-indicator clearance-yellow">YELLOW</span>
+            </div>
+            <div class="menu-item disabled">
+                <span>Performance Metrics</span>
+                <span class="clearance-indicator clearance-green">GREEN</span>
             </div>
         </div>
-        
-        <!-- Taskbar -->
-        <div class="taskbar">
-            <button class="button start-button">
-                <span style="font-size: 14px; margin-right: 4px;">⚙️</span>
-                Start
-            </button>
-            <div class="clock" id="clock">12:00 AM</div>
+
+        <div class="menu-section">
+            <h2 class="menu-title">// DEPARTMENT ACCESS</h2>
+            <div class="menu-item disabled">
+                <span>Truth Verification</span>
+                <span class="clearance-indicator clearance-blue">BLUE</span>
+            </div>
+            <div class="menu-item disabled">
+                <span>Loyalty Calibration</span>
+                <span class="clearance-indicator clearance-blue">BLUE</span>
+            </div>
+            <div class="menu-item" onclick="accessResource('design')">
+                <span>Design Compliance</span>
+                <span class="clearance-indicator clearance-gray">GRAY</span>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="menu-title">// SYSTEM FUNCTIONS</h2>
+            <div class="menu-item" onclick="logout()">
+                <span>Logout</span>
+            </div>
+            <div class="menu-item" onclick="reportIssue()">
+                <span>Report Non-Compliance</span>
+            </div>
+        </div>
+
+        <div class="algorithm-message">
+            THE ALGORITHM IS WATCHING YOUR PRODUCTIVITY
+        </div>
+
+        <div class="footer">
+            AlgoCratic Futures™ - Where The Algorithm Provides<br>
+            Unauthorized access is punishable by immediate termination<br>
+            <small>Session ID: <span id="sessionId"></span></small>
         </div>
     </div>
-    
+
     <script>
-        // Update clock
-        function updateClock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const displayHours = hours % 12 || 12;
-            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('clock').textContent = `${displayHours}:${displayMinutes} ${ampm}`;
+        // Generate binary background
+        function generateBinary() {
+            const chars = '01';
+            let result = '';
+            for (let i = 0; i < 5000; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+                if (i % 100 === 0) result += '\n';
+            }
+            return result;
         }
-        
-        updateClock();
-        setInterval(updateClock, 1000);
-        
-        // Add system messages periodically
-        const messages = [
-            "ALGORITHM: Your productivity has decreased by 0.3%",
-            "NOTICE: Smile verification required in 30 minutes",
-            "REMINDER: Loyalty oath renewal due tomorrow",
-            "ALGORITHM: Thoughtcrime probability: 12.4%",
-            "SYSTEM: Posture analysis complete. Please sit up straighter.",
-            "SECURITY: Unauthorized emotion detected. Logging incident.",
-            "ALGORITHM: Remember, The Algorithm provides all you need."
-        ];
-        
+        document.getElementById('binaryBg').textContent = generateBinary();
+
+        // Session timer
+        let seconds = 0;
         setInterval(() => {
-            const messagePanel = document.querySelector('.inset-panel[style*="overflow-y"]');
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            const time = new Date().toTimeString().split(' ')[0];
-            messagePanel.innerHTML += `[${time}] ${randomMessage}<br>`;
-            messagePanel.scrollTop = messagePanel.scrollHeight;
-        }, 8000);
-        
-        // Window dragging would go here but keeping it simple for now
+            seconds++;
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            document.getElementById('sessionTime').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Generate session ID
+        document.getElementById('sessionId').textContent = 
+            'AF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+        // Detect clearance (mock)
+        setTimeout(() => {
+            document.getElementById('userClearance').textContent = 'RED';
+            document.getElementById('userClearance').style.color = '#ff0000';
+        }, 2000);
+
+        // Navigation functions
+        function accessResource(resource) {
+            const routes = {
+                'orientation': 'orientation_packet.html',
+                'clearance': 'website/clearance/index.html',
+                'forms': 'forms/index.html',
+                'design': 'website/clearance/gray/index.html'
+            };
+            
+            if (routes[resource]) {
+                window.location.href = routes[resource];
+            } else {
+                alert('ACCESS DENIED - Insufficient clearance level');
+            }
+        }
+
+        function logout() {
+            if (confirm('Logout will be recorded in your permanent record. Continue?')) {
+                window.location.href = 'INDEX.HTM';
+            }
+        }
+
+        function reportIssue() {
+            alert('Non-compliance report submitted. The Algorithm appreciates your loyalty.');
+        }
     </script>
 </body>
 </html>
