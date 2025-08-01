@@ -229,6 +229,105 @@ p {
     letter-spacing: 0.05em;
 }
 
+/* === Hero Clearance Section === */
+.hero-clearance {
+    background-color: var(--primary-medium);
+    padding: var(--space-xl) var(--space-lg);
+    text-align: center;
+    border-bottom: 2px solid var(--accent-green);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-clearance::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 255, 0, 0.1) 100%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-clearance .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-clearance .hero-title {
+    font-size: 2rem;
+    color: var(--accent-green);
+    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    letter-spacing: 2px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.hero-clearance .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.hero-clearance .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background-color: var(--accent-green);
+    color: var(--primary-dark);
+    padding: var(--space-md) var(--space-lg);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: 2px solid var(--accent-green);
+    transition: all var(--transition-fast);
+    margin-bottom: var(--space-lg);
+}
+
+.hero-clearance .hero-cta:hover {
+    background-color: transparent;
+    color: var(--accent-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.3);
+}
+
+.hero-clearance .cta-arrow {
+    font-size: 1.5rem;
+    transition: transform var(--transition-fast);
+}
+
+.hero-clearance .hero-cta:hover .cta-arrow {
+    transform: translateX(5px);
+}
+
+.hero-clearance .hero-warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    color: var(--accent-yellow);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.hero-clearance .warning-icon {
+    font-size: 1.2rem;
+    animation: flash 1s ease-in-out infinite;
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+    to { text-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6); }
+}
+
 /* === Layout === */
 .container {
     width: 100%;
