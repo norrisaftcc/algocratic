@@ -113,6 +113,18 @@
             margin-top: 30px;
         }
         
+        .clearance-section {
+            margin-bottom: 50px;
+        }
+        
+        .clearance-section h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
         .clearance-card {
             border: 1px solid;
             border-radius: 4px;
@@ -216,6 +228,76 @@
             background-color: var(--green);
             color: var(--dark-bg);
             border-color: var(--green);
+        }
+        
+        .blue-card {
+            border-color: var(--blue);
+            background-color: rgba(0, 0, 255, 0.1);
+        }
+        .blue-card h3 {
+            color: var(--blue);
+            border-color: var(--blue);
+        }
+        .blue-card .access-button {
+            background-color: var(--blue);
+            color: var(--text-color);
+            border-color: var(--blue);
+        }
+        
+        .indigo-card {
+            border-color: var(--indigo);
+            background-color: rgba(75, 0, 130, 0.1);
+        }
+        .indigo-card h3 {
+            color: var(--indigo);
+            border-color: var(--indigo);
+        }
+        .indigo-card .access-button {
+            background-color: var(--indigo);
+            color: var(--text-color);
+            border-color: var(--indigo);
+        }
+        
+        .violet-card {
+            border-color: var(--violet);
+            background-color: rgba(138, 43, 226, 0.1);
+        }
+        .violet-card h3 {
+            color: var(--violet);
+            border-color: var(--violet);
+        }
+        .violet-card .access-button {
+            background-color: var(--violet);
+            color: var(--text-color);
+            border-color: var(--violet);
+        }
+        
+        .ultraviolet-card {
+            border-color: var(--ultraviolet);
+            background-color: rgba(153, 102, 204, 0.1);
+        }
+        .ultraviolet-card h3 {
+            color: var(--ultraviolet);
+            border-color: var(--ultraviolet);
+        }
+        .ultraviolet-card .access-button {
+            background-color: var(--ultraviolet);
+            color: var(--text-color);
+            border-color: var(--ultraviolet);
+        }
+        
+        .gray-card {
+            border-color: var(--gray);
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+        .gray-card h3 {
+            color: var(--gray);
+            border-color: var(--gray);
+        }
+        .gray-card .access-button {
+            background-color: var(--gray);
+            color: var(--text-color);
+            border-color: var(--gray);
         }
         
         .locked-card {
@@ -463,6 +545,42 @@
             80% { transform: translate(-1px, 1px); }
             100% { transform: translate(0); }
         }
+        
+        .hidden-hint {
+            opacity: 0.3;
+            font-size: 0.8rem;
+            font-style: italic;
+            text-align: center;
+            margin-top: 20px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hidden-hint:hover {
+            opacity: 0.7;
+        }
+        
+        .navigation-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 15px;
+            border-top: 1px dashed var(--primary-color);
+            border-bottom: 1px dashed var(--primary-color);
+        }
+        
+        .navigation-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .navigation-links a:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(32, 128, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -500,46 +618,119 @@
             </div>
         </div>
         
-        <div class="clearance-grid">
-            <!-- INFRARED -->
-            <div class="clearance-card infrared-card">
-                <h3>INFRARED</h3>
-                <p><strong>Probationary Resource Unit</strong></p>
-                <p>Basic operational guidelines for provisional personnel. Includes essential survival information and pathway to RED clearance.</p>
-                <a href="infrared/index.html" class="access-button">ACCESS GUIDE</a>
+        <div class="navigation-links">
+            <a href="/index.html">← Home</a>
+            <a href="/portal.html">Employee Portal</a>
+            <a href="/new_player_guide.html">New Player Guide</a>
+            <a href="/products.html">Products</a>
+        </div>
+        
+        <!-- Entry Level Clearances -->
+        <div class="clearance-section">
+            <h2>ENTRY LEVEL CLEARANCES</h2>
+            <div class="clearance-grid">
+                <!-- GRAY -->
+                <div class="clearance-card gray-card">
+                    <h3>GRAY</h3>
+                    <p><strong>Visitor / Prospective Employee</strong></p>
+                    <p>Public-facing information and orientation materials. Introduction to AlgoCratic culture and values.</p>
+                    <a href="/website/clearance/gray/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- INFRARED -->
+                <div class="clearance-card infrared-card">
+                    <h3>INFRARED</h3>
+                    <p><strong>Probationary Resource Unit</strong></p>
+                    <p>Basic operational guidelines for provisional personnel. Includes essential survival information and pathway to RED clearance.</p>
+                    <a href="infrared/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
             </div>
-            
-            <!-- RED -->
-            <div class="clearance-card red-card">
-                <h3>RED</h3>
-                <p><strong>Junior Innovation Contributor</strong></p>
-                <p>Standard operational protocols for RED clearance personnel. Includes authorized coding practices and requirement interpretation guidelines.</p>
-                <a href="red/index.html" class="access-button">ACCESS GUIDE</a>
+        </div>
+        
+        <!-- Core Operational Clearances -->
+        <div class="clearance-section">
+            <h2>CORE OPERATIONAL CLEARANCES</h2>
+            <div class="clearance-grid">
+                <!-- RED -->
+                <div class="clearance-card red-card">
+                    <h3>RED</h3>
+                    <p><strong>Junior Innovation Contributor</strong></p>
+                    <p>Standard operational protocols for RED clearance personnel. Includes authorized coding practices and requirement interpretation guidelines.</p>
+                    <a href="red/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- ORANGE -->
+                <div class="clearance-card orange-card">
+                    <h3>ORANGE</h3>
+                    <p><strong>Technical Implementation Specialist</strong></p>
+                    <p>Advanced technical protocols for implementation specialists. Includes system integration practices and code review methodologies.</p>
+                    <a href="orange/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- YELLOW -->
+                <div class="clearance-card yellow-card">
+                    <h3>YELLOW</h3>
+                    <p><strong>Strategic Design Specialist</strong></p>
+                    <p>Strategic design and project facilitation procedures. Includes advanced perception management and resource orchestration protocols.</p>
+                    <a href="yellow/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
             </div>
-            
-            <!-- ORANGE -->
-            <div class="clearance-card orange-card">
-                <h3>ORANGE</h3>
-                <p><strong>Technical Implementation Specialist</strong></p>
-                <p>Advanced technical protocols for implementation specialists. Includes system integration practices and code review methodologies.</p>
-                <a href="orange/index.html" class="access-button">ACCESS GUIDE</a>
+        </div>
+        
+        <!-- Advanced Clearances -->
+        <div class="clearance-section">
+            <h2>ADVANCED CLEARANCES</h2>
+            <div class="clearance-grid">
+                <!-- GREEN -->
+                <div class="clearance-card green-card">
+                    <h3>GREEN</h3>
+                    <p><strong>Senior Product Development Orchestrator</strong></p>
+                    <p>Strategic development protocols for senior operatives. Includes system architecture and innovation management guidelines.</p>
+                    <a href="/website/clearance/green/index.html" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- BLUE -->
+                <div class="clearance-card blue-card locked-card">
+                    <h3>BLUE</h3>
+                    <p><strong>AI Unity Specialist</strong></p>
+                    <p>Advanced AI integration and unity protocols. Harmonization of human and artificial intelligence workflows.</p>
+                    <a href="#" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- INDIGO -->
+                <div class="clearance-card indigo-card locked-card">
+                    <h3>INDIGO</h3>
+                    <p><strong>Algorithm Interpreter</strong></p>
+                    <p>Deep algorithmic understanding and interpretation. Direct communication with core system processes.</p>
+                    <a href="#" class="access-button">ACCESS GUIDE</a>
+                </div>
             </div>
-            
-            <!-- YELLOW -->
-            <div class="clearance-card yellow-card">
-                <h3>YELLOW</h3>
-                <p><strong>Strategic Design Specialist</strong></p>
-                <p>Strategic design and project facilitation procedures. Includes advanced perception management and resource orchestration protocols.</p>
-                <a href="yellow/index.html" class="access-button">ACCESS GUIDE</a>
+        </div>
+        
+        <!-- Executive Clearances -->
+        <div class="clearance-section">
+            <h2>EXECUTIVE CLEARANCES</h2>
+            <div class="clearance-grid">
+                <!-- VIOLET -->
+                <div class="clearance-card violet-card locked-card">
+                    <h3>VIOLET</h3>
+                    <p><strong>System Architect</strong></p>
+                    <p>Meta-level system design and reality engineering. Access to fundamental algorithmic structures.</p>
+                    <a href="#" class="access-button">ACCESS GUIDE</a>
+                </div>
+                
+                <!-- ULTRAVIOLET -->
+                <div class="clearance-card ultraviolet-card locked-card">
+                    <h3>ULTRAVIOLET</h3>
+                    <p><strong>Board Liaison</strong></p>
+                    <p>Direct interface with The Board. Reality optimization and timeline management protocols.</p>
+                    <a href="#" class="access-button">ACCESS GUIDE</a>
+                </div>
             </div>
-            
-            <!-- GREEN -->
-            <div class="clearance-card green-card locked-card">
-                <h3>GREEN</h3>
-                <p><strong>Senior Product Development Orchestrator</strong></p>
-                <p>Strategic development protocols for senior operatives. Includes system architecture and innovation management guidelines.</p>
-                <a href="#" class="access-button">ACCESS GUIDE</a>
-            </div>
+        </div>
+        
+        <div class="hidden-hint">
+            <p>Some employees have discovered alternative paths to knowledge. The Algorithm rewards curiosity... when properly channeled.</p>
         </div>
         
         <div class="verification-section">
@@ -553,6 +744,10 @@
         </div>
         
         <div class="algorithm-message" data-text="THE ALGORITHM LOVES THE LOYAL * THE ALGORITHM REWARDS COMPLIANCE * THE ALGORITHM PROVIDES">THE ALGORITHM LOVES THE LOYAL * THE ALGORITHM REWARDS COMPLIANCE * THE ALGORITHM PROVIDES</div>
+        
+        <div class="navigation-links">
+            <a href="/underground/resistance/the_truth.txt" style="opacity: 0.1; font-size: 0.7rem;">...</a>
+        </div>
     </div>
 
     <script>
