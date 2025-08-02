@@ -1,153 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Index of /algocratic/</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Futures™ | Learn CS Through Corporate Dystopia</title>
     <style>
+        /* Minimal Terminal Aesthetic */
+        :root {
+            --bg-primary: #0a0a0a;
+            --text-primary: #00ff41;
+            --text-secondary: #e0e0e0;
+            --text-muted: #808080;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: white;
-            font-family: monospace;
-            margin: 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        h1 {
-            font-size: 1.2em;
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
         }
-        table {
-            font-family: monospace;
-            font-size: 13px;
+
+        /* Header */
+        .header {
+            margin-bottom: 60px;
         }
-        a {
-            color: #0000EE;
+
+        .site-title {
+            font-size: 28px;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Primary CTA */
+        .primary-cta {
+            margin-bottom: 60px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 40px;
+            background-color: transparent;
+            color: var(--text-primary);
             text-decoration: none;
+            border: 2px solid var(--text-primary);
+            font-size: 18px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
         }
-        a:visited {
-            color: #551A8B;
+
+        .cta-button:hover {
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
         }
-        a:hover {
-            text-decoration: underline;
+
+        .cta-button::before {
+            content: '→ ';
+            position: absolute;
+            left: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        th {
-            text-align: left;
-            border-bottom: 1px solid #000;
-            padding-right: 20px;
+
+        .cta-button:hover::before {
+            opacity: 1;
         }
-        td {
-            padding-right: 20px;
-            padding-top: 2px;
+
+        .cta-description {
+            margin-top: 15px;
+            color: var(--text-muted);
+            font-size: 14px;
         }
-        .icon {
-            width: 20px;
+
+        /* Secondary Options */
+        .secondary-options {
+            margin-bottom: 60px;
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .option-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
             display: inline-block;
         }
-        address {
-            font-style: italic;
-            margin-top: 20px;
-            padding-top: 10px;
-            border-top: 1px solid #000;
+
+        .option-link:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        /* Footer */
+        .footer {
+            color: var(--text-muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Simple scan line effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.05),
+                rgba(0, 0, 0, 0.05) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .site-title {
+                font-size: 22px;
+            }
+            
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
-<h1>Index of /algocratic/</h1>
-<table>
-    <tr>
-        <th>[ICO]</th>
-        <th>Name</th>
-        <th>Last modified</th>
-        <th>Size</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="#">Parent Directory</a></td>
-        <td>&nbsp;</td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="clearance/">clearance/</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="docs/">docs/</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="forms/">forms/</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="static/">static/</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[DIR]</td>
-        <td><a href="website/">website/</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">  - </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[TXT]</td>
-        <td><a href="CLAUDE.md">CLAUDE.md</a></td>
-        <td align="right">31-Jul-2025 14:37  </td>
-        <td align="right">4.5K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[HTM]</td>
-        <td><a href="INDEX.HTM">INDEX.HTM</a></td>
-        <td align="right">31-Jul-2025 15:42  </td>
-        <td align="right"> 27K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[TXT]</td>
-        <td><a href="LICENSE">LICENSE</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">1.1K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[TXT]</td>
-        <td><a href="README.md">README.md</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">3.2K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[TXT]</td>
-        <td><a href="forms/algocratic-eula.md">algocratic-eula.md</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right">6.1K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[HTM]</td>
-        <td><a href="orientation_packet.html">orientation_packet.html</a></td>
-        <td align="right">31-Jul-2025 09:14  </td>
-        <td align="right"> 12K</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="top">[HTM]</td>
-        <td><a href="portal.html">portal.html</a></td>
-        <td align="right">31-Jul-2025 14:22  </td>
-        <td align="right"> 18K</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
-<address>Apache/2.4.54 Server at norrisaftcc.github.io Port 443</address>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="site-title">ALGOCRATIC FUTURES™</h1>
+            <p class="tagline">Learn CS Through Corporate Dystopia</p>
+        </header>
+
+        <!-- Primary CTA -->
+        <section class="primary-cta">
+            <a href="website/clearance/" class="cta-button">
+                START CLEARANCE TRAINING
+            </a>
+            <p class="cta-description">
+                Begin your journey through our algorithmic hierarchy
+            </p>
+        </section>
+
+        <!-- Secondary Options -->
+        <nav class="secondary-options">
+            <ul class="options-list">
+                <li><a href="website/clearance/" class="option-link">View All Clearance Levels</a></li>
+                <li><a href="login.html" class="option-link">Employee Portal</a></li>
+                <li><a href="about.html" class="option-link">About This Project</a></li>
+                <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
+            </ul>
+        </nav>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>MIT+xyzzy | The Algorithm Is Watching</p>
+        </footer>
+    </div>
 </body>
 </html>
