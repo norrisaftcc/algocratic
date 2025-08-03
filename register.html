@@ -266,6 +266,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="form-label" style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" id="jokingCheckbox" style="margin-right: 10px; transform: scale(1.2);" required>
+                    <span style="color: var(--warning-color);">Are you joking? (Security verification required)</span>
+                </label>
+                <div id="jokingError" class="error-message">
+                    Security verification required: Please confirm you are not joking.
+                </div>
+            </div>
+
             <button type="submit" class="submit-btn" id="submitBtn">
                 [SUBMIT]
             </button>
@@ -313,11 +323,28 @@
             wordError.classList.remove('show');
         });
 
+        // Clear joking error when checkbox is checked
+        document.getElementById('jokingCheckbox').addEventListener('change', () => {
+            document.getElementById('jokingError').classList.remove('show');
+        });
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const username = usernameInput.value.trim();
             const theWord = wordInput.value.trim().toLowerCase();
+            const jokingCheckbox = document.getElementById('jokingCheckbox');
+            const jokingError = document.getElementById('jokingError');
+
+            // Check if "Are you joking?" checkbox is checked
+            if (!jokingCheckbox.checked) {
+                jokingError.classList.add('show');
+                
+                // Log failed attempt
+                console.log('Failed registration attempt - joking verification not confirmed');
+                
+                return;
+            }
 
             // Validate "the word"
             if (theWord !== 'xyzzy') {

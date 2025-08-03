@@ -220,6 +220,14 @@
             <h3>🔓 Access Code Required</h3>
             <p>Enter the 4-digit code found in the documentation above:</p>
             <input type="text" class="unlock-input" id="access-code" maxlength="4" placeholder="####">
+            
+            <div style="margin: 20px 0; text-align: left;">
+                <label style="display: flex; align-items: center; color: #ffff00; font-size: 14px; cursor: pointer;">
+                    <input type="checkbox" id="joking-checkbox" style="margin-right: 10px; transform: scale(1.2);">
+                    <span>Are you joking? (Required for security verification)</span>
+                </label>
+            </div>
+            
             <button class="unlock-button" id="unlock-btn" onclick="checkAccessCode()">UNLOCK ACCESS</button>
             <div class="error-message" id="error-msg">Invalid access code. Review the documentation carefully.</div>
         </div>
@@ -292,9 +300,17 @@
         // Check access code
         function checkAccessCode() {
             const code = document.getElementById('access-code').value;
+            const jokingCheckbox = document.getElementById('joking-checkbox');
             const errorMsg = document.getElementById('error-msg');
             const successMsg = document.getElementById('success-msg');
             const unlockBtn = document.getElementById('unlock-btn');
+            
+            // Check if "Are you joking?" checkbox is checked
+            if (!jokingCheckbox.checked) {
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = 'Security verification required: Please confirm you are not joking.';
+                return;
+            }
             
             if (code === '7492') {
                 // Correct code!
