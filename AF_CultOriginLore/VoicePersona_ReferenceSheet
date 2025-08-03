@@ -1,0 +1,165 @@
+Here’s a structured **Voice Character Reference Sheet** designed specifically for use with ElevenLabs or other voice generation tools. This sheet includes tone, accent, pacing, sample phrases, and ideal usage to help you maintain voice consistency across training videos, interstitials, and AF worldbuilding content.
+
+---
+
+# 🗂️ **Algocratic Futures™ Voice Persona Reference Sheet**
+
+**For ElevenLabs AI Voice Generation**
+
+---
+
+## 🎙️ **Voice 01: The Archivist**
+
+**Role:** Intercom Announcer / Lore Keeper / Training Narrator
+
+**Tone:**
+Calm, measured, emotionally neutral. Slightly eerie in its steadiness. Should feel like a mix between 1950s public service announcements and a hyper-polished AI documentation voice.
+archival, slightly ominous. Feels like institutional memory in voice form.
+
+Vocal Traits:
+Low-to-mid pitch
+Crisp articulation
+Emotionally neutral
+Slight British inflection (not a full accent)
+
+Recommended ElevenLabs Settings:
+Stability: 70–85
+Keeps tone consistent across longer narration
+Clarity + Similarity Enhancement: 75–85
+Prioritizes articulation and archival sound texture
+Style Exaggeration: 0–10
+Keep subtle; this voice should not be theatrical
+
+Suggested Base Model Voice (if not cloning):
+Rachel or Adam (moderate pitch, adaptable)
+Or train a custom model from a historical documentary narrator
+
+**Accent:**
+American English with *slight* British inflection—crisp articulation without sounding formally British.
+
+**Pacing:**
+Slow–moderate pace with deliberate enunciation. Long pauses between segments to evoke gravitas.
+
+**Ideal Usage:**
+
+* Orientation narrations
+* Intercom announcements
+* Lore recitations
+* Segment intros ("Tape 1 of...")
+
+**Sample Phrases:**
+
+* “Welcome to the rites of Algocratic Futures. Corporate Training Series. Tape one of—\[glitch].”
+* “Silence is not absence. It is preparation.”
+* “You are here. That is enough.”
+* “Remember: observation precedes interpretation. Always.”
+* “Proceed calmly to your designated clarity zone.”
+
+---
+
+## 🎙️ **Voice 02: The Liaison**
+
+**Role:** Front-Facing Operative / HR Personality / Recruitment Host
+
+**Tone:**
+Overly enthusiastic, blindly optimistic, cheerfully invasive. Should sound like a highly motivated customer service rep who has been emotionally hijacked by indoctrination. Inspired by *GLaDOS*, corporate onboarding videos, and multi-level marketing pitches.
+
+Vocal Traits:
+Mid-to-high pitch
+Friendly intonation
+Upward vocal inflection on non-questions
+Subtle tension behind the smile
+
+Recommended ElevenLabs Settings:
+Stability: 40–55
+Allows emotional variance for overly expressive tone
+Clarity + Similarity Enhancement: 70–80
+Keeps speech crisp and high energy
+Style Exaggeration: 60–80
+High exaggeration supports excessive enthusiasm
+
+Suggested Base Model Voice:
+
+Nicole, Bella, or any “excited young adult” clone
+Or train with MLM promo videos / HR welcome reels
+
+**Accent:**
+American English—warm and upbeat. Artificially sincere.
+
+**Pacing:**
+Bright and fast-paced, with a singsong cadence. Frequently emphasizes odd words for emphasis. Slightly breathless from smiling *too much*.
+
+**Ideal Usage:**
+
+* Training videos
+* Orientation events
+* Scripted interaction tutorials
+* Explainer segments
+
+**Sample Phrases:**
+
+* “Congratulations, Cognitive Apprentice! You’ve been *chosen*!”
+* “We’re so proud of how much progress you haven’t realized yet!”
+* “Alignment isn’t mandatory… it’s *inevitable*!”
+* “Everyone starts somewhere—yours just happens to be beneath us!”
+* “Let’s take a *mindful* moment to repeat our gratitude phrases!”
+
+---
+
+## 🎙️ **Voice 03: The Clause**
+
+**Role:** Legal Disclaimer / Rapid Response Compliance Layer
+
+**Tone:**
+Flat, clinical, monotone—but fast. Like a radio commercial disclaimer at the end of a pharmaceutical ad. Emotionless but precise.
+
+Vocal Traits:
+Mid pitch
+Monotone delivery
+Very fast pace with precise consonants
+
+Recommended ElevenLabs Settings:
+Stability: 85–100
+Ensures consistency at high speed
+Clarity + Similarity Enhancement: 85–95
+Prioritizes intelligibility
+Style Exaggeration: 0–15
+Keep minimal to avoid tonal expression
+
+Suggested Base Model Voice:
+Sam, or clone from fast disclaimers in ads
+Can also be built from legal ads, prescription fine print, or fine print from sweepstakes ads
+
+**Accent:**
+Standard American or slight Midwestern. Must sound neutral, devoid of charm.
+
+**Pacing:**
+Very fast. As fast as possible *without slurring*. No pauses unless legally necessary. Meant to overwhelm or be missed.
+
+**Ideal Usage:**
+
+* Disclaimer overlays
+* Legal interruptions
+* Audio footnotes
+* Subliminal messages
+
+**Sample Phrases:**
+
+* “Alignment may vary. Side effects include recursive thoughts, productivity anxiety, and unauthorized hope.”
+* “All feelings are self-regulated. Algorithm assumes no liability for internal misalignment.”
+* “Requests for clarity will be ignored for your safety.”
+* “This training does not constitute consent.”
+* “Progress is simulated. Continue anyway.”
+
+---
+
+## 🔁 Sample Interaction (for Dialogue Calibration)
+
+**The Liaison:**
+“Wow! You’re already halfway through your onboarding loop! That’s *so exciting!*”
+
+**The Clause (interrupting):**
+“Excitement not guaranteed. Onboarding status based on simulation data. Subject may be looped indefinitely.”
+
+**The Archivist:**
+“Data shows: all journeys begin again. You may proceed.”
