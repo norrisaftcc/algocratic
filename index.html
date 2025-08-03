@@ -182,7 +182,17 @@
         </header>
 
         <!-- Primary CTA -->
-        <section class="primary-cta">
+        <section class="primary-cta" id="primary-cta">
+            <a href="compliance-check.html" class="cta-button" id="compliance-cta">
+                BEGIN COMPLIANCE PROCESS
+            </a>
+            <p class="cta-description">
+                All new employees must complete mandatory documentation
+            </p>
+        </section>
+        
+        <!-- Full Site Content (Hidden until compliance) -->
+        <section class="primary-cta" id="full-site-cta" style="display: none;">
             <a href="clearance/" class="cta-button">
                 START CLEARANCE TRAINING
             </a>
@@ -192,7 +202,19 @@
         </section>
 
         <!-- Secondary Options -->
-        <nav class="secondary-options">
+        <nav class="secondary-options" id="secondary-options">
+            <ul class="options-list">
+                <li><a href="compliance-check.html" class="option-link">Compliance Documentation</a></li>
+                <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
+                <li style="margin-top: 20px; font-size: 0.8em; color: #808080;">
+                    <span>Already compliant? </span>
+                    <a href="#" class="option-link" onclick="showFullSite()">Employee Portal</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Full Navigation (Hidden until compliance) -->
+        <nav class="secondary-options" id="full-navigation" style="display: none;">
             <ul class="options-list">
                 <li><a href="clearance/" class="option-link">View All Clearance Levels</a></li>
                 <li><a href="metrics.html" class="option-link">Performance Metrics</a></li>
@@ -207,5 +229,46 @@
             <p>MIT+xyzzy | The Algorithm Is Watching</p>
         </footer>
     </div>
+
+    <script>
+        // Check compliance status and show appropriate content
+        function checkComplianceStatus() {
+            const isCompliant = localStorage.getItem('eula_complete') === 'true';
+            
+            if (isCompliant) {
+                // Show full site
+                document.getElementById('primary-cta').style.display = 'none';
+                document.getElementById('secondary-options').style.display = 'none';
+                document.getElementById('full-site-cta').style.display = 'block';
+                document.getElementById('full-navigation').style.display = 'block';
+                
+                console.log('%c✅ Compliance verified - Full site access granted', 'color: #00ff00;');
+            } else {
+                // Show compliance funnel
+                console.log('%c⚠️ Compliance required - Redirecting to documentation', 'color: #ffff00;');
+            }
+        }
+        
+        // Allow manual override for returning users
+        function showFullSite() {
+            const confirmed = confirm('Are you sure you have completed the compliance documentation?');
+            if (confirmed) {
+                localStorage.setItem('eula_complete', 'true');
+                localStorage.setItem('eula_completion_time', new Date().toISOString());
+                checkComplianceStatus();
+            }
+        }
+        
+        // Initialize on page load
+        checkComplianceStatus();
+        
+        // Console easter egg
+        console.log('%c🏢 ALGOCRATIC FUTURES™ SYSTEM', 'color: #00ff41; font-weight: bold; font-size: 16px;');
+        console.log('%cThe Algorithm welcomes you to our corporate ecosystem', 'color: #00ff41;');
+        
+        if (localStorage.getItem('eula_complete') !== 'true') {
+            console.log('%c📋 Compliance documentation required before system access', 'color: #ffff00;');
+        }
+    </script>
 </body>
 </html>

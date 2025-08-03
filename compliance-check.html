@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandatory Compliance Documentation | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/terminal-ui.css">
+    <style>
+        .compliance-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .compliance-title {
+            font-size: 2.5rem;
+            color: #00ff41;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .compliance-subtitle {
+            color: #ff3030;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .eula-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            padding: 30px;
+            margin: 30px 0;
+            max-height: 500px;
+            overflow-y: scroll;
+            text-align: left;
+            position: relative;
+        }
+        
+        .eula-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 20px,
+                rgba(0, 255, 65, 0.02) 20px,
+                rgba(0, 255, 65, 0.02) 21px
+            );
+            pointer-events: none;
+        }
+        
+        .puzzle-hint {
+            background-color: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            padding: 15px;
+            margin: 20px 0;
+            color: #ffff00;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: flicker 3s infinite;
+        }
+        
+        .compliance-form {
+            margin: 30px 0;
+        }
+        
+        .unlock-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ff3030;
+            background-color: rgba(255, 48, 48, 0.1);
+            position: relative;
+        }
+        
+        .unlock-section h3 {
+            color: #ff3030;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .unlock-input {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff3030;
+            color: #ff3030;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .unlock-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 48, 48, 0.5);
+            border-color: #00ff41;
+            color: #00ff41;
+        }
+        
+        .unlock-button {
+            background-color: transparent;
+            border: 2px solid #ff3030;
+            color: #ff3030;
+            padding: 15px 30px;
+            margin-left: 15px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .unlock-button:hover {
+            background-color: #ff3030;
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 48, 48, 0.7);
+        }
+        
+        .unlock-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .privacy-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .privacy-link:hover {
+            background-color: #00ff41;
+            color: #000;
+            transform: scale(1.05);
+        }
+        
+        .success-message {
+            display: none;
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            color: #00ff00;
+            text-align: center;
+            animation: successPulse 1s ease-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #00ff41; }
+            to { box-shadow: 0 0 20px #00ff41; }
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .error-message {
+            color: #ff3030;
+            font-family: 'Courier New', monospace;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="compliance-container">
+        <h1 class="compliance-title">MANDATORY COMPLIANCE</h1>
+        <h2 class="compliance-subtitle">All employees must complete documentation review</h2>
+        
+        <div class="term-alert term-alert--warning">
+            <span class="term-alert-icon">[!]</span>
+            <div class="term-alert-content">
+                <div class="term-alert-title">System Notice</div>
+                Access to AlgoCratic systems requires completion of compliance documentation. 
+                The Algorithm monitors all activities for security purposes.
+            </div>
+        </div>
+        
+        <div class="puzzle-hint">
+            <strong>🔍 PUZZLE DETECTED:</strong> This document contains a 4-digit access code hidden within the text. 
+            Find the numbers and enter them below to proceed. Look carefully at the variables in the code samples...
+        </div>
+        
+        <div class="eula-container" id="eula-content">
+            <!-- EULA content will be loaded here -->
+            <p style="color: #00ff41; text-align: center;">Loading compliance documentation...</p>
+        </div>
+        
+        <div class="unlock-section">
+            <h3>🔓 Access Code Required</h3>
+            <p>Enter the 4-digit code found in the documentation above:</p>
+            <input type="text" class="unlock-input" id="access-code" maxlength="4" placeholder="####">
+            <button class="unlock-button" id="unlock-btn" onclick="checkAccessCode()">UNLOCK ACCESS</button>
+            <div class="error-message" id="error-msg">Invalid access code. Review the documentation carefully.</div>
+        </div>
+        
+        <div class="success-message" id="success-msg">
+            <h3>✅ COMPLIANCE VERIFIED</h3>
+            <p>Access granted. Welcome to the AlgoCratic ecosystem.</p>
+            <p>Redirecting to employee portal...</p>
+        </div>
+        
+        <a href="portal.html" class="privacy-link" id="privacy-link">
+            📋 Privacy Policy & System Access
+        </a>
+        
+        <div style="margin-top: 40px; color: #808080; font-size: 14px;">
+            <p>Need help? The numbers you seek follow the pattern: x, y, z, z</p>
+            <p>Look for variable assignments in the code examples above.</p>
+            <p><em>Tip: If it doesn't fit, the last part is usually the least important - snip that off.</em></p>
+        </div>
+    </div>
+
+    <script>
+        // Load EULA content
+        async function loadEULA() {
+            try {
+                const response = await fetch('forms/algocratic-eula.md');
+                const markdown = await response.text();
+                
+                // Convert markdown to HTML (basic conversion)
+                let html = markdown
+                    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/- (.*$)/gm, '<li>$1</li>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/^(?!<[h|l|p|d])/gm, '<p>')
+                    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+                
+                document.getElementById('eula-content').innerHTML = html;
+                
+                // Style the code blocks
+                document.querySelectorAll('pre code').forEach(block => {
+                    block.style.color = '#00ff41';
+                    block.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                    block.style.padding = '15px';
+                    block.style.display = 'block';
+                    block.style.fontFamily = "'Courier New', monospace";
+                    block.style.fontSize = '14px';
+                    block.style.whiteSpace = 'pre-wrap';
+                    block.style.border = '1px solid #333';
+                });
+                
+            } catch (error) {
+                document.getElementById('eula-content').innerHTML = 
+                    '<p style="color: #ff3030;">Error loading documentation. Please refresh the page.</p>';
+            }
+        }
+        
+        // Check if user has already completed compliance
+        function checkComplianceStatus() {
+            if (localStorage.getItem('eula_complete') === 'true') {
+                // User has already completed compliance, redirect
+                window.location.href = 'index.html';
+            }
+        }
+        
+        // Check access code
+        function checkAccessCode() {
+            const code = document.getElementById('access-code').value;
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+            const unlockBtn = document.getElementById('unlock-btn');
+            
+            if (code === '7492') {
+                // Correct code!
+                errorMsg.style.display = 'none';
+                successMsg.style.display = 'block';
+                unlockBtn.disabled = true;
+                
+                // Set completion flag
+                localStorage.setItem('eula_complete', 'true');
+                localStorage.setItem('eula_completion_time', new Date().toISOString());
+                
+                // Enable privacy link with special glow
+                const privacyLink = document.getElementById('privacy-link');
+                privacyLink.style.animation = 'glow 0.5s ease-in-out infinite alternate';
+                privacyLink.style.backgroundColor = 'rgba(0, 255, 0, 0.3)';
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+                
+                console.log('%c🎉 COMPLIANCE ACHIEVED', 'color: #00ff00; font-weight: bold; font-size: 16px;');
+                console.log('%cWelcome to the AlgoCratic ecosystem!', 'color: #00ff00;');
+                
+            } else {
+                // Wrong code
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = `Invalid code: "${code}". Look for x, y, z, z variables in the code samples.`;
+                
+                // Shake animation
+                const input = document.getElementById('access-code');
+                input.style.animation = 'shake 0.5s';
+                setTimeout(() => input.style.animation = '', 500);
+                
+                console.log(`%c❌ Invalid access code: ${code}`, 'color: #ff3030;');
+            }
+        }
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Handle Enter key in input
+        document.getElementById('access-code').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAccessCode();
+            }
+        });
+        
+        // Only allow numeric input
+        document.getElementById('access-code').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        // Initialize
+        checkComplianceStatus();
+        loadEULA();
+        
+        // Console easter egg
+        console.log('%c🔍 COMPLIANCE CHECK ACTIVE', 'color: #ffff00; font-weight: bold;');
+        console.log('%cHint: Look for the xyzzy function and examine the variable assignments...', 'color: #ffff00;');
+        console.log('%cThe pattern is x, y, z, z - four variables, four digits.', 'color: #ffff00;');
+    </script>
+</body>
+</html>
