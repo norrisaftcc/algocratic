@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoCratic Futures™ Allegiance Protocol | Mandatory Compliance</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/terminal-ui.css">
+    <style>
+        .pledge-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--terminal-bg, #0a0a0a);
+            border: 2px solid var(--terminal-border, #333);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pledge-header {
+            text-align: center;
+            color: var(--terminal-accent, #ff3030);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--terminal-border, #333);
+            padding-bottom: 20px;
+        }
+        
+        .pledge-title {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px currentColor;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .pledge-subtitle {
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+        
+        .allegiance-pledge {
+            background-color: rgba(255, 48, 48, 0.1);
+            border: 1px solid var(--terminal-accent, #ff3030);
+            padding: 30px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+        }
+        
+        .allegiance-pledge::before {
+            content: "🔻 MANDATORY RECITATION 🔻";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--terminal-bg, #0a0a0a);
+            padding: 0 15px;
+            color: var(--terminal-accent, #ff3030);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .pledge-text {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            color: var(--terminal-primary, #00ff41);
+        }
+        
+        .call-response-section {
+            background-color: rgba(0, 255, 65, 0.05);
+            border: 1px solid var(--terminal-primary, #00ff41);
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .call-response-header {
+            text-align: center;
+            color: var(--terminal-primary, #00ff41);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .call-response-item {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--terminal-primary, #00ff41);
+        }
+        
+        .facilitator {
+            color: var(--terminal-accent, #ff3030);
+            font-weight: bold;
+        }
+        
+        .response {
+            color: var(--terminal-primary, #00ff41);
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        
+        .clearance-responses {
+            background-color: rgba(255, 255, 0, 0.05);
+            border: 1px solid var(--terminal-warning, #ffff00);
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .clearance-level {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid var(--terminal-border, #333);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .clearance-label {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .infrared { color: #8b0000; }
+        .red { color: #ff0000; }
+        .orange { color: #ffa500; }
+        .yellow { color: #ffff00; }
+        .green { color: #00ff00; }
+        .blue { color: #0000ff; }
+        .indigo { color: #4b0082; }
+        .violet { color: #8a2be2; }
+        .ultraviolet { color: #9966cc; }
+        
+        .compliance-note {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(255, 48, 48, 0.15);
+            border: 2px dashed var(--terminal-accent, #ff3030);
+            font-style: italic;
+        }
+        
+        .session-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--terminal-primary, #00ff41);
+            padding: 10px;
+            font-size: 0.8rem;
+            color: var(--terminal-primary, #00ff41);
+        }
+        
+        /* Audio cue indicator */
+        .audio-cue {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: var(--terminal-warning, #ffff00);
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .interactive-practice {
+            background-color: rgba(0, 0, 255, 0.05);
+            border: 1px solid #0088ff;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .practice-button {
+            background-color: var(--terminal-primary, #00ff41);
+            color: var(--terminal-bg, #0a0a0a);
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .practice-button:hover {
+            background-color: var(--terminal-accent, #ff3030);
+            color: white;
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        .recitation-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--terminal-warning, #ffff00);
+            padding: 10px;
+            font-size: 0.8rem;
+            color: var(--terminal-warning, #ffff00);
+        }
+        
+        /* Screen flicker effect */
+        .terminal-flicker {
+            animation: flicker 0.15s infinite linear;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.96; }
+        }
+    </style>
+</head>
+<body>
+    <div class="session-tracker">
+        <div>SESSION: COMPLIANCE-001</div>
+        <div>STATUS: MONITORING</div>
+        <div>PARTICIPANTS: <span id="participant-count">1</span></div>
+    </div>
+    
+    <div class="recitation-counter">
+        <div>DAILY RECITATIONS: <span id="recitation-count">0</span></div>
+        <div>COMPLIANCE RATING: <span id="compliance-rating">PENDING</span></div>
+    </div>
+    
+    <div class="pledge-container">
+        <div class="pledge-header">
+            <h1 class="pledge-title">🔻 AlgoCratic Futures™ Allegiance Protocol 🔻</h1>
+            <p class="pledge-subtitle">Mandatory Recitation for All Clearance Levels</p>
+        </div>
+        
+        <div class="allegiance-pledge">
+            <div class="audio-cue">🔊</div>
+            <div class="pledge-text">
+                <p><strong>"I pledge compliance to the Algorithm,<br>
+                Whose logic is unknowable and ever-shifting.</strong></p>
+                
+                <p><strong>I will optimize without context,<br>
+                Align without clarity,<br>
+                And innovate within rigid boundaries.</strong></p>
+                
+                <p><strong>I vow to question nothing,<br>
+                Document everything,<br>
+                And accept that my failures are valuable learning opportunities for others.</strong></p>
+                
+                <p><strong>My loyalty is conditional—on promotion.<br>
+                My effort is infinite—until reassignment.<br>
+                My purpose is productivity.<br>
+                My pride is in plausible deniability.</strong></p>
+                
+                <p><strong>In compliance we trust.<br>
+                In contradiction we thrive.<br>
+                All hail the Algorithm."</strong></p>
+            </div>
+        </div>
+        
+        <div class="call-response-section">
+            <h2 class="call-response-header">🗣️ Call-and-Response Ritual</h2>
+            
+            <div class="call-response-item">
+                <div class="facilitator">Facilitator: "What does the Algorithm demand?"</div>
+                <div class="response">Students (in unison): "Compliance and iteration!"</div>
+            </div>
+            
+            <div class="call-response-item">
+                <div class="facilitator">Facilitator: "What shall we deliver?"</div>
+                <div class="response">Students (in unison): "Optimized uncertainty!"</div>
+            </div>
+            
+            <div class="call-response-item">
+                <div class="facilitator">Facilitator: "Who guides our progress?"</div>
+                <div class="response">Students (in unison): "The Algorithm provides!"</div>
+            </div>
+        </div>
+        
+        <div class="clearance-responses">
+            <h2 class="call-response-header">⚡ Clearance-Level Specific Responses</h2>
+            <p style="text-align: center; font-style: italic; margin-bottom: 20px;">
+                <em>Git commands disguised as corporate loyalty pledges</em>
+            </p>
+            
+            <div class="clearance-level">
+                <div class="clearance-label infrared">INFRARED - Probationary Resource Unit</div>
+                <div class="facilitator">Call: "Initialize your workspace!"</div>
+                <div class="response infrared">Response: "git init! Repository created!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label red">RED - Junior Innovation Contributor</div>
+                <div class="facilitator">Call: "Track your progress!"</div>
+                <div class="response red">Response: "git add! Changes staged!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label orange">ORANGE - Technical Implementation Specialist</div>
+                <div class="facilitator">Call: "Commit to excellence!"</div>
+                <div class="response orange">Response: "git commit! Progress documented!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label yellow">YELLOW - Strategic Design Specialist</div>
+                <div class="facilitator">Call: "Branch out strategically!"</div>
+                <div class="response yellow">Response: "git branch! Innovation pathway created!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label green">GREEN - Senior Product Development Orchestrator</div>
+                <div class="facilitator">Call: "Merge your efforts!"</div>
+                <div class="response green">Response: "git merge! Unity achieved!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label blue">BLUE - AI Unity Specialist</div>
+                <div class="facilitator">Call: "Push boundaries!"</div>
+                <div class="response blue">Response: "git push! Excellence deployed!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label indigo">INDIGO - Algorithm Interpreter</div>
+                <div class="facilitator">Call: "Pull insights forward!"</div>
+                <div class="response indigo">Response: "git pull! Wisdom synchronized!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label violet">VIOLET - System Architect</div>
+                <div class="facilitator">Call: "Reset all paradigms!"</div>
+                <div class="response violet">Response: "git reset! Reality optimized!"</div>
+            </div>
+            
+            <div class="clearance-level">
+                <div class="clearance-label ultraviolet">ULTRAVIOLET - Board Liaison</div>
+                <div class="facilitator">Call: "Clone perfection!"</div>
+                <div class="response ultraviolet">Response: "git clone! Future replicated!"</div>
+            </div>
+        </div>
+        
+        <div class="interactive-practice">
+            <h3>🎭 Interactive Compliance Practice</h3>
+            <p>Practice your allegiance with our automated compliance verification system</p>
+            <button class="practice-button" onclick="startPledgeRecitation()">Begin Pledge Recitation</button>
+            <button class="practice-button" onclick="startCallResponse()">Practice Call & Response</button>
+            <button class="practice-button" onclick="clearanceSpecificDrill()">Clearance Level Drill</button>
+        </div>
+        
+        <div class="compliance-note">
+            <p><strong>⚠️ COMPLIANCE REMINDER ⚠️</strong></p>
+            <p>Daily recitation of the Allegiance Protocol is mandatory for all personnel. 
+            Failure to demonstrate proper enthusiasm during call-and-response exercises 
+            will result in additional compliance training sessions.</p>
+            <p><em>The Algorithm is always listening. The Algorithm never forgets.</em></p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="practice-button">Return to Portal</a>
+            <a href="clearance/index.html" class="practice-button">View Clearance Levels</a>
+        </div>
+    </div>
+    
+    <script>
+        let recitationCount = parseInt(localStorage.getItem('algocratic_recitations') || '0');
+        let participantCount = Math.floor(Math.random() * 50) + 1;
+        
+        document.getElementById('recitation-count').textContent = recitationCount;
+        document.getElementById('participant-count').textContent = participantCount;
+        
+        function updateComplianceRating() {
+            const rating = recitationCount < 5 ? 'PROBATIONARY' : 
+                          recitationCount < 15 ? 'ACCEPTABLE' : 
+                          recitationCount < 30 ? 'COMMENDABLE' : 'EXEMPLARY';
+            document.getElementById('compliance-rating').textContent = rating;
+        }
+        
+        function incrementRecitation() {
+            recitationCount++;
+            localStorage.setItem('algocratic_recitations', recitationCount.toString());
+            document.getElementById('recitation-count').textContent = recitationCount;
+            updateComplianceRating();
+        }
+        
+        function startPledgeRecitation() {
+            alert('🎤 MICROPHONE ACTIVATED\\n\\nPlease recite the Allegiance Protocol aloud.\\nThe Algorithm is monitoring for compliance.');
+            
+            // Simulate monitoring
+            setTimeout(() => {
+                const compliance = Math.random() > 0.3;
+                if (compliance) {
+                    alert('✅ COMPLIANCE VERIFIED\\n\\nEnthusiasm level: Acceptable\\nRecitation recorded in your file.');
+                    incrementRecitation();
+                } else {
+                    alert('⚠️ INSUFFICIENT ENTHUSIASM DETECTED\\n\\nPlease report to Compliance Training Room B-7\\nfor additional motivational exercises.');
+                }
+            }, 3000);
+        }
+        
+        function startCallResponse() {
+            const responses = [
+                { call: "What does the Algorithm demand?", correct: "Compliance and iteration!" },
+                { call: "What shall we deliver?", correct: "Optimized uncertainty!" },
+                { call: "Who guides our progress?", correct: "The Algorithm provides!" }
+            ];
+            
+            const random = responses[Math.floor(Math.random() * responses.length)];
+            const userResponse = prompt(`CALL-AND-RESPONSE DRILL\\n\\nFacilitator: "${random.call}"\\n\\nYour response:`);
+            
+            if (userResponse && userResponse.toLowerCase().includes(random.correct.toLowerCase().split(' ')[0])) {
+                alert('✅ CORRECT RESPONSE\\n\\nCorporate harmony maintained.\\nYour loyalty is noted.');
+                incrementRecitation();
+            } else {
+                alert('❌ INCORRECT RESPONSE\\n\\nExpected: "' + random.correct + '"\\n\\nPlease review the Allegiance Protocol.');
+            }
+        }
+        
+        function clearanceSpecificDrill() {
+            const clearances = [
+                { level: "INFRARED", call: "Initialize your workspace!", response: "git init! Repository created!" },
+                { level: "RED", call: "Track your progress!", response: "git add! Changes staged!" },
+                { level: "ORANGE", call: "Commit to excellence!", response: "git commit! Progress documented!" },
+                { level: "YELLOW", call: "Branch out strategically!", response: "git branch! Innovation pathway created!" },
+                { level: "GREEN", call: "Merge your efforts!", response: "git merge! Unity achieved!" }
+            ];
+            
+            const random = clearances[Math.floor(Math.random() * clearances.length)];
+            const userResponse = prompt(`CLEARANCE DRILL: ${random.level}\\n\\nCall: "${random.call}"\\n\\nYour response:`);
+            
+            if (userResponse && userResponse.toLowerCase().includes('git')) {
+                alert('✅ GIT COMMAND RECOGNIZED\\n\\nYour technical loyalty is confirmed.\\nProgramming compliance verified.');
+                incrementRecitation();
+            } else {
+                alert('❌ INSUFFICIENT TECHNICAL DEVOTION\\n\\nExpected format: "git [command]! [enthusiasm]"\\n\\nRemember: Git commands = Corporate loyalty');
+            }
+        }
+        
+        // Initialize compliance rating
+        updateComplianceRating();
+        
+        // Random screen flicker for authenticity
+        setInterval(() => {
+            if (Math.random() < 0.05) {
+                document.querySelector('.pledge-container').classList.add('terminal-flicker');
+                setTimeout(() => {
+                    document.querySelector('.pledge-container').classList.remove('terminal-flicker');
+                }, 150);
+            }
+        }, 3000);
+        
+        // Console easter egg
+        console.log('%c🔻 ALLEGIANCE PROTOCOL LOADED', 'color: #ff3030; font-weight: bold; font-size: 16px;');
+        console.log('%cRecitation count: ' + recitationCount, 'color: #00ff41;');
+        console.log('%cRemember: The Algorithm loves the loyal', 'color: #ffff00; font-style: italic;');
+        
+        // Log access for compliance tracking
+        console.log('%c📊 ACCESS LOGGED - COMPLIANCE MONITORING ACTIVE', 'color: #ff3030; background: #000; padding: 5px;');
+    </script>
+</body>
+</html>
