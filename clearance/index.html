@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clearance Level Guides | AlgoCratic Futures™</title>
+    <title>Clearance Level Overview | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/terminal-ui.css">
+    <script src="../static/navigation.js"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -604,8 +607,8 @@
                     <div class="eye"></div>
                 </div>
             </div>
-            <h1 class="document-title">CLEARANCE LEVEL GUIDES</h1>
-            <h2 class="document-subtitle">Personnel Operation Documentation</h2>
+            <h1 class="document-title glitch" data-text="CLEARANCE LEVEL OVERVIEW">CLEARANCE LEVEL OVERVIEW</h1>
+            <h2 class="document-subtitle">Algorithmic Security Hierarchy | Employee Access Management</h2>
             
             <div class="document-id">DOCUMENT: AF-CL-INDEX-2025-05</div>
         </div>
@@ -618,11 +621,17 @@
             </div>
         </div>
         
-        <div class="navigation-links">
-            <a href="/index.html">← Home</a>
-            <a href="/portal.html">Employee Portal</a>
-            <a href="/new_player_guide.html">New Player Guide</a>
-            <a href="/products.html">Products</a>
+        <div class="breadcrumb-container"></div>
+        
+        <div class="progress-container"></div>
+        
+        <div class="term-alert term-alert--info">
+            <span class="term-alert-icon">[i]</span>
+            <div class="term-alert-content">
+                <div class="term-alert-title">Security Notice</div>
+                Access to clearance materials is governed by your current authorization level. 
+                Complete required training to advance through the hierarchy.
+            </div>
         </div>
         
         <!-- Entry Level Clearances -->
@@ -751,7 +760,41 @@
     </div>
 
     <script>
-        // Purely cosmetic effects for the loyalty bar
+        // Clearance level progress tracking
+        const clearanceData = {
+            infrared: { unlocked: true, progress: 75 },
+            red: { unlocked: true, progress: 30 },
+            orange: { unlocked: false, progress: 0 },
+            yellow: { unlocked: false, progress: 0 },
+            green: { unlocked: false, progress: 0 },
+            blue: { unlocked: false, progress: 0 },
+            indigo: { unlocked: false, progress: 0 },
+            violet: { unlocked: false, progress: 0 },
+            ultraviolet: { unlocked: false, progress: 0 },
+            gray: { unlocked: true, progress: 0 }
+        };
+        
+        function updateClearanceStatus() {
+            // Check localStorage for completed clearances
+            const completedEULA = localStorage.getItem('eula_complete') === 'true';
+            if (completedEULA) {
+                clearanceData.infrared.progress = Math.max(clearanceData.infrared.progress, 25);
+            }
+            
+            // Update card appearances based on status
+            document.querySelectorAll('.clearance-card').forEach(card => {
+                const level = card.querySelector('h3').textContent.toLowerCase();
+                const data = clearanceData[level];
+                
+                if (data && !data.unlocked) {
+                    card.classList.add('locked-card');
+                } else {
+                    card.classList.remove('locked-card');
+                }
+            });
+        }
+        
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             const loyaltyBar = document.querySelector('.loyalty-bar');
             const loyaltyStatus = document.querySelector('.loyalty-status');
@@ -760,6 +803,14 @@
             
             // Add glitch effect to algorithm message
             algorithmMessage.classList.add('glitch');
+            
+            // Update clearance status
+            updateClearanceStatus();
+            
+            // Initialize navigation system
+            if (window.AlgoCraticNav) {
+                window.AlgoCraticNav.setClearance('infrared');
+            }
             
             // Randomly fluctuate the loyalty bar
             setInterval(() => {
@@ -793,11 +844,20 @@
                     verifyButton.textContent = 'VERIFYING...';
                     
                     setTimeout(() => {
-                        verifyButton.textContent = 'ACCESS DENIED';
-                        verifyButton.style.backgroundColor = 'var(--accent-color)';
-                        
-                        // Log attempted access (for fun)
-                        console.log('Unauthorized access attempt logged: ' + value);
+                        // Easter egg: special codes
+                        if (value.toLowerCase() === 'xyzzy') {
+                            verifyButton.textContent = 'A HOLLOW VOICE SAYS "FOOL"';
+                            verifyButton.style.backgroundColor = 'var(--green)';
+                            console.log('%c🎮 xyzzy detected - A hollow voice says "fool"', 'color: #00ff00;');
+                        } else if (value === '7492') {
+                            verifyButton.textContent = 'COMPLIANCE ACKNOWLEDGED';
+                            verifyButton.style.backgroundColor = 'var(--green)';
+                            console.log('%c✅ EULA code detected - The Algorithm approves', 'color: #00ff00;');
+                        } else {
+                            verifyButton.textContent = 'ACCESS DENIED';
+                            verifyButton.style.backgroundColor = 'var(--accent-color)';
+                            console.log('Unauthorized access attempt logged: ' + value);
+                        }
                         
                         // Reset after a moment
                         setTimeout(() => {
@@ -808,6 +868,9 @@
                     }, 1500);
                 }
             });
+            
+            console.log('%c🔐 CLEARANCE OVERVIEW LOADED', 'color: #2080ff; font-weight: bold;');
+            console.log('%cThe Algorithm monitors all clearance access attempts', 'color: #2080ff;');
         });
     </script>
 </body>
