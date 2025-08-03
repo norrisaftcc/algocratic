@@ -352,6 +352,46 @@
 - The company's most successful products emerged from bottom-up innovation, not top-down direction
         </div>
         
+        <h3>ARCHIVIST WISDOM: VERSION CONTROL MASTERY</h3>
+        
+        <div class="priority-archive">
+            <h4>Git Wisdom From The Archives</h4>
+            <p style="color: var(--accent-color);"><strong>The Memory Core remembers what others forget about version control:</strong></p>
+            
+            <div class="file-list">
+                <div class="file-entry">
+                    <span>git reflog</span>
+                    <span>Recover "lost" commits</span>
+                </div>
+                <div class="file-entry">
+                    <span>git bisect</span>
+                    <span>Binary search for bugs</span>
+                </div>
+                <div class="file-entry">
+                    <span>git cherry-pick &lt;hash&gt;</span>
+                    <span>Selective history editing</span>
+                </div>
+            </div>
+            
+            <p><strong>Sacred Git Aliases:</strong></p>
+            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto;">
+git config --global alias.oops 'reset HEAD~1'
+git config --global alias.timeline 'log --graph --oneline --all'
+git config --global alias.who 'blame -w -C -C -C'
+git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs -n 1 git branch -d'</pre>
+        </div>
+        
+        <div class="archive-card">
+            <h4>[COMMON GOTCHAS ARCHIVE]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Historical context reveals..."</p>
+            <ul style="color: var(--text-color);">
+                <li><strong>Force push protection:</strong> Always use --force-with-lease, never --force</li>
+                <li><strong>Rebase vs Merge:</strong> Rebase feature branches, merge main branches</li>
+                <li><strong>Stash naming:</strong> git stash save "WIP: descriptive message" beats git stash</li>
+                <li><strong>Commit message format:</strong> Present tense imperative ("Add feature" not "Added feature")</li>
+            </ul>
+        </div>
+        
         <p style="text-align: center; margin-top: 40px;">
             <strong>█ REMEMBER EVERYTHING █ DOCUMENT CHANGES █ PRESERVE TRUTH █</strong>
         </p>
@@ -431,6 +471,13 @@ CEO: "I mean responsive to organizational needs"
 FOUND: original_company_charter.pdf
 "To empower developers through collaborative innovation..."
 [Current version reads: "To optimize human resources for algorithmic efficiency"]
+
+FOUND: git_emergency_procedures.txt
+# WHEN EVERYTHING GOES WRONG:
+git reflog  # Your time machine
+git fsck --lost-found  # Find orphaned commits
+git reset --hard ORIG_HEAD  # Undo the last destructive operation
+.git/objects  # Where git actually stores everything (it's all still there!)
             `;
             
             document.getElementById('recoveryData').textContent = data;

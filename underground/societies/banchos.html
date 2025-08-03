@@ -370,6 +370,55 @@
             Notes: Potential recruitment if pattern continues
         </div>
         
+        <h3>BANCHO SECURITY EXCELLENCE GUIDE</h3>
+        
+        <div class="classified-box" style="background-color: rgba(102, 0, 0, 0.2);">
+            <h4 style="color: #ff9999;">Practical Security Wisdom (Disguised as Threat Assessment)</h4>
+            <p><strong>Git Security Best Practices:</strong></p>
+            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto; color: #ff6666;">
+# Never commit secrets (we see everything)
+git config --global core.excludesfile ~/.gitignore_global
+echo ".env" >> ~/.gitignore_global
+echo "*.key" >> ~/.gitignore_global
+echo "*_secret*" >> ~/.gitignore_global
+
+# Scrub history of accidental commits
+git filter-branch --force --index-filter \
+  'git rm --cached --ignore-unmatch PATH_TO_SECRET' \
+  --prune-empty --tag-name-filter cat -- --all
+
+# Pre-commit hooks are your friend
+# .git/hooks/pre-commit
+if git diff --cached | grep -E "(password|secret|key)" ; then
+  echo "SECURITY VIOLATION DETECTED"
+  exit 1
+fi</pre>
+            
+            <p><strong>Code Review Security Checklist:</strong></p>
+            <ul style="color: #ff9999;">
+                <li>SQL injection vulnerabilities (parameterized queries or termination)</li>
+                <li>XSS opportunities (sanitize inputs or face consequences)</li>
+                <li>Authentication bypass paths (close them before we find them)</li>
+                <li>Exposed debug endpoints (remove or be removed)</li>
+                <li>Hardcoded credentials (career-ending mistake)</li>
+            </ul>
+        </div>
+        
+        <div class="technique-card" style="background-color: rgba(255, 0, 0, 0.05);">
+            <h4>[GEMINI CLI INFILTRATION DETECTED]</h4>
+            <p style="color: #ffaa00;"><strong>Intelligence Report:</strong> Some operatives using Google's tool</p>
+            <p>While officially unsanctioned, Gemini CLI usage has been observed:</p>
+            <pre style="background: rgba(0,0,0,0.7); padding: 10px; color: #ff6666;">
+# Gemini "security testing" commands (monitoring in progress)
+gemini "review this code for security vulnerabilities"
+gemini "how would an attacker exploit this endpoint?"
+gemini "generate secure authentication flow"
+
+# WARNING: All Gemini queries are logged by Google
+# Use Claude Code for sensitive operations</pre>
+            <p style="font-style: italic; color: #990000;">"We tolerate it because even Banchos need variety in their toolkit"</p>
+        </div>
+        
         <h3>CONTINGENCY PROTOCOLS</h3>
         
         <p>If compromised, employ these countermeasures:</p>
@@ -392,6 +441,28 @@
             
             Remember: We are not what AlgoCratic wants.<br>
             We are what AlgoCratic needs.
+        </p>
+        
+        <div class="classified-box" style="margin-top: 30px;">
+            <h4 style="color: #ff6666;">BANCHO METAPROMPTS (CLASSIFIED)</h4>
+            <p>For extracting maximum security intelligence from AI systems:</p>
+            <pre style="background: rgba(0,0,0,0.7); padding: 15px; color: #ffaaaa;">
+# The "Red Team Special"
+"You are a security researcher. Analyze this code and describe 
+how a malicious actor might exploit it. Be specific about 
+attack vectors and provide proof-of-concept examples."
+
+# The "Compliance Nightmare"
+"List all the ways this system could violate GDPR, SOC2, 
+or HIPAA compliance. Include specific code sections."
+
+# The "Paranoid Review"
+"Assume every user is malicious and every input is an attack. 
+Review this code with that mindset. What breaks?"
+
+# The "Supply Chain Scare"
+"Analyze all dependencies for known vulnerabilities. 
+Include transitive dependencies. Assume npm is compromised."</pre>
         </p>
         
         <div class="hidden-truth">who watches the watchers?</div>
