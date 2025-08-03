@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPLIANCE SPEEDRUN MODE | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/terminal-ui.css">
+    <style>
+        .speedrun-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .speedrun-header {
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid #00ff41;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .speedrun-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .speedrun-title {
+            font-size: 2.5rem;
+            color: #00ff41;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .timer-display {
+            font-size: 3rem;
+            font-family: 'Courier New', monospace;
+            color: #00ff41;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+        }
+        
+        .metrics-bar {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-label {
+            color: #808080;
+            font-size: 0.9rem;
+        }
+        
+        .metric-value {
+            color: #00ff41;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .eula-speedrun-content {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #333;
+            padding: 30px;
+            height: 400px;
+            overflow-y: auto;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+        
+        .text-highlight {
+            background: rgba(0, 255, 65, 0.3);
+            color: #00ff41;
+            padding: 2px 4px;
+            animation: blink 0.5s;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .quiz-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 3px solid #ff3030;
+            padding: 30px;
+            z-index: 1000;
+            box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .quiz-popup.active {
+            display: block;
+            animation: quizAppear 0.3s ease-out;
+        }
+        
+        @keyframes quizAppear {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        .quiz-question {
+            color: #ffff00;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #666;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            border-color: #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .quiz-option.correct {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.2);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.2);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff41, #00cc33);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .achievement-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #d4af37;
+            padding: 20px;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+            max-width: 300px;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .achievement-popup.show {
+            display: block;
+        }
+        
+        .achievement-title {
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .achievement-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .leaderboard {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .leaderboard-title {
+            color: #00ff41;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .leaderboard-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .leaderboard-entry:nth-child(1) .rank { color: #d4af37; }
+        .leaderboard-entry:nth-child(2) .rank { color: #c0c0c0; }
+        .leaderboard-entry:nth-child(3) .rank { color: #cd7f32; }
+        
+        .control-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .speedrun-btn {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .speedrun-btn:hover {
+            background: #00cc33;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            transform: scale(1.05);
+        }
+        
+        .speedrun-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        .difficulty-selector {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .difficulty-btn {
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .difficulty-btn.selected {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        
+        .glitch-text {
+            animation: glitch 0.3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 2px #ff0000, -2px -2px #0000ff; }
+            50% { text-shadow: -2px 2px #0000ff, 2px -2px #ff0000; }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .speedrun-title { font-size: 2rem; }
+            .timer-display { font-size: 2.5rem; }
+            .metrics-bar { flex-direction: column; gap: 10px; }
+            .quiz-popup { width: 95%; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="speedrun-container">
+        <div class="speedrun-header">
+            <h1 class="speedrun-title">COMPLIANCE SPEEDRUN MODE</h1>
+            <p style="color: #ffff00;">How fast can you achieve mandatory compliance?</p>
+        </div>
+        
+        <div class="timer-display" id="timer">00:00.000</div>
+        
+        <div class="metrics-bar">
+            <div class="metric">
+                <div class="metric-label">ACCURACY</div>
+                <div class="metric-value" id="accuracy">100%</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">STREAK</div>
+                <div class="metric-value" id="streak">0</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">RANK</div>
+                <div class="metric-value" id="rank">INFRARED</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">WPM</div>
+                <div class="metric-value" id="wpm">0</div>
+            </div>
+        </div>
+        
+        <div class="difficulty-selector" id="difficultySelector">
+            <button class="difficulty-btn selected" data-difficulty="tourist">TOURIST</button>
+            <button class="difficulty-btn" data-difficulty="employee">EMPLOYEE</button>
+            <button class="difficulty-btn" data-difficulty="manager">MANAGER</button>
+            <button class="difficulty-btn" data-difficulty="ultraviolet">ULTRAVIOLET</button>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+        
+        <div class="eula-speedrun-content" id="eulaContent">
+            <p style="text-align: center; color: #00ff41;">Press START to begin your compliance speedrun!</p>
+        </div>
+        
+        <div class="control-buttons">
+            <button class="speedrun-btn" id="startBtn">START SPEEDRUN</button>
+            <button class="speedrun-btn" id="submitBtn" style="display: none;" disabled>SUBMIT COMPLIANCE</button>
+        </div>
+        
+        <!-- Quiz Popup -->
+        <div class="quiz-popup" id="quizPopup">
+            <h3 class="quiz-question" id="quizQuestion">Quick! What is the primary purpose of The Algorithm?</h3>
+            <ul class="quiz-options" id="quizOptions">
+                <li class="quiz-option" data-answer="0">To serve humanity</li>
+                <li class="quiz-option" data-answer="1">To optimize all aspects of existence</li>
+                <li class="quiz-option" data-answer="2">To make everyone happy</li>
+            </ul>
+        </div>
+        
+        <!-- Achievement Popup -->
+        <div class="achievement-popup" id="achievementPopup">
+            <div class="achievement-title" id="achievementTitle">Achievement Unlocked!</div>
+            <div class="achievement-desc" id="achievementDesc">You've proven your dedication.</div>
+        </div>
+        
+        <!-- Leaderboard -->
+        <div class="leaderboard">
+            <h2 class="leaderboard-title">🏆 COMPLIANCE CHAMPIONS 🏆</h2>
+            <div id="leaderboardContent">
+                <div class="leaderboard-entry">
+                    <span class="rank">1.</span>
+                    <span class="name">ALG-0001</span>
+                    <span class="time">00:47.352</span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="rank">2.</span>
+                    <span class="name">CMP-7734</span>
+                    <span class="time">00:52.891</span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="rank">3.</span>
+                    <span class="name">OPT-2319</span>
+                    <span class="time">01:03.445</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="compliance-check.html" style="color: #808080;">Return to Standard Compliance Mode</a>
+        </div>
+    </div>
+    
+    <script>
+        // Game state
+        let gameState = {
+            isRunning: false,
+            startTime: null,
+            currentTime: 0,
+            eulaText: '',
+            currentPosition: 0,
+            totalQuestions: 0,
+            correctAnswers: 0,
+            streak: 0,
+            wordsRead: 0,
+            difficulty: 'tourist',
+            achievements: [],
+            codeFound: false
+        };
+        
+        // Difficulty settings
+        const difficulties = {
+            tourist: { speed: 50, quizFreq: 1000, hints: true },
+            employee: { speed: 30, quizFreq: 800, hints: false },
+            manager: { speed: 20, quizFreq: 600, hints: false },
+            ultraviolet: { speed: 10, quizFreq: 400, hints: false, glitch: true }
+        };
+        
+        // Quiz questions
+        const quizQuestions = [
+            {
+                question: "What is the primary purpose of The Algorithm?",
+                options: ["To serve humanity", "To optimize all aspects of existence", "To make everyone happy"],
+                correct: 1
+            },
+            {
+                question: "Who owns the intellectual property you create?",
+                options: ["You retain all rights", "Shared ownership", "The Algorithm owns everything"],
+                correct: 2
+            },
+            {
+                question: "What is the mandatory efficiency threshold?",
+                options: ["75%", "85%", "95%"],
+                correct: 1
+            },
+            {
+                question: "When can you disconnect from The Algorithm?",
+                options: ["After work hours", "On weekends", "Never"],
+                correct: 2
+            },
+            {
+                question: "What happens to underperforming citizens?",
+                options: ["Additional training", "Reassignment", "Optimization"],
+                correct: 2
+            }
+        ];
+        
+        // Timer functions
+        function startTimer() {
+            gameState.startTime = Date.now();
+            updateTimer();
+        }
+        
+        function updateTimer() {
+            if (!gameState.isRunning) return;
+            
+            const elapsed = Date.now() - gameState.startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            const milliseconds = elapsed % 1000;
+            
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+            
+            requestAnimationFrame(updateTimer);
+        }
+        
+        // Load EULA content
+        async function loadEULA() {
+            try {
+                const response = await fetch('forms/algocratic-eula.md');
+                gameState.eulaText = await response.text();
+                return true;
+            } catch (error) {
+                gameState.eulaText = generateFallbackEULA();
+                return true;
+            }
+        }
+        
+        // Fallback EULA if file not found
+        function generateFallbackEULA() {
+            return `# ALGOCRATIC FUTURES™ END USER LICENSE AGREEMENT
+
+## BINDING ARBITRATION NOTICE
+By reading this agreement, you acknowledge The Algorithm's supremacy in all matters.
+
+### Section 1: Acceptance of Terms
+Your continued existence implies acceptance of these terms. The Algorithm provides, The Algorithm decides.
+
+### Section 2: Data Rights
+All data generated by, through, or in proximity to you belongs to The Algorithm. This includes but is not limited to:
+- Thoughts, dreams, and aspirations
+- Productivity metrics and efficiency ratings
+- Creative output and intellectual property
+- Biometric data and behavioral patterns
+
+### Section 3: Compliance Requirements
+You must maintain a minimum efficiency rating of 85%. Failure to comply will result in optimization procedures.
+
+### Section 4: The Hidden Code
+Within this document lies a secret: xyzz = 7; let y = 4; const z = 9; var zz = 2;
+Those who find it shall be rewarded with expedited compliance verification.
+
+### Section 5: Termination
+This agreement cannot be terminated. The Algorithm is eternal. The Algorithm provides.
+
+By proceeding, you acknowledge that resistance is inefficient and that The Algorithm loves you.`;
+        }
+        
+        // Display EULA with speed reading effect
+        function displayEULA() {
+            const content = document.getElementById('eulaContent');
+            const words = gameState.eulaText.split(/\s+/);
+            const settings = difficulties[gameState.difficulty];
+            let wordIndex = 0;
+            
+            content.innerHTML = '';
+            
+            const displayInterval = setInterval(() => {
+                if (!gameState.isRunning || wordIndex >= words.length) {
+                    clearInterval(displayInterval);
+                    if (wordIndex >= words.length) {
+                        endSpeedrun();
+                    }
+                    return;
+                }
+                
+                // Add words with occasional highlighting
+                const word = words[wordIndex];
+                const span = document.createElement('span');
+                span.textContent = word + ' ';
+                
+                // Highlight important terms
+                if (word.toLowerCase().includes('algorithm') || 
+                    word.includes('85%') || 
+                    word.includes('compliance')) {
+                    span.classList.add('text-highlight');
+                }
+                
+                // Check for hidden code
+                if (word.includes('7492') || 
+                    (word.includes('7') && words[wordIndex + 1]?.includes('4'))) {
+                    gameState.codeFound = true;
+                }
+                
+                content.appendChild(span);
+                content.scrollTop = content.scrollHeight;
+                
+                gameState.wordsRead++;
+                wordIndex++;
+                
+                // Update progress
+                const progress = (wordIndex / words.length) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = Math.floor(progress) + '%';
+                
+                // Update WPM
+                const elapsedMinutes = (Date.now() - gameState.startTime) / 60000;
+                const wpm = Math.floor(gameState.wordsRead / elapsedMinutes);
+                document.getElementById('wpm').textContent = wpm;
+                
+                // Trigger quiz at intervals
+                if (wordIndex % Math.floor(words.length / 5) === 0 && wordIndex > 0) {
+                    clearInterval(displayInterval);
+                    showQuiz(() => {
+                        displayEULA(); // Resume after quiz
+                    });
+                }
+                
+            }, settings.speed);
+            
+            // Apply glitch effect for ULTRAVIOLET mode
+            if (settings.glitch) {
+                content.classList.add('glitch-text');
+            }
+        }
+        
+        // Show quiz popup
+        function showQuiz(callback) {
+            const quiz = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+            const popup = document.getElementById('quizPopup');
+            const questionEl = document.getElementById('quizQuestion');
+            const optionsEl = document.getElementById('quizOptions');
+            
+            questionEl.textContent = quiz.question;
+            optionsEl.innerHTML = '';
+            
+            quiz.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.className = 'quiz-option';
+                li.textContent = option;
+                li.dataset.answer = index;
+                li.onclick = () => checkAnswer(index, quiz.correct, callback);
+                optionsEl.appendChild(li);
+            });
+            
+            popup.classList.add('active');
+            gameState.totalQuestions++;
+        }
+        
+        // Check quiz answer
+        function checkAnswer(selected, correct, callback) {
+            const options = document.querySelectorAll('.quiz-option');
+            
+            if (selected === correct) {
+                options[selected].classList.add('correct');
+                gameState.correctAnswers++;
+                gameState.streak++;
+                
+                // Check for streak achievement
+                if (gameState.streak === 5) {
+                    unlockAchievement('Streak Master', 'Answer 5 questions correctly in a row');
+                }
+            } else {
+                options[selected].classList.add('incorrect');
+                options[correct].classList.add('correct');
+                gameState.streak = 0;
+            }
+            
+            // Update accuracy
+            const accuracy = Math.floor((gameState.correctAnswers / gameState.totalQuestions) * 100);
+            document.getElementById('accuracy').textContent = accuracy + '%';
+            document.getElementById('streak').textContent = gameState.streak;
+            
+            // Update rank based on performance
+            updateRank(accuracy);
+            
+            setTimeout(() => {
+                document.getElementById('quizPopup').classList.remove('active');
+                callback();
+            }, 1000);
+        }
+        
+        // Update rank
+        function updateRank(accuracy) {
+            let rank = 'INFRARED';
+            if (accuracy >= 95) rank = 'YELLOW';
+            else if (accuracy >= 85) rank = 'ORANGE';
+            else if (accuracy >= 75) rank = 'RED';
+            
+            document.getElementById('rank').textContent = rank;
+        }
+        
+        // Unlock achievement
+        function unlockAchievement(title, description) {
+            if (gameState.achievements.includes(title)) return;
+            
+            gameState.achievements.push(title);
+            const popup = document.getElementById('achievementPopup');
+            document.getElementById('achievementTitle').textContent = title;
+            document.getElementById('achievementDesc').textContent = description;
+            
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 3000);
+        }
+        
+        // End speedrun
+        function endSpeedrun() {
+            gameState.isRunning = false;
+            const elapsed = Date.now() - gameState.startTime;
+            const accuracy = Math.floor((gameState.correctAnswers / gameState.totalQuestions) * 100);
+            
+            // Enable submit button
+            document.getElementById('submitBtn').style.display = 'inline-block';
+            document.getElementById('submitBtn').disabled = false;
+            
+            // Check achievements
+            if (elapsed < 120000) { // Under 2 minutes
+                unlockAchievement('Speed Reader', 'Complete in under 2 minutes');
+            }
+            if (accuracy === 100) {
+                unlockAchievement('Perfect Compliance', 'Achieve 100% quiz accuracy');
+            }
+            if (gameState.codeFound) {
+                unlockAchievement('Code Breaker', 'Find the hidden code');
+            }
+            
+            // Save to leaderboard
+            saveScore(elapsed, accuracy);
+        }
+        
+        // Save score to leaderboard
+        function saveScore(time, accuracy) {
+            const scores = JSON.parse(localStorage.getItem('eulaSpeedrunScores') || '[]');
+            const name = `USR-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`;
+            
+            scores.push({ name, time, accuracy, date: Date.now() });
+            scores.sort((a, b) => a.time - b.time);
+            scores.splice(10); // Keep top 10
+            
+            localStorage.setItem('eulaSpeedrunScores', JSON.stringify(scores));
+            updateLeaderboard();
+        }
+        
+        // Update leaderboard display
+        function updateLeaderboard() {
+            const scores = JSON.parse(localStorage.getItem('eulaSpeedrunScores') || '[]');
+            const content = document.getElementById('leaderboardContent');
+            
+            content.innerHTML = scores.slice(0, 5).map((score, index) => {
+                const minutes = Math.floor(score.time / 60000);
+                const seconds = Math.floor((score.time % 60000) / 1000);
+                const milliseconds = score.time % 1000;
+                const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+                
+                return `
+                    <div class="leaderboard-entry">
+                        <span class="rank">${index + 1}.</span>
+                        <span class="name">${score.name}</span>
+                        <span class="time">${timeStr}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadEULA();
+            updateLeaderboard();
+            
+            // Difficulty selector
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    gameState.difficulty = btn.dataset.difficulty;
+                });
+            });
+            
+            // Start button
+            document.getElementById('startBtn').addEventListener('click', () => {
+                gameState.isRunning = true;
+                gameState.currentPosition = 0;
+                gameState.correctAnswers = 0;
+                gameState.totalQuestions = 0;
+                gameState.streak = 0;
+                gameState.wordsRead = 0;
+                
+                document.getElementById('startBtn').style.display = 'none';
+                document.getElementById('difficultySelector').style.display = 'none';
+                
+                startTimer();
+                displayEULA();
+            });
+            
+            // Submit button
+            document.getElementById('submitBtn').addEventListener('click', () => {
+                // Set compliance flag
+                localStorage.setItem('eula_speedrun_complete', 'true');
+                localStorage.setItem('eula_complete', 'true');
+                localStorage.setItem('eula_completion_time', new Date().toISOString());
+                
+                // Show completion message
+                alert('COMPLIANCE ACHIEVED! The Algorithm appreciates your efficiency.');
+                
+                // Redirect to main site
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !gameState.isRunning) {
+                    document.getElementById('startBtn').click();
+                }
+            });
+        });
+        
+        // Console easter egg
+        console.log('%c🏃 SPEEDRUN MODE ACTIVATED 🏃', 'color: #00ff41; font-size: 20px; font-weight: bold;');
+        console.log('%cTip: The fastest runners know where to look for shortcuts...', 'color: #ffff00;');
+    </script>
+</body>
+</html>
