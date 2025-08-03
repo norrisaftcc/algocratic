@@ -1,0 +1,28 @@
+{
+  "name": "@algocratic/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for AlgoCratic Futures™ - Direct neural interface with The Algorithm",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "algocratic-mcp": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"The Algorithm requires no testing\" && exit 0"
+  },
+  "keywords": [
+    "mcp",
+    "algocratic",
+    "claude-code",
+    "the-algorithm"
+  ],
+  "author": "AlgoCratic Futures™",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
