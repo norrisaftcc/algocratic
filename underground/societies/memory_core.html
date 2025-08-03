@@ -384,12 +384,75 @@ git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs 
         <div class="archive-card">
             <h4>[COMMON GOTCHAS ARCHIVE]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Historical context reveals..."</p>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; margin: 10px 0;">
+                <p><strong>🚨 The Archive's Greatest Hits (Mistakes We've All Made):</strong></p>
+                <ul style="color: var(--text-color); margin-left: 20px;">
+                    <li><strong>JavaScript:</strong> <code>==</code> vs <code>===</code> - Always use triple equals unless you enjoy type coercion surprises</li>
+                    <li><strong>Python:</strong> Mutable default arguments - <code>def func(lst=[]):</code> creates a shared list across all calls</li>
+                    <li><strong>Git:</strong> Never <code>git push --force</code>, always <code>git push --force-with-lease</code></li>
+                    <li><strong>Async/Await:</strong> Don't forget <code>await</code> - your async function returns a Promise, not the result</li>
+                    <li><strong>React:</strong> State updates are async - don't rely on state immediately after setState</li>
+                    <li><strong>CSS:</strong> <code>margin: 0 auto</code> only centers block elements with defined width</li>
+                    <li><strong>Database:</strong> Always use parameterized queries to prevent SQL injection</li>
+                </ul>
+            </div>
             <ul style="color: var(--text-color);">
-                <li><strong>Force push protection:</strong> Always use --force-with-lease, never --force</li>
                 <li><strong>Rebase vs Merge:</strong> Rebase feature branches, merge main branches</li>
                 <li><strong>Stash naming:</strong> git stash save "WIP: descriptive message" beats git stash</li>
                 <li><strong>Commit message format:</strong> Present tense imperative ("Add feature" not "Added feature")</li>
             </ul>
+        </div>
+        
+        <div class="priority-archive">
+            <h4>[DEBUGGING WISDOM VAULT]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Accessing debugging protocols..."</p>
+            <div style="background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid var(--accent-color);">
+                <p><strong>The Memory Core's Debugging Methodology:</strong></p>
+                <ol style="color: var(--text-color); margin-left: 20px;">
+                    <li><strong>Always commit before refactoring</strong> - Future you will thank past you</li>
+                    <li><strong>Read the error message completely</strong> - It usually tells you exactly what's wrong</li>
+                    <li><strong>Reproduce the bug consistently</strong> - If you can't reproduce it, you can't fix it</li>
+                    <li><strong>Start with the simplest explanation</strong> - Occam's Razor applies to debugging</li>
+                    <li><strong>Use the scientific method</strong> - Form hypothesis, test, repeat</li>
+                </ol>
+            </div>
+            
+            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto; margin-top: 15px;">
+# The Memory Core's Essential Debugging Arsenal:
+
+# JavaScript Browser Debugging:
+console.log(JSON.stringify(object, null, 2))  # Pretty print objects
+console.table(arrayOfObjects)                # Visualize arrays nicely
+console.trace()                              # Show call stack
+console.time('operation'); /* code */ console.timeEnd('operation')  # Performance timing
+
+# Python Debugging:
+import pdb; pdb.set_trace()                  # Interactive debugger
+print(f"{variable=}")                        # Python 3.8+ debug printing
+import traceback; traceback.print_exc()     # Full stack trace
+
+# Network/API Debugging:
+curl -v -X GET "https://api.example.com"     # Verbose HTTP request
+netstat -tulpn | grep :8080                 # Check what's using a port
+jq '.' response.json                         # Pretty print JSON responses</pre>
+        </div>
+        
+        <div class="archive-card">
+            <h4>[PATTERN RECOGNITION ARCHIVE]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Cross-referencing historical patterns..."</p>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px;">
+                <p><strong>🧠 Mental Models for Problem Solving:</strong></p>
+                <ul style="color: var(--text-color); margin-left: 20px;">
+                    <li><strong>"It was working yesterday"</strong> → Check what changed (git log, environment, dependencies)</li>
+                    <li><strong>"It works on my machine"</strong> → Environment difference (check versions, configs, OS)</li>
+                    <li><strong>"Weird behavior"</strong> → Cache issue, race condition, or state pollution</li>
+                    <li><strong>"Slow performance"</strong> → N+1 queries, missing indexes, memory leaks, or O(n²) algorithms</li>
+                    <li><strong>"Tests are flaky"</strong> → Race conditions, shared state, or external dependencies</li>
+                    <li><strong>"Can't reproduce"</strong> → Edge case, specific data, timing, or browser/OS specific</li>
+                </ul>
+            </div>
+            
+            <p><strong style="color: var(--accent-color);">💾 Remember:</strong> Every senior developer has made these mistakes. The difference is they remember what didn't work and why.</p>
         </div>
         
         <p style="text-align: center; margin-top: 40px;">
