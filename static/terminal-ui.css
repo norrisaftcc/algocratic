@@ -726,6 +726,200 @@
     }
 }
 
+/* === 11. Navigation Components === */
+.term-breadcrumb {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid var(--term-border);
+    padding: var(--term-padding-sm) var(--term-padding-md);
+    font-family: var(--term-font);
+    font-size: 12px;
+    color: var(--term-fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.term-breadcrumb a {
+    color: var(--term-fg);
+    text-decoration: none;
+    transition: var(--term-transition);
+}
+
+.term-breadcrumb a:hover {
+    color: var(--term-fg-active);
+    text-shadow: 0 0 5px currentColor;
+}
+
+.term-breadcrumb .current {
+    color: var(--term-fg-active);
+    font-weight: bold;
+}
+
+.term-breadcrumb .separator {
+    margin: 0 8px;
+    color: var(--term-border);
+}
+
+/* Progress Indicator */
+.term-progress-indicator {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--term-border);
+    padding: var(--term-padding-md);
+    margin: var(--term-padding-md) 0;
+    font-family: var(--term-font);
+    color: var(--term-fg);
+}
+
+.term-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--term-padding-sm);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.term-progress-current {
+    color: var(--term-success);
+    font-weight: bold;
+}
+
+.term-progress-next {
+    color: var(--term-warning);
+}
+
+.term-progress-bar-container {
+    position: relative;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--term-border);
+    margin: var(--term-padding-sm) 0;
+}
+
+.term-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--term-success), var(--term-fg));
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.term-progress-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--term-bg);
+    font-weight: bold;
+    font-size: 11px;
+    text-shadow: 1px 1px 0 var(--term-fg);
+    z-index: 2;
+}
+
+/* Mini Navigation */
+.term-mini-nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--term-border);
+    padding: var(--term-padding-sm);
+    display: flex;
+    gap: var(--term-padding-sm);
+    z-index: 100;
+    font-family: var(--term-font);
+    font-size: 12px;
+}
+
+.term-mini-nav a {
+    color: var(--term-fg-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    transition: var(--term-transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.term-mini-nav a:hover {
+    color: var(--term-fg);
+    border-color: var(--term-border);
+    background-color: rgba(0, 255, 65, 0.05);
+}
+
+.term-mini-nav a.active {
+    color: var(--term-fg-active);
+    border-color: var(--term-fg-active);
+    background-color: rgba(0, 255, 65, 0.1);
+}
+
+/* Clearance Level Indicator */
+.term-clearance-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-family: var(--term-font);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid currentColor;
+}
+
+.term-clearance-infrared {
+    background-color: rgba(139, 0, 0, 0.2);
+    color: #8b0000;
+    border-color: #8b0000;
+}
+
+.term-clearance-red {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border-color: #ff0000;
+}
+
+.term-clearance-orange {
+    background-color: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+    border-color: #ffa500;
+}
+
+.term-clearance-yellow {
+    background-color: rgba(255, 255, 0, 0.2);
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+.term-clearance-green {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    border-color: #00ff00;
+}
+
+.term-clearance-blue {
+    background-color: rgba(0, 0, 255, 0.2);
+    color: #0000ff;
+    border-color: #0000ff;
+}
+
+.term-clearance-indigo {
+    background-color: rgba(75, 0, 130, 0.2);
+    color: #4b0082;
+    border-color: #4b0082;
+}
+
+.term-clearance-violet {
+    background-color: rgba(138, 43, 226, 0.2);
+    color: #8a2be2;
+    border-color: #8a2be2;
+}
+
+.term-clearance-ultraviolet {
+    background-color: rgba(153, 102, 204, 0.2);
+    color: #9966cc;
+    border-color: #9966cc;
+}
+
 /* === Utility Classes === */
 .term-text-center { text-align: center; }
 .term-text-right { text-align: right; }
