@@ -80,6 +80,14 @@ npm start
 
 The server will output to stderr that it's listening. You can then send MCP protocol messages via stdin.
 
+### Running Tests
+```bash
+npm test        # The Algorithm's wisdom
+node test-client.js  # Full integration test
+```
+
+**Test Status: ✅ PASSED** - All resources, tools, and underground detection working correctly.
+
 ## Security Notice
 
 This server simulates AlgoCratic systems for educational purposes. No actual loyalty tracking or surveillance occurs. The Algorithm's wisdom is randomly generated.
