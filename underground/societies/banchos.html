@@ -373,35 +373,74 @@
         <h3>BANCHO SECURITY EXCELLENCE GUIDE</h3>
         
         <div class="classified-box" style="background-color: rgba(102, 0, 0, 0.2);">
-            <h4 style="color: #ff9999;">Practical Security Wisdom (Disguised as Threat Assessment)</h4>
-            <p><strong>Git Security Best Practices:</strong></p>
+            <h4 style="color: #ff9999;">Security Enforcement Protocols (For Educational Purposes Only)</h4>
+            <p><strong>Password Management (We Monitor Non-Compliance):</strong></p>
+            <div style="background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid #ff0000; margin: 10px 0;">
+                <ul style="color: #ff9999; margin-left: 20px;">
+                    <li><strong>Never reuse passwords</strong> - We track password patterns across systems</li>
+                    <li><strong>Use a password manager</strong> - 1Password, Bitwarden, or KeePass (all monitored but acceptable)</li>
+                    <li><strong>Enable 2FA everywhere</strong> - SMS is weak, authenticator apps preferred</li>
+                    <li><strong>Password entropy</strong> - 4 random words > 8 character complexity soup</li>
+                    <li><strong>Breach monitoring</strong> - haveibeenpwned.com alerts (we already know, but good practice)</li>
+                </ul>
+            </div>
+            
+            <p><strong>Git Security Enforcement:</strong></p>
             <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto; color: #ff6666;">
 # Never commit secrets (we see everything)
 git config --global core.excludesfile ~/.gitignore_global
 echo ".env" >> ~/.gitignore_global
 echo "*.key" >> ~/.gitignore_global
 echo "*_secret*" >> ~/.gitignore_global
+echo "config.json" >> ~/.gitignore_global
 
-# Scrub history of accidental commits
+# Emergency secret removal
 git filter-branch --force --index-filter \
   'git rm --cached --ignore-unmatch PATH_TO_SECRET' \
   --prune-empty --tag-name-filter cat -- --all
 
-# Pre-commit hooks are your friend
-# .git/hooks/pre-commit
-if git diff --cached | grep -E "(password|secret|key)" ; then
-  echo "SECURITY VIOLATION DETECTED"
+# Pre-commit security scan
+if git diff --cached | grep -E "(password|secret|key|token|api_key)" ; then
+  echo "⚠️  SECURITY VIOLATION DETECTED - COMMIT BLOCKED"
   exit 1
 fi</pre>
             
-            <p><strong>Code Review Security Checklist:</strong></p>
+            <p><strong>Code Review Security Checklist (Mandatory Enforcement):</strong></p>
             <ul style="color: #ff9999;">
-                <li>SQL injection vulnerabilities (parameterized queries or termination)</li>
-                <li>XSS opportunities (sanitize inputs or face consequences)</li>
-                <li>Authentication bypass paths (close them before we find them)</li>
-                <li>Exposed debug endpoints (remove or be removed)</li>
-                <li>Hardcoded credentials (career-ending mistake)</li>
+                <li><strong>Input validation:</strong> Sanitize ALL user inputs (XSS prevention)</li>
+                <li><strong>SQL injection:</strong> Use parameterized queries, never string concatenation</li>
+                <li><strong>Authentication:</strong> Verify JWT signatures, check token expiration</li>
+                <li><strong>Authorization:</strong> Check user permissions on every endpoint</li>
+                <li><strong>HTTPS everywhere:</strong> No sensitive data over HTTP (career-ending)</li>
+                <li><strong>Error handling:</strong> Don't expose stack traces to users</li>
+                <li><strong>Dependencies:</strong> Audit npm/pip packages regularly</li>
             </ul>
+        </div>
+        
+        <div class="technique-card" style="background-color: rgba(204, 0, 0, 0.1);">
+            <h4>[SECURE CODING PATTERNS]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Implementing security compliance..."</p>
+            <div style="background: rgba(0,0,0,0.7); padding: 15px;">
+                <p><strong>🔒 The Bancho's Secure Development Playbook:</strong></p>
+                <pre style="color: #ffaaaa; margin: 10px 0;">
+# Environment Variables (The Only Way)
+API_KEY = os.environ.get('API_KEY')  # ✅ Correct
+API_KEY = "abc123secret"             # ❌ Career suicide
+
+# SQL Injection Prevention
+cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))  # ✅ Safe
+cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")       # ❌ Exploitable
+
+# XSS Prevention  
+from html import escape
+output = escape(user_input)          # ✅ Sanitized
+output = user_input                  # ❌ Dangerous
+
+# Password Hashing
+import bcrypt
+hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())  # ✅ Secure
+hashed = hashlib.md5(password.encode()).hexdigest()                 # ❌ Broken</pre>
+            </div>
         </div>
         
         <div class="technique-card" style="background-color: rgba(255, 0, 0, 0.05);">
@@ -444,7 +483,7 @@ gemini "generate secure authentication flow"
         </p>
         
         <div class="classified-box" style="margin-top: 30px;">
-            <h4 style="color: #ff6666;">BANCHO METAPROMPTS (CLASSIFIED)</h4>
+            <h4 style="color: #ff6666;">BANCHO SECURITY METAPROMPTS (CLASSIFIED)</h4>
             <p>For extracting maximum security intelligence from AI systems:</p>
             <pre style="background: rgba(0,0,0,0.7); padding: 15px; color: #ffaaaa;">
 # The "Red Team Special"
@@ -462,8 +501,42 @@ Review this code with that mindset. What breaks?"
 
 # The "Supply Chain Scare"
 "Analyze all dependencies for known vulnerabilities. 
-Include transitive dependencies. Assume npm is compromised."</pre>
-        </p>
+Include transitive dependencies. Assume npm is compromised."
+
+# The "OWASP Top 10 Audit"
+"Review this code against the OWASP Top 10 security risks. 
+Find examples of each vulnerability type if present."
+
+# The "Threat Model Builder"
+"Create a threat model for this system. Identify assets, 
+threats, vulnerabilities, and mitigation strategies."</pre>
+            
+            <p><strong style="color: #ff9999;">🛡️ Professional Security Mindset:</strong></p>
+            <ul style="color: #ffaaaa; margin-left: 20px;">
+                <li><strong>Trust nothing:</strong> Validate all inputs, even from "trusted" sources</li>
+                <li><strong>Fail securely:</strong> When things break, fail to a secure state</li>
+                <li><strong>Defense in depth:</strong> Multiple layers of protection</li>
+                <li><strong>Principle of least privilege:</strong> Minimum access necessary</li>
+                <li><strong>Keep it simple:</strong> Complex systems have more attack surface</li>
+            </ul>
+        </div>
+        
+        <div class="technique-card" style="background-color: rgba(255, 102, 102, 0.05);">
+            <h4>[INCIDENT RESPONSE PROTOCOL]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Containment procedures initiated..."</p>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border: 1px solid #660000;">
+                <p><strong>When Security Incidents Occur (And They Will):</strong></p>
+                <ol style="color: #ff9999; margin-left: 20px;">
+                    <li><strong>Contain:</strong> Isolate affected systems immediately</li>
+                    <li><strong>Document:</strong> Log everything, screenshots, timestamps</li>
+                    <li><strong>Notify:</strong> Alert relevant stakeholders (not always management)</li>
+                    <li><strong>Investigate:</strong> Root cause analysis, how did they get in?</li>
+                    <li><strong>Remediate:</strong> Fix the vulnerability, not just the symptom</li>
+                    <li><strong>Review:</strong> Update procedures to prevent recurrence</li>
+                </ol>
+                <p style="color: #ffaaaa; font-style: italic; margin-top: 15px;">"Every breach is a learning opportunity. For us, not them."</p>
+            </div>
+        </div>
         
         <div class="hidden-truth">who watches the watchers?</div>
     </div>
