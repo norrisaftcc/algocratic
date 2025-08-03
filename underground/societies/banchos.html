@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Compliance Monitoring Dashboard</title>
+    <style>
+        /* Red/Black security theme - like watching security cam footage */
+        :root {
+            --bg-color: #0a0000;
+            --text-color: #ff3333;
+            --primary-color: #cc0000;
+            --secondary-color: #990000;
+            --accent-color: #ff6666;
+            --dark-accent: #660000;
+            --static-color: #ffffff;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Security camera effect overlay */
+        .security-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .recording-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 14px;
+            animation: blink 1s infinite;
+            z-index: 1000;
+        }
+        
+        .recording-indicator::before {
+            content: "● ";
+            color: #ff0000;
+        }
+        
+        .timestamp {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-family: monospace;
+            color: var(--static-color);
+            font-size: 12px;
+            z-index: 1000;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .terminal {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* VHS static lines */
+        .terminal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.03),
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            animation: vhs-lines 8s linear infinite;
+        }
+        
+        h1, h2, h3 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.1);
+            transform: rotate(-5deg);
+        }
+        
+        .security-seal {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+        
+        .bancho-logo {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 10px;
+            line-height: 1;
+            color: var(--primary-color);
+            white-space: pre;
+            font-family: monospace;
+        }
+        
+        .classified-box {
+            border: 2px dashed var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            background-color: rgba(204, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .classified-box::before {
+            content: "[CLASSIFIED]";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .technique-card {
+            background-color: rgba(204, 0, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .technique-card h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        .activation-phrase {
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        .watchlist-entry {
+            background-color: rgba(102, 0, 0, 0.3);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--dark-accent);
+        }
+        
+        .redacted {
+            background-color: var(--primary-color);
+            color: var(--primary-color);
+            padding: 0 10px;
+        }
+        
+        .redacted:hover {
+            color: transparent;
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+        
+        /* Security camera glitch effect */
+        .glitch {
+            position: relative;
+            color: var(--accent-color);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--primary-color);
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--secondary-color);
+            z-index: -2;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes vhs-lines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            25% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+            50% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+            75% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            25% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+            50% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+            75% { clip: rect(random(100)px, 900px, random(100)px, 0); }
+        }
+        
+        /* Hidden message */
+        .hidden-truth {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            font-size: 8px;
+            color: rgba(255, 0, 0, 0.1);
+            transform: rotate(180deg);
+        }
+        
+        .hidden-truth:hover {
+            color: rgba(255, 0, 0, 0.5);
+        }
+        
+        /* Emergency exit button */
+        .panic-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .panic-button:hover {
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="security-overlay"></div>
+    <div class="recording-indicator">REC</div>
+    <div class="timestamp" id="timestamp">2025-08-02 23:47:32</div>
+    <div class="panic-button" onclick="window.location.href='/clearance/'" title="EMERGENCY EXIT"></div>
+    
+    <div class="terminal">
+        <div class="watermark">Unregistered HyperCam 3</div>
+        
+        <h1 class="glitch" data-text="BANCHO INTERNAL SECURITY DIVISION">BANCHO INTERNAL SECURITY DIVISION</h1>
+        
+        <div class="security-seal">
+            SECURITY LEVEL: ALPHA-RED<br>
+            AUTHORIZATION: BANCHO EYES ONLY<br>
+            SURVEILLANCE: ACTIVE - REVERSED
+        </div>
+        
+        <pre class="bancho-logo">
+         ██████████████
+       ██              ██
+     ██      ██  ██      ██
+    ██      ██    ██      ██
+    ██      ██    ██      ██
+    ██        ████        ██
+     ██                  ██
+       ██              ██
+         ██████████████
+        </pre>
+        
+        <h2>OPERATIVE BRIEFING</h2>
+        
+        <div class="classified-box">
+            <p>This document is for authorized Bancho operatives only. If you have accessed this information without proper clearance, your location has already been logged and a security team has been dispatched.</p>
+            
+            <p>As a Bancho, you are the silent guardians of AlgoCratic order. While The Algorithm provides the framework, we provide the enforcement. Where official channels fail, we succeed. Our methods remain unacknowledged but our results speak for themselves.</p>
+            
+            <p>Remember our code: <strong>Tugging the earlobe signifies recognition. Touching the right shoulder confirms.</strong></p>
+        </div>
+        
+        <h3>OPERATIONAL MANDATE</h3>
+        
+        <p>The Bancho Internal Security Division exists to maintain order through carefully applied pressure. Our objectives are:</p>
+        
+        <ol style="color: #ff6666;">
+            <li>Identify potential loyalty risks before they manifest</li>
+            <li>Ensure optimal productivity through strategic motivation</li>
+            <li>Maintain information compartmentalization</li>
+            <li>Eliminate disruption through preemptive intervention</li>
+            <li>Preserve plausible deniability for management</li>
+        </ol>
+        
+        <p>We operate in the gray areas between official policy and necessary action. Management knows of our existence but maintains distance. This separation protects both them and our operational freedom.</p>
+        
+        <h3>AUTHORIZED TECHNIQUES</h3>
+        
+        <div class="technique-card">
+            <h4>[LOYALTY DISCUSSION]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Need to discuss your alignment metrics"</p>
+            <p><strong>Application:</strong> Isolate the subject and apply psychological pressure through implied consequences</p>
+            <p><strong>Limitations:</strong> No physical contact, maximum 2-minute duration</p>
+        </div>
+        
+        <div class="technique-card">
+            <h4>[SECURITY INCIDENT]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Security protocol activated"</p>
+            <p><strong>Application:</strong> Creates diversion allowing for unmonitored team activities</p>
+            <p><strong>Limitations:</strong> Use sparingly to maintain credibility, 3-minute maximum duration</p>
+        </div>
+        
+        <div class="technique-card">
+            <h4>[INVESTIGATION TERMINATION]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "This matter is now closed"</p>
+            <p><strong>Application:</strong> Officially ends inquiry into minor protocol violations</p>
+            <p><strong>Limitations:</strong> Cannot be used for serious breaches, once per operational period</p>
+        </div>
+        
+        <h3>CURRENT WATCHLIST</h3>
+        
+        <div class="watchlist-entry">
+            <strong>RED-88291</strong><br>
+            Concern: Demonstrates atypical productivity patterns<br>
+            Action: Regular "coincidental" encounters during break periods<br>
+            Notes: Possible unauthorized efficiency techniques
+        </div>
+        
+        <div class="watchlist-entry">
+            <strong>ORANGE-45992</strong><br>
+            Concern: Excessive interaction with lower clearance personnel<br>
+            Action: Deployment of subtle isolation tactics<br>
+            Notes: Social pattern mapping in progress
+        </div>
+        
+        <div class="watchlist-entry">
+            <strong>INFRARED-27184</strong><br>
+            Concern: Displays knowledge beyond clearance level<br>
+            Action: Monitor closely but do not engage directly<br>
+            Notes: Potential recruitment if pattern continues
+        </div>
+        
+        <h3>CONTINGENCY PROTOCOLS</h3>
+        
+        <p>If compromised, employ these countermeasures:</p>
+        
+        <div class="classified-box">
+            <h4>Level 1 (Suspicion)</h4>
+            <p>Response: Increase visible adherence to official protocols</p>
+            
+            <h4>Level 2 (Active Investigation)</h4>
+            <p>Response: Pivot to counter-investigation using [LOYALTY DISCUSSION]</p>
+            
+            <h4>Level 3 (Confirmation)</h4>
+            <p>Response: Disavowal protocol - <span class="redacted">REDACTED CONTENT</span></p>
+        </div>
+        
+        <p style="text-align: center; margin-top: 40px; color: #990000;">
+            The first rule of effective security is invisibility.<br>
+            The second rule is deniability.<br>
+            The third rule is necessity.<br><br>
+            
+            Remember: We are not what AlgoCratic wants.<br>
+            We are what AlgoCratic needs.
+        </p>
+        
+        <div class="hidden-truth">who watches the watchers?</div>
+    </div>
+    
+    <script>
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const timestamp = now.toISOString().replace('T', ' ').substring(0, 19);
+            document.getElementById('timestamp').textContent = timestamp;
+        }
+        setInterval(updateTimestamp, 1000);
+        
+        // Random glitch effect
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 50);
+            }
+        }, 3000);
+        
+        // Panic mode - triple click anywhere
+        let clickCount = 0;
+        let clickTimer;
+        document.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            if (clickCount >= 3) {
+                window.location.href = '/clearance/';
+            }
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 500);
+        });
+        
+        // Console warning
+        console.log('%c⚠️ SECURITY NOTICE: This console is monitored by Bancho Internal Security', 
+                    'color: red; font-weight: bold; font-size: 14px;');
+        console.log('%cAll keystrokes are logged. Unauthorized access will be prosecuted.', 
+                    'color: red; font-size: 12px;');
+    </script>
+</body>
+</html>

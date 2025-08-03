@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fuzzies - Definitely Not a Secret Society</title>
+    <style>
+        /* Soft, cozy aesthetic */
+        :root {
+            --bg-color: #2a1f3a;
+            --text-color: #ffd4e5;
+            --primary-color: #ff69b4;
+            --secondary-color: #da70d6;
+            --accent-color: #ffb6c1;
+            --soft-bg: rgba(255, 182, 193, 0.1);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(218, 112, 214, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .fuzzy-box {
+            background-color: var(--soft-bg);
+            border: 2px dashed var(--secondary-color);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fuzzy-box::before {
+            content: "✨";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2em;
+            opacity: 0.5;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        
+        .welcome-message {
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 105, 180, 0.1);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .activity-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateX(10px);
+        }
+        
+        .activity-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .emoji-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .emoji-list li {
+            padding: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .emoji-list li::before {
+            content: "🌟 ";
+            color: var(--accent-color);
+        }
+        
+        .cosplay-section {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(218, 112, 214, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+        
+        .secret-message {
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 50px;
+            transition: color 0.5s ease;
+        }
+        
+        .secret-message:hover {
+            color: var(--accent-color);
+        }
+        
+        .fuzzy-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            border-top: 1px dashed var(--secondary-color);
+        }
+        
+        /* Floating hearts animation */
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: float-up 10s linear infinite;
+            z-index: -1;
+        }
+        
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .heart:nth-child(3) { left: 50%; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 70%; animation-delay: 6s; }
+        .heart:nth-child(5) { left: 90%; animation-delay: 8s; }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts -->
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💝</div>
+    <div class="heart">💓</div>
+    
+    <div class="container">
+        <h1>🌈 The Fuzzies 🌈</h1>
+        <p class="subtitle">A Completely Normal Social Club for AlgoCratic Employees</p>
+        
+        <div class="welcome-message">
+            <p><strong>Yes, you can still do that. I'm not going to ask though.</strong></p>
+            <p>Welcome to The Fuzzies! We're just a group of friends who like to hang out and definitely not plan anything subversive whatsoever. 😊</p>
+        </div>
+        
+        <div class="fuzzy-box">
+            <h2>What We're About</h2>
+            <p>The Fuzzies is a social organization dedicated to bringing joy, creativity, and a little bit of whimsy to the sometimes-sterile corridors of AlgoCratic Futures™. We believe that happiness isn't just mandatory—it should be genuine!</p>
+            
+            <p>Our activities are completely above-board and in no way undermine corporate authority. We simply enjoy:</p>
+            
+            <ul class="emoji-list">
+                <li>Weekly cosplay meetups (Fridays are Fursuit Fridays!)</li>
+                <li>Craft circles where we make adorable desk decorations</li>
+                <li>Potluck lunches featuring comfort foods from around the world</li>
+                <li>Movie nights screening feel-good films and anime</li>
+                <li>Supporting each other through the totally normal stress of corporate life</li>
+            </ul>
+        </div>
+        
+        <div class="cosplay-section">
+            <h2>🎭 Our Cosplay Philosophy</h2>
+            <p>Cosplay isn't just a hobby—it's a way to express ourselves beyond our clearance colors! Whether you're into elaborate fursuits, anime characters, or just want to wear cat ears to brighten your day, The Fuzzies welcomes you!</p>
+            
+            <div class="activity-card">
+                <h3>Upcoming Theme Weeks</h3>
+                <p><strong>Next Week:</strong> Magical Girl Monday - Transform into your favorite magical guardian!</p>
+                <p><strong>Following Week:</strong> Cyberpunk Creatures - Blend tech with fluff!</p>
+                <p><strong>Month's End:</strong> The Great Onesie Rebellion - Maximum comfort, maximum cute!</p>
+            </div>
+        </div>
+        
+        <div class="fuzzy-box">
+            <h2>How to Join</h2>
+            <p>Membership in The Fuzzies is open to all clearance levels! We don't discriminate based on your color coding. To join, simply:</p>
+            
+            <ol style="color: var(--accent-color);">
+                <li>Show up to any of our events wearing something fuzzy, sparkly, or adorable</li>
+                <li>Bring a snack to share (homemade cookies are especially welcome)</li>
+                <li>Be ready to compliment at least three people on their outfits</li>
+                <li>Leave your corporate stress at the door</li>
+            </ol>
+            
+            <p>Our recognition signal? A genuine smile and jazz hands. That's it. We're not complicated.</p>
+        </div>
+        
+        <div class="activity-card">
+            <h3>🍰 This Week's Activities</h3>
+            <p><strong>Monday:</strong> Stress Ball Decorating Workshop (Conference Room B-12)</p>
+            <p><strong>Wednesday:</strong> Anime Lunch Watch Party (Bring your own bento!)</p>
+            <p><strong>Friday:</strong> Fursuit Friday Fashion Show (After hours in the main lobby)</p>
+            <p><strong>Saturday:</strong> Community Craft Fair (Selling handmade items for charity)</p>
+        </div>
+        
+        <div class="fuzzy-box">
+            <h2>Our Secret Power</h2>
+            <p>The only "power" The Fuzzies have is the power of friendship, mutual support, and really good hugs. We've found that when people feel genuinely happy and supported, they:</p>
+            
+            <ul class="emoji-list">
+                <li>Write better code (happiness reduces bugs by 73%!)</li>
+                <li>Help each other without being asked</li>
+                <li>Share knowledge freely across clearance levels</li>
+                <li>Create innovative solutions through joy-driven collaboration</li>
+                <li>Somehow always have extra snacks when someone forgets lunch</li>
+            </ul>
+            
+            <p>Is this subversive? We don't think so. We're just making AlgoCratic a little softer, one fuzzy gathering at a time.</p>
+        </div>
+        
+        <p class="secret-message">
+            The real algorithm is the friends we made along the way 💖
+        </p>
+        
+        <div class="fuzzy-footer">
+            <p>Remember: Be kind, be fuzzy, be yourself!</p>
+            <p style="font-size: 2em;">🦊🐰🐱🐶🦝🐨🦁🐯</p>
+            <p style="font-size: 0.8em; opacity: 0.7;">The Fuzzies meet in the basement recreation room every Friday at 5 PM. BYOC (Bring Your Own Costume)</p>
+        </div>
+    </div>
+    
+    <script>
+        // Add sparkles on mouse movement
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.1) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = '20px';
+                sparkle.style.transition = 'all 1s ease-out';
+                sparkle.style.opacity = '1';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.style.transform = 'translateY(-50px)';
+                    sparkle.style.opacity = '0';
+                }, 100);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1100);
+            }
+        });
+        
+        // Console message
+        console.log('%c🌈 Welcome to The Fuzzies! 🌈', 
+                    'color: #ff69b4; font-size: 20px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);');
+        console.log('%cRemember: Happiness is mandatory, but with us, it\'s also genuine! 💖', 
+                    'color: #ffb6c1; font-size: 14px;');
+    </script>
+</body>
+</html>
