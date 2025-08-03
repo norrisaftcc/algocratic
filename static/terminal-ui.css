@@ -1,0 +1,791 @@
+/*
+ * AlgoCratic Terminal UI Component Library
+ * CLASSIFICATION: ORANGE CLEARANCE
+ * 
+ * Standardized terminal-style UI components for consistent
+ * styling across the AlgoCratic ecosystem.
+ * 
+ * THE ALGORITHM APPRECIATES STANDARDIZATION
+ */
+
+/* === Core Terminal Variables === */
+:root {
+    /* Terminal-specific colors */
+    --term-bg: #0a0a0a;
+    --term-fg: #00ff41;
+    --term-fg-secondary: #cccccc;
+    --term-fg-muted: #808080;
+    --term-border: #333333;
+    --term-border-active: #00ff41;
+    --term-accent: #ff3030;
+    --term-warning: #ffff00;
+    --term-success: #00ff00;
+    
+    /* Terminal typography */
+    --term-font: 'Courier New', 'Monaco', 'Menlo', monospace;
+    --term-font-size: 14px;
+    --term-line-height: 1.4;
+    
+    /* Terminal spacing */
+    --term-padding-sm: 8px;
+    --term-padding-md: 15px;
+    --term-padding-lg: 20px;
+    
+    /* Terminal effects */
+    --term-glow: 0 0 10px var(--term-fg);
+    --term-transition: all 0.2s ease;
+}
+
+/* === 1. Terminal Window === */
+.terminal-window {
+    background-color: var(--term-bg);
+    border: 2px solid var(--term-border);
+    border-radius: 4px;
+    font-family: var(--term-font);
+    color: var(--term-fg);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: var(--term-padding-sm) var(--term-padding-md);
+    border-bottom: 1px solid var(--term-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.terminal-title {
+    color: var(--term-fg);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-close {
+    color: var(--term-accent);
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--term-transition);
+}
+
+.terminal-close:hover {
+    color: #ffffff;
+    text-shadow: var(--term-glow);
+}
+
+.terminal-body {
+    padding: var(--term-padding-md);
+    min-height: 200px;
+    background-color: rgba(0, 0, 0, 0.9);
+    white-space: pre-wrap;
+    font-size: var(--term-font-size);
+    line-height: var(--term-line-height);
+    overflow-y: auto;
+}
+
+/* Terminal scan line effect */
+.terminal-window::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 2px,
+        rgba(0, 255, 65, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* === 2. Terminal Button === */
+.term-btn {
+    background-color: transparent;
+    color: var(--term-fg);
+    border: 2px solid var(--term-fg);
+    padding: var(--term-padding-sm) var(--term-padding-md);
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--term-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.term-btn:hover {
+    background-color: var(--term-fg);
+    color: var(--term-bg);
+    box-shadow: var(--term-glow);
+    transform: translateY(-1px);
+}
+
+.term-btn:active {
+    transform: translateY(0);
+}
+
+.term-btn--primary {
+    border-color: var(--term-success);
+    color: var(--term-success);
+}
+
+.term-btn--primary:hover {
+    background-color: var(--term-success);
+    color: var(--term-bg);
+    box-shadow: 0 0 10px var(--term-success);
+}
+
+.term-btn--danger {
+    border-color: var(--term-accent);
+    color: var(--term-accent);
+}
+
+.term-btn--danger:hover {
+    background-color: var(--term-accent);
+    color: var(--term-bg);
+    box-shadow: 0 0 10px var(--term-accent);
+}
+
+.term-btn--warning {
+    border-color: var(--term-warning);
+    color: var(--term-warning);
+}
+
+.term-btn--warning:hover {
+    background-color: var(--term-warning);
+    color: var(--term-bg);
+    box-shadow: 0 0 10px var(--term-warning);
+}
+
+.term-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--term-fg-muted);
+    border-color: var(--term-fg-muted);
+}
+
+.term-btn:disabled:hover {
+    background-color: transparent;
+    color: var(--term-fg-muted);
+    box-shadow: none;
+    transform: none;
+}
+
+/* Button loading effect */
+.term-btn--loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: termBtnScan 1.5s infinite;
+}
+
+@keyframes termBtnScan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* === 3. Terminal Input === */
+.term-input-group {
+    margin: var(--term-padding-sm) 0;
+}
+
+.term-label {
+    display: block;
+    color: var(--term-fg);
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.term-input {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--term-border);
+    color: var(--term-fg);
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    padding: var(--term-padding-sm);
+    width: 100%;
+    transition: var(--term-transition);
+}
+
+.term-input:focus {
+    outline: none;
+    border-color: var(--term-border-active);
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    background-color: rgba(0, 255, 65, 0.05);
+}
+
+.term-input::placeholder {
+    color: var(--term-fg-muted);
+    font-style: italic;
+}
+
+/* Input with prompt indicator */
+.term-input-prompt {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--term-border);
+    padding: var(--term-padding-sm);
+    transition: var(--term-transition);
+}
+
+.term-input-prompt:focus-within {
+    border-color: var(--term-border-active);
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+
+.term-prompt-symbol {
+    color: var(--term-fg);
+    margin-right: var(--term-padding-sm);
+    font-weight: bold;
+    user-select: none;
+}
+
+.term-input-prompt .term-input {
+    border: none;
+    background: transparent;
+    padding: 0;
+    flex: 1;
+}
+
+.term-input-prompt .term-input:focus {
+    box-shadow: none;
+    background: transparent;
+}
+
+/* === 4. ASCII Box === */
+.ascii-box {
+    font-family: var(--term-font);
+    color: var(--term-fg);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: var(--term-padding-md);
+    margin: var(--term-padding-md) 0;
+    border: 1px solid var(--term-border);
+    white-space: pre;
+    font-size: var(--term-font-size);
+    line-height: var(--term-line-height);
+}
+
+.ascii-box--simple {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--term-fg);
+}
+
+.ascii-box--double {
+    border-style: double;
+    border-width: 3px;
+    border-color: var(--term-fg);
+}
+
+.ascii-box--warning {
+    border-color: var(--term-warning);
+    color: var(--term-warning);
+}
+
+.ascii-box--danger {
+    border-color: var(--term-accent);
+    color: var(--term-accent);
+}
+
+.ascii-box--success {
+    border-color: var(--term-success);
+    color: var(--term-success);
+}
+
+/* ASCII Art helpers */
+.ascii-header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: var(--term-padding-sm);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.ascii-content {
+    margin: var(--term-padding-sm) 0;
+}
+
+.ascii-footer {
+    text-align: center;
+    margin-top: var(--term-padding-sm);
+    color: var(--term-fg-muted);
+    font-size: 12px;
+}
+
+/* === 5. Progress Bar === */
+.term-progress {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--term-border);
+    padding: 4px;
+    margin: var(--term-padding-sm) 0;
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+}
+
+.term-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--term-fg);
+    position: relative;
+}
+
+.term-progress-fill {
+    background-color: var(--term-fg);
+    height: 20px;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.term-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: termProgressScan 2s infinite;
+}
+
+@keyframes termProgressScan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.term-progress-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: var(--term-bg);
+    text-shadow: 1px 1px 0 var(--term-fg);
+    z-index: 2;
+}
+
+/* ASCII-style progress bars */
+.term-progress-ascii {
+    font-family: var(--term-font);
+    color: var(--term-fg);
+    font-size: var(--term-font-size);
+    white-space: nowrap;
+}
+
+.term-progress-ascii .progress-label {
+    margin-right: var(--term-padding-sm);
+}
+
+.term-progress-ascii .progress-brackets {
+    color: var(--term-fg-secondary);
+}
+
+.term-progress-ascii .progress-filled {
+    color: var(--term-success);
+    background-color: var(--term-success);
+}
+
+.term-progress-ascii .progress-empty {
+    color: var(--term-fg-muted);
+}
+
+.term-progress-ascii .progress-percent {
+    margin-left: var(--term-padding-sm);
+    color: var(--term-fg);
+}
+
+/* === 6. Alert/Notice === */
+.term-alert {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-left: 4px solid var(--term-fg);
+    color: var(--term-fg);
+    padding: var(--term-padding-md);
+    margin: var(--term-padding-md) 0;
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    position: relative;
+}
+
+.term-alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 255, 65, 0.02) 10px,
+        rgba(0, 255, 65, 0.02) 20px
+    );
+    pointer-events: none;
+}
+
+.term-alert-icon {
+    font-weight: bold;
+    margin-right: var(--term-padding-sm);
+    display: inline-block;
+    min-width: 20px;
+}
+
+.term-alert-content {
+    position: relative;
+    z-index: 1;
+}
+
+.term-alert--info {
+    border-left-color: var(--term-fg);
+    color: var(--term-fg);
+}
+
+.term-alert--warning {
+    border-left-color: var(--term-warning);
+    color: var(--term-warning);
+}
+
+.term-alert--warning::before {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 0, 0.02) 10px,
+        rgba(255, 255, 0, 0.02) 20px
+    );
+}
+
+.term-alert--danger {
+    border-left-color: var(--term-accent);
+    color: var(--term-accent);
+    animation: termAlertFlash 2s infinite;
+}
+
+.term-alert--danger::before {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 48, 48, 0.02) 10px,
+        rgba(255, 48, 48, 0.02) 20px
+    );
+}
+
+.term-alert--success {
+    border-left-color: var(--term-success);
+    color: var(--term-success);
+}
+
+.term-alert--success::before {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 255, 0, 0.02) 10px,
+        rgba(0, 255, 0, 0.02) 20px
+    );
+}
+
+@keyframes termAlertFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Alert title */
+.term-alert-title {
+    font-weight: bold;
+    margin-bottom: var(--term-padding-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* === 7. Terminal Table === */
+.term-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--term-fg);
+    margin: var(--term-padding-md) 0;
+}
+
+.term-table th,
+.term-table td {
+    border: 1px solid var(--term-border);
+    padding: var(--term-padding-sm);
+    text-align: left;
+}
+
+.term-table th {
+    background-color: rgba(0, 255, 65, 0.1);
+    color: var(--term-fg);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.term-table tr:nth-child(even) {
+    background-color: rgba(0, 255, 65, 0.02);
+}
+
+.term-table tr:hover {
+    background-color: rgba(0, 255, 65, 0.05);
+}
+
+/* === 8. Terminal List === */
+.term-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--term-font);
+    color: var(--term-fg);
+}
+
+.term-list li {
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+    position: relative;
+    padding-left: 20px;
+}
+
+.term-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--term-fg);
+    font-weight: bold;
+}
+
+.term-list--numbered {
+    counter-reset: term-counter;
+}
+
+.term-list--numbered li {
+    counter-increment: term-counter;
+}
+
+.term-list--numbered li::before {
+    content: counter(term-counter) '.';
+    min-width: 20px;
+}
+
+.term-list--bullets li::before {
+    content: '■';
+}
+
+.term-list--arrows li::before {
+    content: '→';
+}
+
+/* === 9. Terminal Code Block === */
+.term-code {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--term-border);
+    color: var(--term-fg);
+    font-family: var(--term-font);
+    font-size: var(--term-font-size);
+    padding: var(--term-padding-md);
+    margin: var(--term-padding-md) 0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    position: relative;
+}
+
+.term-code::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(0, 255, 65, 0.03) 20px,
+        rgba(0, 255, 65, 0.03) 21px
+    );
+    pointer-events: none;
+}
+
+.term-code-header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: var(--term-padding-sm);
+    margin: calc(-1 * var(--term-padding-md)) calc(-1 * var(--term-padding-md)) var(--term-padding-sm);
+    border-bottom: 1px solid var(--term-border);
+    font-size: 12px;
+    color: var(--term-fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === 10. Terminal Status === */
+.term-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    font-family: var(--term-font);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+}
+
+.term-status--online {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: var(--term-success);
+    border: 1px solid var(--term-success);
+}
+
+.term-status--offline {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: var(--term-accent);
+    border: 1px solid var(--term-accent);
+}
+
+.term-status--pending {
+    background-color: rgba(255, 255, 0, 0.2);
+    color: var(--term-warning);
+    border: 1px solid var(--term-warning);
+}
+
+.term-status--unknown {
+    background-color: rgba(128, 128, 128, 0.2);
+    color: var(--term-fg-muted);
+    border: 1px solid var(--term-fg-muted);
+}
+
+.term-status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: termStatusPulse 2s infinite;
+}
+
+@keyframes termStatusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .terminal-window {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .terminal-body {
+        padding: var(--term-padding-sm);
+        min-height: 150px;
+    }
+    
+    .term-btn {
+        display: block;
+        width: 100%;
+        margin: var(--term-padding-sm) 0;
+    }
+    
+    .term-input-prompt {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .term-prompt-symbol {
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+    
+    .term-table {
+        font-size: 12px;
+    }
+    
+    .term-table th,
+    .term-table td {
+        padding: 4px;
+    }
+}
+
+/* === Utility Classes === */
+.term-text-center { text-align: center; }
+.term-text-right { text-align: right; }
+.term-text-uppercase { text-transform: uppercase; }
+.term-text-bold { font-weight: bold; }
+
+.term-color-primary { color: var(--term-fg); }
+.term-color-secondary { color: var(--term-fg-secondary); }
+.term-color-muted { color: var(--term-fg-muted); }
+.term-color-success { color: var(--term-success); }
+.term-color-warning { color: var(--term-warning); }
+.term-color-danger { color: var(--term-accent); }
+
+.term-bg-primary { background-color: var(--term-bg); }
+.term-bg-secondary { background-color: rgba(0, 0, 0, 0.8); }
+
+.term-border { border: 1px solid var(--term-border); }
+.term-border-active { border: 1px solid var(--term-border-active); }
+
+.term-glow { box-shadow: var(--term-glow); }
+.term-no-glow { box-shadow: none; }
+
+/* === Animation Classes === */
+.term-flicker {
+    animation: termFlicker 3s infinite;
+}
+
+@keyframes termFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+    75% { opacity: 0.9; }
+}
+
+.term-typing::after {
+    content: '_';
+    animation: termCursor 1s infinite;
+}
+
+@keyframes termCursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.term-scan {
+    position: relative;
+    overflow: hidden;
+}
+
+.term-scan::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+    animation: termScanLine 3s infinite;
+}
+
+@keyframes termScanLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}

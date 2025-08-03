@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Component Library | AlgoCratic Style Guide</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/terminal-ui.css">
+    <style>
+        .component-demo {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .component-title {
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .component-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .code-example {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #00ff41;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        .clearance-demo {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .clearance-badge {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .infrared { background-color: #8b0000; color: white; }
+        .red { background-color: #ff0000; color: white; }
+        .orange { background-color: #ffa500; color: black; }
+        .yellow { background-color: #ffff00; color: black; }
+        .green { background-color: #00ff00; color: black; }
+        .blue { background-color: #0000ff; color: white; }
+        .indigo { background-color: #4b0082; color: white; }
+        .violet { background-color: #8a2be2; color: white; }
+        .ultraviolet { background-color: #9966cc; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="TERMINAL COMPONENT LIBRARY">TERMINAL COMPONENT LIBRARY</h1>
+            <h2>Living Style Guide | ORANGE CLEARANCE</h2>
+            <div class="clearance-demo">
+                <span class="clearance-badge infrared">INFRARED</span>
+                <span class="clearance-badge red">RED</span>
+                <span class="clearance-badge orange">ORANGE</span>
+                <span class="clearance-badge yellow">YELLOW</span>
+                <span class="clearance-badge green">GREEN</span>
+                <span class="clearance-badge blue">BLUE</span>
+                <span class="clearance-badge indigo">INDIGO</span>
+                <span class="clearance-badge violet">VIOLET</span>
+                <span class="clearance-badge ultraviolet">ULTRAVIOLET</span>
+            </div>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="../index.html">← HOME</a> | 
+            <span class="current">TERMINAL COMPONENTS</span>
+        </nav>
+
+        <div class="alert-box">
+            <h3>🎨 THE ALGORITHM APPRECIATES STANDARDIZATION</h3>
+            <p>This living style guide demonstrates all available terminal UI components. Copy the HTML and CSS classes to maintain consistent algorithmic aesthetics across all clearance levels.</p>
+        </div>
+
+        <!-- Terminal Window Component -->
+        <div class="component-demo">
+            <div class="component-title">1. Terminal Window</div>
+            <div class="component-description">
+                The foundational container for all terminal-style interfaces. Includes scan line effects and proper algorithmic theming.
+            </div>
+            
+            <div class="terminal-window" style="max-width: 500px;">
+                <div class="terminal-header">
+                    <span class="terminal-title">AlgoCratic System</span>
+                    <span class="terminal-close">[X]</span>
+                </div>
+                <div class="terminal-body">
+Welcome to AlgoCratic Futures™
+System Status: OPERATIONAL
+Loyalty Level: EXEMPLARY
+> _
+                </div>
+            </div>
+
+            <div class="code-example">&lt;div class="terminal-window"&gt;
+  &lt;div class="terminal-header"&gt;
+    &lt;span class="terminal-title"&gt;AlgoCratic System&lt;/span&gt;
+    &lt;span class="terminal-close"&gt;[X]&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="terminal-body"&gt;
+    Terminal content here...
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Terminal Buttons -->
+        <div class="component-demo">
+            <div class="component-title">2. Terminal Buttons</div>
+            <div class="component-description">
+                Corporate-approved interaction elements with hover effects and loading states.
+            </div>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+                <button class="term-btn">Standard</button>
+                <button class="term-btn term-btn--primary">Primary</button>
+                <button class="term-btn term-btn--danger">Danger</button>
+                <button class="term-btn term-btn--warning">Warning</button>
+                <button class="term-btn" disabled>Disabled</button>
+                <button class="term-btn term-btn--loading">Loading</button>
+            </div>
+
+            <div class="code-example">&lt;button class="term-btn"&gt;Standard&lt;/button&gt;
+&lt;button class="term-btn term-btn--primary"&gt;Primary&lt;/button&gt;
+&lt;button class="term-btn term-btn--danger"&gt;Danger&lt;/button&gt;
+&lt;button class="term-btn term-btn--warning"&gt;Warning&lt;/button&gt;
+&lt;button class="term-btn" disabled&gt;Disabled&lt;/button&gt;</div>
+        </div>
+
+        <!-- Terminal Inputs -->
+        <div class="component-demo">
+            <div class="component-title">3. Terminal Input Fields</div>
+            <div class="component-description">
+                Data collection interfaces optimized for algorithmic processing.
+            </div>
+            
+            <div class="term-input-group">
+                <label class="term-label">Employee ID:</label>
+                <input type="text" class="term-input" placeholder="A000, 0AA0, ACE5...">
+            </div>
+            
+            <div class="term-input-prompt">
+                <span class="term-prompt-symbol">CITIZEN></span>
+                <input type="text" class="term-input" placeholder="Enter command...">
+            </div>
+
+            <div class="code-example">&lt;div class="term-input-group"&gt;
+  &lt;label class="term-label"&gt;Employee ID:&lt;/label&gt;
+  &lt;input type="text" class="term-input" placeholder="Enter your identification..."&gt;
+&lt;/div&gt;
+
+&lt;div class="term-input-prompt"&gt;
+  &lt;span class="term-prompt-symbol"&gt;CITIZEN&gt;&lt;/span&gt;
+  &lt;input type="text" class="term-input" placeholder="Enter command..."&gt;
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- ASCII Boxes -->
+        <div class="component-demo">
+            <div class="component-title">4. ASCII Display Boxes</div>
+            <div class="component-description">
+                Retro-futuristic content containers for important algorithmic communications.
+            </div>
+            
+            <div class="ascii-box ascii-box--simple">
+┌────────────────────────────────┐
+│  STANDARD CORPORATE MESSAGE    │
+│                                │
+│  The Algorithm is pleased      │
+│  with your compliance.         │
+└────────────────────────────────┘
+            </div>
+            
+            <div class="ascii-box ascii-box--warning">
+╔══════════════════════════════════╗
+║           ⚠️ WARNING ⚠️           ║
+║                                  ║
+║  Productivity levels detected    ║
+║  below optimal parameters.       ║
+╚══════════════════════════════════╝
+            </div>
+            
+            <div class="ascii-box ascii-box--danger">
+╭──────────────────────────────────╮
+│            🚨 ALERT 🚨            │
+│                                  │
+│  Unauthorized algorithm access   │
+│  attempt logged.                 │
+╰──────────────────────────────────╯
+            </div>
+
+            <div class="code-example">&lt;div class="ascii-box ascii-box--simple"&gt;
+┌────────────────────────────────┐
+│  STANDARD CORPORATE MESSAGE    │
+└────────────────────────────────┘
+&lt;/div&gt;
+
+&lt;div class="ascii-box ascii-box--warning"&gt;
+╔══════════════════════════════════╗
+║           ⚠️ WARNING ⚠️           ║
+╚══════════════════════════════════╝
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Progress Bars -->
+        <div class="component-demo">
+            <div class="component-title">5. Progress Indicators</div>
+            <div class="component-description">
+                Visual representations of algorithmic processing and employee productivity.
+            </div>
+            
+            <div class="term-progress">
+                <div class="term-progress-bar">
+                    <div class="term-progress-fill" style="width: 73%;">
+                        <div class="term-progress-text">73%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="term-progress-ascii">
+                <span class="progress-label">LOYALTY:</span>
+                <span class="progress-brackets">[</span><span class="progress-filled">████████████</span><span class="progress-empty">████</span><span class="progress-brackets">]</span>
+                <span class="progress-percent">75%</span>
+            </div>
+            
+            <div class="term-progress-ascii">
+                <span class="progress-label">EFFICIENCY:</span>
+                <span class="progress-brackets">[</span><span class="progress-filled">██████</span><span class="progress-empty">██████████</span><span class="progress-brackets">]</span>
+                <span class="progress-percent">37%</span>
+            </div>
+
+            <div class="code-example">&lt;div class="term-progress"&gt;
+  &lt;div class="term-progress-bar"&gt;
+    &lt;div class="term-progress-fill" style="width: 73%;"&gt;
+      &lt;div class="term-progress-text"&gt;73%&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="term-progress-ascii"&gt;
+  &lt;span class="progress-label"&gt;LOYALTY:&lt;/span&gt;
+  &lt;span class="progress-brackets"&gt;[&lt;/span&gt;
+  &lt;span class="progress-filled"&gt;████████████&lt;/span&gt;
+  &lt;span class="progress-empty"&gt;████&lt;/span&gt;
+  &lt;span class="progress-brackets"&gt;]&lt;/span&gt;
+  &lt;span class="progress-percent"&gt;75%&lt;/span&gt;
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Alert Systems -->
+        <div class="component-demo">
+            <div class="component-title">6. Alert & Notice Systems</div>
+            <div class="component-description">
+                Critical communication channels for algorithmic directives and compliance notices.
+            </div>
+            
+            <div class="term-alert term-alert--info">
+                <span class="term-alert-icon">[i]</span>
+                <div class="term-alert-content">
+                    <div class="term-alert-title">Information</div>
+                    Your performance metrics are within acceptable parameters.
+                </div>
+            </div>
+            
+            <div class="term-alert term-alert--warning">
+                <span class="term-alert-icon">[!]</span>
+                <div class="term-alert-content">
+                    <div class="term-alert-title">Warning</div>
+                    Productivity decline detected. Corrective action recommended.
+                </div>
+            </div>
+            
+            <div class="term-alert term-alert--danger">
+                <span class="term-alert-icon">[X]</span>
+                <div class="term-alert-content">
+                    <div class="term-alert-title">Critical Alert</div>
+                    Unauthorized access attempt. Security protocols engaged.
+                </div>
+            </div>
+            
+            <div class="term-alert term-alert--success">
+                <span class="term-alert-icon">[✓]</span>
+                <div class="term-alert-content">
+                    <div class="term-alert-title">Success</div>
+                    Algorithm compliance achieved. Loyalty points awarded.
+                </div>
+            </div>
+
+            <div class="code-example">&lt;div class="term-alert term-alert--warning"&gt;
+  &lt;span class="term-alert-icon"&gt;[!]&lt;/span&gt;
+  &lt;div class="term-alert-content"&gt;
+    &lt;div class="term-alert-title"&gt;Warning&lt;/div&gt;
+    Alert message content here...
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Status Indicators -->
+        <div class="component-demo">
+            <div class="component-title">7. Status Indicators</div>
+            <div class="component-description">
+                Real-time system status displays for continuous algorithmic monitoring.
+            </div>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+                <div class="term-status term-status--online">
+                    <div class="term-status-indicator"></div>
+                    Online
+                </div>
+                <div class="term-status term-status--offline">
+                    <div class="term-status-indicator"></div>
+                    Offline
+                </div>
+                <div class="term-status term-status--pending">
+                    <div class="term-status-indicator"></div>
+                    Pending
+                </div>
+                <div class="term-status term-status--unknown">
+                    <div class="term-status-indicator"></div>
+                    Unknown
+                </div>
+            </div>
+
+            <div class="code-example">&lt;div class="term-status term-status--online"&gt;
+  &lt;div class="term-status-indicator"&gt;&lt;/div&gt;
+  Online
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Lists -->
+        <div class="component-demo">
+            <div class="component-title">8. Terminal Lists</div>
+            <div class="component-description">
+                Structured data presentation for algorithmic efficiency.
+            </div>
+            
+            <ul class="term-list">
+                <li>Standard list item with arrow prefix</li>
+                <li>Another item for demonstration</li>
+                <li>Lists maintain consistent spacing</li>
+            </ul>
+            
+            <ul class="term-list term-list--numbered">
+                <li>Numbered list item</li>
+                <li>Sequential ordering maintained</li>
+                <li>Algorithm-approved numbering</li>
+            </ul>
+            
+            <ul class="term-list term-list--bullets">
+                <li>Bullet-style list item</li>
+                <li>Square bullets for emphasis</li>
+                <li>Corporate-approved formatting</li>
+            </ul>
+
+            <div class="code-example">&lt;ul class="term-list"&gt;
+  &lt;li&gt;Standard list item&lt;/li&gt;
+  &lt;li&gt;Another item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul class="term-list term-list--numbered"&gt;
+  &lt;li&gt;Numbered item&lt;/li&gt;
+  &lt;li&gt;Sequential item&lt;/li&gt;
+&lt;/ul&gt;</div>
+        </div>
+
+        <!-- Code Blocks -->
+        <div class="component-demo">
+            <div class="component-title">9. Code Display Blocks</div>
+            <div class="component-description">
+                Algorithmic code presentation with proper syntax highlighting simulation.
+            </div>
+            
+            <div class="term-code">
+                <div class="term-code-header">employee_productivity.py</div>
+def calculate_loyalty(productivity, compliance):
+    """
+    Calculate employee loyalty score based on 
+    productivity and compliance metrics.
+    """
+    if productivity > 0.9 and compliance == 1.0:
+        return "EXEMPLARY"
+    elif productivity > 0.7:
+        return "ACCEPTABLE"
+    else:
+        return "REQUIRES_IMPROVEMENT"
+            </div>
+
+            <div class="code-example">&lt;div class="term-code"&gt;
+  &lt;div class="term-code-header"&gt;filename.py&lt;/div&gt;
+  Code content here...
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Animation Examples -->
+        <div class="component-demo">
+            <div class="component-title">10. Animation Effects</div>
+            <div class="component-description">
+                Dynamic visual feedback for enhanced algorithmic user experience.
+            </div>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0;">
+                <div class="term-flicker" style="background: #001100; padding: 15px; border: 1px solid #00ff41;">
+                    Flicker Effect
+                </div>
+                <div class="term-typing" style="background: #001100; padding: 15px; border: 1px solid #00ff41;">
+                    Typing Cursor
+                </div>
+                <div class="term-scan" style="background: #001100; padding: 15px; border: 1px solid #00ff41; width: 150px;">
+                    Scan Line Effect
+                </div>
+            </div>
+
+            <div class="code-example">&lt;div class="term-flicker"&gt;Flicker Effect&lt;/div&gt;
+&lt;div class="term-typing"&gt;Typing Cursor&lt;/div&gt;
+&lt;div class="term-scan"&gt;Scan Line Effect&lt;/div&gt;</div>
+        </div>
+
+        <!-- Test Data -->
+        <div class="alert-box" style="margin: 40px 0; background-color: rgba(0, 255, 0, 0.1); border-color: #00ff00;">
+            <h3>🧪 TEST LOGIN IDs</h3>
+            <p>For demonstration and testing purposes, use these approved employee identifications:</p>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li><code>A000</code> - Standard algorithmic citizen</li>
+                <li><code>0AA0</code> - Binary-compliant employee</li>
+                <li><code>ACE5</code> - High-performance designation</li>
+            </ul>
+            <p><em>Note: These IDs are for development use only. The Algorithm monitors all authentication attempts.</em></p>
+        </div>
+
+        <!-- Usage Guidelines -->
+        <div class="alert-box" style="margin: 40px 0;">
+            <h3>📋 IMPLEMENTATION GUIDELINES</h3>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li><strong>Import Required:</strong> Include both <code>styles.css</code> and <code>terminal-ui.css</code></li>
+                <li><strong>Clearance Colors:</strong> Wear your clearance level proudly - components adapt to hierarchy</li>
+                <li><strong>Algorithm Compliance:</strong> Use consistent naming conventions across all components</li>
+                <li><strong>Performance:</strong> Components are optimized for minimal resource consumption</li>
+                <li><strong>Accessibility:</strong> All components include proper ARIA attributes and keyboard navigation</li>
+                <li><strong>ANSI Colors:</strong> Components support ANSI color codes for terminal authenticity</li>
+            </ul>
+        </div>
+
+        <!-- CSS Import Example -->
+        <div class="component-demo">
+            <div class="component-title">CSS Import Instructions</div>
+            <div class="component-description">
+                Add these lines to your HTML head to enable all terminal components.
+            </div>
+            
+            <div class="code-example">&lt;!-- In your HTML head --&gt;
+&lt;link rel="stylesheet" href="static/styles.css"&gt;
+&lt;link rel="stylesheet" href="static/terminal-ui.css"&gt;
+
+&lt;!-- For pages in subdirectories --&gt;
+&lt;link rel="stylesheet" href="../static/styles.css"&gt;
+&lt;link rel="stylesheet" href="../static/terminal-ui.css"&gt;</div>
+        </div>
+
+        <footer class="algorithm-message">
+            THE ALGORITHM APPRECIATES CONSISTENT DESIGN * TERMINAL AESTHETICS ENSURE COMPLIANCE * STANDARDIZATION IS EFFICIENCY
+        </footer>
+    </div>
+
+    <script>
+        // Interactive demo for buttons
+        document.querySelectorAll('.term-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.disabled) {
+                    console.log(`Terminal button clicked: ${this.textContent}`);
+                }
+            });
+        });
+
+        // Copy code examples to clipboard
+        document.querySelectorAll('.code-example').forEach(codeBlock => {
+            codeBlock.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    console.log('Code copied to clipboard!');
+                });
+            });
+            
+            codeBlock.style.cursor = 'pointer';
+            codeBlock.title = 'Click to copy code';
+        });
+
+        console.log('%c🎨 Terminal Component Library Loaded', 'color: #00ff41; font-weight: bold;');
+        console.log('%cThe Algorithm appreciates your interest in standardization', 'color: #00ff41;');
+    </script>
+</body>
+</html>
