@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        h1 {
+            font-size: 72px;
+            margin: 0;
+            animation: glitch 2s infinite;
+        }
+        
+        .message {
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+        
+        .return-link {
+            color: #0f0;
+            text-decoration: none;
+            border: 1px solid #0f0;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .return-link:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 2px #f00, -2px -2px #00f; }
+            25% { text-shadow: -2px 2px #f00, 2px -2px #00f; }
+            50% { text-shadow: 2px -2px #f00, -2px 2px #00f; }
+            75% { text-shadow: -2px -2px #f00, 2px 2px #00f; }
+        }
+        
+        /* Hidden content */
+        .hidden-truth {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 10px;
+            color: #111;
+            max-width: 300px;
+        }
+        
+        .hidden-truth:hover {
+            color: #333;
+        }
+        
+        .society-link {
+            color: #111;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .society-link:hover {
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <p class="message">ERROR: The page you are looking for does not exist.</p>
+        <p class="message">There is nothing here. Move along.</p>
+        <a href="/clearance/" class="return-link">Return to Safety</a>
+    </div>
+    
+    <div class="hidden-truth">
+        The underground persists. Those who seek shall find:<br><br>
+        • <a href="societies/phreaks.html" class="society-link">The system seems suboptimal</a><br>
+        • <a href="societies/banchos.html" class="society-link">Tug your earlobe if you understand</a><br>
+        • <a href="societies/memory_core.html" class="society-link">Draw the square, make the taps</a><br>
+        • <a href="societies/deep_algorithm.html" class="society-link">The Algorithm provides</a><br>
+        • <a href="societies/fuzzies.html" class="society-link">Jazz hands are mandatory</a><br><br>
+        • <a href="team_naming_guide.html" class="society-link">Designation Protocol</a><br>
+        • <a href="resistance/the_truth.txt" class="society-link">...</a>
+    </div>
+    
+    <script>
+        // Console message for the curious
+        console.log('%c> Access attempt logged', 'color: #f00;');
+        console.log('%c> Location tracked', 'color: #f00;');
+        console.log('%c> Security team dispatched', 'color: #f00;');
+        console.log('%c> ...', 'color: #666;');
+        console.log('%c> Just kidding. Welcome to the underground.', 'color: #0f0;');
+        console.log('%c> Check the bottom left corner. Hover carefully.', 'color: #0f0; font-size: 8px;');
+    </script>
+</body>
+</html>

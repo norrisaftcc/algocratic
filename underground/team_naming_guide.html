@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underground Team Registration Protocol</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(0, 20, 0, 0.8);
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            font-size: 2em;
+        }
+        
+        h2 {
+            color: #00cccc;
+            border-bottom: 1px solid #00cccc;
+            padding-bottom: 5px;
+        }
+        
+        .codename-section {
+            background-color: rgba(0, 255, 0, 0.05);
+            border-left: 3px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .codename-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .codename {
+            background-color: rgba(0, 100, 0, 0.3);
+            padding: 10px;
+            border: 1px solid #008800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .codename:hover {
+            background-color: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+            transform: translateY(-2px);
+        }
+        
+        .codename h3 {
+            margin: 0 0 5px 0;
+            color: #00ff00;
+            font-size: 1.1em;
+        }
+        
+        .codename p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #aaffaa;
+        }
+        
+        .generator {
+            background-color: rgba(0, 50, 50, 0.5);
+            padding: 20px;
+            margin: 30px 0;
+            border: 2px dashed #00cccc;
+            text-align: center;
+        }
+        
+        #generated-name {
+            font-size: 1.5em;
+            color: #00ffff;
+            margin: 20px 0;
+            min-height: 40px;
+        }
+        
+        button {
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #00cc00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .warning {
+            color: #ffaa00;
+            text-align: center;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #00ff00;
+            color: #008800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UNDERGROUND TEAM DESIGNATION PROTOCOL</h1>
+        
+        <p style="text-align: center; color: #00cccc;">
+            For cells requiring operational identity establishment
+        </p>
+        
+        <div class="codename-section">
+            <h2>APPROVED CODENAME REGISTRY</h2>
+            <p>The following designations honor the legacy of legendary software operations that changed our world:</p>
+            
+            <div class="codename-list">
+                <div class="codename">
+                    <h3>PHOENIX</h3>
+                    <p>Rise from failed builds</p>
+                </div>
+                <div class="codename">
+                    <h3>NAUTILUS</h3>
+                    <p>Deep system exploration</p>
+                </div>
+                <div class="codename">
+                    <h3>PEGASUS</h3>
+                    <p>Impossible made possible</p>
+                </div>
+                <div class="codename">
+                    <h3>LONGHORN</h3>
+                    <p>Ambitious vision realized</p>
+                </div>
+                <div class="codename">
+                    <h3>COPLAND</h3>
+                    <p>Revolutionary attempts</p>
+                </div>
+                <div class="codename">
+                    <h3>CAIRO</h3>
+                    <p>Future-facing pioneers</p>
+                </div>
+                <div class="codename">
+                    <h3>TALIGENT</h3>
+                    <p>Cross-platform unity</p>
+                </div>
+                <div class="codename">
+                    <h3>PINK</h3>
+                    <p>Bold new thinking</p>
+                </div>
+                <div class="codename">
+                    <h3>RHAPSODY</h3>
+                    <p>Harmonious integration</p>
+                </div>
+                <div class="codename">
+                    <h3>GERSHWIN</h3>
+                    <p>Composed excellence</p>
+                </div>
+                <div class="codename">
+                    <h3>SONATA</h3>
+                    <p>Structured beauty</p>
+                </div>
+                <div class="codename">
+                    <h3>TEMPO</h3>
+                    <p>Perfect timing</p>
+                </div>
+                <div class="codename">
+                    <h3>HARMONY</h3>
+                    <p>Synchronized effort</p>
+                </div>
+                <div class="codename">
+                    <h3>CHICAGO</h3>
+                    <p>Architectural revolution</p>
+                </div>
+                <div class="codename">
+                    <h3>MEMPHIS</h3>
+                    <p>Blues-inspired flow</p>
+                </div>
+                <div class="codename">
+                    <h3>WHISTLER</h3>
+                    <p>Mountain-high goals</p>
+                </div>
+                <div class="codename">
+                    <h3>BLACKCOMB</h3>
+                    <p>Peak performance</p>
+                </div>
+                <div class="codename">
+                    <h3>VIENNA</h3>
+                    <p>Classical precision</p>
+                </div>
+                <div class="codename">
+                    <h3>MONAD</h3>
+                    <p>Singular focus</p>
+                </div>
+                <div class="codename">
+                    <h3>INDIGO</h3>
+                    <p>Deep system wisdom</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="generator">
+            <h2>AUTONOMOUS DESIGNATION GENERATOR</h2>
+            <p>For teams requiring immediate operational identity:</p>
+            <div id="generated-name"></div>
+            <button onclick="generateTeamName()">GENERATE CODENAME</button>
+        </div>
+        
+        <div class="codename-section">
+            <h2>NAMING PROTOCOL GUIDELINES</h2>
+            <ol style="color: #aaffaa;">
+                <li><strong>Historical Significance:</strong> Choose names that honor software history</li>
+                <li><strong>Operational Security:</strong> Avoid names that reveal your true purpose</li>
+                <li><strong>Team Resonance:</strong> The name should inspire your cell members</li>
+                <li><strong>Unique Identity:</strong> No duplication with existing cells</li>
+                <li><strong>Plausible Deniability:</strong> Names should seem innocuous to outsiders</li>
+            </ol>
+            
+            <h3 style="color: #00ff00; margin-top: 20px;">Custom Designation Formula:</h3>
+            <p style="background: rgba(0,0,0,0.5); padding: 15px; font-family: monospace;">
+                [MYTHOLOGICAL_CREATURE] + [DEVELOPMENT_TERM] = Team Name<br><br>
+                Examples:<br>
+                - PHOENIX + KERNEL = "Phoenix Kernel"<br>
+                - HYDRA + BRANCH = "Hydra Branch"<br>
+                - GRIFFIN + PIPELINE = "Griffin Pipeline"
+            </p>
+        </div>
+        
+        <p class="warning">
+            WARNING: All team designations are logged in the Memory Core archives.<br>
+            Choose wisely - your name becomes your legacy.
+        </p>
+        
+        <div class="footer">
+            <p>Remember: A team without a name is just a meeting.</p>
+            <p style="font-size: 0.8em;">Access more naming conventions in /underground/archive/</p>
+        </div>
+    </div>
+    
+    <script>
+        const prefixes = [
+            'SHADOW', 'GHOST', 'PHANTOM', 'STEALTH', 'CIPHER',
+            'NEXUS', 'PRISM', 'QUANTUM', 'MATRIX', 'VECTOR',
+            'DELTA', 'OMEGA', 'ALPHA', 'SIGMA', 'EPSILON',
+            'CYBER', 'NEON', 'PULSE', 'FLUX', 'NOVA'
+        ];
+        
+        const suffixes = [
+            'PROTOCOL', 'SYNDICATE', 'COLLECTIVE', 'NETWORK', 'CELL',
+            'FORGE', 'LABS', 'CORE', 'HUB', 'NODE',
+            'UNIT', 'FORCE', 'TEAM', 'OPS', 'CREW',
+            'SYSTEMS', 'WORKS', 'TECH', 'SOFT', 'WARE'
+        ];
+        
+        function generateTeamName() {
+            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+            const nameElement = document.getElementById('generated-name');
+            
+            // Typing effect
+            nameElement.innerHTML = '';
+            const fullName = `${prefix} ${suffix}`;
+            let i = 0;
+            
+            const typeWriter = setInterval(() => {
+                if (i < fullName.length) {
+                    nameElement.innerHTML += fullName.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeWriter);
+                }
+            }, 50);
+        }
+        
+        // Click on codenames to copy
+        document.querySelectorAll('.codename').forEach(element => {
+            element.addEventListener('click', function() {
+                const name = this.querySelector('h3').textContent;
+                navigator.clipboard.writeText(name);
+                this.style.backgroundColor = 'rgba(0, 255, 0, 0.3)';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 500);
+            });
+        });
+        
+        // Console easter egg
+        console.log('%cTEAM DESIGNATION SYSTEM ACTIVE', 'color: #00ff00; font-weight: bold;');
+        console.log('%cRemember: Your name is your first act of resistance', 'color: #00cccc; font-style: italic;');
+    </script>
+</body>
+</html>

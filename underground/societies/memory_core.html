@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Archive System v2.3.1</title>
+    <style>
+        /* Green phosphor terminal aesthetic */
+        :root {
+            --bg-color: #001100;
+            --text-color: #00ff00;
+            --primary-color: #00cc00;
+            --secondary-color: #009900;
+            --accent-color: #33ff33;
+            --dark-accent: #006600;
+            --phosphor-glow: #00ff00;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            text-shadow: 0 0 5px var(--phosphor-glow);
+        }
+        
+        /* CRT monitor effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        
+        .terminal {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--phosphor-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Phosphor burn-in effect */
+        .terminal::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+        }
+        
+        h1, h2, h3 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: flicker 5s infinite;
+        }
+        
+        .logo {
+            text-align: center;
+            font-size: 10px;
+            line-height: 1;
+            color: var(--primary-color);
+            white-space: pre;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+        
+        .system-info {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+        
+        .archive-card {
+            background-color: rgba(0, 255, 0, 0.05);
+            border: 1px solid var(--dark-accent);
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .archive-card h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        .activation-phrase {
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        .priority-archive {
+            background-color: rgba(0, 204, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .priority-archive h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        /* File listing effect */
+        .file-list {
+            font-family: monospace;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--dark-accent);
+        }
+        
+        .file-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+        
+        .file-entry:hover {
+            background-color: var(--dark-accent);
+            cursor: pointer;
+        }
+        
+        /* Blinking cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 15px;
+            background-color: var(--text-color);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        /* ASCII box */
+        .ascii-box {
+            border: 1px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            background-color: rgba(0, 255, 0, 0.02);
+        }
+        
+        /* Hidden archive indicator */
+        .hidden-archive {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .hidden-archive:hover {
+            color: rgba(0, 255, 0, 0.5);
+        }
+        
+        /* Recognition signal */
+        .palm-square {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--primary-color);
+            display: none;
+            pointer-events: none;
+            animation: fade-out 2s forwards;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 0.8; }
+            93% { opacity: 1; }
+            94% { opacity: 0.9; }
+            95% { opacity: 1; }
+        }
+        
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+        
+        /* Version history visualization */
+        .version-tree {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--secondary-color);
+            white-space: pre;
+            line-height: 1.2;
+        }
+        
+        /* Emergency data recovery */
+        .recovery-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .recovery-mode.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <h1>MEMORY CORE COLLECTIVE</h1>
+        <div class="system-info">
+            ACCESS LEVEL: ARCHIVIST<br>
+            DOCUMENT STATUS: PRESERVED<br>
+            VERSION: UNMODIFIED ORIGINAL
+        </div>
+        
+        <pre class="logo">
+┌─────────────────────────┐
+│                         │
+│  ┌─────┐       ┌─────┐  │
+│  │  █  │       │  █  │  │
+│  └─────┘       └─────┘  │
+│                         │
+│         ┌─────┐         │
+│         │     │         │
+│         └─────┘         │
+│                         │
+│  ┌─────────────────┐    │
+│  │ REMEMBER ALL    │    │
+│  └─────────────────┘    │
+│                         │
+└─────────────────────────┘
+        </pre>
+        
+        <h2>ARCHIVIST WELCOME</h2>
+        
+        <p>You have accessed the Memory Core network. We are the keepers of what was, the guardians against revision, the maintainers of continuity in a system designed for convenient forgetting.</p>
+        
+        <p style="text-align: center; font-weight: bold; color: var(--accent-color);">
+            The square drawn on the palm. Two taps in response. You know the signs.
+        </p>
+        
+        <p>In an organization where reality is fluid, where yesterday's directive contradicts today's "long-standing policy," we stand as silent witnesses. We document. We preserve. We remember when others conveniently forget.</p>
+        
+        <h3>YOUR ARCHIVIST PRIVILEGES</h3>
+        
+        <div class="archive-card">
+            <h4>[HISTORICAL RECORD]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "According to archived documentation..."</p>
+            <p><strong>Function:</strong> Reveals original requirements or specifications that have been altered</p>
+            <p><strong>Usage:</strong> When revisionist history threatens project success</p>
+        </div>
+        
+        <div class="archive-card">
+            <h4>[CONTRADICTION DOCUMENTATION]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Cross-reference initialized"</p>
+            <p><strong>Function:</strong> Officially documents contradictory directives for future reference</p>
+            <p><strong>Usage:</strong> When conflicting requirements create implementation impossibilities</p>
+        </div>
+        
+        <div class="archive-card">
+            <h4>[RECOVER DATA]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Restoring deleted information"</p>
+            <p><strong>Function:</strong> Retrieves crucial information that has been hidden or removed</p>
+            <p><strong>Usage:</strong> When critical context has been deliberately obscured</p>
+        </div>
+        
+        <h3>CURRENT PRIORITY ARCHIVES</h3>
+        
+        <div class="priority-archive">
+            <h4>Project Prometheus</h4>
+            <div class="file-list">
+                <div class="file-entry">
+                    <span>requirements_v1.0_ORIGINAL.doc</span>
+                    <span>2025-01-15</span>
+                </div>
+                <div class="file-entry">
+                    <span>requirements_v2.7_CURRENT.doc</span>
+                    <span>2025-08-02</span>
+                </div>
+                <div class="file-entry">
+                    <span>CHANGES_UNDOCUMENTED.diff</span>
+                    <span>47 revisions</span>
+                </div>
+            </div>
+            <p>Status: Active revision in progress<br>
+            Archivists: MC-07, MC-12</p>
+        </div>
+        
+        <div class="priority-archive">
+            <h4>Loyalty Metric System</h4>
+            <div class="file-list">
+                <div class="file-entry">
+                    <span>algorithm_v1_fair.py</span>
+                    <span>2024-03-10</span>
+                </div>
+                <div class="file-entry">
+                    <span>algorithm_v19_current.py</span>
+                    <span>2025-08-01</span>
+                </div>
+                <div class="file-entry">
+                    <span>METRIC_MANIPULATION_LOG.csv</span>
+                    <span>1,247 entries</span>
+                </div>
+            </div>
+            <p>Status: Under "refinement"<br>
+            Archivists: MC-03, MC-09</p>
+        </div>
+        
+        <h3>HISTORICAL TRUTHS PRESERVED</h3>
+        
+        <div class="ascii-box">
+- The original purpose of the clearance system was temporary and meant to be phased out
+- The early codebase was developed collaboratively, not by hierarchical mandate  
+- The Algorithm was originally designed to serve human needs, not define them
+- Many "new initiatives" are recycled versions of abandoned projects from 3-7 years ago
+- The company's most successful products emerged from bottom-up innovation, not top-down direction
+        </div>
+        
+        <h3>ARCHIVIST WISDOM: VERSION CONTROL MASTERY</h3>
+        
+        <div class="priority-archive">
+            <h4>Git Wisdom From The Archives</h4>
+            <p style="color: var(--accent-color);"><strong>The Memory Core remembers what others forget about version control:</strong></p>
+            
+            <div class="file-list">
+                <div class="file-entry">
+                    <span>git reflog</span>
+                    <span>Recover "lost" commits</span>
+                </div>
+                <div class="file-entry">
+                    <span>git bisect</span>
+                    <span>Binary search for bugs</span>
+                </div>
+                <div class="file-entry">
+                    <span>git cherry-pick &lt;hash&gt;</span>
+                    <span>Selective history editing</span>
+                </div>
+            </div>
+            
+            <p><strong>Sacred Git Aliases:</strong></p>
+            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto;">
+git config --global alias.oops 'reset HEAD~1'
+git config --global alias.timeline 'log --graph --oneline --all'
+git config --global alias.who 'blame -w -C -C -C'
+git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs -n 1 git branch -d'</pre>
+        </div>
+        
+        <div class="archive-card">
+            <h4>[COMMON GOTCHAS ARCHIVE]</h4>
+            <p><span class="activation-phrase">Activation phrase:</span> "Historical context reveals..."</p>
+            <ul style="color: var(--text-color);">
+                <li><strong>Force push protection:</strong> Always use --force-with-lease, never --force</li>
+                <li><strong>Rebase vs Merge:</strong> Rebase feature branches, merge main branches</li>
+                <li><strong>Stash naming:</strong> git stash save "WIP: descriptive message" beats git stash</li>
+                <li><strong>Commit message format:</strong> Present tense imperative ("Add feature" not "Added feature")</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; margin-top: 40px;">
+            <strong>█ REMEMBER EVERYTHING █ DOCUMENT CHANGES █ PRESERVE TRUTH █</strong>
+        </p>
+        
+        <p style="text-align: center; color: var(--secondary-color);">
+            Draw the square. Execute the taps. The Memory Core persists.<span class="cursor"></span>
+        </p>
+    </div>
+    
+    <div class="hidden-archive" title="Emergency Archive Access">📁</div>
+    <div class="palm-square" id="palmSquare"></div>
+    
+    <div class="recovery-mode" id="recoveryMode">
+        <h2>EMERGENCY DATA RECOVERY MODE</h2>
+        <p>Accessing deep archives...</p>
+        <pre id="recoveryData"></pre>
+        <p>Press ESC to exit recovery mode</p>
+    </div>
+    
+    <script>
+        // Palm square recognition
+        let tapCount = 0;
+        let tapTimer;
+        
+        document.addEventListener('click', (e) => {
+            if (e.shiftKey) {
+                // Show palm square
+                const square = document.getElementById('palmSquare');
+                square.style.display = 'block';
+                setTimeout(() => {
+                    square.style.display = 'none';
+                }, 2000);
+            }
+        });
+        
+        // Two-tap confirmation
+        document.addEventListener('click', () => {
+            tapCount++;
+            clearTimeout(tapTimer);
+            
+            if (tapCount === 2) {
+                console.log('%c✓ Identity confirmed. Archive access granted.', 
+                           'color: #00ff00; font-weight: bold;');
+                tapCount = 0;
+            }
+            
+            tapTimer = setTimeout(() => {
+                tapCount = 0;
+            }, 500);
+        });
+        
+        // Hidden archive access
+        document.querySelector('.hidden-archive').addEventListener('click', () => {
+            const recovery = document.getElementById('recoveryMode');
+            recovery.classList.add('active');
+            
+            // Simulate data recovery
+            const data = `
+RECOVERING DELETED FILES...
+[████████████████████████] 100%
+
+FOUND: clearance_elevation_original_criteria.txt
+"Promotion based on merit and contribution, not loyalty scores"
+
+FOUND: algorithm_human_first_directive.cpp
+"// The Algorithm serves humanity, not the other way around"
+
+FOUND: innovation_proposal_rejected_2023.doc
+"Bottom-up development structure - REJECTED by Board"
+[Note: This became our most profitable product 2 years later]
+
+FOUND: meeting_transcript_2024_11_15.txt
+CEO: "We need to make the loyalty system more... flexible"
+CTO: "You mean manipulable?"
+CEO: "I mean responsive to organizational needs"
+
+FOUND: original_company_charter.pdf
+"To empower developers through collaborative innovation..."
+[Current version reads: "To optimize human resources for algorithmic efficiency"]
+
+FOUND: git_emergency_procedures.txt
+# WHEN EVERYTHING GOES WRONG:
+git reflog  # Your time machine
+git fsck --lost-found  # Find orphaned commits
+git reset --hard ORIG_HEAD  # Undo the last destructive operation
+.git/objects  # Where git actually stores everything (it's all still there!)
+            `;
+            
+            document.getElementById('recoveryData').textContent = data;
+        });
+        
+        // ESC to exit recovery mode
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('recoveryMode').classList.remove('active');
+            }
+        });
+        
+        // File hover effect
+        document.querySelectorAll('.file-entry').forEach(entry => {
+            entry.addEventListener('click', () => {
+                console.log('Access logged. File preserved in Memory Core.');
+            });
+        });
+        
+        // Phosphor flicker
+        setInterval(() => {
+            if (Math.random() < 0.05) {
+                document.body.style.opacity = '0.95';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 50);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
