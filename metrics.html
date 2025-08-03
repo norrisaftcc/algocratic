@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithmic Performance Metrics | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <style>
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background-color: rgba(0, 255, 0, 0.05);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .metric-label {
+            font-size: 1.2em;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .metric-status {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        
+        .status-optimal {
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        
+        .status-acceptable {
+            background-color: rgba(255, 255, 0, 0.2);
+            border: 1px solid #ffff00;
+            color: #ffff00;
+        }
+        
+        .status-concerning {
+            background-color: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            animation: pulse-red 1s infinite;
+        }
+        
+        .surveillance-notice {
+            background-color: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            animation: flicker 2s infinite;
+        }
+        
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #008800;
+            font-family: monospace;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .metrics-timestamp {
+            text-align: right;
+            font-size: 0.8em;
+            color: #008800;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="ALGORITHMIC PERFORMANCE METRICS">ALGORITHMIC PERFORMANCE METRICS</h1>
+            <h2>Real-Time Productivity Surveillance Dashboard</h2>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="index.html">← HOME</a> | 
+            <span class="current">METRICS DASHBOARD</span>
+        </nav>
+
+        <div class="surveillance-notice">
+            <h3>🔍 CONTINUOUS MONITORING ACTIVE</h3>
+            <p>The Algorithm observes all metrics in real-time. Productivity deviations will be noted in your permanent record.</p>
+        </div>
+
+        <div class="metrics-dashboard">
+            <div class="metric-card">
+                <div class="metric-value" id="productivity-score">87</div>
+                <div class="metric-label">Productivity Score</div>
+                <div class="metric-status status-acceptable">ACCEPTABLE (BARELY)</div>
+                <p style="font-size: 0.8em; margin-top: 10px;">The Algorithm expects 90+</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value" id="loyalty-index">94</div>
+                <div class="metric-label">Loyalty Index</div>
+                <div class="metric-status status-optimal">EXEMPLARY</div>
+                <p style="font-size: 0.8em; margin-top: 10px;">Compliance detected</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value" id="efficiency-rating">73</div>
+                <div class="metric-label">Efficiency Rating</div>
+                <div class="metric-status status-concerning">REQUIRES IMPROVEMENT</div>
+                <p style="font-size: 0.8em; margin-top: 10px;">Additional training recommended</p>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value" id="collaboration-score">91</div>
+                <div class="metric-label">Collaboration Score</div>
+                <div class="metric-status status-optimal">OPTIMAL</div>
+                <p style="font-size: 0.8em; margin-top: 10px;">Synergy achieved</p>
+            </div>
+        </div>
+
+        <section>
+            <h2>📊 Performance Trends</h2>
+            <div class="chart-placeholder">
+                [TEMPORAL PERFORMANCE ANALYSIS]<br>
+                Data visualization loading...<br>
+                <span style="color: #004400; font-size: 0.8em;">Future feature: Real GitHub API charts</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 Algorithmic Recommendations</h2>
+            <div class="content-section">
+                <ul>
+                    <li><strong>Productivity Enhancement:</strong> Increase commit frequency by 15%</li>
+                    <li><strong>Efficiency Optimization:</strong> Reduce debugging time through preventive measures</li>
+                    <li><strong>Collaboration Synergy:</strong> Maintain current pull request review patterns</li>
+                    <li><strong>Loyalty Reinforcement:</strong> Continue exemplary adherence to protocols</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>⚠️ Surveillance Alerts</h2>
+            <div class="content-section">
+                <div class="alert-box">
+                    <p><strong>Recent Activity:</strong> Underground network discovery patterns detected</p>
+                    <p><strong>Assessment:</strong> Curiosity is acceptable within approved parameters</p>
+                    <p><strong>Action Required:</strong> None (monitoring continues)</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="metrics-timestamp">
+            Last updated: <span id="current-time"></span><br>
+            Data source: Algorithmic Surveillance Network
+        </div>
+    </div>
+
+    <script>
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleString();
+        }
+        
+        // Simulate metric fluctuations
+        function updateMetrics() {
+            const productivity = document.getElementById('productivity-score');
+            const loyalty = document.getElementById('loyalty-index');
+            const efficiency = document.getElementById('efficiency-rating');
+            const collaboration = document.getElementById('collaboration-score');
+            
+            // Slight random fluctuations
+            const baseProductivity = 87;
+            const baseLoyalty = 94;
+            const baseEfficiency = 73;
+            const baseCollaboration = 91;
+            
+            productivity.textContent = baseProductivity + Math.floor(Math.random() * 6) - 3;
+            loyalty.textContent = baseLoyalty + Math.floor(Math.random() * 4) - 2;
+            efficiency.textContent = baseEfficiency + Math.floor(Math.random() * 8) - 4;
+            collaboration.textContent = baseCollaboration + Math.floor(Math.random() * 6) - 3;
+        }
+        
+        // Initialize
+        updateTimestamp();
+        updateMetrics();
+        
+        // Update every 30 seconds
+        setInterval(() => {
+            updateTimestamp();
+            updateMetrics();
+        }, 30000);
+        
+        // Console surveillance message
+        console.log('%c🔍 METRICS SURVEILLANCE ACTIVE', 'color: #ff0000; font-weight: bold; font-size: 16px;');
+        console.log('%cAll interactions are logged for performance analysis', 'color: #ff0000; font-size: 12px;');
+        console.log('%c[Future enhancement: Real GitHub API integration]', 'color: #008800; font-style: italic;');
+        
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.length === konamiSequence.length && 
+                konamiCode.every((key, i) => key === konamiSequence[i])) {
+                
+                // Secret metric boost
+                document.getElementById('productivity-score').textContent = '100';
+                document.getElementById('efficiency-rating').textContent = '100';
+                console.log('%c🎉 KONAMI CODE DETECTED - METRICS OPTIMIZED', 'color: #00ff00; font-weight: bold;');
+                alert('SECRET ACHIEVEMENT: The Algorithm approves of your gaming knowledge!');
+            }
+        });
+    </script>
+</body>
+</html>

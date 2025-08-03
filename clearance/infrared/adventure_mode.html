@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFRARED Adventure Mode | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .terminal-adventure {
+            background-color: #001100;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .terminal-output {
+            min-height: 400px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #008800;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        
+        .terminal-input {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #008800;
+            padding: 10px;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .terminal-command {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            flex: 1;
+            outline: none;
+        }
+        
+        .hint-box {
+            background-color: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ffff00;
+            font-size: 12px;
+        }
+        
+        .achievement {
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #00ff00; }
+            to { box-shadow: 0 0 20px #00ff00; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="container">
+        <div class="document-header">
+            <h1 class="document-title glitch" data-text="INFRARED ADVENTURE MODE">INFRARED ADVENTURE MODE</h1>
+            <h2 class="document-subtitle">Interactive Programming Puzzle Chamber</h2>
+            <div class="document-id">MODE: EDUCATIONAL ENTERTAINMENT</div>
+        </div>
+
+        <nav class="breadcrumb">
+            <a href="index.html">← INFRARED GUIDE</a> | 
+            <a href="assignment_portal.html">ASSIGNMENT PORTAL</a> |
+            <span class="current">ADVENTURE MODE</span>
+        </nav>
+
+        <div class="content-section">
+            <div class="alert-box">
+                <h3>🎮 EXPERIMENTAL LEARNING PROTOCOL</h3>
+                <p>This is an experimental text-based adventure that teaches programming concepts through interactive puzzles. Use commands like "look", "examine", "use", and "help" to explore.</p>
+            </div>
+
+            <div class="terminal-adventure">
+                <div class="terminal-output" id="terminal-output">Welcome to the AlgoCratic Training Simulator...
+
+> look around
+
+You are in a sterile training room. The walls hum with algorithmic energy.
+
+Items you can see:
+- A TERMINAL (blinking expectantly)
+- A POSTER (corporate motivational content)
+- A RUBBER DUCK (yellow and suspicious)
+- A DOOR (locked with a keypad: _ _ _ _)
+
+The air smells of efficiency and barely contained despair.
+
+Type 'help' for available commands, or start exploring!
+</div>
+                
+                <div class="terminal-input">
+                    <span class="terminal-prompt">CITIZEN></span>
+                    <input type="text" class="terminal-command" id="command-input" placeholder="Enter command..." autocomplete="off">
+                </div>
+            </div>
+
+            <div class="hint-box" id="hint-box" style="display: none;">
+                <strong>HINT:</strong> <span id="hint-text"></span>
+            </div>
+
+            <div id="achievement-area"></div>
+        </div>
+    </div>
+
+    <script>
+        class AdventureGame {
+            constructor() {
+                this.output = document.getElementById('terminal-output');
+                this.input = document.getElementById('command-input');
+                this.hintBox = document.getElementById('hint-box');
+                this.hintText = document.getElementById('hint-text');
+                this.achievementArea = document.getElementById('achievement-area');
+                
+                this.gameState = {
+                    location: 'training_room',
+                    inventory: [],
+                    examined: [],
+                    solved: [],
+                    hints: 0,
+                    doorCode: '',
+                    terminalAccess: false
+                };
+                
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                this.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const command = this.input.value.trim().toLowerCase();
+                        this.input.value = '';
+                        this.processCommand(command);
+                    }
+                });
+                
+                // Focus input when clicking anywhere on terminal
+                this.output.addEventListener('click', () => {
+                    this.input.focus();
+                });
+                
+                // Auto-focus on load
+                this.input.focus();
+            }
+            
+            print(text) {
+                this.output.textContent += '\n\nCITIZEN> ' + this.input.value + '\n' + text;
+                this.output.scrollTop = this.output.scrollHeight;
+            }
+            
+            showHint(hintText) {
+                this.hintText.textContent = hintText;
+                this.hintBox.style.display = 'block';
+                this.gameState.hints++;
+                
+                setTimeout(() => {
+                    this.hintBox.style.display = 'none';
+                }, 8000);
+            }
+            
+            showAchievement(title, description) {
+                const achievement = document.createElement('div');
+                achievement.className = 'achievement';
+                achievement.innerHTML = `
+                    <h4>🏆 ACHIEVEMENT UNLOCKED: ${title}</h4>
+                    <p>${description}</p>
+                `;
+                this.achievementArea.appendChild(achievement);
+                
+                setTimeout(() => {
+                    achievement.remove();
+                }, 10000);
+            }
+            
+            processCommand(command) {
+                const words = command.split(' ');
+                const verb = words[0];
+                const noun = words.slice(1).join(' ');
+                
+                switch (verb) {
+                    case 'help':
+                        this.print(`Available commands:
+- look / look around - Examine your surroundings
+- examine [item] - Look closely at something
+- use [item] - Interact with an object
+- take [item] - Pick up an item
+- inventory - Check what you're carrying
+- hint - Get a helpful hint
+- debug - Enter debug mode (advanced)`);
+                        break;
+                        
+                    case 'look':
+                        if (noun === 'around' || noun === '') {
+                            this.print(`You are in a sterile training room. The walls hum with algorithmic energy.
+
+Items you can see:
+- A TERMINAL (blinking expectantly)
+- A POSTER (corporate motivational content)  
+- A RUBBER DUCK (yellow and suspicious)
+- A DOOR (locked with a keypad: ${this.gameState.doorCode || '_ _ _ _'})
+
+The air smells of efficiency and barely contained despair.`);
+                        } else {
+                            this.examineItem(noun);
+                        }
+                        break;
+                        
+                    case 'examine':
+                        this.examineItem(noun);
+                        break;
+                        
+                    case 'use':
+                        this.useItem(noun);
+                        break;
+                        
+                    case 'take':
+                        this.takeItem(noun);
+                        break;
+                        
+                    case 'inventory':
+                        if (this.gameState.inventory.length === 0) {
+                            this.print("Your pockets are empty. The Algorithm provides all you need.");
+                        } else {
+                            this.print("You are carrying: " + this.gameState.inventory.join(', '));
+                        }
+                        break;
+                        
+                    case 'hint':
+                        this.giveHint();
+                        break;
+                        
+                    case 'debug':
+                        this.debugMode();
+                        break;
+                        
+                    default:
+                        this.print(`I don't understand "${command}". Type 'help' for available commands.`);
+                        
+                        // Easter eggs
+                        if (command.includes('sudo')) {
+                            this.print("\nUser is not in sudoers file. This incident will be reported to The Algorithm.");
+                        } else if (command === 'whoami') {
+                            this.print("\nCITIZEN-748293 (INFRARED CLEARANCE)");
+                        } else if (command === 'pwd') {
+                            this.print("\n/algocratic/training/room_001");
+                        }
+                }
+            }
+            
+            examineItem(item) {
+                switch (item) {
+                    case 'terminal':
+                        this.print(`A sleek corporate terminal. The screen shows:
+
+ERROR 404: MOTIVATION NOT FOUND
+> Please enter authorization code: ____
+
+${this.gameState.terminalAccess ? 'You have access to this terminal.' : 'You need the right code to access this terminal.'}`);
+                        if (!this.gameState.examined.includes('terminal')) {
+                            this.gameState.examined.push('terminal');
+                        }
+                        break;
+                        
+                    case 'poster':
+                        this.print(`The poster reads: "SYNERGY THROUGH SYNTAX"
+
+Below in tiny print: "The first shall be last"
+
+The letters seem oddly spaced:
+S Y N E R G Y
+T H R O U G H
+S Y N T A X
+
+Something about this arrangement seems... intentional.`);
+                        if (!this.gameState.examined.includes('poster')) {
+                            this.gameState.examined.push('poster');
+                            this.showHint("Look at the first and last letters of each line...");
+                        }
+                        break;
+                        
+                    case 'duck':
+                    case 'rubber duck':
+                        this.print(`A classic yellow rubber duck. It stares at you with plastic wisdom.
+
+There's a small tag: "Debugging companion - Property of Employee #748293"
+
+The duck seems to be trying to tell you something important...`);
+                        if (!this.gameState.examined.includes('duck')) {
+                            this.gameState.examined.push('duck');
+                        }
+                        break;
+                        
+                    case 'door':
+                        this.print(`A heavy door with a digital keypad. It requires a 4-digit code.
+
+Current entry: ${this.gameState.doorCode || '____'}
+
+${this.gameState.doorCode.length === 4 ? 'Press ENTER to try the code!' : 'You need to find the correct 4-digit combination.'}`);
+                        break;
+                        
+                    default:
+                        this.print(`You don't see a "${item}" here.`);
+                }
+            }
+            
+            useItem(item) {
+                switch (item) {
+                    case 'terminal':
+                        if (!this.gameState.terminalAccess) {
+                            this.print("You need the authorization code first. Try examining the poster...");
+                        } else {
+                            this.print(`Terminal access granted!
+
+Loading employee_record.py...
+
+def get_door_code(employee_id):
+    """TODO: Fix this function - it's returning None"""
+    if employee_id == 748293:
+        return  # BUG: Missing return value!
+    code = employee_id % 10000
+    return code
+
+The code has a bug! Can you fix it?`);
+                        }
+                        break;
+                        
+                    case 'poster':
+                        if (this.gameState.examined.includes('poster')) {
+                            this.print("Reading the first letters vertically: S-T-S");
+                            this.print("Reading the last letters vertically: Y-H-X");
+                            this.print("Combined: SYSHX");
+                            this.print("\nMaybe this is the terminal authorization code?");
+                            this.showHint("Try using the terminal with this code!");
+                        } else {
+                            this.print("Examine it first to understand what you're looking at.");
+                        }
+                        break;
+                        
+                    case 'duck':
+                    case 'rubber duck':
+                        this.print(`You explain your problem to the rubber duck:
+
+"I need to find a 4-digit door code. The terminal has some employee ID... 748293?"
+
+The duck's plastic stare suddenly makes sense. Of course! Employee #748293 - that's YOUR ID!`);
+                        if (this.gameState.terminalAccess) {
+                            this.print("\nNow you understand: run the fixed function with YOUR employee ID!");
+                            this.showHint("748293 % 10000 = ?");
+                        }
+                        break;
+                        
+                    case 'door':
+                        if (this.gameState.doorCode === '8293') {
+                            this.print(`🎉 The door clicks open!
+
+Beyond, you see... another puzzle chamber. But also, somehow, understanding.
+
+You've learned:
+- Pattern recognition (poster puzzle)
+- Debugging (fixing the function)
+- Rubber duck debugging (talking through the problem)
+- Math operations (modulo)
+
+CONGRATULATIONS! You've completed the INFRARED Adventure Tutorial!`);
+                            this.showAchievement("ESCAPED THE TUTORIAL", "You've mastered the basics of algorithmic thinking!");
+                            this.gameState.solved.push('tutorial');
+                        } else if (this.gameState.doorCode.length === 4) {
+                            this.print("BZZT! Incorrect code. The Algorithm frowns upon your failure.");
+                            this.gameState.doorCode = '';
+                        } else {
+                            this.print("You need a 4-digit code first.");
+                        }
+                        break;
+                        
+                    default:
+                        this.print(`You can't use "${item}".`);
+                }
+                
+                // Special case: entering terminal code
+                if (item === 'syshx' || item === 'SYSHX') {
+                    this.print("AUTHORIZATION ACCEPTED! Terminal access granted.");
+                    this.gameState.terminalAccess = true;
+                    this.showAchievement("SYSTEM ACCESS", "You cracked the poster puzzle!");
+                }
+                
+                // Special case: entering door code
+                if (/^\d{4}$/.test(item)) {
+                    this.gameState.doorCode = item;
+                    this.print(`Code entered: ${item}`);
+                    if (item === '8293') {
+                        setTimeout(() => this.useItem('door'), 1000);
+                    }
+                }
+            }
+            
+            takeItem(item) {
+                switch (item) {
+                    case 'duck':
+                    case 'rubber duck':
+                        this.print("You pick up the rubber duck. It's surprisingly heavy with wisdom.");
+                        this.gameState.inventory.push('rubber duck');
+                        break;
+                    default:
+                        this.print(`You can't take "${item}".`);
+                }
+            }
+            
+            giveHint() {
+                if (!this.gameState.examined.includes('poster')) {
+                    this.showHint("Start by examining everything in the room. The poster might have hidden information.");
+                } else if (!this.gameState.terminalAccess) {
+                    this.showHint("The poster has a pattern. Look at the first and last letters of each line!");
+                } else if (!this.gameState.examined.includes('duck')) {
+                    this.showHint("That rubber duck isn't just decoration. Try talking to it about your problem!");
+                } else if (this.gameState.doorCode !== '8293') {
+                    this.showHint("Remember your employee ID from the duck's tag? Use it with the fixed function: 748293 % 10000 = 8293");
+                } else {
+                    this.showHint("You're ready to escape! Use the door with your code.");
+                }
+            }
+            
+            debugMode() {
+                this.print(`DEBUG MODE ACTIVATED
+
+Game State:
+- Location: ${this.gameState.location}
+- Examined: ${this.gameState.examined.join(', ') || 'none'}
+- Inventory: ${this.gameState.inventory.join(', ') || 'empty'}
+- Terminal Access: ${this.gameState.terminalAccess}
+- Door Code: ${this.gameState.doorCode || 'none'}
+- Hints Used: ${this.gameState.hints}
+
+This is a simple state machine teaching basic programming concepts through puzzle-solving.`);
+            }
+        }
+        
+        // Initialize the game
+        const game = new AdventureGame();
+        
+        // Console easter egg
+        console.log('%c🎮 INFRARED ADVENTURE MODE ACTIVATED', 'color: #00ff00; font-weight: bold; font-size: 16px;');
+        console.log('%cThis is a learning adventure disguised as a text game!', 'color: #00ff00; font-style: italic;');
+    </script>
+</body>
+</html>

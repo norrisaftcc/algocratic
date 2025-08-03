@@ -48,6 +48,39 @@ When working with Claude Code features:
 - `/install-github-app` - Set up GitHub integration
 - `/mcp` - Configure MCP OAuth connections
 
+### Temporal Integration Guidelines
+
+#### Implemented Future Features (August 2025)
+Successfully integrated from future timeline documents without paradox:
+
+1. **Adventure Mode** (`clearance/infrared/adventure_mode.html`)
+   - Text-based escape room mechanics adapted from future escape-rooms.md
+   - Interactive terminal-style learning environment
+   - Programming concept puzzles disguised as corporate training
+
+2. **Metrics Dashboard** (`metrics.html`)
+   - Basic surveillance-style productivity tracking
+   - Real-time metric fluctuations with algorithmic feedback
+   - Foundation for future GitHub API integration
+
+3. **Interactive Society Challenges** (Phreak optimization puzzle)
+   - Live code optimization challenges within underground societies
+   - Automated feedback system for programming solutions
+   - Mathematical problem-solving with immediate scoring
+
+#### Future Integration Pipeline
+Documents cataloged in `TEMPORAL_CATALOG.md` for safe implementation:
+- Video content integration (multimedia educational materials)
+- Advanced GitHub API metrics (real repository data)
+- Physical escape room coordination systems
+- Community collaboration features
+
+#### Paradox Prevention
+- No direct references to "future" sources
+- Organic feature introduction as natural evolution
+- Simplified implementations initially
+- Timeline monitoring for displacement symptoms
+
 ## MCP Server Architecture (claude-conduit)
 
 ### Purpose

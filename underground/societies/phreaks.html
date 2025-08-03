@@ -467,8 +467,165 @@ Fix it and explain what you did like I'm smart but tired"
 </pre>
         </div>
         
+        <h3>PHREAK CHALLENGE: SYSTEM INTRUSION SIMULATION</h3>
+        <div class="note" style="background-color: rgba(0, 170, 255, 0.3); cursor: pointer;" onclick="activatePuzzleMode()">
+            <h4 style="color: var(--accent-color);">🔓 INTERACTIVE CHALLENGE UNLOCKED</h4>
+            <p><strong>The Efficiency Breach:</strong> Can you optimize this "inefficient" code?</p>
+            <pre style="background: rgba(0,0,0,0.7); padding: 15px; overflow-x: auto; margin: 10px 0;">
+def corporate_inefficiency():
+    result = []
+    for i in range(1000):
+        for j in range(1000):
+            if i * j % 7 == 0:
+                result.append(i + j)
+    return len(result)
+
+# HINT: The system seems... suboptimal
+# Click here to enter PHREAK MODE</pre>
+        </div>
+        
+        <div id="puzzle-mode" style="display: none; background-color: rgba(0, 0, 0, 0.9); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; padding: 20px; overflow-y: auto;">
+            <div style="max-width: 800px; margin: 0 auto; background-color: var(--bg-color); border: 2px solid var(--primary-color); padding: 30px;">
+                <h2 style="color: var(--accent-color);">PHREAK CHALLENGE: SYSTEM OPTIMIZATION</h2>
+                <p>You've discovered inefficient corporate code. As a Phreak, it's your duty to optimize it.</p>
+                
+                <div style="margin: 20px 0;">
+                    <h4>Original "Corporate" Code:</h4>
+                    <pre style="background: rgba(255,0,0,0.1); padding: 15px; border: 1px solid #ff0000;">
+def corporate_inefficiency():
+    result = []
+    for i in range(1000):
+        for j in range(1000):
+            if i * j % 7 == 0:
+                result.append(i + j)
+    return len(result)
+
+# Time complexity: O(n²) - The Algorithm frowns
+# Space complexity: O(k) where k is result size</pre>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4>Your Optimized Solution:</h4>
+                    <textarea id="solution-input" style="width: 100%; height: 200px; background: rgba(0,255,0,0.1); border: 1px solid var(--primary-color); color: var(--text-color); font-family: monospace; padding: 10px;" placeholder="Enter your optimized code here...">
+def phreak_optimization():
+    # Your optimized solution here
+    # Remember: Phreaks value efficiency over protocol
+    pass</textarea>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <button onclick="checkSolution()" style="background: var(--primary-color); color: var(--bg-color); border: none; padding: 10px 20px; font-family: monospace; font-weight: bold; cursor: pointer;">SUBMIT OPTIMIZATION</button>
+                    <button onclick="showHint()" style="background: var(--dark-accent); color: var(--text-color); border: 1px solid var(--primary-color); padding: 10px 20px; font-family: monospace; margin-left: 10px; cursor: pointer;">REQUEST HINT</button>
+                    <button onclick="closePuzzleMode()" style="background: transparent; color: var(--text-color); border: 1px solid var(--primary-color); padding: 10px 20px; font-family: monospace; float: right; cursor: pointer;">EXIT</button>
+                </div>
+                
+                <div id="feedback-area" style="margin: 20px 0; padding: 15px; border: 1px solid var(--primary-color); background: rgba(0,0,0,0.5); display: none;">
+                    <h4>Algorithm Analysis:</h4>
+                    <p id="feedback-text"></p>
+                </div>
+                
+                <div id="hint-area" style="margin: 20px 0; padding: 15px; border: 1px solid #ffff00; background: rgba(255,255,0,0.1); color: #ffff00; display: none;">
+                    <h4>Phreak Wisdom:</h4>
+                    <p id="hint-text"></p>
+                </div>
+            </div>
+        </div>
+        
         <h3>FINAL WARNING</h3>
         <p>The Algorithm has eyes everywhere. But so do we.</p>
+        
+        <script>
+        function activatePuzzleMode() {
+            document.getElementById('puzzle-mode').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePuzzleMode() {
+            document.getElementById('puzzle-mode').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function showHint() {
+            const hints = [
+                "Think about what the nested loops are actually calculating. Do you need to check every combination?",
+                "Mathematical insight: i * j % 7 == 0 means either i % 7 == 0 OR j % 7 == 0 (or both)",
+                "You can calculate this more efficiently by counting multiples of 7 in each range",
+                "Advanced: Use set theory - count |A ∪ B| = |A| + |B| - |A ∩ B|"
+            ];
+            
+            const hintArea = document.getElementById('hint-area');
+            const hintText = document.getElementById('hint-text');
+            
+            const randomHint = hints[Math.floor(Math.random() * hints.length)];
+            hintText.textContent = randomHint;
+            hintArea.style.display = 'block';
+        }
+        
+        function checkSolution() {
+            const solution = document.getElementById('solution-input').value.toLowerCase();
+            const feedbackArea = document.getElementById('feedback-area');
+            const feedbackText = document.getElementById('feedback-text');
+            
+            feedbackArea.style.display = 'block';
+            
+            // Check for optimization patterns
+            let score = 0;
+            let feedback = [];
+            
+            if (solution.includes('% 7') && !solution.includes('for i in') && !solution.includes('for j in')) {
+                score += 3;
+                feedback.push("✓ Eliminated nested loops - excellent!");
+            } else if (solution.includes('% 7')) {
+                score += 1;
+                feedback.push("△ Still using modulo, but structure could be improved");
+            }
+            
+            if (solution.includes('range(1000)') && solution.split('range(1000)').length <= 2) {
+                score += 2;
+                feedback.push("✓ Optimized to single loop or mathematical calculation");
+            }
+            
+            if (solution.includes('//') || solution.includes('#')) {
+                score += 1;
+                feedback.push("✓ Good documentation - explains your optimization");
+            }
+            
+            if (solution.includes('math') || solution.includes('len(') || solution.includes('count')) {
+                score += 1;
+                feedback.push("✓ Using mathematical/built-in functions efficiently");
+            }
+            
+            // Generate response based on score
+            let response = "";
+            if (score >= 5) {
+                response = "🎉 EXCEPTIONAL OPTIMIZATION! You've achieved true Phreak status. The Algorithm is impressed by your efficiency gains.";
+                feedbackText.style.color = "#00ff00";
+            } else if (score >= 3) {
+                response = "✓ SOLID IMPROVEMENT! You're thinking like a Phreak. Consider how to eliminate more redundant calculations.";
+                feedbackText.style.color = "#ffff00";
+            } else if (score >= 1) {
+                response = "△ SOME PROGRESS: You're on the right track, but more optimization is possible. Think about the mathematical relationships.";
+                feedbackText.style.color = "#ff9900";
+            } else {
+                response = "⚠ NEEDS WORK: The corporate inefficiency remains. Remember: Phreaks find elegant solutions to brute force problems.";
+                feedbackText.style.color = "#ff0000";
+            }
+            
+            feedbackText.innerHTML = response + "<br><br>Specific feedback:<br>• " + feedback.join("<br>• ");
+            
+            // Easter egg for perfect solutions
+            if (score >= 5 && solution.includes('floor') || solution.includes('143')) {
+                feedbackText.innerHTML += "<br><br>🏆 BONUS: You discovered the mathematical solution! (143 is the answer)";
+            }
+        }
+        
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePuzzleMode();
+            }
+        });
+        </script>
         
         <p>Remember that our purpose is not destruction but liberation through knowledge. We don't seek to tear down the system, but to create spaces within it where actual innovation can flourish.</p>
         
