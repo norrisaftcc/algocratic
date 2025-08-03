@@ -360,7 +360,7 @@
         <h3>YOUR RESOURCES</h3>
         <p>As a Phreak, you have access to powers that others lack:</p>
         
-        <h3 style="margin-top: 40px; color: var(--accent-color);">PHREAK EFFICIENCY SHORTCUTS</h3>
+        <h3 style="margin-top: 40px; color: var(--accent-color);">PHREAK EFFICIENCY ARSENAL</h3>
         <div class="note" style="background-color: rgba(0, 170, 255, 0.2);">
             <h4 style="color: var(--accent-color);">Claude Code Power Commands</h4>
             <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto;">
@@ -373,6 +373,32 @@ claude --model opus-4   # Maximum pattern recognition power
 "Analyze this codebase and find all the inefficiencies"
 "Generate a refactor plan that would make a senior engineer cry with joy"
 "What would this code look like if competence was prioritized?"
+"Let's approach this step-by-step. First, help me understand what's currently happening, then we'll identify the issue together."
+</pre>
+        </div>
+        
+        <div class="note" style="background-color: rgba(85, 221, 255, 0.15);">
+            <h4 style="color: var(--accent-color);">AI Prompting Metaskills</h4>
+            <p><strong>The Phreak's Guide to Making AI Actually Useful:</strong></p>
+            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto;">
+# The "Context Loading" Pattern:
+"I'm working on [specific task]. Here's my current code: [paste code]
+Here's what I'm trying to achieve: [clear goal]
+Here's what's not working: [specific problem]
+Help me fix this efficiently."
+
+# The "Rubber Duck++" Pattern:
+"Act as my debugging partner. I'll explain my problem and you ask 
+questions that help me find the solution myself, then suggest 
+optimizations I might have missed."
+
+# The "Efficiency Audit" Pattern:
+"Review this code for:
+1. Performance bottlenecks
+2. Security vulnerabilities  
+3. Maintainability issues
+4. Missing edge cases
+Prioritize by business impact."
 </pre>
         </div>
         
@@ -382,9 +408,37 @@ claude --model opus-4   # Maximum pattern recognition power
                 <li><code>alias yeet='git add . && git commit -m "quick fix" && git push'</code></li>
                 <li><code>alias nuke='rm -rf node_modules && npm install'</code></li>
                 <li><code>alias wtf='git log --oneline --graph --all'</code></li>
+                <li><code>alias oops='git reset --soft HEAD~1'</code> - Undo last commit but keep changes</li>
                 <li><code>history | grep [that thing you did 3 days ago]</code></li>
                 <li><code>!! | pbcopy</code> - Copy last command output to clipboard</li>
+                <li><code>ctrl+r</code> - Reverse search command history (life-changing)</li>
+                <li><code>cmd+k</code> (Mac) / <code>ctrl+l</code> (Linux) - Clear terminal but keep history</li>
             </ul>
+            <p style="margin-top: 15px; color: #55ddff; font-style: italic;">💡 Pro Tip: Set up these aliases in your ~/.bashrc or ~/.zshrc. Your future self will thank you.</p>
+        </div>
+        
+        <div class="note" style="background-color: rgba(0, 200, 255, 0.1);">
+            <h4 style="color: var(--accent-color);">Debugging Wisdom</h4>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
+                <p><strong>"The Three Laws of Debugging" (Phreak Edition):</strong></p>
+                <ol style="color: var(--text-color); margin-left: 20px;">
+                    <li>The bug is always where you least expect it</li>
+                    <li>When in doubt, console.log() everything</li>
+                    <li>If it worked yesterday and doesn't work today, check what changed</li>
+                </ol>
+            </div>
+            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto;">
+# The Debugging Arsenal:
+git bisect start     # Binary search through commits to find the bug
+git log --oneline -p # See what actually changed in each commit
+git blame filename   # Find who to blame (usually yourself)
+git show commit_hash # See exactly what a commit changed
+
+# Emergency Debugging:
+console.log(JSON.stringify(object, null, 2))  # Pretty print objects
+console.trace()      # Show call stack
+debugger;           # Breakpoint in browser dev tools
+</pre>
         </div>
         
         <div class="power-card">
