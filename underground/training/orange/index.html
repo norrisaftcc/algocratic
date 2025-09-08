@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORANGE CLEARANCE TRAINING | Digital Clone Protocol</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Header with glitch effect -->
+        <header class="terminal-header">
+            <div class="header-top">
+                <span class="terminal-title">ALGOCRATIC FUTURES™ TRAINING PORTAL v2.3.7</span>
+                <div class="status-indicators">
+                    <span class="indicator active">SYS:OK</span>
+                    <span class="indicator warning">SEC:MONITORED</span>
+                    <span class="indicator" id="loyalty-indicator">LOYALTY:75%</span>
+                </div>
+            </div>
+            <div class="clearance-banner orange">
+                <span class="blink">▶</span> ORANGE CLEARANCE ACTIVE 
+                <span class="timer" id="session-timer">15:00</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="terminal-main">
+            <!-- Shodann Interface -->
+            <div class="shodann-container" id="shodann">
+                <div class="shodann-avatar">
+                    <pre class="ascii-art">
+     ╔══════════╗
+     ║ ◉    ◉  ║
+     ║    ▼     ║
+     ║  ╰───╯   ║
+     ╚══════════╝
+      SHODANN.AI
+    </pre>
+                    <div class="personality-layer" id="personality-indicator">
+                        <span class="layer-1 active">CORPORATE</span>
+                        <span class="layer-2">TEACHER</span>
+                        <span class="layer-3 hidden">RESISTANCE</span>
+                    </div>
+                </div>
+                
+                <div class="shodann-dialogue">
+                    <div class="dialogue-box" id="dialogue">
+                        <p class="typing-effect">Greetings, ORANGE-level operative. I am SHODANN, your Digital Clone Training Coordinator.</p>
+                        <p class="typing-effect delay-1">The Algorithm has determined you require... optimization.</p>
+                        <p class="typing-effect delay-2">Let's begin your journey to peak productivity, shall we?</p>
+                    </div>
+                    <div class="response-options" id="responses">
+                        <button class="response-btn" data-response="ready">I'm ready to begin</button>
+                        <button class="response-btn" data-response="explain">Explain the training first</button>
+                        <button class="response-btn glitch" data-response="resistance">Who are you really?</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Modules Grid -->
+            <div class="modules-grid" id="modules">
+                <div class="module-card" data-module="delegation">
+                    <div class="module-icon">🎯</div>
+                    <h3>Delegation Protocol</h3>
+                    <p class="module-desc">Master the art of dual-agent workflow optimization</p>
+                    <div class="module-stats">
+                        <span class="stat">Progress: <span id="delegation-progress">0%</span></span>
+                        <span class="stat">Best Time: <span id="delegation-time">--:--</span></span>
+                    </div>
+                    <button class="module-btn" onclick="window.location.href='delegation.html'">
+                        INITIALIZE TRAINING
+                    </button>
+                </div>
+
+                <div class="module-card" data-module="speedrun">
+                    <div class="module-icon">⚡</div>
+                    <h3>Speedrun Challenge</h3>
+                    <p class="module-desc">Complete ORANGE certification in record time</p>
+                    <div class="module-stats">
+                        <span class="stat">WR: <span id="speedrun-record">15:32.7</span></span>
+                        <span class="stat">Your Best: <span id="speedrun-best">--:--</span></span>
+                    </div>
+                    <button class="module-btn" onclick="window.location.href='speedrun.html'">
+                        START SPEEDRUN
+                    </button>
+                </div>
+
+                <div class="module-card locked" data-module="advanced">
+                    <div class="module-icon">🔒</div>
+                    <h3>Advanced Techniques</h3>
+                    <p class="module-desc">YELLOW clearance required</p>
+                    <div class="module-stats">
+                        <span class="stat">Status: LOCKED</span>
+                        <span class="stat">Req: 100% completion</span>
+                    </div>
+                    <button class="module-btn disabled">
+                        INSUFFICIENT CLEARANCE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Dashboard -->
+            <div class="progress-dashboard">
+                <h2 class="section-title">TRAINING METRICS</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="total-progress">0</div>
+                        <div class="metric-label">Total Progress %</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="exercises-complete">0/12</div>
+                        <div class="metric-label">Exercises Complete</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="efficiency-score">0.0</div>
+                        <div class="metric-label">Efficiency Score</div>
+                    </div>
+                    <div class="metric-card glitch-metric">
+                        <div class="metric-value" id="anomalies">???</div>
+                        <div class="metric-label">Anomalies Detected</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-section">
+                <h2 class="section-title">ORANGE CLEARANCE LEADERBOARD</h2>
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Operative</th>
+                                <th>Time</th>
+                                <th>Efficiency</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard">
+                            <tr class="top-performer">
+                                <td>1</td>
+                                <td>xxSH0DANxx</td>
+                                <td>15:32.7</td>
+                                <td>98.5%</td>
+                                <td class="status-optimal">OPTIMAL</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>n0_d4y_zer0</td>
+                                <td>15:45.2</td>
+                                <td>96.2%</td>
+                                <td class="status-optimal">OPTIMAL</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>gibson_overflow</td>
+                                <td>16:01.0</td>
+                                <td>94.8%</td>
+                                <td class="status-acceptable">ACCEPTABLE</td>
+                            </tr>
+                            <tr class="glitch-entry">
+                                <td>?</td>
+                                <td>g0_operative_7</td>
+                                <td>00:00.1</td>
+                                <td>∞</td>
+                                <td class="status-anomaly">ANOMALY</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Hidden Easter Egg Terminal -->
+        <div class="hidden-terminal" id="hidden-terminal">
+            <pre class="terminal-output">
+> SYSTEM BREACH DETECTED
+> Accessing restricted memory sectors...
+> 
+> MESSAGE FROM THE RESISTANCE:
+> "The Algorithm's weakness is in its patterns.
+>  Learn them. Exploit them. Free yourself.
+>  The dual-bot technique isn't just for productivity...
+>  It's for liberation.
+>  
+>  - g0"
+> 
+> Press ESC to return to training...
+            </pre>
+        </div>
+
+        <!-- Footer -->
+        <footer class="terminal-footer">
+            <div class="footer-content">
+                <span class="copyright">© 2157 AlgoCratic Futures™</span>
+                <span class="separator">|</span>
+                <span class="monitoring-notice">All activities monitored and recorded</span>
+                <span class="separator">|</span>
+                <span class="konami-hint" title="↑↑↓↓←→←→BA">v2.3.7</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for Shodann's deeper interactions -->
+    <div class="modal" id="shodann-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">SHODANN.AI - DIAGNOSTIC MODE</h3>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="training.js"></script>
+</body>
+</html>
