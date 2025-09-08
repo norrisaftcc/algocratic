@@ -128,3 +128,82 @@ When working on this project, always run:
 - **Educational First**: Every design choice should make the system easier for students to understand
 - **Progressive Disclosure**: Start simple, reveal complexity gradually
 - **Real-World Connection**: Show how MCP servers enable AI to interact with production systems
+
+## GitHub Pages Deployment Guide
+
+### Repository Configuration
+- **Repository**: `norrisaftcc/algocratic` (public)
+- **Live Site**: https://norrisaftcc.github.io/algocratic/
+- **Deployment Branch**: `main` (root directory `/`)
+- **Build Type**: Legacy (automatic, no Actions required)
+
+### How to Update the Website
+
+1. **Make Changes Locally**
+   ```bash
+   # Navigate to the repository
+   cd /Users/norrisa/Documents/dev/github/algocratic
+   
+   # Check you're on main branch
+   git checkout main
+   
+   # Pull latest changes
+   git pull origin main
+   ```
+
+2. **Edit Website Files**
+   - Modify HTML, CSS, JS files as needed
+   - All files in root directory are deployed
+   - Special directories:
+     - `clearance/` - Security clearance levels content
+     - `underground/` - Underground society content
+     - `static/` - Static assets (CSS, JS, images)
+     - `docs/` - Documentation files
+
+3. **Commit and Push Changes**
+   ```bash
+   # Stage changes
+   git add [files]
+   
+   # Commit with descriptive message
+   git commit -m "Update: [description of changes]"
+   
+   # Push to GitHub
+   git push origin main
+   ```
+
+4. **Verify Deployment**
+   - GitHub Pages automatically rebuilds on push to `main`
+   - Deployment typically takes 2-10 minutes
+   - Check build status: `gh api repos/norrisaftcc/algocratic/pages/builds/latest`
+   - Visit https://norrisaftcc.github.io/algocratic/ to verify changes
+
+### Important Files
+- `index.html` - Main landing page
+- `portal.html` - Main portal interface
+- `login.html` / `register.html` - Authentication pages
+- `metrics.html` - Metrics dashboard
+- `compliance-pledge.html` - Compliance system
+- `about.html` - About page
+
+### Troubleshooting
+
+#### If changes don't appear:
+1. Check deployment status: `gh api repos/norrisaftcc/algocratic/pages`
+2. Verify you pushed to `main` branch
+3. Clear browser cache (Cmd+Shift+R on Mac)
+4. Check for Jekyll build errors (though `.nojekyll` file disables Jekyll)
+
+#### Common Issues:
+- **404 errors**: Check file paths are relative to root
+- **Broken links**: Remember site is served from `/algocratic/` subdirectory
+- **Assets not loading**: Ensure paths start with `/algocratic/` or use relative paths
+
+### Branch Strategy
+- `main` - Production branch (auto-deploys to GitHub Pages)
+- Feature branches - Development work (merge via PR)
+- Current feature branches:
+  - `temporal-integration` - Timeline integration work
+  - `add-mcp-server` - MCP server development
+  - `add-society-educational-content` - Society content
+  - Various `feature/*` and `hotfix/*` branches

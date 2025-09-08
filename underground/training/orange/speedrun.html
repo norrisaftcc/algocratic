@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORANGE CLEARANCE SPEEDRUN | Any% WR Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Speedrun-specific styles */
+        .speedrun-timer {
+            font-size: 4rem;
+            font-family: var(--font-mono);
+            color: var(--term-green);
+            text-align: center;
+            margin: var(--space-xl) 0;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+        
+        .speedrun-splits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .split-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: var(--space-md);
+            position: relative;
+        }
+        
+        .split-card.active {
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 10px var(--orange-glow);
+        }
+        
+        .split-card.completed {
+            border-color: var(--term-green);
+            opacity: 0.7;
+        }
+        
+        .split-card.gold {
+            border-color: gold;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .split-name {
+            color: var(--orange-primary);
+            font-weight: bold;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .split-time {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+        }
+        
+        .split-pb {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+        
+        .split-status {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-dim);
+        }
+        
+        .split-status.active {
+            background: var(--orange-primary);
+            animation: pulse-orange 1s infinite;
+        }
+        
+        .split-status.done {
+            background: var(--term-green);
+        }
+        
+        .speedrun-controls {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .control-btn {
+            padding: var(--space-md) var(--space-xl);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            border-color: var(--orange-primary);
+            transform: translateY(-2px);
+        }
+        
+        .control-btn.start {
+            background: var(--term-green);
+            color: var(--bg-primary);
+            border-color: var(--term-green);
+        }
+        
+        .control-btn.stop {
+            background: var(--term-red);
+            color: var(--text-primary);
+            border-color: var(--term-red);
+        }
+        
+        .speedrun-challenge {
+            background: var(--bg-secondary);
+            border: 2px solid var(--orange-dark);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+        }
+        
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .challenge-title {
+            color: var(--orange-primary);
+            font-size: 1.3rem;
+        }
+        
+        .challenge-timer {
+            font-family: var(--font-mono);
+            color: var(--term-amber);
+            font-size: 1.1rem;
+        }
+        
+        .quick-task {
+            background: var(--bg-primary);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            border-left: 3px solid var(--orange-dark);
+        }
+        
+        .quick-task.completed {
+            border-left-color: var(--term-green);
+            opacity: 0.6;
+        }
+        
+        .task-question {
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        
+        .task-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+        }
+        
+        .option-btn {
+            padding: var(--space-sm);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-btn:hover {
+            background: var(--orange-dark);
+            border-color: var(--orange-primary);
+        }
+        
+        .option-btn.correct {
+            background: var(--term-green);
+            color: var(--bg-primary);
+        }
+        
+        .option-btn.incorrect {
+            background: var(--term-red);
+        }
+        
+        .leaderboard-live {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            width: 250px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: var(--space-md);
+            z-index: 100;
+        }
+        
+        .leaderboard-live h3 {
+            color: var(--orange-primary);
+            margin-bottom: var(--space-md);
+            font-size: 1rem;
+        }
+        
+        .live-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+        
+        .live-entry.you {
+            color: var(--term-green);
+            font-weight: bold;
+        }
+        
+        .live-entry.wr {
+            color: gold;
+        }
+        
+        .speedrun-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .stat-box {
+            background: var(--bg-tertiary);
+            padding: var(--space-md);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-box .value {
+            font-size: 1.5rem;
+            color: var(--term-green);
+            font-weight: bold;
+        }
+        
+        .stat-box .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        @keyframes pulse-orange {
+            0%, 100% { box-shadow: 0 0 5px var(--orange-primary); }
+            50% { box-shadow: 0 0 15px var(--orange-primary); }
+        }
+        
+        .frame-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--term-green);
+            padding: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--term-green);
+        }
+        
+        .speedrun-route {
+            background: var(--bg-tertiary);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            border: 1px solid var(--border-color);
+        }
+        
+        .route-step {
+            display: flex;
+            align-items: center;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .route-step.current {
+            color: var(--orange-primary);
+            font-weight: bold;
+        }
+        
+        .route-step.done {
+            color: var(--text-dim);
+            text-decoration: line-through;
+        }
+        
+        .step-time {
+            margin-left: auto;
+            font-family: var(--font-mono);
+            color: var(--term-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Header -->
+        <header class="terminal-header">
+            <div class="header-top">
+                <span class="terminal-title">ORANGE CLEARANCE SPEEDRUN - ANY%</span>
+                <div class="status-indicators">
+                    <span class="indicator active">RUN: ACTIVE</span>
+                    <span class="indicator" id="split-indicator">SPLIT: 1/5</span>
+                    <span class="indicator warning" id="pace-indicator">PACE: --</span>
+                </div>
+            </div>
+            <div class="clearance-banner orange">
+                <span class="blink">▶</span> WORLD RECORD ATTEMPT IN PROGRESS
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="terminal-main">
+            <!-- Main Timer -->
+            <div class="speedrun-timer" id="main-timer">00:00.0</div>
+            
+            <!-- Speedrun Controls -->
+            <div class="speedrun-controls">
+                <button class="control-btn start" id="start-btn" onclick="startSpeedrun()">
+                    START RUN
+                </button>
+                <button class="control-btn" id="split-btn" onclick="splitTime()" disabled>
+                    SPLIT
+                </button>
+                <button class="control-btn stop" id="stop-btn" onclick="stopSpeedrun()" disabled>
+                    STOP/RESET
+                </button>
+            </div>
+
+            <!-- Live Stats -->
+            <div class="speedrun-stats">
+                <div class="stat-box">
+                    <div class="value" id="current-split">--:--</div>
+                    <div class="label">Current Split</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value" id="sum-of-best">15:32.7</div>
+                    <div class="label">Sum of Best</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value" id="pb-pace">--:--</div>
+                    <div class="label">PB Pace</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value" id="time-save">--:--</div>
+                    <div class="label">Time Save</div>
+                </div>
+            </div>
+
+            <!-- Splits Display -->
+            <div class="speedrun-splits">
+                <div class="split-card" id="split-1" data-split="1">
+                    <div class="split-status"></div>
+                    <div class="split-name">Dual Bot Setup</div>
+                    <div class="split-time">--:--</div>
+                    <div class="split-pb">PB: 03:00</div>
+                </div>
+                <div class="split-card" id="split-2" data-split="2">
+                    <div class="split-status"></div>
+                    <div class="split-name">Basic Pen Testing</div>
+                    <div class="split-time">--:--</div>
+                    <div class="split-pb">PB: 05:00</div>
+                </div>
+                <div class="split-card" id="split-3" data-split="3">
+                    <div class="split-status"></div>
+                    <div class="split-name">Student Patterns</div>
+                    <div class="split-time">--:--</div>
+                    <div class="split-pb">PB: 04:00</div>
+                </div>
+                <div class="split-card" id="split-4" data-split="4">
+                    <div class="split-status"></div>
+                    <div class="split-name">Automation Setup</div>
+                    <div class="split-time">--:--</div>
+                    <div class="split-pb">PB: 03:00</div>
+                </div>
+                <div class="split-card" id="split-5" data-split="5">
+                    <div class="split-status"></div>
+                    <div class="split-name">Final Certification</div>
+                    <div class="split-time">--:--</div>
+                    <div class="split-pb">PB: 00:32.7</div>
+                </div>
+            </div>
+
+            <!-- Current Challenge -->
+            <div class="speedrun-challenge" id="challenge-container">
+                <div class="challenge-header">
+                    <h3 class="challenge-title">SPLIT 1: Dual Bot Setup</h3>
+                    <div class="challenge-timer">Time Limit: 03:00</div>
+                </div>
+                
+                <div class="quick-task" id="task-1">
+                    <div class="task-question">
+                        Which bot handles rapid ideation and exploration?
+                    </div>
+                    <div class="task-options">
+                        <button class="option-btn" onclick="checkAnswer(this, 'flashbot')">FLASHBOT</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'thinkerbot')">THINKERBOT</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'both')">BOTH EQUALLY</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'neither')">NEITHER</button>
+                    </div>
+                </div>
+                
+                <div class="quick-task" id="task-2">
+                    <div class="task-question">
+                        Best handoff strategy for vulnerability assessment?
+                    </div>
+                    <div class="task-options">
+                        <button class="option-btn" onclick="checkAnswer(this, 'scout')">Scout & Sniper</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'swarm')">The Swarm</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'loop')">Validation Loop</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'single')">Single Bot</button>
+                    </div>
+                </div>
+                
+                <div class="quick-task" id="task-3">
+                    <div class="task-question">
+                        Optimal macro for FLASHBOT research?
+                    </div>
+                    <div class="task-options">
+                        <button class="option-btn" onclick="checkAnswer(this, 'scout');">;scout</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'fix');">;fix</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'analyze');">;analyze</button>
+                        <button class="option-btn" onclick="checkAnswer(this, 'implement');">;implement</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speedrun Route Guide -->
+            <div class="speedrun-route">
+                <h3 style="color: var(--orange-primary); margin-bottom: var(--space-md);">Optimal Route</h3>
+                <div class="route-step current" id="route-1">
+                    <span>1. Initialize both bots with stock config</span>
+                    <span class="step-time">00:30</span>
+                </div>
+                <div class="route-step" id="route-2">
+                    <span>2. Test handoff with simple task</span>
+                    <span class="step-time">01:00</span>
+                </div>
+                <div class="route-step" id="route-3">
+                    <span>3. Set up macro templates</span>
+                    <span class="step-time">01:30</span>
+                </div>
+                <div class="route-step" id="route-4">
+                    <span>4. Complete delegation exercises</span>
+                    <span class="step-time">05:00</span>
+                </div>
+                <div class="route-step" id="route-5">
+                    <span>5. Submit certification</span>
+                    <span class="step-time">00:30</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Live Leaderboard -->
+        <div class="leaderboard-live">
+            <h3>LIVE LEADERBOARD</h3>
+            <div class="live-entry wr">
+                <span>1. xxSH0DANxx</span>
+                <span>15:32.7</span>
+            </div>
+            <div class="live-entry">
+                <span>2. n0_d4y_zer0</span>
+                <span>15:45.2</span>
+            </div>
+            <div class="live-entry">
+                <span>3. gibson_overflow</span>
+                <span>16:01.0</span>
+            </div>
+            <div class="live-entry you" id="your-position">
+                <span>--. YOU</span>
+                <span>--:--</span>
+            </div>
+        </div>
+
+        <!-- Frame Counter -->
+        <div class="frame-counter">
+            <span>FPS: <span id="fps">60</span></span> | 
+            <span>FRAMES: <span id="frame-count">0</span></span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="terminal-footer">
+            <div class="footer-content">
+                <span>SPEEDRUN META v1.337</span>
+                <span class="separator">|</span>
+                <span>Remember: Speed is nothing without accuracy</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Speedrun State
+        let speedrunState = {
+            running: false,
+            startTime: null,
+            currentSplit: 1,
+            splitTimes: [],
+            challenges: [],
+            frameCount: 0,
+            timerInterval: null,
+            fps: 60
+        };
+
+        // WR splits (in seconds)
+        const wrSplits = [180, 300, 240, 180, 32.7]; // Total: 932.7 seconds (15:32.7)
+        
+        // Challenge data for each split
+        const challengeData = {
+            1: {
+                title: "Dual Bot Setup",
+                tasks: [
+                    { question: "Which bot handles rapid ideation?", correct: "flashbot" },
+                    { question: "Best handoff strategy?", correct: "scout" },
+                    { question: "Optimal macro for research?", correct: "scout" }
+                ]
+            },
+            2: {
+                title: "Basic Pen Testing Flow",
+                tasks: [
+                    { question: "First step in pen testing?", correct: "recon" },
+                    { question: "SQL injection detection bot?", correct: "flashbot" },
+                    { question: "Implementation bot?", correct: "thinkerbot" }
+                ]
+            },
+            3: {
+                title: "Student Interaction Patterns",
+                tasks: [
+                    { question: "Common vulnerability type?", correct: "sql" },
+                    { question: "Feedback generation bot?", correct: "thinkerbot" },
+                    { question: "Pattern recognition bot?", correct: "flashbot" }
+                ]
+            },
+            4: {
+                title: "Automation & Scaling",
+                tasks: [
+                    { question: "Batch processing pattern?", correct: "swarm" },
+                    { question: "Template creation bot?", correct: "thinkerbot" },
+                    { question: "Optimization strategy?", correct: "parallel" }
+                ]
+            },
+            5: {
+                title: "Final Certification",
+                tasks: [
+                    { question: "Submit portfolio command?", correct: "submit" },
+                    { question: "Screenshot hotkey?", correct: "f12" },
+                    { question: "Leaderboard update?", correct: "auto" }
+                ]
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFPS();
+            loadPersonalBest();
+        });
+
+        // Start speedrun
+        function startSpeedrun() {
+            speedrunState.running = true;
+            speedrunState.startTime = Date.now();
+            speedrunState.currentSplit = 1;
+            speedrunState.splitTimes = [];
+            
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('split-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = false;
+            
+            // Activate first split
+            activateSplit(1);
+            loadChallenges(1);
+            
+            // Start timer
+            speedrunState.timerInterval = setInterval(updateTimer, 100);
+            
+            // Update indicators
+            document.getElementById('split-indicator').textContent = `SPLIT: 1/5`;
+            updatePaceIndicator();
+        }
+
+        // Update timer
+        function updateTimer() {
+            if (!speedrunState.running) return;
+            
+            const elapsed = (Date.now() - speedrunState.startTime) / 1000;
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = (elapsed % 60).toFixed(1);
+            
+            document.getElementById('main-timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`;
+            
+            // Update current split time
+            const splitStart = speedrunState.splitTimes.reduce((sum, time) => sum + time, 0);
+            const splitTime = elapsed - splitStart;
+            const splitMinutes = Math.floor(splitTime / 60);
+            const splitSeconds = (splitTime % 60).toFixed(0);
+            
+            document.getElementById('current-split').textContent = 
+                `${splitMinutes.toString().padStart(2, '0')}:${splitSeconds.toString().padStart(2, '0')}`;
+            
+            // Update pace
+            updatePaceIndicator();
+            
+            // Frame counter
+            speedrunState.frameCount++;
+            document.getElementById('frame-count').textContent = speedrunState.frameCount;
+        }
+
+        // Split time
+        function splitTime() {
+            if (!speedrunState.running) return;
+            
+            const elapsed = (Date.now() - speedrunState.startTime) / 1000;
+            const splitStart = speedrunState.splitTimes.reduce((sum, time) => sum + time, 0);
+            const splitTime = elapsed - splitStart;
+            
+            speedrunState.splitTimes.push(splitTime);
+            
+            // Update split display
+            const splitCard = document.getElementById(`split-${speedrunState.currentSplit}`);
+            splitCard.classList.add('completed');
+            splitCard.querySelector('.split-status').classList.remove('active');
+            splitCard.querySelector('.split-status').classList.add('done');
+            
+            const minutes = Math.floor(splitTime / 60);
+            const seconds = (splitTime % 60).toFixed(1);
+            splitCard.querySelector('.split-time').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`;
+            
+            // Check if gold split
+            if (splitTime < wrSplits[speedrunState.currentSplit - 1]) {
+                splitCard.classList.add('gold');
+            }
+            
+            // Move to next split
+            speedrunState.currentSplit++;
+            
+            if (speedrunState.currentSplit > 5) {
+                finishSpeedrun();
+            } else {
+                activateSplit(speedrunState.currentSplit);
+                loadChallenges(speedrunState.currentSplit);
+                document.getElementById('split-indicator').textContent = 
+                    `SPLIT: ${speedrunState.currentSplit}/5`;
+            }
+        }
+
+        // Activate split
+        function activateSplit(splitNum) {
+            // Clear previous active
+            document.querySelectorAll('.split-card').forEach(card => {
+                card.classList.remove('active');
+                card.querySelector('.split-status').classList.remove('active');
+            });
+            
+            // Activate new split
+            const splitCard = document.getElementById(`split-${splitNum}`);
+            splitCard.classList.add('active');
+            splitCard.querySelector('.split-status').classList.add('active');
+            
+            // Update route
+            document.querySelectorAll('.route-step').forEach(step => {
+                step.classList.remove('current', 'done');
+            });
+            
+            for (let i = 1; i < splitNum; i++) {
+                document.getElementById(`route-${i}`).classList.add('done');
+            }
+            document.getElementById(`route-${splitNum}`).classList.add('current');
+        }
+
+        // Load challenges for split
+        function loadChallenges(splitNum) {
+            const challenge = challengeData[splitNum];
+            const container = document.getElementById('challenge-container');
+            
+            container.querySelector('.challenge-title').textContent = 
+                `SPLIT ${splitNum}: ${challenge.title}`;
+            
+            // Clear and reload tasks
+            const tasks = container.querySelectorAll('.quick-task');
+            tasks.forEach(task => {
+                task.classList.remove('completed');
+                task.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect');
+                    btn.disabled = false;
+                });
+            });
+        }
+
+        // Check answer
+        function checkAnswer(button, answer) {
+            const correctAnswers = {
+                1: ['flashbot', 'scout', 'scout'],
+                2: ['recon', 'flashbot', 'thinkerbot'],
+                3: ['sql', 'thinkerbot', 'flashbot'],
+                4: ['swarm', 'thinkerbot', 'parallel'],
+                5: ['submit', 'f12', 'auto']
+            };
+            
+            const taskElement = button.closest('.quick-task');
+            const taskNum = parseInt(taskElement.id.split('-')[1]);
+            const isCorrect = answer === correctAnswers[speedrunState.currentSplit][taskNum - 1];
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                taskElement.classList.add('completed');
+                
+                // Check if all tasks complete
+                const allComplete = Array.from(document.querySelectorAll('.quick-task'))
+                    .every(task => task.classList.contains('completed'));
+                
+                if (allComplete) {
+                    // Auto-split after short delay
+                    setTimeout(() => splitTime(), 500);
+                }
+            } else {
+                button.classList.add('incorrect');
+                // Time penalty
+                speedrunState.startTime -= 2000; // 2 second penalty
+            }
+            
+            button.disabled = true;
+        }
+
+        // Update pace indicator
+        function updatePaceIndicator() {
+            if (!speedrunState.running) return;
+            
+            const elapsed = (Date.now() - speedrunState.startTime) / 1000;
+            const expectedTime = wrSplits.slice(0, speedrunState.currentSplit - 1)
+                .reduce((sum, time) => sum + time, 0) + 
+                (wrSplits[speedrunState.currentSplit - 1] * 0.5); // Halfway through current split
+            
+            const pace = elapsed - expectedTime;
+            const paceIndicator = document.getElementById('pace-indicator');
+            
+            if (pace < -5) {
+                paceIndicator.textContent = `PACE: -${Math.abs(pace).toFixed(1)}`;
+                paceIndicator.style.color = 'gold';
+            } else if (pace < 0) {
+                paceIndicator.textContent = `PACE: -${Math.abs(pace).toFixed(1)}`;
+                paceIndicator.style.color = 'var(--term-green)';
+            } else if (pace < 10) {
+                paceIndicator.textContent = `PACE: +${pace.toFixed(1)}`;
+                paceIndicator.style.color = 'var(--term-amber)';
+            } else {
+                paceIndicator.textContent = `PACE: +${pace.toFixed(1)}`;
+                paceIndicator.style.color = 'var(--term-red)';
+            }
+        }
+
+        // Stop speedrun
+        function stopSpeedrun() {
+            speedrunState.running = false;
+            clearInterval(speedrunState.timerInterval);
+            
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('split-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = true;
+            
+            // Reset displays
+            document.getElementById('main-timer').textContent = '00:00.0';
+            document.getElementById('current-split').textContent = '--:--';
+            document.getElementById('pace-indicator').textContent = 'PACE: --';
+            
+            // Reset splits
+            document.querySelectorAll('.split-card').forEach(card => {
+                card.classList.remove('active', 'completed', 'gold');
+                card.querySelector('.split-status').classList.remove('active', 'done');
+                card.querySelector('.split-time').textContent = '--:--';
+            });
+        }
+
+        // Finish speedrun
+        function finishSpeedrun() {
+            speedrunState.running = false;
+            clearInterval(speedrunState.timerInterval);
+            
+            const totalTime = (Date.now() - speedrunState.startTime) / 1000;
+            const minutes = Math.floor(totalTime / 60);
+            const seconds = (totalTime % 60).toFixed(1);
+            
+            // Save if PB
+            const pb = localStorage.getItem('speedrunPB');
+            if (!pb || totalTime < parseFloat(pb)) {
+                localStorage.setItem('speedrunPB', totalTime);
+                localStorage.setItem('speedrunBest', 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+                
+                // Show celebration
+                showCelebration(true);
+            } else {
+                showCelebration(false);
+            }
+            
+            // Update leaderboard position
+            updateLeaderboardPosition(totalTime);
+        }
+
+        // Show celebration
+        function showCelebration(isPB) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--bg-secondary);
+                border: 3px solid ${isPB ? 'gold' : 'var(--term-green)'};
+                padding: 40px;
+                z-index: 2000;
+                text-align: center;
+                box-shadow: 0 0 50px ${isPB ? 'rgba(255, 215, 0, 0.5)' : 'rgba(0, 255, 65, 0.5)'};
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: ${isPB ? 'gold' : 'var(--term-green)'}; margin-bottom: 20px;">
+                    ${isPB ? 'NEW PERSONAL BEST!' : 'RUN COMPLETE!'}
+                </h2>
+                <div style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary);">
+                    ${document.getElementById('main-timer').textContent}
+                </div>
+                <button onclick="this.parentElement.remove(); stopSpeedrun();" 
+                        style="padding: 10px 30px; background: var(--orange-primary); 
+                               color: white; border: none; cursor: pointer;">
+                    CONTINUE
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // Update leaderboard position
+        function updateLeaderboardPosition(time) {
+            let position = 4;
+            if (time < 932.7) position = 1;
+            else if (time < 945.2) position = 2;
+            else if (time < 961) position = 3;
+            
+            const minutes = Math.floor(time / 60);
+            const seconds = (time % 60).toFixed(1);
+            
+            document.getElementById('your-position').innerHTML = `
+                <span>${position}. YOU</span>
+                <span>${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}</span>
+            `;
+        }
+
+        // FPS counter
+        function updateFPS() {
+            let lastTime = performance.now();
+            let frames = 0;
+            
+            function countFPS() {
+                frames++;
+                const currentTime = performance.now();
+                
+                if (currentTime >= lastTime + 1000) {
+                    speedrunState.fps = Math.round(frames * 1000 / (currentTime - lastTime));
+                    document.getElementById('fps').textContent = speedrunState.fps;
+                    frames = 0;
+                    lastTime = currentTime;
+                }
+                
+                requestAnimationFrame(countFPS);
+            }
+            
+            countFPS();
+        }
+
+        // Load personal best
+        function loadPersonalBest() {
+            const pb = localStorage.getItem('speedrunBest');
+            if (pb) {
+                document.getElementById('pb-pace').textContent = pb;
+            }
+        }
+    </script>
+</body>
+</html>
