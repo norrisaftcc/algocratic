@@ -29,7 +29,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -167,6 +167,17 @@ def load_config(config_path: str | Path) -> RoutingConfig:
             "dry_run must be true; live Project mutation is not implemented"
         )
 
+    for flag_name in (
+        "allow_deletion",
+        "allow_archive",
+        "allow_cross_repository",
+        "allow_project_writes",
+    ):
+        if bool(safety_section.get(flag_name, False)):
+            raise ValueError(
+                f"Safety flag '{flag_name}' must be false in dry-run mode"
+            )
+
     max_candidates = safety_section.get("max_candidates", MAX_CANDIDATES_HARD_LIMIT)
     if not isinstance(max_candidates, int) or max_candidates < 1:
         raise ValueError(f"max_candidates must be a positive integer, got {max_candidates!r}")
@@ -176,6 +187,10 @@ def load_config(config_path: str | Path) -> RoutingConfig:
         )
 
     allowed_types_raw = routing_section.get("allowed_types", list(ALLOWED_ITEM_TYPES))
+    if not isinstance(allowed_types_raw, list):
+        raise ValueError(
+            f"routing.allowed_types must be a list, got {type(allowed_types_raw).__name__!r}"
+        )
     allowed_types = frozenset(str(t) for t in allowed_types_raw)
     unknown_types = allowed_types - ALLOWED_ITEM_TYPES
     if unknown_types:
@@ -183,11 +198,23 @@ def load_config(config_path: str | Path) -> RoutingConfig:
             f"Unknown item types in routing.allowed_types: {sorted(unknown_types)}"
         )
 
+    required_labels_raw = routing_section.get("required_labels", ["project:track"])
+    if not isinstance(required_labels_raw, list):
+        raise ValueError(
+            f"routing.required_labels must be a list, got {type(required_labels_raw).__name__!r}"
+        )
+
+    excluded_labels_raw = routing_section.get("excluded_labels", ["project:ignore"])
+    if not isinstance(excluded_labels_raw, list):
+        raise ValueError(
+            f"routing.excluded_labels must be a list, got {type(excluded_labels_raw).__name__!r}"
+        )
+
     return RoutingConfig(
         repository=str(repository_name),
         routing_group=str(routing_group),
-        required_labels=list(routing_section.get("required_labels", ["project:track"])),
-        excluded_labels=list(routing_section.get("excluded_labels", ["project:ignore"])),
+        required_labels=list(required_labels_raw),
+        excluded_labels=list(excluded_labels_raw),
         allowed_types=allowed_types,
         dry_run=bool(dry_run),
         backfill=bool(safety_section.get("backfill", False)),
@@ -330,7 +357,8 @@ def count_candidates(items: list[Item], config: RoutingConfig) -> int:
     count = 0
     for item in items:
         if (
-            item.state == "open"
+            item.repository == config.repository
+            and item.state == "open"
             and item.type in config.allowed_types
             and not any(excl in item.labels for excl in config.excluded_labels)
         ):
@@ -438,7 +466,7 @@ def main(argv: list[str] | None = None) -> int:  # noqa: C901
     # Load config — fail closed on any error
     try:
         config = load_config(args.config)
-    except (FileNotFoundError, ValueError, ImportError, Exception) as exc:
+    except (FileNotFoundError, ValueError, ImportError) as exc:
         print(f"ERROR: Failed to load config: {exc}", file=sys.stderr)
         return 1
 

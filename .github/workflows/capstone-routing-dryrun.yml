@@ -103,7 +103,7 @@ jobs:
               already_in_project: false
             }]' \
           > /tmp/issues_raw.json
-          echo "Fetched $(python -c "import json; d=json.load(open('/tmp/issues_raw.json')); print(len(d))") issues"
+          echo "Fetched $(python -c 'import json; d=json.load(open("/tmp/issues_raw.json")); print(len(d))') issues"
 
       - name: Fetch open pull requests
         env:
@@ -121,7 +121,7 @@ jobs:
               already_in_project: false
             }]' \
           > /tmp/prs_raw.json
-          echo "Fetched $(python -c "import json; d=json.load(open('/tmp/prs_raw.json')); print(len(d))") pull requests"
+          echo "Fetched $(python -c 'import json; d=json.load(open("/tmp/prs_raw.json")); print(len(d))') pull requests"
 
       - name: Merge item lists (no duplicates)
         run: |
