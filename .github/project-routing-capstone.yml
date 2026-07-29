@@ -1,0 +1,46 @@
+schema: project-routing/v1
+version: 1
+
+# Scope: exactly this repository
+repository:
+  name: norrisaftcc/algocratic
+
+routing:
+  # Routing group identifier — must equal "capstone"
+  group: capstone
+
+  # Items must carry at least one required label to be routed
+  required_labels:
+    - "project:track"
+
+  # Items carrying any excluded label are never routed
+  excluded_labels:
+    - "project:ignore"
+
+  # Only these item types are evaluated
+  allowed_types:
+    - issue
+    - pull_request
+
+safety:
+  # Dry-run is permanently fixed true; live mode is not implemented
+  dry_run: true
+
+  # Backfill of historical items is disabled
+  backfill: false
+
+  # Hard upper bound on candidate count; exceeding this fails closed
+  max_candidates: 25
+
+  # No destructive or mutating operations are permitted
+  allow_deletion: false
+  allow_archive: false
+  allow_cross_repository: false
+  allow_project_writes: false
+
+# Project owner and number are intentionally unset.
+# This configuration does not point to a validated live GitHub Project.
+# A separate approval is required before live project integration is enabled.
+project:
+  owner: ~
+  number: ~

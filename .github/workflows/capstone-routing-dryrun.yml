@@ -1,0 +1,170 @@
+# capstone-routing-dryrun.yml
+#
+# Capstone project routing pilot — DRY-RUN ONLY
+#
+# Scope:         norrisaftcc/algocratic
+# Routing group: capstone
+# Trigger:       manual (workflow_dispatch) only
+#
+# Safety guarantees:
+#   - Dry-run is permanently enabled; live mode has no code path.
+#   - No GitHub Project items are added, updated, archived, or deleted.
+#   - No repository settings, labels, secrets, or branch rules are changed.
+#   - Permissions are read-only (contents: read, issues: read).
+#   - GITHUB_TOKEN is the only credential used (no external secrets needed).
+#
+# How to use:
+#   1. Go to Actions → "Capstone Routing Dry-Run" → "Run workflow".
+#   2. Optionally supply a confirmation string (any non-empty value).
+#   3. Review the console summary and the uploaded routing-report artifact.
+#
+# Rollback:
+#   Disable or delete this workflow file. No Project data will be affected.
+
+name: Capstone Routing Dry-Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: >
+          Type any text to confirm you want to run the dry-run report.
+          (Dry-run is the only mode; no Project writes will occur.)
+        required: false
+        default: "dry-run"
+        type: string
+
+# Permissions — read-only; no write scopes are requested.
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  routing-dryrun:
+    name: Evaluate capstone routing candidates
+    runs-on: ubuntu-latest
+    # Confirm the token can reach the required repository only.
+    env:
+      TARGET_REPO: norrisaftcc/algocratic
+      ROUTING_GROUP: capstone
+      CONFIG_PATH: .github/project-routing-capstone.yml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install pyyaml pytest --quiet
+
+      - name: Run routing unit tests
+        run: python -m pytest tests/test_project_router.py -v
+
+      - name: Validate routing configuration
+        run: |
+          python - <<'EOF'
+          import sys
+          sys.path.insert(0, "scripts")
+          from project_router import load_config, validate_routing_context
+          import os
+
+          config_path = os.environ["CONFIG_PATH"]
+          repo = os.environ["TARGET_REPO"]
+          group = os.environ["ROUTING_GROUP"]
+
+          cfg = load_config(config_path)
+          validate_routing_context(cfg, repo, group)
+          print(f"Config OK: repo={cfg.repository}, group={cfg.routing_group}, "
+                f"dry_run={cfg.dry_run}, allow_project_writes={cfg.allow_project_writes}")
+          EOF
+
+      # Fetch open issues from the GitHub API.
+      # gh returns issues only (not pull requests) when using `issue list`.
+      # Pull requests are fetched separately to avoid double-counting, because
+      # the GitHub REST /issues endpoint also returns pull requests.
+      - name: Fetch open issues (excluding pull requests)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api \
+            "repos/$TARGET_REPO/issues?state=open&per_page=100" \
+            --paginate \
+            --jq '[.[] | select(.pull_request == null) | {
+              id: .number,
+              type: "issue",
+              state: .state,
+              labels: [.labels[].name],
+              repository: "'"$TARGET_REPO"'",
+              already_in_project: false
+            }]' \
+          > /tmp/issues_raw.json
+          echo "Fetched $(python -c "import json; d=json.load(open('/tmp/issues_raw.json')); print(len(d))") issues"
+
+      - name: Fetch open pull requests
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api \
+            "repos/$TARGET_REPO/pulls?state=open&per_page=100" \
+            --paginate \
+            --jq '[.[] | {
+              id: .number,
+              type: "pull_request",
+              state: .state,
+              labels: [.labels[].name],
+              repository: "'"$TARGET_REPO"'",
+              already_in_project: false
+            }]' \
+          > /tmp/prs_raw.json
+          echo "Fetched $(python -c "import json; d=json.load(open('/tmp/prs_raw.json')); print(len(d))") pull requests"
+
+      - name: Merge item lists (no duplicates)
+        run: |
+          python - <<'EOF'
+          import json
+
+          with open("/tmp/issues_raw.json") as f:
+            issues = json.load(f)
+          with open("/tmp/prs_raw.json") as f:
+            prs = json.load(f)
+
+          # Use (type, id) as the dedup key
+          seen = set()
+          merged = []
+          for item in issues + prs:
+            key = (item["type"], item["id"])
+            if key not in seen:
+              seen.add(key)
+              merged.append(item)
+
+          with open("/tmp/items.json", "w") as f:
+            json.dump(merged, f, indent=2)
+          print(f"Total unique items: {len(merged)}")
+          EOF
+
+      - name: Run routing evaluation (dry-run)
+        run: |
+          python scripts/project_router.py \
+            --config "$CONFIG_PATH" \
+            --items /tmp/items.json \
+            --report /tmp/routing-report.json \
+            --repository "$TARGET_REPO" \
+            --routing-group "$ROUTING_GROUP"
+
+      - name: Print full routing report
+        run: |
+          echo "=== Routing Report (JSON) ==="
+          python -m json.tool /tmp/routing-report.json
+
+      - name: Upload routing report artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: routing-report
+          path: /tmp/routing-report.json
+          retention-days: 14
