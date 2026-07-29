@@ -313,8 +313,9 @@ class TestCountCandidates(unittest.TestCase):
             ),
             _make_item(id=4, state="open", type="issue", labels=[]),
         ]
-        # Only item 1: open, issue, no excluded label
-        # Item 4: open, issue, no excluded label — label check is post-filter
+        # Items 1 and 4: open, allowed type, no excluded label => 2 candidates
+        # Item 2: closed => not a candidate
+        # Item 3: has excluded label "project:ignore" => not a candidate
         self.assertEqual(count_candidates(items, cfg), 2)
 
 

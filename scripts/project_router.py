@@ -343,7 +343,7 @@ def evaluate_items(
 ) -> list[RoutingDecision]:
     """Evaluate all items.
 
-    Raises ValueError (exit code 2) if the candidate count exceeds
+    Raises OverflowError (exit code 2) if the candidate count exceeds
     max_candidates — fail closed rather than processing a truncated set.
     """
     n_candidates = count_candidates(items, config)

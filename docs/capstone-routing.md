@@ -112,7 +112,7 @@ No external secrets are required or used.
 
 ## Local execution
 
-Prerequisites: Python ≥ 3.9 and PyYAML.
+Prerequisites: Python ≥ 3.12 (matches the workflow runner) and PyYAML.
 
 ```bash
 pip install pyyaml pytest
