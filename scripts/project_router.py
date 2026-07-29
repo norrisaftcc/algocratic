@@ -189,7 +189,7 @@ def load_config(config_path: str | Path) -> RoutingConfig:
     allowed_types_raw = routing_section.get("allowed_types", list(ALLOWED_ITEM_TYPES))
     if not isinstance(allowed_types_raw, list):
         raise ValueError(
-            f"routing.allowed_types must be a list, got {type(allowed_types_raw).__name__!r}"
+            f"routing.allowed_types must be a list, got {type(allowed_types_raw).__name__}"
         )
     allowed_types = frozenset(str(t) for t in allowed_types_raw)
     unknown_types = allowed_types - ALLOWED_ITEM_TYPES
@@ -201,13 +201,13 @@ def load_config(config_path: str | Path) -> RoutingConfig:
     required_labels_raw = routing_section.get("required_labels", ["project:track"])
     if not isinstance(required_labels_raw, list):
         raise ValueError(
-            f"routing.required_labels must be a list, got {type(required_labels_raw).__name__!r}"
+            f"routing.required_labels must be a list, got {type(required_labels_raw).__name__}"
         )
 
     excluded_labels_raw = routing_section.get("excluded_labels", ["project:ignore"])
     if not isinstance(excluded_labels_raw, list):
         raise ValueError(
-            f"routing.excluded_labels must be a list, got {type(excluded_labels_raw).__name__!r}"
+            f"routing.excluded_labels must be a list, got {type(excluded_labels_raw).__name__}"
         )
 
     return RoutingConfig(
