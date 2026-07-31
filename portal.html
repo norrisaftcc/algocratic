@@ -370,9 +370,9 @@
         function accessResource(resource) {
             const routes = {
                 'orientation': 'orientation_packet.html',
-                'clearance': 'website/clearance/index.html',
+                'clearance': 'clearance/index.html',
                 'forms': 'forms/index.html',
-                'design': 'website/clearance/gray/index.html'
+                'design': 'clearance/gray/index.html'
             };
             
             if (routes[resource]) {
@@ -389,7 +389,7 @@
                     currentUser.sessionActive = false;
                     localStorage.setItem('algocratic_user', JSON.stringify(currentUser));
                 }
-                window.location.href = 'INDEX.HTM';
+                window.location.href = 'index.html';
             }
         }
 
